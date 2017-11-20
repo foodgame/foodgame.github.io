@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Food</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.min.css" />
+    <script type="text/javascript" src="js/script.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/food.min.css" />
+    <script type="text/javascript" src="js/food.min.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <button type="button" class="btn btn-toggle function-switch active" data-toggle="button">
+            <span>个人版</span>
+            <div class="handle"></div>
+            <span>公共版</span>
+        </button>
+    </div>
+    <div class="box chk-show">
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-show-id">
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            编号
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-show-fire" checked>
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            火
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-show-skill">
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            技能
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-show-ingredient" checked>
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            材料
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-show-price">
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            单价
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-show-total-price">
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            总价
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-show-efficiency" checked>
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            效率
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-show-unlock">
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            解锁
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-show-guest" checked>
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            贵客
+        </label>
+        <label class="btn btn-default hidden">
+            <input type="checkbox" id="chk-show-quality">
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            品质
+        </label>
+        <label class="btn btn-default hidden">
+            <input type="checkbox" id="chk-show-remark">
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            备注
+        </label>
+        <div class="chk-show-chef-wrapper hidden">
+            <select id="chk-show-chef" multiple="multiple"></select>
+        </div>
+    </div>
+    <div class="box chk-fire">
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-fire-1" checked>
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            1火
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-fire-2" checked>
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            2火
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-fire-3" checked>
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            3火
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-fire-4" checked>
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            4火
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-fire-5" checked>
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            5火
+        </label>
+    </div>
+    <div class="box chk-skill">
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-skill-stirfry" checked>
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            炒
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-skill-boil" checked>
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            煮
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-skill-cut" checked>
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            切
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-skill-fry" checked>
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            炸
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-skill-roast" checked>
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            烤
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-skill-steam" checked>
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            蒸
+        </label>
+        <button type="button" class="btn btn-toggle multi-switch active" data-toggle="button">
+            <span>单选</span>
+            <div class="handle"></div>
+            <span>多选</span>
+        </button>
+        <a class="btn btn-default chk-skill-all">
+            全选
+        </a>
+    </div>
+    <div class="box chk-guest">
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-guest">
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            贵客
+        </label>
+    </div>
+    <div>
+        <table id="food-table" class="table table-hover table-bordered" width="100%">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>菜名</th>
+                    <th>火</th>
+                    <th>炒</th>
+                    <th>煮</th>
+                    <th>切</th>
+                    <th>炸</th>
+                    <th>烤</th>
+                    <th>蒸</th>
+                    <th>材料</th>
+                    <th>单价</th>
+                    <th>时间 (秒)</th>
+                    <th>一组</th>
+                    <th>总价</th>
+                    <th>总时间 (秒)</th>
+                    <th>金币/小时</th>
+                    <th>解锁</th>
+                    <th>贵客</th>
+                    <th>品质</th>
+                    <th>备注</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+
+</html>

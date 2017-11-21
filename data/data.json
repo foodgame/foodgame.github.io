@@ -5,10 +5,6 @@
             "name": "荷包蛋",
             "fire": 1,
             "unlock": -1,
-            "quality": "神",
-            "price": 7,
-            "time": 30,
-            "total": 40,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -21,6 +17,12 @@
                     "quantity": 2
                 }
             ],
+            "price": 7,
+            "time": 30,
+            "total": 40,
+            "origin": "主线3",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -28,10 +30,6 @@
             "name": "鸡汤",
             "fire": 1,
             "unlock": -1,
-            "quality": "神",
-            "price": 9,
-            "time": 37,
-            "total": 40,
             "stirfry": 0,
             "boil": 12,
             "cut": 0,
@@ -44,6 +42,12 @@
                     "quantity": 2
                 }
             ],
+            "price": 9,
+            "time": 37,
+            "total": 40,
+            "origin": "主线13",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -51,10 +55,6 @@
             "name": "炒青菜",
             "fire": 1,
             "unlock": 4,
-            "quality": "神",
-            "price": 5,
-            "time": 30,
-            "total": 40,
             "stirfry": 10,
             "boil": 0,
             "cut": 0,
@@ -67,6 +67,12 @@
                     "quantity": 3
                 }
             ],
+            "price": 5,
+            "time": 30,
+            "total": 40,
+            "origin": "主线1",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -74,10 +80,6 @@
             "name": "香菇青菜",
             "fire": 1,
             "unlock": -1,
-            "quality": "神",
-            "price": 35,
-            "time": 160,
-            "total": 40,
             "stirfry": 18,
             "boil": 0,
             "cut": 0,
@@ -98,6 +100,12 @@
                     "quantity": 3
                 }
             ],
+            "price": 35,
+            "time": 160,
+            "total": 40,
+            "origin": "神级炒青菜",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -105,10 +113,6 @@
             "name": "阳春面",
             "fire": 1,
             "unlock": 19,
-            "quality": "神",
-            "price": 30,
-            "time": 94,
-            "total": 40,
             "stirfry": 0,
             "boil": 18,
             "cut": 0,
@@ -129,6 +133,12 @@
                     "quantity": 4
                 }
             ],
+            "price": 30,
+            "time": 94,
+            "total": 40,
+            "origin": "主线24",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -136,10 +146,6 @@
             "name": "红烧牛肉面",
             "fire": 3,
             "unlock": 57,
-            "quality": "特",
-            "price": 159,
-            "time": 243,
-            "total": 25,
             "stirfry": 40,
             "boil": 40,
             "cut": 0,
@@ -160,17 +166,19 @@
                     "quantity": 3
                 }
             ],
-            "remark": ""
+            "price": 159,
+            "time": 243,
+            "total": 25,
+            "origin": "神级葱油拌面",
+            "get": true,
+            "quality": "特",
+            "remark": "暂无"
         },
         {
             "recipeId": 17,
             "name": "番茄炒蛋",
             "fire": 1,
             "unlock": -1,
-            "quality": "神",
-            "price": 16,
-            "time": 68,
-            "total": 40,
             "stirfry": 15,
             "boil": 0,
             "cut": 0,
@@ -187,6 +195,12 @@
                     "quantity": 2
                 }
             ],
+            "price": 16,
+            "time": 68,
+            "total": 40,
+            "origin": "主线8",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -194,10 +208,6 @@
             "name": "麻婆豆腐",
             "fire": 2,
             "unlock": 37,
-            "quality": "神",
-            "price": 78,
-            "time": 181,
-            "total": 30,
             "stirfry": 40,
             "boil": 0,
             "cut": 0,
@@ -218,6 +228,12 @@
                     "quantity": 2
                 }
             ],
+            "price": 78,
+            "time": 181,
+            "total": 30,
+            "origin": "主线69",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -225,10 +241,6 @@
             "name": "豚骨拉面",
             "fire": 2,
             "unlock": -1,
-            "quality": "特",
-            "price": 92,
-            "time": 236,
-            "total": 30,
             "stirfry": 0,
             "boil": 45,
             "cut": 0,
@@ -249,17 +261,19 @@
                     "quantity": 3
                 }
             ],
-            "remark": "上宫晴"
+            "price": 92,
+            "time": 236,
+            "total": 30,
+            "origin": "神级阳春面",
+            "get": true,
+            "quality": "特",
+            "remark": "三阶上宫晴"
         },
         {
             "recipeId": 21,
             "name": "番茄鸡蛋面",
             "fire": 1,
             "unlock": -1,
-            "quality": "神",
-            "price": 64,
-            "time": 218,
-            "total": 40,
             "stirfry": 15,
             "boil": 20,
             "cut": 0,
@@ -280,6 +294,12 @@
                     "quantity": 2
                 }
             ],
+            "price": 64,
+            "time": 218,
+            "total": 40,
+            "origin": "主线33",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -287,10 +307,6 @@
             "name": "白菜猪肉饺",
             "fire": 1,
             "unlock": -1,
-            "quality": "神",
-            "price": 38,
-            "time": 119,
-            "total": 40,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -311,6 +327,12 @@
                     "quantity": 2
                 }
             ],
+            "price": 38,
+            "time": 119,
+            "total": 40,
+            "origin": "主线65",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -318,10 +340,6 @@
             "name": "鸡蛋饼",
             "fire": 1,
             "unlock": -1,
-            "quality": "神",
-            "price": 18,
-            "time": 51,
-            "total": 40,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -338,6 +356,12 @@
                     "quantity": 2
                 }
             ],
+            "price": 18,
+            "time": 51,
+            "total": 40,
+            "origin": "主线22",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -345,10 +369,6 @@
             "name": "咖喱土豆鸡",
             "fire": 3,
             "unlock": -1,
-            "quality": "特",
-            "price": 524,
-            "time": 674,
-            "total": 0,
             "stirfry": 45,
             "boil": 20,
             "cut": 0,
@@ -373,6 +393,12 @@
                     "quantity": 8
                 }
             ],
+            "price": 524,
+            "time": 674,
+            "total": 0,
+            "origin": "新手奖池",
+            "get": true,
+            "quality": "特",
             "remark": "羽十六"
         },
         {
@@ -380,10 +406,6 @@
             "name": "炸鱼排",
             "fire": 3,
             "unlock": -1,
-            "quality": "",
-            "price": 416,
-            "time": 204,
-            "total": 0,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -404,17 +426,19 @@
                     "quantity": 8
                 }
             ],
-            "remark": ""
+            "price": 416,
+            "time": 204,
+            "total": 0,
+            "origin": "神级椒盐排条",
+            "get": true,
+            "quality": "优",
+            "remark": "熊麓-大天狗"
         },
         {
             "recipeId": 33,
             "name": "葱油饼",
             "fire": 1,
             "unlock": 35,
-            "quality": "神",
-            "price": 16,
-            "time": 44,
-            "total": 40,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -431,6 +455,12 @@
                     "quantity": 2
                 }
             ],
+            "price": 16,
+            "time": 44,
+            "total": 40,
+            "origin": "主线29",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -438,10 +468,6 @@
             "name": "罗宋汤",
             "fire": 3,
             "unlock": -1,
-            "quality": "可",
-            "price": 157,
-            "time": 342,
-            "total": 25,
             "stirfry": 0,
             "boil": 35,
             "cut": 35,
@@ -466,17 +492,19 @@
                     "quantity": 6
                 }
             ],
-            "remark": ""
+            "price": 157,
+            "time": 342,
+            "total": 25,
+            "origin": "神级青菜豆腐汤",
+            "get": true,
+            "quality": "可",
+            "remark": "暂无"
         },
         {
             "recipeId": 35,
             "name": "土豆饼",
             "fire": 2,
             "unlock": -1,
-            "quality": "特",
-            "price": 129,
-            "time": 392,
-            "total": 30,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -497,6 +525,12 @@
                     "quantity": 3
                 }
             ],
+            "price": 129,
+            "time": 392,
+            "total": 30,
+            "origin": "神级葱油饼",
+            "get": true,
+            "quality": "特",
             "remark": "大天狗"
         },
         {
@@ -504,14 +538,10 @@
             "name": "蟹粉豆腐",
             "fire": 3,
             "unlock": -1,
-            "quality": "",
-            "price": 0,
-            "time": 0,
-            "total": 0,
             "stirfry": 0,
             "boil": 0,
-            "cut": 0,
-            "fry": 25,
+            "cut": 25,
+            "fry": 0,
             "roast": 0,
             "steam": 65,
             "ingredient": [
@@ -528,17 +558,19 @@
                     "quantity": 3
                 }
             ],
+            "price": 237,
+            "time": 452,
+            "total": 0,
+            "origin": "神级麻婆豆腐",
+            "get": true,
+            "quality": "",
             "remark": ""
         },
         {
             "recipeId": 38,
             "name": "青椒土豆丝",
             "fire": 2,
-            "unlock": 0,
-            "quality": "神",
-            "price": 84,
-            "time": 248,
-            "total": 30,
+            "unlock": 140,
             "stirfry": 25,
             "boil": 0,
             "cut": 15,
@@ -555,6 +587,12 @@
                     "quantity": 5
                 }
             ],
+            "price": 84,
+            "time": 248,
+            "total": 30,
+            "origin": "主线91",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -562,10 +600,6 @@
             "name": "野菜汤",
             "fire": 1,
             "unlock": 81,
-            "quality": "神",
-            "price": 21,
-            "time": 103,
-            "total": 40,
             "stirfry": 0,
             "boil": 28,
             "cut": 0,
@@ -582,17 +616,19 @@
                     "quantity": 4
                 }
             ],
+            "price": 21,
+            "time": 103,
+            "total": 40,
+            "origin": "主线63",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
             "recipeId": 42,
             "name": "黄瓜炒肉",
             "fire": 2,
-            "unlock": 0,
-            "quality": "神",
-            "price": 142,
-            "time": 212,
-            "total": 30,
+            "unlock": 119,
             "stirfry": 20,
             "boil": 0,
             "cut": 15,
@@ -609,6 +645,12 @@
                     "quantity": 2
                 }
             ],
+            "price": 142,
+            "time": 212,
+            "total": 30,
+            "origin": "神级凉拌黄瓜",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -616,10 +658,6 @@
             "name": "菠萝派",
             "fire": 2,
             "unlock": -1,
-            "quality": "可",
-            "price": 50,
-            "time": 171,
-            "total": 30,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -636,17 +674,19 @@
                     "quantity": 6
                 }
             ],
-            "remark": "升级大天狗-升级大天狗"
+            "price": 50,
+            "time": 171,
+            "total": 30,
+            "origin": "神级面包",
+            "get": true,
+            "quality": "优",
+            "remark": "升级大天狗-三阶不知火喵"
         },
         {
             "recipeId": 44,
             "name": "面包",
             "fire": 1,
             "unlock": 43,
-            "quality": "神",
-            "price": 8,
-            "time": 30,
-            "total": 40,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -659,6 +699,12 @@
                     "quantity": 2
                 }
             ],
+            "price": 8,
+            "time": 30,
+            "total": 40,
+            "origin": "主线21",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -666,10 +712,6 @@
             "name": "猪排饭",
             "fire": 3,
             "unlock": -1,
-            "quality": "神",
-            "price": 136,
-            "time": 237,
-            "total": 25,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -686,17 +728,19 @@
                     "quantity": 10
                 }
             ],
+            "price": 136,
+            "time": 237,
+            "total": 25,
+            "origin": "主线88",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
             "recipeId": 51,
             "name": "凉拌黄瓜",
             "fire": 1,
-            "unlock": 0,
-            "quality": "神",
-            "price": 23,
-            "time": 118,
-            "total": 40,
+            "unlock": 42,
             "stirfry": 0,
             "boil": 0,
             "cut": 20,
@@ -713,6 +757,12 @@
                     "quantity": 2
                 }
             ],
+            "price": 23,
+            "time": 118,
+            "total": 40,
+            "origin": "主线97",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -720,10 +770,6 @@
             "name": "锅贴",
             "fire": 1,
             "unlock": 183,
-            "quality": "神",
-            "price": 35,
-            "time": 120,
-            "total": 40,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -744,6 +790,12 @@
                     "quantity": 3
                 }
             ],
+            "price": 35,
+            "time": 120,
+            "total": 40,
+            "origin": "主线80",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -751,10 +803,6 @@
             "name": "葱油拌面",
             "fire": 1,
             "unlock": 9,
-            "quality": "神",
-            "price": 37,
-            "time": 109,
-            "total": 40,
             "stirfry": 0,
             "boil": 20,
             "cut": 10,
@@ -771,6 +819,12 @@
                     "quantity": 2
                 }
             ],
+            "price": 37,
+            "time": 109,
+            "total": 40,
+            "origin": "主线32",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -778,10 +832,6 @@
             "name": "老鸭粉丝汤",
             "fire": 2,
             "unlock": -1,
-            "quality": "",
-            "price": 0,
-            "time": 0,
-            "total": 0,
             "stirfry": 0,
             "boil": 40,
             "cut": 20,
@@ -806,6 +856,12 @@
                     "quantity": 5
                 }
             ],
+            "price": 183,
+            "time": 461,
+            "total": 30,
+            "origin": "主线104",
+            "get": true,
+            "quality": "",
             "remark": ""
         },
         {
@@ -813,10 +869,6 @@
             "name": "干炒牛河",
             "fire": 3,
             "unlock": 0,
-            "quality": "特",
-            "price": 90,
-            "time": 106,
-            "total": 25,
             "stirfry": 55,
             "boil": 0,
             "cut": 20,
@@ -833,17 +885,19 @@
                     "quantity": 6
                 }
             ],
-            "remark": ""
+            "price": 90,
+            "time": 106,
+            "total": 25,
+            "origin": "主线38",
+            "get": true,
+            "quality": "特",
+            "remark": "暂无"
         },
         {
             "recipeId": 65,
             "name": "葱油鸡",
             "fire": 1,
             "unlock": 68,
-            "quality": "神",
-            "price": 50,
-            "time": 105,
-            "total": 40,
             "stirfry": 0,
             "boil": 0,
             "cut": 10,
@@ -860,6 +914,12 @@
                     "quantity": 3
                 }
             ],
+            "price": 50,
+            "time": 105,
+            "total": 40,
+            "origin": "主线18",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -867,10 +927,6 @@
             "name": "口水鸡",
             "fire": 3,
             "unlock": 0,
-            "quality": "可",
-            "price": 373,
-            "time": 512,
-            "total": 25,
             "stirfry": 0,
             "boil": 0,
             "cut": 55,
@@ -895,17 +951,19 @@
                     "quantity": 6
                 }
             ],
-            "remark": ""
+            "price": 373,
+            "time": 512,
+            "total": 25,
+            "origin": "神级葱油鸡",
+            "get": true,
+            "quality": "可",
+            "remark": "二阶夏娃/三阶秋韵-二阶夏娃-三阶夏娃"
         },
         {
             "recipeId": 69,
             "name": "皮蛋瘦肉粥",
             "fire": 1,
             "unlock": 70,
-            "quality": "神",
-            "price": 35,
-            "time": 117,
-            "total": 40,
             "stirfry": 0,
             "boil": 18,
             "cut": 0,
@@ -926,6 +984,12 @@
                     "quantity": 1
                 }
             ],
+            "price": 35,
+            "time": 117,
+            "total": 40,
+            "origin": "主线49",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -933,10 +997,6 @@
             "name": "窝蛋牛肉粥",
             "fire": 2,
             "unlock": 0,
-            "quality": "特",
-            "price": 84,
-            "time": 210,
-            "total": 30,
             "stirfry": 0,
             "boil": 50,
             "cut": 0,
@@ -957,17 +1017,19 @@
                     "quantity": 3
                 }
             ],
-            "remark": "上宫晴"
+            "price": 84,
+            "time": 210,
+            "total": 30,
+            "origin": "神级皮蛋瘦肉粥",
+            "get": true,
+            "quality": "特",
+            "remark": "三阶上宫晴"
         },
         {
             "recipeId": 74,
             "name": "臭豆腐",
             "fire": 2,
             "unlock": -1,
-            "quality": "神",
-            "price": 96,
-            "time": 222,
-            "total": 30,
             "stirfry": 0,
             "boil": 0,
             "cut": 10,
@@ -984,6 +1046,12 @@
                     "quantity": 6
                 }
             ],
+            "price": 96,
+            "time": 222,
+            "total": 30,
+            "origin": "新手奖池",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -991,10 +1059,6 @@
             "name": "家常豆腐",
             "fire": 2,
             "unlock": 123,
-            "quality": "神",
-            "price": 189,
-            "time": 495,
-            "total": 30,
             "stirfry": 25,
             "boil": 0,
             "cut": 0,
@@ -1015,6 +1079,12 @@
                     "quantity": 8
                 }
             ],
+            "price": 189,
+            "time": 495,
+            "total": 30,
+            "origin": "主线86",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -1022,10 +1092,6 @@
             "name": "醉蟹",
             "fire": 4,
             "unlock": -1,
-            "quality": "",
-            "price": 0,
-            "time": 0,
-            "total": 0,
             "stirfry": 0,
             "boil": 0,
             "cut": 90,
@@ -1042,6 +1108,12 @@
                     "quantity": 2
                 }
             ],
+            "price": 0,
+            "time": 0,
+            "total": 0,
+            "origin": "新手奖池",
+            "get": true,
+            "quality": "",
             "remark": ""
         },
         {
@@ -1049,10 +1121,6 @@
             "name": "香酥鸭",
             "fire": 2,
             "unlock": 0,
-            "quality": "优",
-            "price": 136,
-            "time": 216,
-            "total": 30,
             "stirfry": 0,
             "boil": 0,
             "cut": 10,
@@ -1069,17 +1137,19 @@
                     "quantity": 6
                 }
             ],
-            "remark": ""
+            "price": 136,
+            "time": 216,
+            "total": 30,
+            "origin": "主线102",
+            "get": true,
+            "quality": "优",
+            "remark": "三阶熊麓-大天狗"
         },
         {
             "recipeId": 80,
             "name": "麻辣鸭头",
             "fire": 2,
             "unlock": -1,
-            "quality": "特",
-            "price": 101,
-            "time": 134,
-            "total": 30,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -1096,6 +1166,12 @@
                     "quantity": 4
                 }
             ],
+            "price": 101,
+            "time": 134,
+            "total": 30,
+            "origin": "签到礼包",
+            "get": true,
+            "quality": "特",
             "remark": "三阶申公子"
         },
         {
@@ -1103,10 +1179,6 @@
             "name": "青菜豆腐汤",
             "fire": 1,
             "unlock": 34,
-            "quality": "神",
-            "price": 26,
-            "time": 140,
-            "total": 40,
             "stirfry": 0,
             "boil": 25,
             "cut": 0,
@@ -1123,6 +1195,12 @@
                     "quantity": 2
                 }
             ],
+            "price": 26,
+            "time": 140,
+            "total": 40,
+            "origin": "神级野菜汤",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -1130,10 +1208,6 @@
             "name": "卤水门腔",
             "fire": 1,
             "unlock": 0,
-            "quality": "优",
-            "price": 87,
-            "time": 255,
-            "total": 40,
             "stirfry": 0,
             "boil": 20,
             "cut": 20,
@@ -1150,17 +1224,19 @@
                     "quantity": 2
                 }
             ],
-            "remark": "羽十六"
+            "price": 87,
+            "time": 255,
+            "total": 40,
+            "origin": "新手奖池",
+            "get": true,
+            "quality": "优",
+            "remark": "羽十六-暂无"
         },
         {
             "recipeId": 85,
             "name": "香烤猪颈肉",
             "fire": 3,
             "unlock": -1,
-            "quality": "优",
-            "price": 114,
-            "time": 151,
-            "total": 25,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -1177,17 +1253,19 @@
                     "quantity": 6
                 }
             ],
-            "remark": ""
+            "price": 114,
+            "time": 151,
+            "total": 25,
+            "origin": "新手奖池",
+            "get": true,
+            "quality": "优",
+            "remark": "二阶不知火喵-三阶不知火喵"
         },
         {
             "recipeId": 91,
             "name": "剁椒跑蛋",
             "fire": 1,
             "unlock": 122,
-            "quality": "神",
-            "price": 21,
-            "time": 100,
-            "total": 40,
             "stirfry": 25,
             "boil": 0,
             "cut": 0,
@@ -1204,6 +1282,12 @@
                     "quantity": 3
                 }
             ],
+            "price": 21,
+            "time": 100,
+            "total": 40,
+            "origin": "神级香葱煎蛋",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -1211,10 +1295,6 @@
             "name": "剁椒皮蛋",
             "fire": 1,
             "unlock": -1,
-            "quality": "神",
-            "price": 30,
-            "time": 68,
-            "total": 40,
             "stirfry": 0,
             "boil": 0,
             "cut": 15,
@@ -1231,6 +1311,12 @@
                     "quantity": 2
                 }
             ],
+            "price": 30,
+            "time": 68,
+            "total": 40,
+            "origin": "主线53",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -1238,10 +1324,6 @@
             "name": "香葱煎蛋",
             "fire": 1,
             "unlock": 91,
-            "quality": "神",
-            "price": 31,
-            "time": 71,
-            "total": 40,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -1258,6 +1340,12 @@
                     "quantity": 2
                 }
             ],
+            "price": 31,
+            "time": 71,
+            "total": 40,
+            "origin": "主线15",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -1265,10 +1353,6 @@
             "name": "洋葱圈",
             "fire": 2,
             "unlock": -1,
-            "quality": "神",
-            "price": 49,
-            "time": 113,
-            "total": 30,
             "stirfry": 0,
             "boil": 0,
             "cut": 5,
@@ -1285,6 +1369,12 @@
                     "quantity": 2
                 }
             ],
+            "price": 49,
+            "time": 113,
+            "total": 30,
+            "origin": "新手奖池",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -1292,10 +1382,6 @@
             "name": "干锅鱼头",
             "fire": 4,
             "unlock": 0,
-            "quality": "可",
-            "price": 866,
-            "time": 323,
-            "total": 0,
             "stirfry": 0,
             "boil": 40,
             "cut": 0,
@@ -1316,17 +1402,19 @@
                     "quantity": 6
                 }
             ],
-            "remark": ""
+            "price": 866,
+            "time": 323,
+            "total": 0,
+            "origin": "主线78",
+            "get": true,
+            "quality": "可",
+            "remark": "暂无"
         },
         {
             "recipeId": 106,
             "name": "牛肉煎包",
             "fire": 1,
             "unlock": -1,
-            "quality": "神",
-            "price": 46,
-            "time": 149,
-            "total": 40,
             "stirfry": 0,
             "boil": 0,
             "cut": 15,
@@ -1343,6 +1431,12 @@
                     "quantity": 3
                 }
             ],
+            "price": 46,
+            "time": 149,
+            "total": 40,
+            "origin": "主线36",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -1350,10 +1444,6 @@
             "name": "炸牛奶",
             "fire": 2,
             "unlock": -1,
-            "quality": "",
-            "price": 0,
-            "time": 0,
-            "total": 0,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -1370,6 +1460,12 @@
                     "quantity": 6
                 }
             ],
+            "price": 56,
+            "time": 135,
+            "total": 30,
+            "origin": "签到礼包",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -1377,10 +1473,6 @@
             "name": "番茄肥牛",
             "fire": 2,
             "unlock": -1,
-            "quality": "神",
-            "price": 89,
-            "time": 105,
-            "total": 30,
             "stirfry": 20,
             "boil": 30,
             "cut": 0,
@@ -1397,6 +1489,12 @@
                     "quantity": 5
                 }
             ],
+            "price": 89,
+            "time": 105,
+            "total": 30,
+            "origin": "主线40",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -1404,10 +1502,6 @@
             "name": "红油抄手",
             "fire": 4,
             "unlock": -1,
-            "quality": "",
-            "price": 491,
-            "time": 376,
-            "total": 0,
             "stirfry": 50,
             "boil": 60,
             "cut": 0,
@@ -1432,6 +1526,12 @@
                     "quantity": 6
                 }
             ],
+            "price": 491,
+            "time": 376,
+            "total": 0,
+            "origin": "神级炸春卷",
+            "get": true,
+            "quality": "",
             "remark": ""
         },
         {
@@ -1439,10 +1539,6 @@
             "name": "四喜饺",
             "fire": 4,
             "unlock": -1,
-            "quality": "",
-            "price": 216,
-            "time": 230,
-            "total": 0,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -1467,6 +1563,12 @@
                     "quantity": 3
                 }
             ],
+            "price": 216,
+            "time": 230,
+            "total": 0,
+            "origin": "双11壁池",
+            "get": true,
+            "quality": "",
             "remark": ""
         },
         {
@@ -1474,10 +1576,6 @@
             "name": "酿黄瓜",
             "fire": 2,
             "unlock": -1,
-            "quality": "可",
-            "price": 64,
-            "time": 176,
-            "total": 30,
             "stirfry": 0,
             "boil": 0,
             "cut": 20,
@@ -1494,17 +1592,19 @@
                     "quantity": 2
                 }
             ],
-            "remark": ""
+            "price": 64,
+            "time": 176,
+            "total": 30,
+            "origin": "神级黄瓜炒肉",
+            "get": true,
+            "quality": "可",
+            "remark": "夏娃/秋韵-武葵-升级武葵/?阶夏娃"
         },
         {
             "recipeId": 122,
             "name": "虾仁跑蛋",
             "fire": 3,
             "unlock": -1,
-            "quality": "可",
-            "price": 654,
-            "time": 443,
-            "total": 0,
             "stirfry": 60,
             "boil": 0,
             "cut": 0,
@@ -1525,17 +1625,19 @@
                     "quantity": 5
                 }
             ],
-            "remark": "升级大天狗-升级大天狗"
+            "price": 654,
+            "time": 443,
+            "total": 0,
+            "origin": "神级剁椒跑蛋",
+            "get": true,
+            "quality": "可",
+            "remark": "大天狗-升级大天狗-暂无"
         },
         {
             "recipeId": 123,
             "name": "虾仁豆腐",
             "fire": 3,
             "unlock": -1,
-            "quality": "",
-            "price": 758,
-            "time": 574,
-            "total": 0,
             "stirfry": 65,
             "boil": 0,
             "cut": 50,
@@ -1556,6 +1658,12 @@
                     "quantity": 4
                 }
             ],
+            "price": 758,
+            "time": 574,
+            "total": 0,
+            "origin": "神级家常豆腐",
+            "get": true,
+            "quality": "",
             "remark": ""
         },
         {
@@ -1563,10 +1671,6 @@
             "name": "白粽",
             "fire": 1,
             "unlock": 0,
-            "quality": "优",
-            "price": 30,
-            "time": 180,
-            "total": 40,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -1579,17 +1683,19 @@
                     "quantity": 3
                 }
             ],
-            "remark": "升级申公子-三阶申公子"
+            "price": 30,
+            "time": 180,
+            "total": 40,
+            "origin": "主线72",
+            "get": true,
+            "quality": "优",
+            "remark": "升级申公子-三阶申公子/二阶上宫晴"
         },
         {
             "recipeId": 132,
             "name": "得莫利炖鱼",
             "fire": 5,
             "unlock": -1,
-            "quality": "",
-            "price": 0,
-            "time": 0,
-            "total": 0,
             "stirfry": 0,
             "boil": 80,
             "cut": 0,
@@ -1614,6 +1720,12 @@
                     "quantity": 6
                 }
             ],
+            "price": 0,
+            "time": 0,
+            "total": 0,
+            "origin": "双11壁池",
+            "get": true,
+            "quality": "",
             "remark": ""
         },
         {
@@ -1621,10 +1733,6 @@
             "name": "鸡汤煮干丝",
             "fire": 4,
             "unlock": -1,
-            "quality": "",
-            "price": 0,
-            "time": 0,
-            "total": 0,
             "stirfry": 0,
             "boil": 100,
             "cut": 99,
@@ -1649,6 +1757,12 @@
                     "quantity": 12
                 }
             ],
+            "price": 0,
+            "time": 0,
+            "total": 0,
+            "origin": "双11壁池",
+            "get": true,
+            "quality": "",
             "remark": ""
         },
         {
@@ -1656,10 +1770,6 @@
             "name": "三鲜豆皮",
             "fire": 3,
             "unlock": -1,
-            "quality": "优",
-            "price": 321,
-            "time": 683,
-            "total": 25,
             "stirfry": 55,
             "boil": 0,
             "cut": 0,
@@ -1684,17 +1794,19 @@
                     "quantity": 5
                 }
             ],
-            "remark": "大天狗-升级大天狗"
+            "price": 321,
+            "time": 683,
+            "total": 25,
+            "origin": "双11壁池",
+            "get": true,
+            "quality": "优",
+            "remark": "升级大天狗-升级大天狗"
         },
         {
             "recipeId": 140,
             "name": "三丝抱豆",
             "fire": 2,
             "unlock": -1,
-            "quality": "",
-            "price": 172,
-            "time": 537,
-            "total": 30,
             "stirfry": 0,
             "boil": 0,
             "cut": 30,
@@ -1719,6 +1831,12 @@
                     "quantity": 4
                 }
             ],
+            "price": 172,
+            "time": 537,
+            "total": 30,
+            "origin": "神级青椒土豆丝",
+            "get": true,
+            "quality": "",
             "remark": ""
         },
         {
@@ -1726,10 +1844,6 @@
             "name": "牛肉手抓饭",
             "fire": 3,
             "unlock": -1,
-            "quality": "特",
-            "price": 255,
-            "time": 347,
-            "total": 25,
             "stirfry": 50,
             "boil": 0,
             "cut": 0,
@@ -1754,17 +1868,19 @@
                     "quantity": 5
                 }
             ],
-            "remark": "大天狗"
+            "price": 255,
+            "time": 347,
+            "total": 25,
+            "origin": "双11壁池",
+            "get": true,
+            "quality": "特",
+            "remark": "升级大天狗"
         },
         {
             "recipeId": 149,
             "name": "肉酱千层面",
             "fire": 4,
             "unlock": -1,
-            "quality": "可",
-            "price": 235,
-            "time": 285,
-            "total": 20,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -1789,17 +1905,19 @@
                     "quantity": 6
                 }
             ],
-            "remark": "大天狗-三阶不知火喵-?"
+            "price": 235,
+            "time": 285,
+            "total": 20,
+            "origin": "双11壁池",
+            "get": true,
+            "quality": "可",
+            "remark": "升级大天狗-三阶不知火喵-暂无"
         },
         {
             "recipeId": 152,
             "name": "炸茄盒",
             "fire": 3,
             "unlock": -1,
-            "quality": "神",
-            "price": 59,
-            "time": 135,
-            "total": 25,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -1816,6 +1934,12 @@
                     "quantity": 5
                 }
             ],
+            "price": 59,
+            "time": 135,
+            "total": 25,
+            "origin": "双11壁池",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -1823,10 +1947,6 @@
             "name": "牛肉串",
             "fire": 3,
             "unlock": -1,
-            "quality": "可",
-            "price": 110,
-            "time": 140,
-            "total": 0,
             "stirfry": 0,
             "boil": 0,
             "cut": 20,
@@ -1839,17 +1959,19 @@
                     "quantity": 4
                 }
             ],
-            "remark": "?-?-?"
+            "price": 110,
+            "time": 140,
+            "total": 0,
+            "origin": "主线95",
+            "get": true,
+            "quality": "优",
+            "remark": "二阶不知火喵-三阶不知火喵"
         },
         {
             "recipeId": 160,
             "name": "葱姜辣炒蛤蜊",
             "fire": 2,
             "unlock": 0,
-            "quality": "",
-            "price": 0,
-            "time": 0,
-            "total": 0,
             "stirfry": 35,
             "boil": 0,
             "cut": 0,
@@ -1870,6 +1992,12 @@
                     "quantity": 4
                 }
             ],
+            "price": 298,
+            "time": 205,
+            "total": 30,
+            "origin": "主线112",
+            "get": true,
+            "quality": "",
             "remark": ""
         },
         {
@@ -1877,10 +2005,6 @@
             "name": "原汁白蛤蜊",
             "fire": 1,
             "unlock": -1,
-            "quality": "特",
-            "price": 0,
-            "time": 0,
-            "total": 0,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -1893,17 +2017,19 @@
                     "quantity": 2
                 }
             ],
-            "remark": ""
+            "price": 55,
+            "time": 85,
+            "total": 40,
+            "origin": "主线111",
+            "get": true,
+            "quality": "特",
+            "remark": "升级申公子"
         },
         {
             "recipeId": 164,
             "name": "盐酥鸡",
             "fire": 2,
             "unlock": -1,
-            "quality": "神",
-            "price": 60,
-            "time": 85,
-            "total": 30,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -1920,6 +2046,12 @@
                     "quantity": 4
                 }
             ],
+            "price": 60,
+            "time": 85,
+            "total": 30,
+            "origin": "签到礼包",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -1927,10 +2059,6 @@
             "name": "椒盐排条",
             "fire": 2,
             "unlock": 31,
-            "quality": "神",
-            "price": 47,
-            "time": 60,
-            "total": 30,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -1947,6 +2075,12 @@
                     "quantity": 4
                 }
             ],
+            "price": 47,
+            "time": 60,
+            "total": 30,
+            "origin": "主线58",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -1954,10 +2088,6 @@
             "name": "糖番茄",
             "fire": 1,
             "unlock": -1,
-            "quality": "神",
-            "price": 7,
-            "time": 30,
-            "total": 40,
             "stirfry": 0,
             "boil": 0,
             "cut": 10,
@@ -1970,6 +2100,12 @@
                     "quantity": 3
                 }
             ],
+            "price": 7,
+            "time": 30,
+            "total": 40,
+            "origin": "主线11",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -1977,10 +2113,6 @@
             "name": "客家小炒肉",
             "fire": 3,
             "unlock": -1,
-            "quality": "",
-            "price": 240,
-            "time": 386,
-            "total": 0,
             "stirfry": 51,
             "boil": 0,
             "cut": 0,
@@ -2005,6 +2137,12 @@
                     "quantity": 6
                 }
             ],
+            "price": 240,
+            "time": 386,
+            "total": 0,
+            "origin": "双11壁池",
+            "get": true,
+            "quality": "",
             "remark": ""
         },
         {
@@ -2012,10 +2150,6 @@
             "name": "肉夹馍",
             "fire": 2,
             "unlock": -1,
-            "quality": "可",
-            "price": 108,
-            "time": 180,
-            "total": 30,
             "stirfry": 0,
             "boil": 0,
             "cut": 55,
@@ -2036,17 +2170,19 @@
                     "quantity": 5
                 }
             ],
-            "remark": "三阶熊麓-?-?"
+            "price": 108,
+            "time": 180,
+            "total": 30,
+            "origin": "主线45",
+            "get": true,
+            "quality": "可",
+            "remark": "孙香香-升级孙香香-三阶夏娃"
         },
         {
             "recipeId": 183,
             "name": "炸春卷",
             "fire": 2,
             "unlock": 110,
-            "quality": "神",
-            "price": 149,
-            "time": 253,
-            "total": 30,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -2067,6 +2203,12 @@
                     "quantity": 6
                 }
             ],
+            "price": 149,
+            "time": 253,
+            "total": 30,
+            "origin": "神级锅贴",
+            "get": true,
+            "quality": "神",
             "remark": ""
         },
         {
@@ -2074,10 +2216,6 @@
             "name": "元宝肘子",
             "fire": 3,
             "unlock": -1,
-            "quality": "可",
-            "price": 237,
-            "time": 333,
-            "total": 0,
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -2102,21 +2240,23 @@
                     "quantity": 4
                 }
             ],
-            "remark": "升级申公子-?-?"
+            "price": 237,
+            "time": 333,
+            "total": 0,
+            "origin": "双11壁池",
+            "get": true,
+            "quality": "可",
+            "remark": "升级申公子-三阶申公子-?阶上宫晴"
         },
         {
             "recipeId": 189,
             "name": "咖喱鱼丸",
             "fire": 4,
             "unlock": -1,
-            "quality": "",
-            "price": 0,
-            "time": 0,
-            "total": 0,
             "stirfry": 0,
             "boil": 0,
-            "cut": 25,
-            "fry": 0,
+            "cut": 0,
+            "fry": 25,
             "roast": 0,
             "steam": 70,
             "ingredient": [
@@ -2133,6 +2273,12 @@
                     "quantity": 7
                 }
             ],
+            "price": 0,
+            "time": 0,
+            "total": 0,
+            "origin": "双11壁池",
+            "get": true,
+            "quality": "",
             "remark": ""
         },
         {
@@ -2140,10 +2286,6 @@
             "name": "酸汤肥牛",
             "fire": 4,
             "unlock": -1,
-            "quality": "",
-            "price": 0,
-            "time": 0,
-            "total": 0,
             "stirfry": 0,
             "boil": 85,
             "cut": 0,
@@ -2164,6 +2306,12 @@
                     "quantity": 7
                 }
             ],
+            "price": 0,
+            "time": 0,
+            "total": 0,
+            "origin": "双11壁池",
+            "get": true,
+            "quality": "",
             "remark": "羽十六"
         },
         {
@@ -2171,10 +2319,6 @@
             "name": "麻辣小龙虾",
             "fire": 4,
             "unlock": -1,
-            "quality": "可",
-            "price": 1037,
-            "time": 446,
-            "total": 0,
             "stirfry": 75,
             "boil": 75,
             "cut": 0,
@@ -2199,7 +2343,13 @@
                     "quantity": 4
                 }
             ],
-            "remark": "羽十六"
+            "price": 1037,
+            "time": 446,
+            "total": 0,
+            "origin": "双11壁池",
+            "get": true,
+            "quality": "可",
+            "remark": "羽十六-暂无"
         }
     ],
     "origins": [
@@ -3244,7 +3394,7 @@
             "fry": 240,
             "roast": 120,
             "steam": 0,
-            "show": true,
+            "show": false,
             "skill": [
                 {
                     "type": "水产",

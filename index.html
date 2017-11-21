@@ -12,11 +12,7 @@
 
 <body>
     <div class="box">
-        <button type="button" class="btn btn-toggle function-switch active" data-toggle="button">
-            <span>个人版</span>
-            <div class="handle"></div>
-            <span>公共版</span>
-        </button>
+        <input type="checkbox" id="chk-personal" data-toggle="toggle" data-on="个人版" data-off="公共版" data-onstyle="default">
     </div>
     <div class="box chk-show">
         <label class="btn btn-default">
@@ -55,6 +51,11 @@
             效率
         </label>
         <label class="btn btn-default">
+            <input type="checkbox" id="chk-show-origin">
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            来源
+        </label>
+        <label class="btn btn-default">
             <input type="checkbox" id="chk-show-unlock">
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             解锁
@@ -63,6 +64,11 @@
             <input type="checkbox" id="chk-show-guest" checked>
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             贵客
+        </label>
+        <label class="btn btn-default hidden">
+            <input type="checkbox" id="chk-show-get">
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            已有
         </label>
         <label class="btn btn-default hidden">
             <input type="checkbox" id="chk-show-quality">
@@ -105,51 +111,54 @@
             5火
         </label>
     </div>
-    <div class="box chk-skill">
+    <div class="box">
         <label class="btn btn-default">
-            <input type="checkbox" id="chk-skill-stirfry" checked>
+            <input type="checkbox" id="chk-skill-stirfry" class="chk-skill" checked>
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             炒
         </label>
         <label class="btn btn-default">
-            <input type="checkbox" id="chk-skill-boil" checked>
+            <input type="checkbox" id="chk-skill-boil" class="chk-skill" checked>
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             煮
         </label>
         <label class="btn btn-default">
-            <input type="checkbox" id="chk-skill-cut" checked>
+            <input type="checkbox" id="chk-skill-cut" class="chk-skill" checked>
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             切
         </label>
         <label class="btn btn-default">
-            <input type="checkbox" id="chk-skill-fry" checked>
+            <input type="checkbox" id="chk-skill-fry" class="chk-skill" checked>
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             炸
         </label>
         <label class="btn btn-default">
-            <input type="checkbox" id="chk-skill-roast" checked>
+            <input type="checkbox" id="chk-skill-roast" class="chk-skill" checked>
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             烤
         </label>
         <label class="btn btn-default">
-            <input type="checkbox" id="chk-skill-steam" checked>
+            <input type="checkbox" id="chk-skill-steam" class="chk-skill" checked>
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             蒸
         </label>
-        <button type="button" class="btn btn-toggle multi-switch active" data-toggle="button">
-            <span>单选</span>
-            <div class="handle"></div>
-            <span>多选</span>
-        </button>
-        <a class="btn btn-default chk-skill-all">
+        <input type="checkbox" id="chk-single-skill" data-toggle="toggle" data-on="单选" data-off="多选" data-onstyle="default">
+        <a id="chk-skill-all" class="btn btn-default">
             全选
         </a>
     </div>
-    <div class="box chk-guest">
+    <div class="box">
         <label class="btn btn-default">
             <input type="checkbox" id="chk-guest">
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             贵客
+        </label>
+    </div>
+    <div class="box hidden">
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-get">
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            已有
         </label>
     </div>
     <div>
@@ -172,8 +181,10 @@
                     <th>总价</th>
                     <th>总时间 (秒)</th>
                     <th>金币/小时</th>
+                    <th>来源</th>
                     <th>解锁</th>
                     <th>贵客</th>
+                    <th>已有</th>
                     <th>品质</th>
                     <th>备注</th>
                 </tr>

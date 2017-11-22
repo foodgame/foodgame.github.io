@@ -182,6 +182,8 @@ function init(json) {
             initShow(table, json);
         }
     });
+
+    $('#food-table').removeClass("hidden");
 }
 
 function generateData(json) {

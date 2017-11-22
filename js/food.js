@@ -145,7 +145,7 @@ function init(json) {
         if ($(this).prop("checked")) {
             $('#chk-show-get').parent(".btn").removeClass('hidden');
             $('#chk-show-quality').prop("checked", true).parent(".btn").removeClass('hidden');
-            $('#chk-show-remark').prop("checked", true).parent(".btn").removeClass('hidden');
+            $('#chk-show-remark').parent(".btn").removeClass('hidden');
             for (j in json.chefs) {
                 if (json.chefs[j].show) {
                     $('#chk-show-chef').multiselect('select', j);

@@ -69,9 +69,9 @@ function init(json) {
         }
     });
 
-    for (j in json.chefs) {
-        $('#chk-show-chef').append("<option value='" + j + "'>" + json.chefs[j].name + "</option>");
-        $('#food-table thead tr').append("<th>" + json.chefs[j].name + "</th>").append("<th>金币/小时</th>");
+    for (j in json.personal.chefs) {
+        $('#chk-show-chef').append("<option value='" + j + "'>" + json.personal.chefs[j].name + "</option>");
+        $('#food-table thead tr').append("<th>" + json.personal.chefs[j].name + "</th>").append("<th>金币/小时</th>");
     }
 
     var table = $('#food-table').DataTable({
@@ -81,15 +81,18 @@ function init(json) {
         ],
         "language": {
             "search": "查找:",
-            "lengthMenu": "一页显示 _MENU_ 条",
+            "lengthMenu": "一页显示 _MENU_ 个",
             "zeroRecords": "没有找到",
-            "info": "第 _PAGE_ 页 共 _PAGES_ 页 _TOTAL_ 条记录",
+            "info": "第 _PAGE_ 页 共 _PAGES_ 页 _TOTAL_ 个菜谱",
             "infoEmpty": "没有数据",
-            "infoFiltered": "(从 _MAX_ 条记录中过滤)"
+            "infoFiltered": "(从 _MAX_ 个菜谱中过滤)"
         },
         "pagingType": "numbers",
         "lengthMenu": [[20, 50, 100, -1], [20, 50, 100, "所有"]],
-        "pageLength": 20
+        "pageLength": 20,
+        "dom": "<'row'<'col-sm-4'l><'col-sm-4'i><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-12'p>>"
     });
 
     $('.chk-skill').click(function () {
@@ -146,8 +149,8 @@ function init(json) {
             $('#chk-show-get').parent(".btn").removeClass('hidden');
             $('#chk-show-quality').prop("checked", true).parent(".btn").removeClass('hidden');
             $('#chk-show-remark').parent(".btn").removeClass('hidden');
-            for (j in json.chefs) {
-                if (json.chefs[j].show) {
+            for (j in json.personal.chefs) {
+                if (json.personal.chefs[j].show) {
                     $('#chk-show-chef').multiselect('select', j);
                 }
             }
@@ -278,27 +281,40 @@ function generateData(json) {
             json.recipes[i].hasOwnProperty('efficiency') ? parseInt(json.recipes[i].efficiency) : "",
             json.recipes[i].origin,
             json.recipes[i].unlockname || "-",
-            json.recipes[i].hasOwnProperty('guests') ? json.recipes[i].guests : "",
-            json.recipes[i].get,
-            json.recipes[i].quality,
-            json.recipes[i].remark,
+            json.recipes[i].hasOwnProperty('guests') ? json.recipes[i].guests : ""
         ]);
 
-        for (j in json.chefs) {
+        var hasRecipe = false;
+        for (j in json.personal.recipes) {
+            if (json.recipes[i].recipeId == json.personal.recipes[j].recipeId) {
+                hasRecipe = true;
+                recipesData[i].push("true");
+                recipesData[i].push(json.personal.recipes[j].quality);
+                recipesData[i].push(json.personal.recipes[j].remark);
+                break;
+            }
+        }
+        if (!hasRecipe) {
+            recipesData[i].push("false");
+            recipesData[i].push("");
+            recipesData[i].push("");
+        }
+
+        for (j in json.personal.chefs) {
 
             var times = Number.MAX_VALUE;
 
             if (json.recipes[i].stirfry > 0) {
-                if (json.chefs[j].stirfry > 0) {
-                    times = Math.min(times, json.chefs[j].stirfry / json.recipes[i].stirfry);
+                if (json.personal.chefs[j].stirfry > 0) {
+                    times = Math.min(times, json.personal.chefs[j].stirfry / json.recipes[i].stirfry);
                 } else {
                     times = 0;
                 }
             }
             if (times >= 1) {
                 if (json.recipes[i].boil > 0) {
-                    if (json.chefs[j].boil > 0) {
-                        times = Math.min(times, json.chefs[j].boil / json.recipes[i].boil);
+                    if (json.personal.chefs[j].boil > 0) {
+                        times = Math.min(times, json.personal.chefs[j].boil / json.recipes[i].boil);
                     } else {
                         times = 0;
                     }
@@ -306,8 +322,8 @@ function generateData(json) {
             }
             if (times >= 1) {
                 if (json.recipes[i].cut > 0) {
-                    if (json.chefs[j].cut > 0) {
-                        times = Math.min(times, json.chefs[j].cut / json.recipes[i].cut);
+                    if (json.personal.chefs[j].cut > 0) {
+                        times = Math.min(times, json.personal.chefs[j].cut / json.recipes[i].cut);
                     } else {
                         times = 0;
                     }
@@ -315,8 +331,8 @@ function generateData(json) {
             }
             if (times >= 1) {
                 if (json.recipes[i].fry > 0) {
-                    if (json.chefs[j].fry > 0) {
-                        times = Math.min(times, json.chefs[j].fry / json.recipes[i].fry);
+                    if (json.personal.chefs[j].fry > 0) {
+                        times = Math.min(times, json.personal.chefs[j].fry / json.recipes[i].fry);
                     } else {
                         times = 0;
                     }
@@ -324,8 +340,8 @@ function generateData(json) {
             }
             if (times >= 1) {
                 if (json.recipes[i].roast > 0) {
-                    if (json.chefs[j].roast > 0) {
-                        times = Math.min(times, json.chefs[j].roast / json.recipes[i].roast);
+                    if (json.personal.chefs[j].roast > 0) {
+                        times = Math.min(times, json.personal.chefs[j].roast / json.recipes[i].roast);
                     } else {
                         times = 0;
                     }
@@ -333,8 +349,8 @@ function generateData(json) {
             }
             if (times >= 1) {
                 if (json.recipes[i].steam > 0) {
-                    if (json.chefs[j].steam > 0) {
-                        times = Math.min(times, json.chefs[j].steam / json.recipes[i].steam);
+                    if (json.personal.chefs[j].steam > 0) {
+                        times = Math.min(times, json.personal.chefs[j].steam / json.recipes[i].steam);
                     } else {
                         times = 0;
                     }
@@ -363,9 +379,9 @@ function generateData(json) {
                 }
 
                 var skillAddition = 0;
-                if (json.chefs[j].hasOwnProperty('skill')) {
-                    for (k in json.chefs[j].skill) {
-                        if (json.chefs[j].skill[k].type == "水产") {
+                if (json.personal.chefs[j].hasOwnProperty('skill')) {
+                    for (k in json.personal.chefs[j].skill) {
+                        if (json.personal.chefs[j].skill[k].type == "水产") {
                             var hasSkill = false;
                             for (k in json.recipes[i].ingredient) {
                                 if (json.ingredients[json.recipes[i].ingredient[k].ingredientId].originId == 8) {
@@ -374,9 +390,9 @@ function generateData(json) {
                                 }
                             }
                             if (hasSkill) {
-                                skillAddition += json.chefs[j].skill[k].addition;
+                                skillAddition += json.personal.chefs[j].skill[k].addition;
                             }
-                        } else if (json.chefs[j].skill[k].type == "炸类") {
+                        } else if (json.personal.chefs[j].skill[k].type == "炸类") {
                             var hasSkill = false;
                             for (k in json.recipes[i].ingredient) {
                                 if (json.recipes[i].fry > 0) {
@@ -385,19 +401,14 @@ function generateData(json) {
                                 }
                             }
                             if (hasSkill) {
-                                skillAddition += json.chefs[j].skill[k].addition;
+                                skillAddition += json.personal.chefs[j].skill[k].addition;
                             }
                         }
                     }
                 }
 
-                var furnitureAddition = 0;
-                if (json.hasOwnProperty('furniture')) {
-                    furnitureAddition = json.furniture;
-                }
-
                 if (json.recipes[i].hasOwnProperty('efficiency')) {
-                    chefEff = (1 + qualityAddition + skillAddition + furnitureAddition) * json.recipes[i].efficiency;
+                    chefEff = (1 + qualityAddition + skillAddition + json.personal.furniture) * json.recipes[i].efficiency;
                 }
             }
 
@@ -435,7 +446,7 @@ function initShow(table, json) {
     table.column(20).visible($('#chk-show-quality').prop("checked"), false);
     table.column(21).visible($('#chk-show-remark').prop("checked"), false);
 
-    for (j in json.chefs) {
+    for (j in json.personal.chefs) {
         var chkChefs = $('#chk-show-chef').val();
         table.column(22 + 2 * j).visible(chkChefs.indexOf(j) > -1, false);
         table.column(23 + 2 * j).visible(chkChefs.indexOf(j) > -1, false);

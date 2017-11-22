@@ -256,7 +256,7 @@ function generateData(json) {
         }
 
         recipesData.push([
-            json.recipes[i].recipeId.toString(),
+            json.recipes[i].recipeId,
             json.recipes[i].name,
             json.recipes[i].fire || "",
             json.recipes[i].stirfry || "",

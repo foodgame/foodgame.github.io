@@ -153,6 +153,7 @@ function init(json) {
             }
             $('#chk-show-chef').parent(".chk-show-chef-wrapper").removeClass('hidden');
             $('#chk-get').prop("checked", true).parents(".box").removeClass('hidden');
+            $('#alert-personal').removeClass('hidden');
         }
         else {
             $('#chk-show-get').prop("checked", false).parent(".btn").addClass('hidden');
@@ -160,6 +161,7 @@ function init(json) {
             $('#chk-show-remark').prop("checked", false).parent(".btn").addClass('hidden');
             $('#chk-show-chef').multiselect('deselectAll', false).parent(".chk-show-chef-wrapper").addClass('hidden');
             $('#chk-get').prop("checked", false).parents(".box").addClass('hidden');
+            $('#alert-personal').addClass('hidden');
         }
         initShow(table, json);
     });

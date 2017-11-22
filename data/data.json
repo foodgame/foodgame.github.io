@@ -658,6 +658,35 @@
             "remark": ""
         },
         {
+            "recipeId": 41,
+            "name": "蘑菇炒肉",
+            "fire": 1,
+            "unlock": -1,
+            "stirfry": 35,
+            "boil": 0,
+            "cut": 0,
+            "fry": 0,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "ingredientId": 17,
+                    "quantity": 6
+                },
+                {
+                    "ingredientId": 3,
+                    "quantity": 2
+                }
+            ],
+            "price": 77,
+            "time": 302,
+            "total": 40,
+            "origin": "主线120",
+            "get": true,
+            "quality": "优",
+            "remark": ""
+        },
+        {
             "recipeId": 42,
             "name": "黄瓜炒肉",
             "fire": 2,
@@ -1790,7 +1819,7 @@
                     "quantity": 12
                 }
             ],
-            "price": 0,
+            "price": 1080,
             "time": 0,
             "total": 0,
             "origin": "双11壁池",
@@ -2212,6 +2241,35 @@
             "remark": "孙香香-升级孙香香-三阶夏娃"
         },
         {
+            "recipeId": 176,
+            "name": "鸭肉皮蛋卷",
+            "fire": 3,
+            "unlock": -1,
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 25,
+            "fry": 0,
+            "roast": 0,
+            "steam": 45,
+            "ingredient": [
+                {
+                    "ingredientId": 1,
+                    "quantity": 5
+                },
+                {
+                    "ingredientId": 12,
+                    "quantity": 6
+                }
+            ],
+            "price": 201,
+            "time": 0,
+            "total": 0,
+            "origin": "双11壁池",
+            "get": false,
+            "quality": "",
+            "remark": ""
+        },
+        {
             "recipeId": 183,
             "name": "炸春卷",
             "fire": 2,
@@ -2339,7 +2397,7 @@
                     "quantity": 7
                 }
             ],
-            "price": 0,
+            "price": 356,
             "time": 0,
             "total": 0,
             "origin": "双11壁池",

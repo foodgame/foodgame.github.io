@@ -14,72 +14,90 @@
     <div class="box">
         <input type="checkbox" id="chk-personal" data-toggle="toggle" data-on="个人版" data-off="公共版" data-onstyle="default">
     </div>
-    <div class="box chk-show">
+    <div class="box">
         <label class="btn btn-default">
-            <input type="checkbox" id="chk-show-id">
+            <input type="checkbox" id="chk-show-id" class="chk-show">
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             编号
         </label>
         <label class="btn btn-default">
-            <input type="checkbox" id="chk-show-fire" checked>
+            <input type="checkbox" id="chk-show-fire" class="chk-show" checked>
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             火
         </label>
         <label class="btn btn-default">
-            <input type="checkbox" id="chk-show-skill">
+            <input type="checkbox" id="chk-show-skill" class="chk-show">
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             技能
         </label>
         <label class="btn btn-default">
-            <input type="checkbox" id="chk-show-ingredient" checked>
+            <input type="checkbox" id="chk-show-ingredient" class="chk-show" checked>
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             材料
         </label>
         <label class="btn btn-default">
-            <input type="checkbox" id="chk-show-price">
+            <input type="checkbox" id="chk-show-price" class="chk-show">
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             单价
         </label>
         <label class="btn btn-default">
-            <input type="checkbox" id="chk-show-total-price">
+            <input type="checkbox" id="chk-show-time" class="chk-show">
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            单时间
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-show-total" class="chk-show">
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            一组
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-show-total-price" class="chk-show">
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             总价
         </label>
         <label class="btn btn-default">
-            <input type="checkbox" id="chk-show-efficiency" checked>
+            <input type="checkbox" id="chk-show-total-time" class="chk-show">
+            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+            总时间
+        </label>
+        <label class="btn btn-default">
+            <input type="checkbox" id="chk-show-efficiency" class="chk-show" checked>
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             效率
         </label>
         <label class="btn btn-default">
-            <input type="checkbox" id="chk-show-origin">
+            <input type="checkbox" id="chk-show-origin" class="chk-show">
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             来源
         </label>
         <label class="btn btn-default">
-            <input type="checkbox" id="chk-show-unlock">
+            <input type="checkbox" id="chk-show-unlock" class="chk-show">
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             解锁
         </label>
         <label class="btn btn-default">
-            <input type="checkbox" id="chk-show-guest" checked>
+            <input type="checkbox" id="chk-show-guest" class="chk-show">
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             贵客
         </label>
         <label class="btn btn-default hidden">
-            <input type="checkbox" id="chk-show-get">
+            <input type="checkbox" id="chk-show-get" class="chk-show">
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             已有
         </label>
         <label class="btn btn-default hidden">
-            <input type="checkbox" id="chk-show-quality">
+            <input type="checkbox" id="chk-show-quality" class="chk-show">
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             品质
         </label>
         <label class="btn btn-default hidden">
-            <input type="checkbox" id="chk-show-remark">
+            <input type="checkbox" id="chk-show-remark" class="chk-show">
             <i class="fa fa-check glyphicon glyphicon-ok"></i>
             备注
         </label>
+        <a id="chk-show-all" class="btn btn-default">
+            全选
+        </a>
         <div class="chk-show-chef-wrapper hidden">
             <select id="chk-show-chef" multiple="multiple"></select>
         </div>
@@ -176,7 +194,7 @@
                     <th>蒸</th>
                     <th>材料</th>
                     <th>单价</th>
-                    <th>时间 (秒)</th>
+                    <th>单时间 (秒)</th>
                     <th>一组</th>
                     <th>总价</th>
                     <th>总时间 (秒)</th>

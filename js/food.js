@@ -131,6 +131,16 @@ function init(json) {
         table.draw();
     });
 
+    $('#chk-show-all').click(function () {
+        if ($('.btn:not(.hidden) .chk-show:checked').length == $('.btn:not(.hidden) .chk-show').length) {
+            $('.btn:not(.hidden) .chk-show').prop("checked", false);
+        }
+        else {
+            $('.btn:not(.hidden) .chk-show').prop("checked", true);
+        }
+        initShow(table, json);
+    });
+
     $('#chk-personal').change(function () {
         if ($(this).prop("checked")) {
             $('#chk-show-get').parent(".btn").removeClass('hidden');
@@ -145,7 +155,7 @@ function init(json) {
             $('#chk-get').prop("checked", true).parents(".box").removeClass('hidden');
         }
         else {
-            $('#chk-show-get').parent(".btn").addClass('hidden');
+            $('#chk-show-get').prop("checked", false).parent(".btn").addClass('hidden');
             $('#chk-show-quality').prop("checked", false).parent(".btn").addClass('hidden');
             $('#chk-show-remark').prop("checked", false).parent(".btn").addClass('hidden');
             $('#chk-show-chef').multiselect('deselectAll', false).parent(".chk-show-chef-wrapper").addClass('hidden');
@@ -155,7 +165,7 @@ function init(json) {
     });
 
     initShow(table, json);
-    $('.chk-show input[type="checkbox"]').click(function () {
+    $('.chk-show').click(function () {
         initShow(table, json);
     });
 
@@ -246,7 +256,7 @@ function generateData(json) {
         }
 
         recipesData.push([
-            json.recipes[i].recipeId,
+            json.recipes[i].recipeId.toString(),
             json.recipes[i].name,
             json.recipes[i].fire || "",
             json.recipes[i].stirfry || "",
@@ -408,13 +418,11 @@ function initShow(table, json) {
     table.column(7).visible(chkSkill, false);
     table.column(8).visible(chkSkill, false);
     table.column(9).visible($('#chk-show-ingredient').prop("checked"), false);
-    var chkPrice = $('#chk-show-price').prop("checked");
-    table.column(10).visible(chkPrice, false);
-    table.column(11).visible(chkPrice, false);
-    var chkTotalPrice = $('#chk-show-total-price').prop("checked");
-    table.column(12).visible(chkTotalPrice, false);
-    table.column(13).visible(chkTotalPrice, false);
-    table.column(14).visible(chkTotalPrice, false);
+    table.column(10).visible($('#chk-show-price').prop("checked"), false);
+    table.column(11).visible($('#chk-show-time').prop("checked"), false);
+    table.column(12).visible($('#chk-show-total').prop("checked"), false);
+    table.column(13).visible($('#chk-show-total-price').prop("checked"), false);
+    table.column(14).visible($('#chk-show-total-time').prop("checked"), false);
     table.column(15).visible($('#chk-show-efficiency').prop("checked"), false);
     table.column(16).visible($('#chk-show-origin').prop("checked"), false);
     table.column(17).visible($('#chk-show-unlock').prop("checked"), false);

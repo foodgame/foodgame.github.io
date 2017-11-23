@@ -71,7 +71,7 @@ function init(json) {
 
     for (j in json.personal.chefs) {
         $('#chk-show-chef').append("<option value='" + j + "'>" + json.personal.chefs[j].name + "</option>");
-        $('#food-table thead tr').append("<th>" + json.personal.chefs[j].name + "</th>").append("<th>金币/小时</th>");
+        $('#food-table thead tr').append("<th>" + json.personal.chefs[j].name + "</th>").append("<th>效率</th>");
     }
 
     var table = $('#food-table').DataTable({
@@ -195,6 +195,8 @@ function init(json) {
             initShow(table, json);
         }
     });
+
+    $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
 
     $('#food-table').removeClass("hidden");
 }

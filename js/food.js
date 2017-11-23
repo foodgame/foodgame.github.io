@@ -77,7 +77,8 @@ function init(json) {
     var table = $('#food-table').DataTable({
         data: recipesData,
         "columnDefs": [
-            { "searchable": false, "targets": [16, 17] }
+            { "searchable": true, "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 18, 19] },
+            { "searchable": false, "targets": '_all' }
         ],
         "language": {
             "search": "查找:",
@@ -144,30 +145,37 @@ function init(json) {
         initShow(table, json);
     });
 
-    $('#chk-personal').change(function () {
-        if ($(this).prop("checked")) {
-            $('#chk-show-get').parent(".btn").removeClass('hidden');
-            $('#chk-show-quality').prop("checked", true).parent(".btn").removeClass('hidden');
-            $('#chk-show-remark').parent(".btn").removeClass('hidden');
-            for (j in json.personal.chefs) {
-                if (json.personal.chefs[j].show) {
-                    $('#chk-show-chef').multiselect('select', j);
+    if (window.location.search.indexOf("666") > 0) {
+        $('#chk-personal').parents(".box").removeClass('hidden');
+        $('#chk-personal').bootstrapToggle({
+            on: '个人版',
+            off: '公共版',
+            onstyle: 'default'
+        });
+
+        $('#chk-personal').change(function () {
+            if ($(this).prop("checked")) {
+                $('#chk-show-get').parent(".btn").removeClass('hidden');
+                $('#chk-show-quality').prop("checked", true).parent(".btn").removeClass('hidden');
+                $('#chk-show-remark').parent(".btn").removeClass('hidden');
+                for (j in json.personal.chefs) {
+                    if (json.personal.chefs[j].show) {
+                        $('#chk-show-chef').multiselect('select', j);
+                    }
                 }
+                $('#chk-show-chef').parent(".chk-show-chef-wrapper").removeClass('hidden');
+                $('#chk-get').prop("checked", true).parents(".box").removeClass('hidden');
             }
-            $('#chk-show-chef').parent(".chk-show-chef-wrapper").removeClass('hidden');
-            $('#chk-get').prop("checked", true).parents(".box").removeClass('hidden');
-            $('#alert-personal').removeClass('hidden');
-        }
-        else {
-            $('#chk-show-get').prop("checked", false).parent(".btn").addClass('hidden');
-            $('#chk-show-quality').prop("checked", false).parent(".btn").addClass('hidden');
-            $('#chk-show-remark').prop("checked", false).parent(".btn").addClass('hidden');
-            $('#chk-show-chef').multiselect('deselectAll', false).parent(".chk-show-chef-wrapper").addClass('hidden');
-            $('#chk-get').prop("checked", false).parents(".box").addClass('hidden');
-            $('#alert-personal').addClass('hidden');
-        }
-        initShow(table, json);
-    });
+            else {
+                $('#chk-show-get').prop("checked", false).parent(".btn").addClass('hidden');
+                $('#chk-show-quality').prop("checked", false).parent(".btn").addClass('hidden');
+                $('#chk-show-remark').prop("checked", false).parent(".btn").addClass('hidden');
+                $('#chk-show-chef').multiselect('deselectAll', false).parent(".chk-show-chef-wrapper").addClass('hidden');
+                $('#chk-get').prop("checked", false).parents(".box").addClass('hidden');
+            }
+            initShow(table, json);
+        });
+    }
 
     initShow(table, json);
     $('.chk-show').click(function () {

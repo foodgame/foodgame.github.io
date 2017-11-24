@@ -221,7 +221,7 @@ function generateData(json) {
 
         json.recipes[i].ingredients = "";
         for (k in json.recipes[i].ingredient) {
-            json.recipes[i].ingredients += json.ingredients[json.recipes[i].ingredient[k].ingredientId].name + "*" + json.recipes[i].ingredient[k].quantity + " "
+            json.recipes[i].ingredients += json.recipes[i].ingredient[k].name + "*" + json.recipes[i].ingredient[k].quantity + " "
         }
 
         json.recipes[i].guests = "";
@@ -261,17 +261,6 @@ function generateData(json) {
             }
         }
 
-        if (json.recipes[i].unlock == 0) {
-            json.recipes[i].unlockname = "有";
-        } else if (json.recipes[i].unlock > 0) {
-            for (m in json.recipes) {
-                if (json.recipes[m].recipeId == json.recipes[i].unlock) {
-                    json.recipes[i].unlockname = json.recipes[m].name;
-                    break;
-                }
-            }
-        }
-
         recipesData.push([
             json.recipes[i].recipeId,
             json.recipes[i].name,
@@ -290,25 +279,14 @@ function generateData(json) {
             json.recipes[i].hasOwnProperty('totalTime') ? (json.recipes[i].totalTime / 60).toFixed() : "",
             json.recipes[i].hasOwnProperty('efficiency') ? parseInt(json.recipes[i].efficiency) : "",
             json.recipes[i].origin,
-            json.recipes[i].unlockname || "-",
-            json.recipes[i].hasOwnProperty('guests') ? json.recipes[i].guests : ""
+            json.recipes[i].unlock,
+            json.recipes[i].hasOwnProperty('guests') ? json.recipes[i].guests : "",
+            json.recipes[i].hasOwnProperty('personal')? true:false,
+            json.recipes[i].hasOwnProperty('personal')? json.recipes[i].personal.quality : "",
+            json.recipes[i].hasOwnProperty('personal')? json.recipes[i].personal.remark : "",
+
         ]);
 
-        var hasRecipe = false;
-        for (j in json.personal.recipes) {
-            if (json.recipes[i].recipeId == json.personal.recipes[j].recipeId) {
-                hasRecipe = true;
-                recipesData[i].push("true");
-                recipesData[i].push(json.personal.recipes[j].quality);
-                recipesData[i].push(json.personal.recipes[j].remark);
-                break;
-            }
-        }
-        if (!hasRecipe) {
-            recipesData[i].push("false");
-            recipesData[i].push("");
-            recipesData[i].push("");
-        }
 
         for (j in json.personal.chefs) {
 
@@ -393,10 +371,14 @@ function generateData(json) {
                     for (k in json.personal.chefs[j].skill) {
                         if (json.personal.chefs[j].skill[k].type == "水产") {
                             var hasSkill = false;
-                            for (k in json.recipes[i].ingredient) {
-                                if (json.ingredients[json.recipes[i].ingredient[k].ingredientId].originId == 8) {
-                                    hasSkill = true;
-                                    break;
+                            for (m in json.recipes[i].ingredient) {
+                                for (n in json.ingredients) {
+                                    if (json.recipes[i].ingredient[m].name == json.ingredients[n].name) {
+                                        if (json.ingredients[n].originId == 8) {
+                                            hasSkill = true;
+                                            break;
+                                        }
+                                    }
                                 }
                             }
                             if (hasSkill) {

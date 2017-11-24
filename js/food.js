@@ -69,17 +69,114 @@ function init(json) {
         }
     });
 
+    var columns = [
+        {
+            "data": "recipeId"
+        },
+        {
+            "data": "name"
+        },
+        {
+            "data": {
+                "_": "fire.value",
+                "display": "fire.display"
+            },
+        },
+        {
+            "data": "stirfry"
+        },
+        {
+            "data": "boil"
+        },
+        {
+            "data": "cut"
+        },
+        {
+            "data": "fry"
+        },
+        {
+            "data": "roast"
+        },
+        {
+            "data": "steam"
+        },
+        {
+            "data": {
+                "_": "ingredients.value",
+                "display": "ingredients.display"
+            }
+        },
+        {
+            "data": "price",
+            "searchable": false
+        },
+        {
+            "data": {
+                "_": "time.value",
+                "display": "time.display"
+            },
+            "searchable": false
+        },
+        {
+            "data": "total",
+            "searchable": false
+        },
+        {
+            "data": "totalPrice",
+            "searchable": false
+        },
+        {
+            "data": {
+                "_": "totalTime.value",
+                "display": "totalTime.display"
+            },
+            "searchable": false
+        },
+        {
+            "data": "efficiency",
+            "searchable": false
+        },
+        {
+            "data": "origin",
+            "searchable": false
+        },
+        {
+            "data": "unlock",
+            "searchable": false
+        },
+        {
+            "data": "guests"
+        },
+        {
+            "data": "get"
+        },
+        {
+            "data": "quality",
+            "searchable": false
+        },
+        {
+            "data": "remark",
+            "searchable": false
+        }
+    ];
+
     for (j in json.personal.chefs) {
         $('#chk-show-chef').append("<option value='" + j + "'>" + json.personal.chefs[j].name + "</option>");
         $('#food-table thead tr').append("<th>" + json.personal.chefs[j].name + "</th>").append("<th>效率</th>");
+
+        columns.push({
+            "data": "chefQlty" + j,
+            "searchable": false
+        });
+        columns.push({
+            "data": "chefEff" + j,
+            "searchable": false
+        });
     }
 
     var table = $('#food-table').DataTable({
         data: recipesData,
-        "columnDefs": [
-            { "searchable": true, "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 18, 19] },
-            { "searchable": false, "targets": '_all' }
-        ],
+        "columns": columns,
         "language": {
             "search": "查找:",
             "lengthMenu": "一页显示 _MENU_ 个",
@@ -205,88 +302,80 @@ function generateData(json) {
     var recipesData = new Array();
     for (i in json.recipes) {
 
-        if (!json.recipes[i].name) {
-            continue;
+        recipesData[i] = new Object();
+        recipesData[i]["recipeId"] = json.recipes[i].recipeId;
+        recipesData[i]["name"] = json.recipes[i].name;
+        recipesData[i]["stirfry"] = json.recipes[i].stirfry || "";
+        recipesData[i]["boil"] = json.recipes[i].boil || "";
+        recipesData[i]["cut"] = json.recipes[i].cut || "";
+        recipesData[i]["fry"] = json.recipes[i].fry || "";
+        recipesData[i]["roast"] = json.recipes[i].roast || "";
+        recipesData[i]["steam"] = json.recipes[i].steam || "";
+        recipesData[i]["price"] = json.recipes[i].price || "";
+        recipesData[i]["time"] = {
+            "display": json.recipes[i].time != 0 ? secondsToTime(json.recipes[i].time) : "",
+            "value": json.recipes[i].time != 0 ? json.recipes[i].time : ""
+        };
+        recipesData[i]["total"] = json.recipes[i].total || "";
+        recipesData[i]["origin"] = json.recipes[i].origin;
+        recipesData[i]["unlock"] = json.recipes[i].unlock;
+        recipesData[i]["get"] = json.recipes[i].hasOwnProperty('personal') ? true : false;
+        recipesData[i]["quality"] = json.recipes[i].hasOwnProperty('personal') ? json.recipes[i].personal.quality : "";
+        recipesData[i]["remark"] = json.recipes[i].hasOwnProperty('personal') ? json.recipes[i].personal.remark : "";
+
+        var fireDisp = "";
+        for (j = 0; j < json.recipes[i].fire; j++) {
+            fireDisp += "&#x2605;";
         }
+        recipesData[i]["fire"] = {
+            "display": fireDisp,
+            "value": json.recipes[i].fire
+        };
+
+        var totalPrice = 0;
+        var totalTime = 0;
+        var efficiency = 0;
 
         if (json.recipes[i].price > 0 && json.recipes[i].time > 0) {
 
-            json.recipes[i].efficiency = json.recipes[i].price * 3600 / json.recipes[i].time;
+            efficiency = json.recipes[i].price * 3600 / json.recipes[i].time;
 
             if (json.recipes[i].total > 0) {
-                json.recipes[i].totalPrice = json.recipes[i].price * json.recipes[i].total;
-                json.recipes[i].totalTime = json.recipes[i].time * json.recipes[i].total;
+                totalPrice = json.recipes[i].price * json.recipes[i].total;
+                totalTime = json.recipes[i].time * json.recipes[i].total;
             }
         }
 
-        json.recipes[i].ingredients = "";
-        for (k in json.recipes[i].ingredient) {
-            json.recipes[i].ingredients += json.recipes[i].ingredient[k].name + "*" + json.recipes[i].ingredient[k].quantity + " "
-        }
+        recipesData[i]["totalPrice"] = totalPrice ? totalPrice : "";
+        recipesData[i]["totalTime"] = {
+            "display": totalTime ? secondsToTime(totalTime) : "",
+            "value": totalTime ? totalTime : ""
+        };
+        recipesData[i]["efficiency"] = efficiency ? parseInt(efficiency) : "";
 
-        json.recipes[i].guests = "";
+        var ingredientsDisp = "";
+        var ingredientsVal = "";
+        for (k in json.recipes[i].ingredient) {
+            ingredientsDisp += json.recipes[i].ingredient[k].name + "*" + json.recipes[i].ingredient[k].quantity + " "
+            ingredientsVal += json.recipes[i].ingredient[k].name;
+        }
+        recipesData[i]["ingredients"] = {
+            "display": ingredientsDisp,
+            "value": ingredientsVal
+        };
+
+        var guests = "";
+        var guests = "";
         for (m in json.guests) {
             var hasGuest = false;
-            for (n in json.guests[m].recipes) {
-                if (json.recipes[i].recipeId == json.guests[m].recipes[n].recipeId) {
-                    hasGuest = true;
+            for (n in json.guests[m].gifts) {
+                if (json.recipes[i].name == json.guests[m].gifts[n].recipe) {
+                    guests += json.guests[m].name + "-" + json.guests[m].gifts[n].rune + "<br>";
                     break;
                 }
             }
-            if (hasGuest) {
-                json.recipes[i].guests += json.guests[m].name + " - ";
-                for (n in json.guests[m].recipes) {
-                    var found = false;
-                    if (json.guests[m].recipes[n].recipeId > 0) {
-                        for (o in json.recipes) {
-                            if (json.recipes[o].recipeId == json.guests[m].recipes[n].recipeId) {
-                                json.recipes[i].guests += json.recipes[o].name + " ";
-                                found = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (!found) {
-                        json.recipes[i].guests += " 暂无 ";
-                    }
-                }
-
-                json.recipes[i].guests += " - ";
-
-                for (n in json.guests[m].runes) {
-                    json.recipes[i].guests += json.runes[json.guests[m].runes[n].runeId].name + " ";
-                }
-
-                json.recipes[i].guests += "<br>";
-            }
         }
-
-        recipesData.push([
-            json.recipes[i].recipeId,
-            json.recipes[i].name,
-            json.recipes[i].fire || "",
-            json.recipes[i].stirfry || "",
-            json.recipes[i].boil || "",
-            json.recipes[i].cut || "",
-            json.recipes[i].fry || "",
-            json.recipes[i].roast || "",
-            json.recipes[i].steam || "",
-            json.recipes[i].ingredients || "",
-            json.recipes[i].price || "",
-            json.recipes[i].time != 0 ? (json.recipes[i].time / 60).toFixed(2) : "",
-            json.recipes[i].total || "",
-            json.recipes[i].hasOwnProperty('totalPrice') ? json.recipes[i].totalPrice : "",
-            json.recipes[i].hasOwnProperty('totalTime') ? (json.recipes[i].totalTime / 60).toFixed() : "",
-            json.recipes[i].hasOwnProperty('efficiency') ? parseInt(json.recipes[i].efficiency) : "",
-            json.recipes[i].origin,
-            json.recipes[i].unlock,
-            json.recipes[i].hasOwnProperty('guests') ? json.recipes[i].guests : "",
-            json.recipes[i].hasOwnProperty('personal')? true:false,
-            json.recipes[i].hasOwnProperty('personal')? json.recipes[i].personal.quality : "",
-            json.recipes[i].hasOwnProperty('personal')? json.recipes[i].personal.remark : "",
-
-        ]);
-
+        recipesData[i]["guests"] = guests;
 
         for (j in json.personal.chefs) {
 
@@ -345,8 +434,8 @@ function generateData(json) {
                 }
             }
 
-            var quality = "-";
-            var chefEff = "";
+            var chefQlty = "-";
+            var chefEff = 0;
 
             if (times != Number.MAX_VALUE && times >= 1) {
 
@@ -354,16 +443,16 @@ function generateData(json) {
 
                 if (times >= 4) {
                     qualityAddition = 0.5;
-                    quality = "神";
+                    chefQlty = "神";
                 } else if (times >= 3) {
                     qualityAddition = 0.3;
-                    quality = "特";
+                    chefQlty = "特";
                 } else if (times >= 2) {
                     qualityAddition = 0.1;
-                    quality = "优";
+                    chefQlty = "优";
                 } else if (times >= 1) {
                     qualityAddition = 0;
-                    quality = "可";
+                    chefQlty = "可";
                 }
 
                 var skillAddition = 0;
@@ -399,13 +488,13 @@ function generateData(json) {
                     }
                 }
 
-                if (json.recipes[i].hasOwnProperty('efficiency')) {
-                    chefEff = (1 + qualityAddition + skillAddition + json.personal.furniture) * json.recipes[i].efficiency;
+                if (efficiency > 0) {
+                    chefEff = (1 + qualityAddition + skillAddition + json.personal.furniture) * efficiency;
                 }
             }
 
-            recipesData[i].push(quality);
-            recipesData[i].push(parseInt(chefEff) || "");
+            recipesData[i]["chefQlty" + j] = chefQlty;
+            recipesData[i]["chefEff" + j] = chefEff ? parseInt(chefEff) : "";
 
         }
     }
@@ -445,4 +534,29 @@ function initShow(table, json) {
     }
 
     table.columns.adjust().draw(false);
+}
+
+function secondsToTime(sec) {
+    sec = Number(sec);
+
+    var d = Math.floor(sec / 3600 / 24);
+    var h = Math.floor(sec / 3600 % 24);
+    var m = Math.floor(sec / 60 % 60);
+    var s = Math.floor(sec % 60);
+
+    var ret = "";
+    if (d > 0) {
+        ret += d + "天";
+    }
+    if (h > 0) {
+        ret += h + "小时";
+    }
+    if (m > 0) {
+        ret += m + "分";
+    }
+    if (s > 0) {
+        ret += s + "秒";
+    }
+
+    return ret;
 }

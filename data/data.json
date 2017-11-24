@@ -21,7 +21,7 @@
             "time": 30,
             "total": 40,
             "origin": "主线3",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -47,7 +47,7 @@
             "time": 37,
             "total": 40,
             "origin": "主线13",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -73,7 +73,7 @@
             "time": 30,
             "total": 40,
             "origin": "主线1",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -107,7 +107,7 @@
             "time": 160,
             "total": 40,
             "origin": "神级炒青菜",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -141,7 +141,7 @@
             "time": 94,
             "total": 40,
             "origin": "主线24",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -175,7 +175,7 @@
             "time": 243,
             "total": 25,
             "origin": "神级葱油拌面",
-            "personal":{
+            "personal": {
                 "quality": "特",
                 "remark": "暂无"
             }
@@ -209,7 +209,7 @@
             "time": 151,
             "total": 30,
             "origin": "神级蛋包饭",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -243,7 +243,7 @@
             "time": 0,
             "total": 0,
             "origin": "神级扬州炒饭",
-            "personal":{
+            "personal": {
                 "quality": "",
                 "remark": ""
             }
@@ -277,7 +277,7 @@
             "time": 169,
             "total": 40,
             "origin": "壁池",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -307,7 +307,7 @@
             "time": 89,
             "total": 30,
             "origin": "壁池",
-            "personal":{
+            "personal": {
                 "quality": "",
                 "remark": ""
             }
@@ -337,7 +337,7 @@
             "time": 68,
             "total": 40,
             "origin": "主线8",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -371,7 +371,7 @@
             "time": 181,
             "total": 30,
             "origin": "主线69",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -405,7 +405,7 @@
             "time": 236,
             "total": 30,
             "origin": "神级阳春面",
-            "personal":{
+            "personal": {
                 "quality": "特",
                 "remark": "三阶上宫晴"
             }
@@ -439,7 +439,7 @@
             "time": 218,
             "total": 40,
             "origin": "主线33",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -473,8 +473,42 @@
             "time": 437,
             "total": 25,
             "origin": "主线116",
-            "personal":{
+            "personal": {
                 "quality": "",
+                "remark": ""
+            }
+        },
+        {
+            "recipeId": 23,
+            "name": "宫保鸡丁",
+            "fire": 3,
+            "unlock": "-",
+            "stirfry": 35,
+            "boil": 0,
+            "cut": 20,
+            "fry": 0,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "鸡胸肉",
+                    "quantity": 3
+                },
+                {
+                    "name": "胡萝卜",
+                    "quantity": 6
+                },
+                {
+                    "name": "黄瓜",
+                    "quantity": 6
+                }
+            ],
+            "price": 316,
+            "time": 0,
+            "total": 0,
+            "origin": "主线129",
+            "personal": {
+                "quality": "特",
                 "remark": ""
             }
         },
@@ -507,7 +541,7 @@
             "time": 119,
             "total": 40,
             "origin": "主线65",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -541,7 +575,7 @@
             "time": 199,
             "total": 20,
             "origin": "神级香酥鸭",
-            "personal":{
+            "personal": {
                 "quality": "",
                 "remark": ""
             }
@@ -571,7 +605,7 @@
             "time": 51,
             "total": 40,
             "origin": "主线22",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -609,7 +643,7 @@
             "time": 674,
             "total": 25,
             "origin": "新手奖池",
-            "personal":{
+            "personal": {
                 "quality": "特",
                 "remark": "羽十六"
             }
@@ -643,7 +677,7 @@
             "time": 204,
             "total": 25,
             "origin": "神级椒盐排条",
-            "personal":{
+            "personal": {
                 "quality": "优",
                 "remark": "杨小倩-大天狗"
             }
@@ -673,7 +707,7 @@
             "time": 44,
             "total": 40,
             "origin": "主线29",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -711,7 +745,7 @@
             "time": 342,
             "total": 25,
             "origin": "神级青菜豆腐汤",
-            "personal":{
+            "personal": {
                 "quality": "可",
                 "remark": "暂无"
             }
@@ -745,7 +779,7 @@
             "time": 392,
             "total": 30,
             "origin": "神级葱油饼",
-            "personal":{
+            "personal": {
                 "quality": "特",
                 "remark": "大天狗"
             }
@@ -779,7 +813,7 @@
             "time": 452,
             "total": 15,
             "origin": "神级麻婆豆腐",
-            "personal":{
+            "personal": {
                 "quality": "",
                 "remark": ""
             }
@@ -809,7 +843,7 @@
             "time": 248,
             "total": 30,
             "origin": "主线91",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -839,7 +873,7 @@
             "time": 103,
             "total": 40,
             "origin": "主线63",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -869,7 +903,7 @@
             "time": 302,
             "total": 40,
             "origin": "主线120",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -899,7 +933,7 @@
             "time": 212,
             "total": 30,
             "origin": "神级凉拌黄瓜",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -929,7 +963,7 @@
             "time": 171,
             "total": 30,
             "origin": "神级面包",
-            "personal":{
+            "personal": {
                 "quality": "优",
                 "remark": "升级大天狗-三阶不知火喵"
             }
@@ -955,7 +989,7 @@
             "time": 30,
             "total": 40,
             "origin": "主线21",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -985,7 +1019,7 @@
             "time": 237,
             "total": 25,
             "origin": "主线88",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -1015,7 +1049,7 @@
             "time": 118,
             "total": 40,
             "origin": "主线97",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -1049,7 +1083,7 @@
             "time": 120,
             "total": 40,
             "origin": "主线80",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -1079,7 +1113,7 @@
             "time": 109,
             "total": 40,
             "origin": "主线32",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -1117,7 +1151,7 @@
             "time": 461,
             "total": 30,
             "origin": "主线104",
-            "personal":{
+            "personal": {
                 "quality": "",
                 "remark": ""
             }
@@ -1147,7 +1181,7 @@
             "time": 106,
             "total": 25,
             "origin": "主线38",
-            "personal":{
+            "personal": {
                 "quality": "特",
                 "remark": "暂无"
             }
@@ -1177,7 +1211,7 @@
             "time": 105,
             "total": 40,
             "origin": "主线18",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -1215,7 +1249,7 @@
             "time": 512,
             "total": 25,
             "origin": "神级葱油鸡",
-            "personal":{
+            "personal": {
                 "quality": "可",
                 "remark": "二阶夏娃/三阶秋韵-二阶夏娃-三阶夏娃"
             }
@@ -1249,7 +1283,7 @@
             "time": 117,
             "total": 40,
             "origin": "主线49",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -1283,7 +1317,7 @@
             "time": 210,
             "total": 30,
             "origin": "神级皮蛋瘦肉粥",
-            "personal":{
+            "personal": {
                 "quality": "特",
                 "remark": "三阶上宫晴"
             }
@@ -1313,7 +1347,7 @@
             "time": 222,
             "total": 30,
             "origin": "新手奖池",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -1347,7 +1381,7 @@
             "time": 495,
             "total": 30,
             "origin": "主线86",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -1377,7 +1411,7 @@
             "time": 289,
             "total": 15,
             "origin": "新手奖池",
-            "personal":{
+            "personal": {
                 "quality": "",
                 "remark": ""
             }
@@ -1407,7 +1441,7 @@
             "time": 216,
             "total": 30,
             "origin": "主线102",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -1437,7 +1471,7 @@
             "time": 134,
             "total": 30,
             "origin": "签到礼包",
-            "personal":{
+            "personal": {
                 "quality": "特",
                 "remark": "三阶申公子"
             }
@@ -1467,7 +1501,7 @@
             "time": 140,
             "total": 40,
             "origin": "神级野菜汤",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -1497,7 +1531,7 @@
             "time": 255,
             "total": 40,
             "origin": "新手奖池",
-            "personal":{
+            "personal": {
                 "quality": "优",
                 "remark": "羽十六-暂无"
             }
@@ -1527,7 +1561,7 @@
             "time": 151,
             "total": 25,
             "origin": "新手奖池",
-            "personal":{
+            "personal": {
                 "quality": "优",
                 "remark": "二阶不知火喵-三阶不知火喵"
             }
@@ -1557,7 +1591,7 @@
             "time": 100,
             "total": 40,
             "origin": "神级香葱煎蛋",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -1587,7 +1621,7 @@
             "time": 68,
             "total": 40,
             "origin": "主线53",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -1617,7 +1651,7 @@
             "time": 71,
             "total": 40,
             "origin": "主线15",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -1647,7 +1681,7 @@
             "time": 113,
             "total": 30,
             "origin": "新手奖池",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -1681,7 +1715,7 @@
             "time": 323,
             "total": 0,
             "origin": "主线78",
-            "personal":{
+            "personal": {
                 "quality": "可",
                 "remark": "暂无"
             }
@@ -1711,7 +1745,7 @@
             "time": 149,
             "total": 40,
             "origin": "主线36",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -1741,7 +1775,7 @@
             "time": 155,
             "total": 25,
             "origin": "主线125",
-            "personal":{
+            "personal": {
                 "quality": "",
                 "remark": ""
             }
@@ -1771,7 +1805,7 @@
             "time": 135,
             "total": 30,
             "origin": "签到礼包",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -1801,7 +1835,7 @@
             "time": 105,
             "total": 30,
             "origin": "主线40",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -1839,7 +1873,7 @@
             "time": 376,
             "total": 0,
             "origin": "神级炸春卷",
-            "personal":{
+            "personal": {
                 "quality": "",
                 "remark": ""
             }
@@ -1877,7 +1911,7 @@
             "time": 230,
             "total": 0,
             "origin": "双11壁池",
-            "personal":{
+            "personal": {
                 "quality": "",
                 "remark": ""
             }
@@ -1907,7 +1941,7 @@
             "time": 176,
             "total": 30,
             "origin": "神级黄瓜炒肉",
-            "personal":{
+            "personal": {
                 "quality": "可",
                 "remark": "夏娃/秋韵-武葵-升级武葵/?阶夏娃"
             }
@@ -1941,7 +1975,7 @@
             "time": 443,
             "total": 25,
             "origin": "神级剁椒跑蛋",
-            "personal":{
+            "personal": {
                 "quality": "可",
                 "remark": "大天狗-升级大天狗-暂无"
             }
@@ -1975,7 +2009,7 @@
             "time": 574,
             "total": 25,
             "origin": "神级家常豆腐",
-            "personal":{
+            "personal": {
                 "quality": "",
                 "remark": ""
             }
@@ -2001,7 +2035,7 @@
             "time": 180,
             "total": 40,
             "origin": "主线72",
-            "personal":{
+            "personal": {
                 "quality": "优",
                 "remark": "升级申公子-三阶申公子/二阶上宫晴"
             }
@@ -2039,7 +2073,7 @@
             "time": 260,
             "total": 0,
             "origin": "双11壁池",
-            "personal":{
+            "personal": {
                 "quality": "",
                 "remark": ""
             }
@@ -2077,7 +2111,7 @@
             "time": 0,
             "total": 0,
             "origin": "双11壁池",
-            "personal":{
+            "personal": {
                 "quality": "",
                 "remark": "暂无"
             }
@@ -2115,7 +2149,7 @@
             "time": 683,
             "total": 25,
             "origin": "双11壁池",
-            "personal":{
+            "personal": {
                 "quality": "优",
                 "remark": "升级大天狗-升级大天狗"
             }
@@ -2153,7 +2187,7 @@
             "time": 537,
             "total": 30,
             "origin": "神级青椒土豆丝",
-            "personal":{
+            "personal": {
                 "quality": "",
                 "remark": ""
             }
@@ -2191,7 +2225,7 @@
             "time": 347,
             "total": 25,
             "origin": "双11壁池",
-            "personal":{
+            "personal": {
                 "quality": "特",
                 "remark": "升级大天狗"
             }
@@ -2229,7 +2263,7 @@
             "time": 285,
             "total": 20,
             "origin": "双11壁池",
-            "personal":{
+            "personal": {
                 "quality": "可",
                 "remark": "升级大天狗-三阶不知火喵-暂无"
             }
@@ -2259,7 +2293,7 @@
             "time": 135,
             "total": 25,
             "origin": "双11壁池",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -2285,7 +2319,7 @@
             "time": 140,
             "total": 0,
             "origin": "主线95",
-            "personal":{
+            "personal": {
                 "quality": "优",
                 "remark": "二阶不知火喵-三阶不知火喵"
             }
@@ -2319,7 +2353,7 @@
             "time": 205,
             "total": 30,
             "origin": "主线112",
-            "personal":{
+            "personal": {
                 "quality": "优",
                 "remark": ""
             }
@@ -2345,7 +2379,7 @@
             "time": 85,
             "total": 40,
             "origin": "主线111",
-            "personal":{
+            "personal": {
                 "quality": "特",
                 "remark": "升级申公子"
             }
@@ -2379,7 +2413,7 @@
             "time": 412,
             "total": 25,
             "origin": "壁池",
-            "personal":{
+            "personal": {
                 "quality": "",
                 "remark": ""
             }
@@ -2409,7 +2443,7 @@
             "time": 85,
             "total": 30,
             "origin": "签到礼包",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -2439,7 +2473,7 @@
             "time": 60,
             "total": 30,
             "origin": "主线58",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -2465,7 +2499,7 @@
             "time": 30,
             "total": 40,
             "origin": "主线11",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -2503,7 +2537,7 @@
             "time": 386,
             "total": 25,
             "origin": "双11壁池",
-            "personal":{
+            "personal": {
                 "quality": "",
                 "remark": ""
             }
@@ -2537,7 +2571,7 @@
             "time": 180,
             "total": 30,
             "origin": "主线45",
-            "personal":{
+            "personal": {
                 "quality": "可",
                 "remark": "孙香香-升级孙香香-三阶夏娃"
             }
@@ -2597,7 +2631,7 @@
             "time": 253,
             "total": 30,
             "origin": "神级锅贴",
-            "personal":{
+            "personal": {
                 "quality": "神",
                 "remark": ""
             }
@@ -2635,7 +2669,7 @@
             "time": 333,
             "total": 0,
             "origin": "双11壁池",
-            "personal":{
+            "personal": {
                 "quality": "可",
                 "remark": "升级申公子-三阶申公子-?阶上宫晴"
             }
@@ -2669,7 +2703,7 @@
             "time": 439,
             "total": 0,
             "origin": "双11壁池",
-            "personal":{
+            "personal": {
                 "quality": "",
                 "remark": ""
             }
@@ -2703,7 +2737,7 @@
             "time": 0,
             "total": 0,
             "origin": "双11壁池",
-            "personal":{
+            "personal": {
                 "quality": "",
                 "remark": "羽十六"
             }
@@ -2741,7 +2775,7 @@
             "time": 446,
             "total": 20,
             "origin": "双11壁池",
-            "personal":{
+            "personal": {
                 "quality": "可",
                 "remark": "羽十六-暂无"
             }
@@ -3014,97 +3048,78 @@
     ],
     "runes": [
         {
-            "runeId": 0,
             "level": 0,
             "name": ""
         },
         {
-            "runeId": 1,
             "level": 1,
             "name": "五香果"
         },
         {
-            "runeId": 2,
             "level": 1,
             "name": "蒸汽耳环"
         },
         {
-            "runeId": 3,
             "level": 1,
             "name": "油火虫"
         },
         {
-            "runeId": 4,
             "level": 1,
             "name": "防水的柠檬"
         },
         {
-            "runeId": 5,
             "level": 1,
             "name": "烤焦的菊花"
         },
         {
-            "runeId": 6,
             "level": 1,
             "name": "剪刀蟹"
         },
         {
-            "runeId": 7,
             "level": 2,
             "name": "暖石"
         },
         {
-            "runeId": 8,
             "level": 2,
             "name": "蒸汽宝石"
         },
         {
-            "runeId": 9,
             "level": 2,
             "name": "一昧真火"
         },
         {
-            "runeId": 10,
             "level": 2,
             "name": "耐煮的水草"
         },
         {
-            "runeId": 11,
             "level": 2,
             "name": "焦虫"
         },
         {
-            "runeId": 12,
             "level": 2,
             "name": "刀嘴鹦鹉"
         },
         {
-            "runeId": 13,
             "level": 3,
             "name": "五星妙果"
         },
         {
-            "runeId": 14,
             "level": 3,
             "name": "蒸馏杯"
         },
         {
-            "runeId": 15,
             "level": 3,
             "name": "鼓风机"
         },
         {
-            "runeId": 16,
             "level": 3,
             "name": "千年煮鳖"
         },
         {
-            "runeId": 17,
             "level": 3,
             "name": "香烤鱼排"
         },
         {
-            "runeId": 18,
             "level": 3,
             "name": "恐怖利刃"
         }
@@ -3113,699 +3128,524 @@
         {
             "guestId": 1,
             "name": "耶稣",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 79
+                    "recipe": "香酥鸭",
+                    "rune": "油火虫"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 3
-                },
-                {
-                    "runeId": 7
+                    "recipe": "毛蟹年糕",
+                    "rune": "暖石"
                 }
             ]
         },
         {
             "guestId": 2,
             "name": "如来",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 0
+                    "recipe": "金缕虾",
+                    "rune": "一昧真火"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 9
-                },
-                {
-                    "runeId": 16
+                    "recipe": "佛跳墙",
+                    "rune": "千年煮鳖"
                 }
             ]
         },
         {
             "guestId": 3,
             "name": "木良",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 28
+                    "recipe": "鸡蛋饼",
+                    "rune": "烤焦的菊花"
                 },
                 {
-                    "recipeId": 0
+                    "recipe": "泡椒凤爪",
+                    "rune": "蒸汽耳环"
                 },
                 {
-                    "recipeId": 62
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 5
-                },
-                {
-                    "runeId": 2
-                },
-                {
-                    "runeId": 7
+                    "recipe": "干炒牛河",
+                    "rune": "暖石"
                 }
             ]
         },
         {
             "guestId": 4,
             "name": "木优",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 68
+                    "recipe": "口水鸡",
+                    "rune": "刀嘴鹦鹉"
                 },
                 {
-                    "recipeId": 0
+                    "recipe": "葱香烤鱼",
+                    "rune": "焦虫"
                 },
                 {
-                    "recipeId": 35
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 12
-                },
-                {
-                    "runeId": 11
-                },
-                {
-                    "runeId": 3
+                    "recipe": "土豆饼",
+                    "rune": "油火虫"
                 }
             ]
         },
         {
             "guestId": 5,
             "name": "迷思吹法师",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 65
+                    "recipe": "葱油鸡",
+                    "rune": "蒸汽耳环"
                 },
                 {
-                    "recipeId": 106
+                    "recipe": "牛肉煎包",
+                    "rune": "油火虫"
                 },
                 {
-                    "recipeId": 58
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 2
-                },
-                {
-                    "runeId": 3
-                },
-                {
-                    "runeId": 4
+                    "recipe": "葱油拌面",
+                    "rune": "防水的柠檬"
                 }
             ]
         },
         {
             "guestId": 6,
             "name": "大胃王",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 55
+                    "recipe": "锅贴",
+                    "rune": "油火虫"
                 },
                 {
-                    "recipeId": 0
+                    "recipe": "烤肉拼盘",
+                    "rune": "焦虫"
                 },
                 {
-                    "recipeId": 46
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 3
-                },
-                {
-                    "runeId": 11
-                },
-                {
-                    "runeId": 9
+                    "recipe": "猪排饭",
+                    "rune": "一昧真火"
                 }
             ]
         },
         {
             "guestId": 7,
             "name": "屠夫老王",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 109
+                    "recipe": "番茄肥牛",
+                    "rune": "防水的柠檬"
                 },
                 {
-                    "recipeId": 22
+                    "recipe": "回锅肉",
+                    "rune": "暖石"
                 },
                 {
-                    "recipeId": 165
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 4
-                },
-                {
-                    "runeId": 7
-                },
-                {
-                    "runeId": 3
+                    "recipe": "椒盐排条",
+                    "rune": "油火虫"
                 }
             ]
         },
         {
             "guestId": 8,
             "name": "丐帮帮主",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 0
+                    "recipe": "葱香烤鱼",
+                    "rune": "焦虫"
                 },
                 {
-                    "recipeId": 128
+                    "recipe": "白粽",
+                    "rune": "蒸汽耳环"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 11
-                },
-                {
-                    "runeId": 2
-                },
-                {
-                    "runeId": 12
+                    "recipe": "片皮鸭",
+                    "rune": "刀嘴鹦鹉"
                 }
             ]
         },
         {
             "guestId": 9,
             "name": "潇洒李白",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 0
+                    "recipe": "红烧排骨",
+                    "rune": "一昧真火"
                 },
                 {
-                    "recipeId": 78
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 9
-                },
-                {
-                    "runeId": 12
+                    "recipe": "醉蟹",
+                    "rune": "刀嘴鹦鹉"
                 }
             ]
         },
         {
             "guestId": 10,
             "name": "迷弟杜甫",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 0
+                    "recipe": "红烧排骨",
+                    "rune": "一昧真火"
                 },
                 {
-                    "recipeId": 19
+                    "recipe": "豚骨拉面",
+                    "rune": "防水的柠檬"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 9
-                },
-                {
-                    "runeId": 4
-                },
-                {
-                    "runeId": 12
+                    "recipe": "扣三丝",
+                    "rune": "刀嘴鹦鹉"
                 }
             ]
         },
         {
             "guestId": 11,
             "name": "诸葛亮",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 46
+                    "recipe": "猪排饭",
+                    "rune": "一昧真火"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 9
-                },
-                {
-                    "runeId": 1
+                    "recipe": "扬州炒饭",
+                    "rune": "五香果"
                 }
             ]
         },
         {
             "guestId": 12,
             "name": "黄月英",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 0
+                    "recipe": "小笼包",
+                    "rune": "蒸汽耳环"
                 },
                 {
-                    "recipeId": 0
+                    "recipe": "肉末茄子",
+                    "rune": "烤焦的菊花"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 2
-                },
-                {
-                    "runeId": 5
-                },
-                {
-                    "runeId": 10
+                    "recipe": "萝卜小排汤",
+                    "rune": "耐煮的水草"
                 }
             ]
         },
         {
             "guestId": 13,
             "name": "苏轼",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 0
+                    "recipe": "蛤蜊豆腐汤",
+                    "rune": "防水的柠檬"
                 },
                 {
-                    "recipeId": 0
+                    "recipe": "东坡肉",
+                    "rune": "耐煮的水草"
                 },
                 {
-                    "recipeId": 31
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 4
-                },
-                {
-                    "runeId": 10
-                },
-                {
-                    "runeId": 9
+                    "recipe": "炸鱼排",
+                    "rune": "一昧真火"
                 }
             ]
         },
         {
             "guestId": 14,
             "name": "唐伯虎",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 166
+                    "recipe": "糖番茄",
+                    "rune": "剪刀蟹"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 6
-                },
-                {
-                    "runeId": 4
+                    "recipe": "酒酿小丸子",
+                    "rune": "防水的柠檬"
                 }
             ]
         },
         {
             "guestId": 15,
             "name": "张飞",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 106
+                    "recipe": "牛肉煎包",
+                    "rune": "油火虫"
                 },
                 {
-                    "recipeId": 9
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 3
-                },
-                {
-                    "runeId": 10
+                    "recipe": "红烧牛肉面",
+                    "rune": "耐煮的水草"
                 }
             ]
         },
         {
             "guestId": 16,
             "name": "关羽",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 109
+                    "recipe": "番茄肥牛",
+                    "rune": "防水的柠檬"
                 },
                 {
-                    "recipeId": 0
+                    "recipe": "红烧萝卜",
+                    "rune": "耐煮的水草"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 4
-                },
-                {
-                    "runeId": 10
+                    "recipe": "水煮鱼",
+                    "rune": "耐煮的水草"
                 }
             ]
         },
         {
             "guestId": 17,
             "name": "刘备",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 0
+                    "recipe": "猪耳碟头",
+                    "rune": "蒸汽耳环"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 2
-                },
-                {
-                    "runeId": 11
+                    "recipe": "干锅香辣虾",
+                    "rune": "焦虫"
                 }
             ]
         },
         {
             "guestId": 18,
             "name": "吕布",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 119
+                    "recipe": "酿黄瓜",
+                    "rune": "蒸汽耳环"
                 },
                 {
-                    "recipeId": 34
+                    "recipe": "罗宋汤",
+                    "rune": "刀嘴鹦鹉"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 2
-                },
-                {
-                    "runeId": 12
+                    "recipe": "豆豉蒸排骨",
+                    "rune": "刀嘴鹦鹉"
                 }
             ]
         },
         {
             "guestId": 19,
             "name": "貂蝉",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 69
+                    "recipe": "皮蛋瘦肉粥",
+                    "rune": "防水的柠檬"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 4
-                },
-                {
-                    "runeId": 11
+                    "recipe": "章鱼小丸子",
+                    "rune": "焦虫"
                 }
             ]
         },
         {
             "guestId": 20,
             "name": "大内侍卫",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 0
+                    "recipe": "萝卜小排汤",
+                    "rune": "耐煮的水草"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 10
+                    "recipe": "红烧萝卜",
+                    "rune": "防水的柠檬"
                 },
                 {
-                    "runeId": 4
+                    "recipe": "辣炒萝卜干",
+                    "rune": "五香果"
                 }
             ]
         },
         {
             "guestId": 22,
             "name": "公主",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 0
+                    "recipe": "黄焖鸡",
+                    "rune": "暖石"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 7
+                    "recipe": "菠萝饭",
+                    "rune": "暖石?"
                 }
             ]
         },
         {
             "guestId": 23,
             "name": "大明湖畔的美女",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 74
+                    "recipe": "臭豆腐",
+                    "rune": "油火虫"
                 },
                 {
-                    "recipeId": 0
+                    "recipe": "爆炒猪肝",
+                    "rune": "暖石"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 3
-                },
-                {
-                    "runeId": 7
-                },
-                {
-                    "runeId": 10
+                    "recipe": "海鲜面",
+                    "rune": "耐煮的水草"
                 }
             ]
         },
         {
             "guestId": 24,
             "name": "皇帝",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 0
+                    "recipe": "虾饺皇",
+                    "rune": "蒸汽宝石"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 8
-                },
-                {
-                    "runeId": 13
+                    "recipe": "龙井虾仁",
+                    "rune": "五星妙果"
                 }
             ]
         },
         {
             "guestId": 25,
             "name": "皇后",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 59
+                    "recipe": "老鸭粉丝汤",
+                    "rune": "防水的柠檬"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 4
-                },
-                {
-                    "runeId": 17
+                    "recipe": "蒜蓉芝士焗龙虾",
+                    "rune": "香烤鱼排"
                 }
             ]
         },
         {
             "guestId": 26,
             "name": "官爷",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 75
+                    "recipe": "家常豆腐",
+                    "rune": "油火虫"
                 },
                 {
-                    "recipeId": 0
+                    "recipe": "洋葱小炒肉",
+                    "rune": "暖石"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 3
-                },
-                {
-                    "runeId": 7
-                },
-                {
-                    "runeId": 18
+                    "recipe": "松鼠桂鱼",
+                    "rune": "恐怖利刃"
                 }
             ]
         },
         {
             "guestId": 27,
             "name": "富人",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 0
+                    "recipe": "蛤蜊蒸蛋",
+                    "rune": "蒸汽耳环"
                 },
                 {
-                    "recipeId": 85
+                    "recipe": "香烤猪颈肉",
+                    "rune": "焦虫"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 2
-                },
-                {
-                    "runeId": 11
-                },
-                {
-                    "runeId": 10
+                    "recipe": "腌笃鲜",
+                    "rune": "耐煮的水草"
                 }
             ]
         },
         {
             "guestId": 28,
             "name": "富太太",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 18
+                    "recipe": "麻婆豆腐",
+                    "rune": "五香果"
                 },
                 {
-                    "recipeId": 0
+                    "recipe": "鱼头豆腐汤",
+                    "rune": "耐煮的水草"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 1
-                },
-                {
-                    "runeId": 10
-                },
-                {
-                    "runeId": 4
+                    "recipe": "海鲜粥",
+                    "rune": "防水的柠檬"
                 }
             ]
         },
         {
             "guestId": 29,
             "name": "富二代",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 37
+                    "recipe": "蟹粉豆腐",
+                    "rune": "蒸汽宝石"
                 },
                 {
-                    "recipeId": 0
+                    "recipe": "油焖笋",
+                    "rune": "耐煮的水草"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 8
-                },
-                {
-                    "runeId": 10
-                },
-                {
-                    "runeId": 7
+                    "recipe": "宫保鸡丁",
+                    "rune": "暖石"
                 }
             ]
         },
         {
             "guestId": 30,
             "name": "白富美",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 6
+                    "recipe": "阳春面",
+                    "rune": "防水的柠檬"
                 },
                 {
-                    "recipeId": 0
+                    "recipe": "菠萝饭",
+                    "rune": "暖石"
                 },
                 {
-                    "recipeId": 0
+                    "recipe": "水晶肴蹄",
+                    "rune": "刀嘴鹦鹉"
                 }
-            ],
-            "runes": [
+            ]
+        },
+        {
+            "guestId": 31,
+            "name": "TapTap",
+            "gifts": [
                 {
-                    "runeId": 4
+                    "recipe": "鸡肉汤青拉面",
+                    "rune": "神秘魔方,防水的柠檬"
+                }
+            ]
+        },
+        {
+            "guestId": 33,
+            "name": "木良木优",
+            "gifts": [
+                {
+                    "recipe": "鸡肉蔬菜沙拉",
+                    "rune": "暖石"
                 },
                 {
-                    "runeId": 7
+                    "recipe": "鸡汤煮干丝",
+                    "rune": "耐煮的水草"
                 },
                 {
-                    "runeId": 12
+                    "recipe": "腊味合蒸",
+                    "rune": "蒸馏杯"
                 }
             ]
         },
         {
             "guestId": 37,
             "name": "吕布貂蝉",
-            "recipes": [
+            "gifts": [
                 {
-                    "recipeId": 0
+                    "recipe": "蟹粉狮子头",
+                    "rune": "蒸汽宝石"
                 },
                 {
-                    "recipeId": 0
+                    "recipe": "金针菇牛肉卷",
+                    "rune": "刀嘴鹦鹉"
                 },
                 {
-                    "recipeId": 0
-                }
-            ],
-            "runes": [
-                {
-                    "runeId": 8
-                },
-                {
-                    "runeId": 12
-                },
-                {
-                    "runeId": 18
+                    "recipe": "松鼠桂鱼",
+                    "rune": "恐怖利刃"
                 }
             ]
         }

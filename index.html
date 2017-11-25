@@ -10,14 +10,14 @@
     <script type="text/javascript" src="js/food.min.js"></script>
 </head>
 
-<body>
+<body class="hidden">
     <div>
         <div class="box">
             <a id="chk-show-all" class="btn btn-default">
                 全选
             </a>
             <label class="btn btn-default">
-                <input type="checkbox" id="chk-show-id" class="chk-show" checked>
+                <input type="checkbox" id="chk-show-id" class="chk-show">
                 <i class="fa fa-check glyphicon glyphicon-ok"></i>
                 编号
             </label>
@@ -96,7 +96,7 @@
                 <i class="fa fa-check glyphicon glyphicon-ok"></i>
                 备注
             </label>
-            <div class="chk-show-chef-wrapper hidden">
+            <div class="chk-show-chef-wrapper">
                 <select id="chk-show-chef" multiple="multiple"></select>
             </div>
         </div>
@@ -160,7 +160,8 @@
                 <i class="fa fa-check glyphicon glyphicon-ok"></i>
                 蒸
             </label>
-            <input type="checkbox" id="chk-single-skill" data-toggle="toggle" data-on="单选" data-off="多选" data-onstyle="default">
+            <input type="checkbox" id="chk-single-skill" data-toggle="toggle" data-on="单选" data-off="多选" data-onstyle="default" data-width="67px"
+                data-height="34px">
             <a id="chk-skill-all" class="btn btn-default">
                 全选
             </a>
@@ -173,9 +174,6 @@
             </label>
         </div>
         <div class="box hidden">
-            <input type="checkbox" id="chk-personal">
-        </div>
-        <div class="box hidden">
             <label class="btn btn-default">
                 <input type="checkbox" id="chk-get">
                 <i class="fa fa-check glyphicon glyphicon-ok"></i>
@@ -184,7 +182,7 @@
         </div>
     </div>
     <div>
-        <table id="food-table" class="table table-hover table-bordered hidden" width="100%">
+        <table id="food-table" class="table table-hover table-bordered" width="100%">
             <thead>
                 <tr>
                     <th>编号</th>

@@ -239,9 +239,9 @@
                     "quantity": 6
                 }
             ],
-            "price": 0,
-            "time": 0,
-            "total": 0,
+            "price": 190,
+            "time": 318,
+            "total": 25,
             "origin": "神级扬州炒饭",
             "personal": {
                 "quality": "",
@@ -504,8 +504,8 @@
                 }
             ],
             "price": 316,
-            "time": 0,
-            "total": 0,
+            "time": 351,
+            "total": 25,
             "origin": "主线129",
             "personal": {
                 "quality": "特",
@@ -1567,6 +1567,36 @@
             }
         },
         {
+            "recipeId": 88,
+            "name": "扣三丝",
+            "fire": 4,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 80,
+            "fry": 0,
+            "roast": 0,
+            "steam": 60,
+            "ingredient": [
+                {
+                    "name": "鸡胸肉",
+                    "quantity": 6
+                },
+                {
+                    "name": "香菇",
+                    "quantity": 12
+                },
+                {
+                    "name": "里脊肉",
+                    "quantity": 6
+                }
+            ],
+            "price": 330,
+            "time": 532,
+            "total": 20,
+            "origin": "壁池"
+        },
+        {
             "recipeId": 91,
             "name": "剁椒跑蛋",
             "fire": 1,
@@ -1713,7 +1743,7 @@
             ],
             "price": 866,
             "time": 323,
-            "total": 0,
+            "total": 20,
             "origin": "主线78",
             "personal": {
                 "quality": "可",
@@ -1871,7 +1901,7 @@
             ],
             "price": 491,
             "time": 376,
-            "total": 0,
+            "total": 20,
             "origin": "神级炸春卷",
             "personal": {
                 "quality": "",
@@ -1909,7 +1939,7 @@
             ],
             "price": 216,
             "time": 230,
-            "total": 0,
+            "total": 20,
             "origin": "双11壁池",
             "personal": {
                 "quality": "",
@@ -2071,7 +2101,7 @@
             ],
             "price": 1477,
             "time": 260,
-            "total": 0,
+            "total": 15,
             "origin": "双11壁池",
             "personal": {
                 "quality": "",
@@ -2191,6 +2221,40 @@
                 "quality": "",
                 "remark": ""
             }
+        },
+        {
+            "recipeId": 141,
+            "name": "龙井虾仁",
+            "fire": 5,
+            "unlock": "-",
+            "stirfry": 110,
+            "boil": 0,
+            "cut": 0,
+            "fry": 0,
+            "roast": 0,
+            "steam": 80,
+            "ingredient": [
+                {
+                    "name": "虾",
+                    "quantity": 10
+                },
+                {
+                    "name": "酒",
+                    "quantity": 6
+                },
+                {
+                    "name": "鸡蛋",
+                    "quantity": 6
+                },
+                {
+                    "name": "面粉",
+                    "quantity": 10
+                }
+            ],
+            "price": 1705,
+            "time": 359,
+            "total": 0,
+            "origin": "壁池"
         },
         {
             "recipeId": 145,
@@ -2317,7 +2381,7 @@
             ],
             "price": 110,
             "time": 140,
-            "total": 0,
+            "total": 25,
             "origin": "主线95",
             "personal": {
                 "quality": "优",
@@ -2598,8 +2662,8 @@
                 }
             ],
             "price": 201,
-            "time": 0,
-            "total": 0,
+            "time": 252,
+            "total": 25,
             "origin": "双11壁池"
         },
         {
@@ -2667,12 +2731,46 @@
             ],
             "price": 237,
             "time": 333,
-            "total": 0,
+            "total": 25,
             "origin": "双11壁池",
             "personal": {
                 "quality": "可",
                 "remark": "升级申公子-三阶申公子-?阶上宫晴"
             }
+        },
+        {
+            "recipeId": 188,
+            "name": "咖喱什锦蔬菜",
+            "fire": 3,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 0,
+            "fry": 0,
+            "roast": 0,
+            "steam": 48,
+            "ingredient": [
+                {
+                    "name": "咖喱",
+                    "quantity": 3
+                },
+                {
+                    "name": "香菇",
+                    "quantity": 6
+                },
+                {
+                    "name": "胡萝卜",
+                    "quantity": 5
+                },
+                {
+                    "name": "土豆",
+                    "quantity": 5
+                }
+            ],
+            "price": 187,
+            "time": 466,
+            "total": 0,
+            "origin": "双11壁池"
         },
         {
             "recipeId": 189,
@@ -2709,6 +2807,36 @@
             }
         },
         {
+            "recipeId": 191,
+            "name": "番茄芝士",
+            "fire": 3,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 40,
+            "fry": 0,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "番茄",
+                    "quantity": 4
+                },
+                {
+                    "name": "牛乳",
+                    "quantity": 3
+                },
+                {
+                    "name": "里脊肉",
+                    "quantity": 3
+                }
+            ],
+            "price": 78,
+            "time": 158,
+            "total": 25,
+            "origin": "双11壁池"
+        },
+        {
             "recipeId": 193,
             "name": "酸汤肥牛",
             "fire": 4,
@@ -2734,8 +2862,8 @@
                 }
             ],
             "price": 356,
-            "time": 0,
-            "total": 0,
+            "time": 310,
+            "total": 20,
             "origin": "双11壁池",
             "personal": {
                 "quality": "",
@@ -2779,6 +2907,40 @@
                 "quality": "可",
                 "remark": "羽十六-暂无"
             }
+        },
+        {
+            "recipeId": 195,
+            "name": "狗粮",
+            "fire": 3,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 0,
+            "fry": 35,
+            "roast": 35,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "面粉",
+                    "quantity": 4
+                },
+                {
+                    "name": "鸡胸肉",
+                    "quantity": 3
+                },
+                {
+                    "name": "鸡蛋",
+                    "quantity": 4
+                },
+                {
+                    "name": "黄豆",
+                    "quantity": 3
+                }
+            ],
+            "price": 174,
+            "time": 277,
+            "total": 25,
+            "origin": "双11壁池"
         }
     ],
     "origins": [
@@ -3385,7 +3547,7 @@
                 },
                 {
                     "recipe": "水煮鱼",
-                    "rune": "耐煮的水草"
+                    "rune": "耐煮的水草?"
                 }
             ]
         },
@@ -3417,7 +3579,7 @@
                 },
                 {
                     "recipe": "豆豉蒸排骨",
-                    "rune": "刀嘴鹦鹉"
+                    "rune": "刀嘴鹦鹉?"
                 }
             ]
         },
@@ -3660,33 +3822,8 @@
                 "fry": 0,
                 "roast": 0,
                 "steam": 30,
+                "private": false,
                 "show": true
-            },
-            {
-                "name": "大天狗",
-                "stirfry": 160,
-                "boil": 0,
-                "cut": 40,
-                "fry": 240,
-                "roast": 120,
-                "steam": 0,
-                "show": false,
-                "skill": [
-                    {
-                        "type": "水产",
-                        "addition": 0.2
-                    }
-                ]
-            },
-            {
-                "name": "申公子",
-                "stirfry": 0,
-                "boil": 0,
-                "cut": 18,
-                "fry": 91,
-                "roast": 36,
-                "steam": 91,
-                "show": false
             },
             {
                 "name": "熊麓",
@@ -3696,11 +3833,29 @@
                 "fry": 185,
                 "roast": 61,
                 "steam": 0,
-                "show": false,
+                "private": false,
+                "show": true,
                 "skill": [
                     {
                         "type": "炸类",
                         "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "大天狗",
+                "stirfry": 160,
+                "boil": 0,
+                "cut": 40,
+                "fry": 240,
+                "roast": 120,
+                "steam": 0,
+                "private": true,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "水产",
+                        "addition": 0.2
                     }
                 ]
             }

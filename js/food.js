@@ -248,9 +248,10 @@ function init(json) {
             }
         }
 
+        $('#chk-show-origin').prop("checked", false)
         $('#chk-show-get').parent(".btn").removeClass('hidden');
         $('#chk-show-quality').prop("checked", true).parent(".btn").removeClass('hidden');
-        $('#chk-show-remark').parent(".btn").removeClass('hidden');
+        $('#chk-show-remark').prop("checked", true).parent(".btn").removeClass('hidden');
         $('#chk-get').prop("checked", true).parents(".box").removeClass('hidden');
 
         $('#chk-get').click(function () {

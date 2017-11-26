@@ -244,8 +244,8 @@
             "total": 25,
             "origin": "神级扬州炒饭",
             "personal": {
-                "quality": "",
-                "remark": ""
+                "quality": "优",
+                "remark": "大天狗-暂无"
             }
         },
         {
@@ -309,7 +309,7 @@
             "origin": "壁池",
             "personal": {
                 "quality": "",
-                "remark": ""
+                "remark": "任意(优)-任意-上宫晴"
             }
         },
         {
@@ -475,7 +475,7 @@
             "origin": "主线116",
             "personal": {
                 "quality": "",
-                "remark": ""
+                "remark": "羽十六(优)-琪琪-暂无"
             }
         },
         {
@@ -577,7 +577,7 @@
             "origin": "神级香酥鸭",
             "personal": {
                 "quality": "",
-                "remark": ""
+                "remark": "孙香香(优)-升级孙香香-暂无"
             }
         },
         {
@@ -678,8 +678,8 @@
             "total": 25,
             "origin": "神级椒盐排条",
             "personal": {
-                "quality": "优",
-                "remark": "杨小倩-大天狗"
+                "quality": "特",
+                "remark": "大天狗"
             }
         },
         {
@@ -747,7 +747,7 @@
             "origin": "神级青菜豆腐汤",
             "personal": {
                 "quality": "可",
-                "remark": "暂无"
+                "remark": "升级盲女(优)-暂无-暂无"
             }
         },
         {
@@ -815,7 +815,7 @@
             "origin": "神级麻婆豆腐",
             "personal": {
                 "quality": "",
-                "remark": ""
+                "remark": "升级武葵/三阶上宫晴(优)-暂无-暂无"
             }
         },
         {
@@ -965,7 +965,7 @@
             "origin": "神级面包",
             "personal": {
                 "quality": "优",
-                "remark": "升级大天狗-三阶不知火喵"
+                "remark": "大天狗-三阶不知火喵"
             }
         },
         {
@@ -1025,6 +1025,36 @@
             }
         },
         {
+            "recipeId": 48,
+            "name": "蛋黄粽",
+            "fire": 2,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 0,
+            "fry": 0,
+            "roast": 0,
+            "steam": 55,
+            "ingredient": [
+                {
+                    "name": "糯米",
+                    "quantity": 5
+                },
+                {
+                    "name": "鸡蛋",
+                    "quantity": 2
+                }
+            ],
+            "price": 83,
+            "time": 261,
+            "total": 30,
+            "origin": "神级白粽",
+            "personal": {
+                "quality": "",
+                "remark": "上宫晴(优)-升级上宫晴(165)-升级上宫晴(220)"
+            }
+        },
+        {
             "recipeId": 51,
             "name": "凉拌黄瓜",
             "fire": 1,
@@ -1052,6 +1082,36 @@
             "personal": {
                 "quality": "神",
                 "remark": ""
+            }
+        },
+        {
+            "recipeId": 53,
+            "name": "咖喱饺",
+            "fire": 3,
+            "unlock": "-",
+            "stirfry": 60,
+            "boil": 0,
+            "cut": 0,
+            "fry": 50,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "咖喱",
+                    "quantity": 4
+                },
+                {
+                    "name": "牛五花",
+                    "quantity": 3
+                }
+            ],
+            "price": 207,
+            "time": 470,
+            "total": 0,
+            "origin": "壁池",
+            "personal": {
+                "quality": "优",
+                "remark": "大天狗-暂无"
             }
         },
         {
@@ -1153,7 +1213,7 @@
             "origin": "主线104",
             "personal": {
                 "quality": "",
-                "remark": ""
+                "remark": "叶姬(优)-羽十六-暂无"
             }
         },
         {
@@ -1387,6 +1447,36 @@
             }
         },
         {
+            "recipeId": 77,
+            "name": "毛蟹年糕",
+            "fire": 4,
+            "unlock": "-",
+            "stirfry": 60,
+            "boil": 0,
+            "cut": 0,
+            "fry": 50,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "面粉",
+                    "quantity": 8
+                },
+                {
+                    "name": "螃蟹",
+                    "quantity": 2
+                }
+            ],
+            "price": 457,
+            "time": 144,
+            "total": 20,
+            "origin": "壁池",
+            "personal": {
+                "quality": "优",
+                "remark": "大天狗-暂无"
+            }
+        },
+        {
             "recipeId": 78,
             "name": "醉蟹",
             "fire": 4,
@@ -1413,7 +1503,7 @@
             "origin": "新手奖池",
             "personal": {
                 "quality": "",
-                "remark": ""
+                "remark": "升级孙香香/二阶夏娃(优)-三阶夏娃-暂无"
             }
         },
         {
@@ -1657,6 +1747,36 @@
             }
         },
         {
+            "recipeId": 96,
+            "name": "爆炒猪肝",
+            "fire": 3,
+            "unlock": "洋葱肥肠",
+            "stirfry": 40,
+            "boil": 0,
+            "cut": 25,
+            "fry": 0,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "猪杂",
+                    "quantity": 4
+                },
+                {
+                    "name": "青椒",
+                    "quantity": 5
+                }
+            ],
+            "price": 181,
+            "time": 214,
+            "total": 25,
+            "origin": "主线135",
+            "personal": {
+                "quality": "",
+                "remark": "羽十六(优)-琪琪-升级琪琪"
+            }
+        },
+        {
             "recipeId": 97,
             "name": "香葱煎蛋",
             "fire": 1,
@@ -1747,7 +1867,7 @@
             "origin": "主线78",
             "personal": {
                 "quality": "可",
-                "remark": "暂无"
+                "remark": "暂无-暂无-暂无"
             }
         },
         {
@@ -1807,7 +1927,7 @@
             "origin": "主线125",
             "personal": {
                 "quality": "",
-                "remark": ""
+                "remark": "升级孙香香(优)-大天狗-二阶不知火喵"
             }
         },
         {
@@ -1905,7 +2025,7 @@
             "origin": "神级炸春卷",
             "personal": {
                 "quality": "",
-                "remark": ""
+                "remark": "羽十六(优)-暂无-暂无"
             }
         },
         {
@@ -1943,7 +2063,7 @@
             "origin": "双11壁池",
             "personal": {
                 "quality": "",
-                "remark": ""
+                "remark": "上宫晴(优)-升级上宫晴(195)-三阶上宫晴"
             }
         },
         {
@@ -1973,7 +2093,7 @@
             "origin": "神级黄瓜炒肉",
             "personal": {
                 "quality": "可",
-                "remark": "夏娃/秋韵-武葵-升级武葵/?阶夏娃"
+                "remark": "夏娃/秋韵-武葵-升级武葵/二阶夏娃"
             }
         },
         {
@@ -2006,8 +2126,8 @@
             "total": 25,
             "origin": "神级剁椒跑蛋",
             "personal": {
-                "quality": "可",
-                "remark": "大天狗-升级大天狗-暂无"
+                "quality": "优",
+                "remark": "大天狗-暂无"
             }
         },
         {
@@ -2041,7 +2161,75 @@
             "origin": "神级家常豆腐",
             "personal": {
                 "quality": "",
-                "remark": ""
+                "remark": "升级琪琪(优)-暂无-暂无"
+            }
+        },
+        {
+            "recipeId": 124,
+            "name": "蛤蜊蒸蛋",
+            "fire": 2,
+            "unlock": "蛤蜊豆腐汤",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 0,
+            "fry": 0,
+            "roast": 0,
+            "steam": 55,
+            "ingredient": [
+                {
+                    "name": "鸡蛋",
+                    "quantity": 4
+                },
+                {
+                    "name": "葱",
+                    "quantity": 5
+                },
+                {
+                    "name": "贝壳",
+                    "quantity": 3
+                }
+            ],
+            "price": 276,
+            "time": 270,
+            "total": 30,
+            "origin": "神级葱姜辣炒蛤蜊",
+            "personal": {
+                "quality": "",
+                "remark": "上宫晴(优)-升级上宫晴(165)-升级上宫晴(220)"
+            }
+        },
+        {
+            "recipeId": 127,
+            "name": "南瓜饼",
+            "fire": 2,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 0,
+            "fry": 55,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "糯米",
+                    "quantity": 3
+                },
+                {
+                    "name": "面粉",
+                    "quantity": 2
+                },
+                {
+                    "name": "牛乳",
+                    "quantity": 4
+                }
+            ],
+            "price": 100,
+            "time": 275,
+            "total": 30,
+            "origin": "壁池",
+            "personal": {
+                "quality": "",
+                "remark": "杨小倩(优)-熊麓-大天狗"
             }
         },
         {
@@ -2066,8 +2254,46 @@
             "total": 40,
             "origin": "主线72",
             "personal": {
-                "quality": "优",
-                "remark": "升级申公子-三阶申公子/二阶上宫晴"
+                "quality": "神",
+                "remark": ""
+            }
+        },
+        {
+            "recipeId": 130,
+            "name": "生拌牛肉",
+            "fire": 4,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 80,
+            "fry": 0,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "牛排",
+                    "quantity": 5
+                },
+                {
+                    "name": "鸡蛋",
+                    "quantity": 4
+                },
+                {
+                    "name": "白萝卜",
+                    "quantity": 6
+                },
+                {
+                    "name": "黄瓜",
+                    "quantity": 6
+                }
+            ],
+            "price": 486,
+            "time": 431,
+            "total": 20,
+            "origin": "壁池",
+            "personal": {
+                "quality": "",
+                "remark": "熊麓-秋韵-三阶夏娃-暂无"
             }
         },
         {
@@ -2105,7 +2331,7 @@
             "origin": "双11壁池",
             "personal": {
                 "quality": "",
-                "remark": ""
+                "remark": "杨小倩-暂无-暂无-暂无"
             }
         },
         {
@@ -2143,7 +2369,7 @@
             "origin": "双11壁池",
             "personal": {
                 "quality": "",
-                "remark": "暂无"
+                "remark": "暂无-暂无-暂无-暂无"
             }
         },
         {
@@ -2180,8 +2406,8 @@
             "total": 25,
             "origin": "双11壁池",
             "personal": {
-                "quality": "优",
-                "remark": "升级大天狗-升级大天狗"
+                "quality": "特",
+                "remark": "大天狗"
             }
         },
         {
@@ -2219,7 +2445,7 @@
             "origin": "神级青椒土豆丝",
             "personal": {
                 "quality": "",
-                "remark": ""
+                "remark": "暂无(优)-暂无(特)-熊麓"
             }
         },
         {
@@ -2254,7 +2480,41 @@
             "price": 1705,
             "time": 359,
             "total": 0,
-            "origin": "壁池"
+            "origin": "壁池",
+            "personal": {
+                "quality": "",
+                "remark": "三阶上宫晴-暂无-暂无-暂无"
+            }
+        },
+        {
+            "recipeId": 142,
+            "name": "冰醉小龙虾",
+            "fire": 4,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 100,
+            "cut": 40,
+            "fry": 0,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "虾",
+                    "quantity": 6
+                },
+                {
+                    "name": "酒",
+                    "quantity": 8
+                }
+            ],
+            "price": 955,
+            "time": 478,
+            "total": 20,
+            "origin": "壁池",
+            "personal": {
+                "quality": "",
+                "remark": "羽十六-暂无-暂无-暂无"
+            }
         },
         {
             "recipeId": 145,
@@ -2291,7 +2551,7 @@
             "origin": "双11壁池",
             "personal": {
                 "quality": "特",
-                "remark": "升级大天狗"
+                "remark": "大天狗"
             }
         },
         {
@@ -2329,7 +2589,7 @@
             "origin": "双11壁池",
             "personal": {
                 "quality": "可",
-                "remark": "升级大天狗-三阶不知火喵-暂无"
+                "remark": "大天狗-三阶不知火喵-暂无"
             }
         },
         {
@@ -2363,6 +2623,40 @@
             }
         },
         {
+            "recipeId": 153,
+            "name": "腊味合蒸",
+            "fire": 5,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 0,
+            "fry": 0,
+            "roast": 85,
+            "steam": 100,
+            "ingredient": [
+                {
+                    "name": "鸡腿",
+                    "quantity": 12
+                },
+                {
+                    "name": "里脊肉",
+                    "quantity": 12
+                },
+                {
+                    "name": "鲜鱼",
+                    "quantity": 8
+                }
+            ],
+            "price": 1332,
+            "time": 0,
+            "total": 0,
+            "origin": "壁池",
+            "personal": {
+                "quality": "",
+                "remark": "升级白稻荷-暂无-暂无-暂无"
+            }
+        },
+        {
             "recipeId": 157,
             "name": "牛肉串",
             "fire": 3,
@@ -2386,6 +2680,32 @@
             "personal": {
                 "quality": "优",
                 "remark": "二阶不知火喵-三阶不知火喵"
+            }
+        },
+        {
+            "recipeId": 158,
+            "name": "碳烤牛舍",
+            "fire": 3,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 0,
+            "fry": 0,
+            "roast": 65,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "牛杂",
+                    "quantity": 4
+                }
+            ],
+            "price": 73,
+            "time": 99,
+            "total": 25,
+            "origin": "壁池",
+            "personal": {
+                "quality": "",
+                "remark": "大天狗(优)-三阶不知火喵-升级三阶不知火喵"
             }
         },
         {
@@ -2418,7 +2738,7 @@
             "total": 30,
             "origin": "主线112",
             "personal": {
-                "quality": "优",
+                "quality": "神",
                 "remark": ""
             }
         },
@@ -2445,7 +2765,7 @@
             "origin": "主线111",
             "personal": {
                 "quality": "特",
-                "remark": "升级申公子"
+                "remark": "任意"
             }
         },
         {
@@ -2479,7 +2799,7 @@
             "origin": "壁池",
             "personal": {
                 "quality": "",
-                "remark": ""
+                "remark": "羽十六-暂无-暂无-暂无"
             }
         },
         {
@@ -2569,6 +2889,74 @@
             }
         },
         {
+            "recipeId": 168,
+            "name": "葱香烤茄子",
+            "fire": 2,
+            "unlock": "鱼香茄子",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 0,
+            "fry": 0,
+            "roast": 45,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "茄子",
+                    "quantity": 3
+                },
+                {
+                    "name": "葱",
+                    "quantity": 8
+                }
+            ],
+            "price": 54,
+            "time": 198,
+            "total": 30,
+            "origin": "壁池",
+            "personal": {
+                "quality": "",
+                "remark": "升级孙香香-大天狗-三阶不知火喵"
+            }
+        },
+        {
+            "recipeId": 170,
+            "name": "蒜蓉芝士焗龙虾",
+            "fire": 5,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 100,
+            "fry": 0,
+            "roast": 150,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "虾",
+                    "quantity": 12
+                },
+                {
+                    "name": "洋葱",
+                    "quantity": 12
+                },
+                {
+                    "name": "面粉",
+                    "quantity": 12
+                },
+                {
+                    "name": "牛乳",
+                    "quantity": 12
+                }
+            ],
+            "price": 2288,
+            "time": 0,
+            "total": 0,
+            "origin": "壁池",
+            "personal": {
+                "quality": "",
+                "remark": "二阶不知火喵-暂无-暂无-暂无"
+            }
+        },
+        {
             "recipeId": 171,
             "name": "客家小炒肉",
             "fire": 3,
@@ -2603,7 +2991,7 @@
             "origin": "双11壁池",
             "personal": {
                 "quality": "",
-                "remark": ""
+                "remark": "鱼不斩(优)-羽十六-大天狗"
             }
         },
         {
@@ -2735,7 +3123,7 @@
             "origin": "双11壁池",
             "personal": {
                 "quality": "可",
-                "remark": "升级申公子-三阶申公子-?阶上宫晴"
+                "remark": "上宫晴-升级上宫晴(蒸165)-升级上宫晴(220)"
             }
         },
         {
@@ -2803,7 +3191,7 @@
             "origin": "双11壁池",
             "personal": {
                 "quality": "",
-                "remark": ""
+                "remark": "三阶申公子(优)-暂无-暂无"
             }
         },
         {
@@ -2867,7 +3255,7 @@
             "origin": "双11壁池",
             "personal": {
                 "quality": "",
-                "remark": "羽十六"
+                "remark": "三阶上宫晴(优)-暂无-暂无"
             }
         },
         {
@@ -2905,7 +3293,7 @@
             "origin": "双11壁池",
             "personal": {
                 "quality": "可",
-                "remark": "羽十六-暂无"
+                "remark": "羽十六-暂无-暂无"
             }
         },
         {
@@ -3844,11 +4232,11 @@
             },
             {
                 "name": "大天狗",
-                "stirfry": 160,
+                "stirfry": 227,
                 "boil": 0,
-                "cut": 40,
-                "fry": 240,
-                "roast": 120,
+                "cut": 57,
+                "fry": 340,
+                "roast": 170,
                 "steam": 0,
                 "private": true,
                 "show": false,

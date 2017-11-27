@@ -1050,8 +1050,8 @@
             "total": 30,
             "origin": "神级白粽",
             "personal": {
-                "quality": "",
-                "remark": "上宫晴(优)-升级上宫晴(165)-升级上宫晴(220)"
+                "quality": "特",
+                "remark": "上宫晴"
             }
         },
         {
@@ -1772,8 +1772,8 @@
             "total": 25,
             "origin": "主线135",
             "personal": {
-                "quality": "",
-                "remark": "羽十六(优)-琪琪-升级琪琪"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -1834,6 +1834,36 @@
             "personal": {
                 "quality": "神",
                 "remark": ""
+            }
+        },
+        {
+            "recipeId": 101,
+            "name": "洋葱肥肠",
+            "fire": 3,
+            "unlock": "-",
+            "stirfry": 50,
+            "boil": 0,
+            "cut": 20,
+            "fry": 0,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "洋葱",
+                    "quantity": 4
+                },
+                {
+                    "name": "猪杂",
+                    "quantity": 4
+                }
+            ],
+            "price": 176,
+            "time": 205,
+            "total": 25,
+            "origin": "神级爆炒猪肝",
+            "personal": {
+                "quality": "",
+                "remark": "鱼不斩/大天狗(优)-羽十六-暂无"
             }
         },
         {
@@ -2062,8 +2092,8 @@
             "total": 20,
             "origin": "双11壁池",
             "personal": {
-                "quality": "",
-                "remark": "上宫晴(优)-升级上宫晴(195)-三阶上宫晴"
+                "quality": "优",
+                "remark": "上宫晴-三阶上宫晴"
             }
         },
         {
@@ -2161,7 +2191,7 @@
             "origin": "神级家常豆腐",
             "personal": {
                 "quality": "",
-                "remark": "升级琪琪(优)-暂无-暂无"
+                "remark": "琪琪(优)-暂无-暂无"
             }
         },
         {
@@ -2194,8 +2224,8 @@
             "total": 30,
             "origin": "神级葱姜辣炒蛤蜊",
             "personal": {
-                "quality": "",
-                "remark": "上宫晴(优)-升级上宫晴(165)-升级上宫晴(220)"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -2769,6 +2799,40 @@
             }
         },
         {
+            "recipeId": 161,
+            "name": "蛤蜊豆腐汤",
+            "fire": 2,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 60,
+            "cut": 20,
+            "fry": 0,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "贝壳",
+                    "quantity": 3
+                },
+                {
+                    "name": "葱",
+                    "quantity": 3
+                },
+                {
+                    "name": "豆腐",
+                    "quantity": 3
+                }
+            ],
+            "price": 402,
+            "time": 340,
+            "total": 30,
+            "origin": "神级蛤蜊蒸蛋",
+            "personal": {
+                "quality": "",
+                "remark": "羽十六(优)-三阶上宫晴-暂无"
+            }
+        },
+        {
             "recipeId": 163,
             "name": "鱼头豆腐汤",
             "fire": 3,
@@ -3122,8 +3186,8 @@
             "total": 25,
             "origin": "双11壁池",
             "personal": {
-                "quality": "可",
-                "remark": "上宫晴-升级上宫晴(蒸165)-升级上宫晴(220)"
+                "quality": "特",
+                "remark": "上宫晴"
             }
         },
         {
@@ -3990,8 +4054,8 @@
             "name": "大内侍卫",
             "gifts": [
                 {
-                    "recipe": "萝卜小排汤",
-                    "rune": "耐煮的水草"
+                    "recipe": "罗宋汤",
+                    "rune": "刀嘴鹦鹉"
                 },
                 {
                     "recipe": "红烧萝卜",
@@ -4000,6 +4064,20 @@
                 {
                     "recipe": "辣炒萝卜干",
                     "rune": "五香果"
+                }
+            ]
+        },
+        {
+            "guestId": 21,
+            "name": "王子",
+            "gifts": [
+                {
+                    "recipe": "咖喱土豆鸡",
+                    "rune": "暖石"
+                },
+                {
+                    "recipe": "菠萝咕咾肉",
+                    "rune": "一昧真火"
                 }
             ]
         },
@@ -4173,7 +4251,7 @@
                 },
                 {
                     "recipe": "鸡汤煮干丝",
-                    "rune": "耐煮的水草"
+                    "rune": "刀嘴鹦鹉"
                 },
                 {
                     "recipe": "腊味合蒸",

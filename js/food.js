@@ -12,52 +12,6 @@ function init(json) {
     var private = window.location.search.indexOf("666") > 0;
     var data = generateData(json, private);
 
-    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-        var chkFire1 = $('#chk-fire-1').prop("checked");
-        var chkFire2 = $('#chk-fire-2').prop("checked");
-        var chkFire3 = $('#chk-fire-3').prop("checked");
-        var chkFire4 = $('#chk-fire-4').prop("checked");
-        var chkFire5 = $('#chk-fire-5').prop("checked");
-        var fire = parseInt(data[2]) || 0;
-
-        if (chkFire1 && fire == 1
-            || chkFire2 && fire == 2
-            || chkFire3 && fire == 3
-            || chkFire4 && fire == 4
-            || chkFire5 && fire == 5) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    });
-
-    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-        if ($('#chk-skill-stirfry').prop("checked") && (parseInt(data[3]) || 0) > 0
-            || $('#chk-skill-boil').prop("checked") && (parseInt(data[4]) || 0) > 0
-            || $('#chk-skill-cut').prop("checked") && (parseInt(data[5]) || 0) > 0
-            || $('#chk-skill-fry').prop("checked") && (parseInt(data[6]) || 0) > 0
-            || $('#chk-skill-roast').prop("checked") && (parseInt(data[7]) || 0) > 0
-            || $('#chk-skill-steam').prop("checked") && (parseInt(data[8]) || 0) > 0
-        ) {
-            return true;
-        } else {
-            return false;
-        }
-    });
-
-    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-        var check = $('#chk-guest').prop("checked");
-        var value = data[18];
-
-        if (!check || check && value) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    });
-
     var columns = [
         {
             "data": "recipeId"
@@ -96,42 +50,34 @@ function init(json) {
             }
         },
         {
-            "data": "price",
-            "searchable": false
+            "data": "price"
         },
         {
             "data": {
                 "_": "time.value",
                 "display": "time.display"
-            },
-            "searchable": false
+            }
         },
         {
-            "data": "total",
-            "searchable": false
+            "data": "total"
         },
         {
-            "data": "totalPrice",
-            "searchable": false
+            "data": "totalPrice"
         },
         {
             "data": {
                 "_": "totalTime.value",
                 "display": "totalTime.display"
-            },
-            "searchable": false
+            }
         },
         {
-            "data": "efficiency",
-            "searchable": false
+            "data": "efficiency"
         },
         {
-            "data": "origin",
-            "searchable": false
+            "data": "origin"
         },
         {
-            "data": "unlock",
-            "searchable": false
+            "data": "unlock"
         },
         {
             "data": "guests"
@@ -140,12 +86,10 @@ function init(json) {
             "data": "get"
         },
         {
-            "data": "quality",
-            "searchable": false
+            "data": "quality"
         },
         {
-            "data": "remark",
-            "searchable": false
+            "data": "remark"
         }
     ];
 
@@ -177,9 +121,81 @@ function init(json) {
         "pagingType": "numbers",
         "lengthMenu": [[20, 50, 100, -1], [20, 50, 100, "所有"]],
         "pageLength": 20,
-        "dom": "<'row'<'col-sm-4'l><'col-sm-4'i><'col-sm-4'f>>" +
+        "dom": "<'row'<'col-sm-4'l><'col-sm-4 text-center'i><'col-sm-4'<'search-box'>>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12'p>>"
+    });
+
+    $("div.search-box").html('<label>查找:<input type="search" class="form-control input-sm" placeholder="菜名 材料 符文 ..."></label>');
+
+    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+        var chkFire1 = $('#chk-fire-1').prop("checked");
+        var chkFire2 = $('#chk-fire-2').prop("checked");
+        var chkFire3 = $('#chk-fire-3').prop("checked");
+        var chkFire4 = $('#chk-fire-4').prop("checked");
+        var chkFire5 = $('#chk-fire-5').prop("checked");
+        var fire = parseInt(data[2]) || 0;
+
+        if (chkFire1 && fire == 1
+            || chkFire2 && fire == 2
+            || chkFire3 && fire == 3
+            || chkFire4 && fire == 4
+            || chkFire5 && fire == 5) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    });
+
+    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+        if ($('#chk-skill-stirfry').prop("checked") && (parseInt(data[3]) || 0) > 0
+            || $('#chk-skill-boil').prop("checked") && (parseInt(data[4]) || 0) > 0
+            || $('#chk-skill-cut').prop("checked") && (parseInt(data[5]) || 0) > 0
+            || $('#chk-skill-fry').prop("checked") && (parseInt(data[6]) || 0) > 0
+            || $('#chk-skill-roast').prop("checked") && (parseInt(data[7]) || 0) > 0
+            || $('#chk-skill-steam').prop("checked") && (parseInt(data[8]) || 0) > 0
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
+    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+        var min = parseInt($('#input-price').val());
+        var price = parseFloat(data[10]) || 0;
+
+        if (isNaN(min) || min < price) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
+    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+        var check = $('#chk-guest').prop("checked");
+        var value = data[18];
+
+        if (!check || check && value) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    });
+
+    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+        var value = $(".search-box input").val().toLowerCase();
+        var searchCols = [0, 1, 9, 18];
+
+        for (var i = 0, len = searchCols.length; i < len; i++) {
+            if (data[searchCols[i]].toLowerCase().indexOf(value) !== -1) {
+                return true;
+            }
+        }
+
+        return false;
     });
 
     $('#chk-show-all').click(function () {
@@ -237,7 +253,15 @@ function init(json) {
         table.draw();
     });
 
+    $('#input-price').keyup(function () {
+        table.draw();
+    });
+
     $('#chk-guest').click(function () {
+        table.draw();
+    });
+
+    $('.search-box input').keyup(function () {
         table.draw();
     });
 

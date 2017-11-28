@@ -411,6 +411,40 @@
             }
         },
         {
+            "recipeId": 20,
+            "name": "水煮鱼",
+            "fire": 4,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 80,
+            "cut": 0,
+            "fry": 75,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "鲜鱼",
+                    "quantity": 2
+                },
+                {
+                    "name": "辣椒",
+                    "quantity": 10
+                },
+                {
+                    "name": "黄豆",
+                    "quantity": 10
+                }
+            ],
+            "price": 1148,
+            "time": 519,
+            "total": 20,
+            "origin": "新手奖池",
+            "personal": {
+                "quality": "",
+                "remark": "杨小倩-暂无-暂无-暂无"
+            }
+        },
+        {
             "recipeId": 21,
             "name": "番茄鸡蛋面",
             "fire": 1,
@@ -680,6 +714,36 @@
             "personal": {
                 "quality": "特",
                 "remark": "大天狗"
+            }
+        },
+        {
+            "recipeId": 32,
+            "name": "糯米团子",
+            "fire": 2,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 0,
+            "fry": 0,
+            "roast": 0,
+            "steam": 35,
+            "ingredient": [
+                {
+                    "name": "糯米",
+                    "quantity": 4
+                },
+                {
+                    "name": "牛乳",
+                    "quantity": 4
+                }
+            ],
+            "price": 74,
+            "time": 196,
+            "total": 30,
+            "origin": "新手奖池",
+            "personal": {
+                "quality": "",
+                "remark": "任意(优)-升级申公子-上宫晴"
             }
         },
         {
@@ -1244,6 +1308,36 @@
             "personal": {
                 "quality": "特",
                 "remark": "暂无"
+            }
+        },
+        {
+            "recipeId": 64,
+            "name": "泡椒凤爪",
+            "fire": 2,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 20,
+            "cut": 0,
+            "fry": 0,
+            "roast": 0,
+            "steam": 20,
+            "ingredient": [
+                {
+                    "name": "辣椒",
+                    "quantity": 4
+                },
+                {
+                    "name": "鸡杂",
+                    "quantity": 2
+                }
+            ],
+            "price": 87,
+            "time": 106,
+            "total": 30,
+            "origin": "新手奖池",
+            "personal": {
+                "quality": "",
+                "remark": "任意(优)-粉雪-上宫晴"
             }
         },
         {
@@ -2094,6 +2188,36 @@
             "personal": {
                 "quality": "优",
                 "remark": "上宫晴-三阶上宫晴"
+            }
+        },
+        {
+            "recipeId": 118,
+            "name": "辣炒萝卜干",
+            "fire": 2,
+            "unlock": "红烧萝卜",
+            "stirfry": 40,
+            "boil": 0,
+            "cut": 18,
+            "fry": 0,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "白萝卜",
+                    "quantity": 3
+                },
+                {
+                    "name": "辣椒",
+                    "quantity": 4
+                }
+            ],
+            "price": 77,
+            "time": 234,
+            "total": 30,
+            "origin": "新手奖池",
+            "personal": {
+                "quality": "特",
+                "remark": "琪琪"
             }
         },
         {

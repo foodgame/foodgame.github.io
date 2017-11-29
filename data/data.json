@@ -2216,8 +2216,8 @@
             "total": 30,
             "origin": "新手奖池",
             "personal": {
-                "quality": "特",
-                "remark": "琪琪"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -2860,6 +2860,36 @@
             "personal": {
                 "quality": "",
                 "remark": "大天狗(优)-三阶不知火喵-升级三阶不知火喵"
+            }
+        },
+        {
+            "recipeId": 159,
+            "name": "红烧萝卜",
+            "fire": 2,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 25,
+            "cut": 15,
+            "fry": 0,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "白萝卜",
+                    "quantity": 3
+                },
+                {
+                    "name": "葱",
+                    "quantity": 4
+                }
+            ],
+            "price": 62,
+            "time": 163,
+            "total": 30,
+            "origin": "神级辣炒萝卜干",
+            "personal": {
+                "quality": "神",
+                "remark": ""
             }
         },
         {

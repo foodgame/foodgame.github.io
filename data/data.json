@@ -147,6 +147,40 @@
             }
         },
         {
+            "recipeId": 8,
+            "name": "梅菜扣肉",
+            "fire": 3,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 35,
+            "fry": 0,
+            "roast": 0,
+            "steam": 45,
+            "ingredient": [
+                {
+                    "name": "里脊肉",
+                    "quantity": 2
+                },
+                {
+                    "name": "白菜",
+                    "quantity": 8
+                },
+                {
+                    "name": "青菜",
+                    "quantity": 8
+                }
+            ],
+            "price": 227,
+            "time": 247,
+            "total": 25,
+            "origin": "主线142",
+            "personal": {
+                "quality": "",
+                "remark": "秋韵(优)-三阶夏娃-升级三阶夏娃"
+            }
+        },
+        {
             "recipeId": 9,
             "name": "红烧牛肉面",
             "fire": 3,
@@ -712,8 +746,8 @@
             "total": 25,
             "origin": "神级椒盐排条",
             "personal": {
-                "quality": "特",
-                "remark": "大天狗"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -846,6 +880,36 @@
             "personal": {
                 "quality": "特",
                 "remark": "大天狗"
+            }
+        },
+        {
+            "recipeId": 36,
+            "name": "小笼包",
+            "fire": 2,
+            "unlock": "虾皇饺",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 0,
+            "fry": 0,
+            "roast": 0,
+            "steam": 50,
+            "ingredient": [
+                {
+                    "name": "里脊肉",
+                    "quantity": 3
+                },
+                {
+                    "name": "面粉",
+                    "quantity": 2
+                }
+            ],
+            "price": 61,
+            "time": 159,
+            "total": 30,
+            "origin": "神级烧麦",
+            "personal": {
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -1089,6 +1153,44 @@
             }
         },
         {
+            "recipeId": 47,
+            "name": "烤肉拼盘",
+            "fire": 4,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 0,
+            "fry": 70,
+            "roast": 90,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "鸡腿",
+                    "quantity": 6
+                },
+                {
+                    "name": "梅花肉",
+                    "quantity": 6
+                },
+                {
+                    "name": "牛排",
+                    "quantity": 6
+                },
+                {
+                    "name": "猪油",
+                    "quantity": 10
+                }
+            ],
+            "price": 1032,
+            "time": 0,
+            "total": 0,
+            "origin": "晚秋壁池",
+            "personal": {
+                "quality": "",
+                "remark": "大天狗-暂无-暂无-暂无"
+            }
+        },
+        {
             "recipeId": 48,
             "name": "蛋黄粽",
             "fire": 2,
@@ -1116,6 +1218,36 @@
             "personal": {
                 "quality": "特",
                 "remark": "上宫晴"
+            }
+        },
+        {
+            "recipeId": 49,
+            "name": "兔子馒头",
+            "fire": 2,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 0,
+            "fry": 0,
+            "roast": 0,
+            "steam": 25,
+            "ingredient": [
+                {
+                    "name": "面粉",
+                    "quantity": 4
+                },
+                {
+                    "name": "鸡蛋",
+                    "quantity": 2
+                }
+            ],
+            "price": 29,
+            "time": 47,
+            "total": 30,
+            "origin": "新手奖池",
+            "personal": {
+                "quality": "",
+                "remark": "琪琪(优)-白稻荷-上宫晴"
             }
         },
         {
@@ -1179,6 +1311,36 @@
             }
         },
         {
+            "recipeId": 54,
+            "name": "烧麦",
+            "fire": 2,
+            "unlock": "小笼包",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 10,
+            "fry": 0,
+            "roast": 0,
+            "steam": 25,
+            "ingredient": [
+                {
+                    "name": "糯米",
+                    "quantity": 6
+                },
+                {
+                    "name": "猪腿肉",
+                    "quantity": 2
+                }
+            ],
+            "price": 107,
+            "time": 231,
+            "total": 30,
+            "origin": "新手奖池",
+            "personal": {
+                "quality": "神",
+                "remark": ""
+            }
+        },
+        {
             "recipeId": 55,
             "name": "锅贴",
             "fire": 1,
@@ -1210,6 +1372,36 @@
             "personal": {
                 "quality": "神",
                 "remark": ""
+            }
+        },
+        {
+            "recipeId": 56,
+            "name": "虾皇饺",
+            "fire": 3,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 50,
+            "fry": 0,
+            "roast": 0,
+            "steam": 80,
+            "ingredient": [
+                {
+                    "name": "面粉",
+                    "quantity": 6
+                },
+                {
+                    "name": "虾",
+                    "quantity": 3
+                }
+            ],
+            "price": 158,
+            "time": 269,
+            "total": 25,
+            "origin": "神级小笼包",
+            "personal": {
+                "quality": "",
+                "remark": "升级兔爷(优)-暂无-暂无"
             }
         },
         {
@@ -1278,6 +1470,36 @@
             "personal": {
                 "quality": "",
                 "remark": "叶姬(优)-羽十六-暂无"
+            }
+        },
+        {
+            "recipeId": 61,
+            "name": "杭椒牛柳",
+            "fire": 3,
+            "unlock": "-",
+            "stirfry": 40,
+            "boil": 0,
+            "cut": 30,
+            "fry": 0,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "牛腩",
+                    "quantity": 2
+                },
+                {
+                    "name": "青椒",
+                    "quantity": 8
+                }
+            ],
+            "price": 193,
+            "time": 237,
+            "total": 25,
+            "origin": "晚秋壁池",
+            "personal": {
+                "quality": "",
+                "remark": "羽十六(优)-琪琪-升级琪琪"
             }
         },
         {
@@ -4464,13 +4686,13 @@
             },
             {
                 "name": "大天狗",
-                "stirfry": 227,
+                "stirfry": 232,
                 "boil": 0,
-                "cut": 57,
-                "fry": 340,
-                "roast": 170,
+                "cut": 58,
+                "fry": 348,
+                "roast": 174,
                 "steam": 0,
-                "private": true,
+                "private": false,
                 "show": false,
                 "skill": [
                     {

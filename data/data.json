@@ -1763,6 +1763,40 @@
             }
         },
         {
+            "recipeId": 76,
+            "name": "香辣蟹",
+            "fire": 5,
+            "unlock": "-",
+            "stirfry": 85,
+            "boil": 0,
+            "cut": 0,
+            "fry": 75,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "辣椒",
+                    "quantity": 12
+                },
+                {
+                    "name": "螃蟹",
+                    "quantity": 4
+                },
+                {
+                    "name": "青菜",
+                    "quantity": 12
+                }
+            ],
+            "price": 1154,
+            "time": 0,
+            "total": 0,
+            "origin": "晚秋壁池",
+            "personal": {
+                "quality": "",
+                "remark": "大天狗(优)-暂无-暂无"
+            }
+        },
+        {
             "recipeId": 77,
             "name": "毛蟹年糕",
             "fire": 4,
@@ -2030,6 +2064,44 @@
             "personal": {
                 "quality": "神",
                 "remark": ""
+            }
+        },
+        {
+            "recipeId": 92,
+            "name": "迷之月饼",
+            "fire": 4,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 50,
+            "fry": 0,
+            "roast": 50,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "面粉",
+                    "quantity": 8
+                },
+                {
+                    "name": "白萝卜",
+                    "quantity": 3
+                },
+                {
+                    "name": "茄子",
+                    "quantity": 3
+                },
+                {
+                    "name": "洋葱",
+                    "quantity": 3
+                }
+            ],
+            "price": 270,
+            "time": 0,
+            "total": 0,
+            "origin": "晚秋壁池",
+            "personal": {
+                "quality": "",
+                "remark": "升级孙香香(优)-三阶不知火喵-暂无"
             }
         },
         {
@@ -2928,6 +3000,40 @@
             "personal": {
                 "quality": "特",
                 "remark": "大天狗"
+            }
+        },
+        {
+            "recipeId": 146,
+            "name": "锅包肉",
+            "fire": 4,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 0,
+            "fry": 75,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "梅花肉",
+                    "quantity": 6
+                },
+                {
+                    "name": "番茄",
+                    "quantity": 8
+                },
+                {
+                    "name": "面粉",
+                    "quantity": 10
+                }
+            ],
+            "price": 350,
+            "time": 0,
+            "total": 0,
+            "origin": "晚秋壁池",
+            "personal": {
+                "quality": "",
+                "remark": "熊麓(优)-暂无-大天狗"
             }
         },
         {

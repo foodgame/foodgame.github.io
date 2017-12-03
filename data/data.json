@@ -1303,7 +1303,7 @@
             ],
             "price": 207,
             "time": 470,
-            "total": 0,
+            "total": 25,
             "origin": "壁池",
             "personal": {
                 "quality": "优",
@@ -2783,6 +2783,44 @@
             }
         },
         {
+            "recipeId": 134,
+            "name": "毛血旺",
+            "fire": 3,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 75,
+            "cut": 20,
+            "fry": 0,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "鸭子",
+                    "quantity": 8
+                },
+                {
+                    "name": "牛杂",
+                    "quantity": 8
+                },
+                {
+                    "name": "黄豆",
+                    "quantity": 6
+                },
+                {
+                    "name": "辣椒",
+                    "quantity": 8
+                }
+            ],
+            "price": 614,
+            "time": 977,
+            "total": 25,
+            "origin": "晚秋壁池",
+            "personal": {
+                "quality": "",
+                "remark": "羽十六(优)-上宫晴-暂无"
+            }
+        },
+        {
             "recipeId": 138,
             "name": "鸡汤煮干丝",
             "fire": 4,
@@ -2812,8 +2850,8 @@
                 }
             ],
             "price": 1080,
-            "time": 0,
-            "total": 0,
+            "time": 1260,
+            "total": 20,
             "origin": "双11壁池",
             "personal": {
                 "quality": "",
@@ -2927,7 +2965,7 @@
             ],
             "price": 1705,
             "time": 359,
-            "total": 0,
+            "total": 15,
             "origin": "壁池",
             "personal": {
                 "quality": "",
@@ -3130,8 +3168,8 @@
                 }
             ],
             "price": 1332,
-            "time": 0,
-            "total": 0,
+            "time": 598,
+            "total": 15,
             "origin": "壁池",
             "personal": {
                 "quality": "",
@@ -3494,8 +3532,8 @@
                 }
             ],
             "price": 2288,
-            "time": 0,
-            "total": 0,
+            "time": 576,
+            "total": 15,
             "origin": "壁池",
             "personal": {
                 "quality": "",
@@ -3703,7 +3741,7 @@
             ],
             "price": 187,
             "time": 466,
-            "total": 0,
+            "total": 25,
             "origin": "双11壁池"
         },
         {
@@ -3733,7 +3771,7 @@
             ],
             "price": 1153,
             "time": 439,
-            "total": 0,
+            "total": 20,
             "origin": "双11壁池",
             "personal": {
                 "quality": "",

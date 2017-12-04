@@ -129,6 +129,7 @@ function init(json) {
     $("div.search-box").html('<label>查找:<input type="search" class="form-control input-sm" placeholder="菜名 材料 符文 ..."></label>');
 
     $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+        var chkFire0 = $('#chk-fire-0').prop("checked");
         var chkFire1 = $('#chk-fire-1').prop("checked");
         var chkFire2 = $('#chk-fire-2').prop("checked");
         var chkFire3 = $('#chk-fire-3').prop("checked");
@@ -136,7 +137,8 @@ function init(json) {
         var chkFire5 = $('#chk-fire-5').prop("checked");
         var fire = parseInt(data[2]) || 0;
 
-        if (chkFire1 && fire == 1
+        if (chkFire0 && fire == 0
+            || chkFire1 && fire == 1
             || chkFire2 && fire == 2
             || chkFire3 && fire == 3
             || chkFire4 && fire == 4
@@ -155,6 +157,8 @@ function init(json) {
             || $('#chk-skill-fry').prop("checked") && (parseInt(data[6]) || 0) > 0
             || $('#chk-skill-roast').prop("checked") && (parseInt(data[7]) || 0) > 0
             || $('#chk-skill-steam').prop("checked") && (parseInt(data[8]) || 0) > 0
+            || ($('#chk-skill-unknown').prop("checked") && (parseInt(data[3]) || 0) == 0 && (parseInt(data[4]) || 0) == 0 && (parseInt(data[5]) || 0) == 0
+                && (parseInt(data[6]) || 0) == 0 && (parseInt(data[7]) || 0) == 0 && (parseInt(data[8]) || 0) == 0)
         ) {
             return true;
         } else {
@@ -314,34 +318,39 @@ function generateData(json, private) {
     }
 
     var recipesData = new Array();
+    var dataCount = 0;
     for (i in json.recipes) {
 
-        recipesData[i] = new Object();
-        recipesData[i]["recipeId"] = json.recipes[i].recipeId;
-        recipesData[i]["name"] = json.recipes[i].name;
-        recipesData[i]["stirfry"] = json.recipes[i].stirfry || "";
-        recipesData[i]["boil"] = json.recipes[i].boil || "";
-        recipesData[i]["cut"] = json.recipes[i].cut || "";
-        recipesData[i]["fry"] = json.recipes[i].fry || "";
-        recipesData[i]["roast"] = json.recipes[i].roast || "";
-        recipesData[i]["steam"] = json.recipes[i].steam || "";
-        recipesData[i]["price"] = json.recipes[i].price || "";
-        recipesData[i]["time"] = {
+        if (!json.recipes[i].name) {
+            continue;
+        }
+
+        recipesData[dataCount] = new Object();
+        recipesData[dataCount]["recipeId"] = json.recipes[i].recipeId;
+        recipesData[dataCount]["name"] = json.recipes[i].name;
+        recipesData[dataCount]["stirfry"] = json.recipes[i].stirfry || "";
+        recipesData[dataCount]["boil"] = json.recipes[i].boil || "";
+        recipesData[dataCount]["cut"] = json.recipes[i].cut || "";
+        recipesData[dataCount]["fry"] = json.recipes[i].fry || "";
+        recipesData[dataCount]["roast"] = json.recipes[i].roast || "";
+        recipesData[dataCount]["steam"] = json.recipes[i].steam || "";
+        recipesData[dataCount]["price"] = json.recipes[i].price || "";
+        recipesData[dataCount]["time"] = {
             "display": json.recipes[i].time != 0 ? secondsToTime(json.recipes[i].time) : "",
             "value": json.recipes[i].time != 0 ? json.recipes[i].time : ""
         };
-        recipesData[i]["total"] = json.recipes[i].total || "";
-        recipesData[i]["origin"] = json.recipes[i].origin;
-        recipesData[i]["unlock"] = json.recipes[i].unlock;
-        recipesData[i]["get"] = json.recipes[i].hasOwnProperty('personal') ? true : false;
-        recipesData[i]["quality"] = json.recipes[i].hasOwnProperty('personal') ? json.recipes[i].personal.quality : "";
-        recipesData[i]["remark"] = json.recipes[i].hasOwnProperty('personal') ? json.recipes[i].personal.remark : "";
+        recipesData[dataCount]["total"] = json.recipes[i].total || "";
+        recipesData[dataCount]["origin"] = json.recipes[i].origin;
+        recipesData[dataCount]["unlock"] = json.recipes[i].unlock;
+        recipesData[dataCount]["get"] = json.recipes[i].hasOwnProperty('personal') ? true : false;
+        recipesData[dataCount]["quality"] = json.recipes[i].hasOwnProperty('personal') ? json.recipes[i].personal.quality : "";
+        recipesData[dataCount]["remark"] = json.recipes[i].hasOwnProperty('personal') ? json.recipes[i].personal.remark : "";
 
         var fireDisp = "";
         for (j = 0; j < json.recipes[i].fire; j++) {
             fireDisp += "&#x2605;";
         }
-        recipesData[i]["fire"] = {
+        recipesData[dataCount]["fire"] = {
             "display": fireDisp,
             "value": json.recipes[i].fire
         };
@@ -360,12 +369,12 @@ function generateData(json, private) {
             }
         }
 
-        recipesData[i]["totalPrice"] = totalPrice ? totalPrice : "";
-        recipesData[i]["totalTime"] = {
+        recipesData[dataCount]["totalPrice"] = totalPrice ? totalPrice : "";
+        recipesData[dataCount]["totalTime"] = {
             "display": totalTime ? secondsToTime(totalTime) : "",
             "value": totalTime ? totalTime : ""
         };
-        recipesData[i]["efficiency"] = efficiency ? parseInt(efficiency) : "";
+        recipesData[dataCount]["efficiency"] = efficiency ? parseInt(efficiency) : "";
 
         var ingredientsDisp = "";
         var ingredientsVal = "";
@@ -373,7 +382,7 @@ function generateData(json, private) {
             ingredientsDisp += json.recipes[i].ingredient[k].name + "*" + json.recipes[i].ingredient[k].quantity + " "
             ingredientsVal += json.recipes[i].ingredient[k].name;
         }
-        recipesData[i]["ingredients"] = {
+        recipesData[dataCount]["ingredients"] = {
             "display": ingredientsDisp,
             "value": ingredientsVal
         };
@@ -389,9 +398,9 @@ function generateData(json, private) {
                 }
             }
         }
-        recipesData[i]["guests"] = guests;
+        recipesData[dataCount]["guests"] = guests;
 
-        recipesData[i]["chefs"] = new Array();
+        recipesData[dataCount]["chefs"] = new Array();
         for (j in retData["chefs"]) {
 
             var times = Number.MAX_VALUE;
@@ -508,11 +517,13 @@ function generateData(json, private) {
                 }
             }
 
-            recipesData[i]["chefs"].push({
+            recipesData[dataCount]["chefs"].push({
                 "chefQlty": chefQlty,
                 "chefEff": chefEff ? parseInt(chefEff) : ""
             });
         }
+
+        dataCount++;
     }
 
     retData["recipes"] = recipesData;

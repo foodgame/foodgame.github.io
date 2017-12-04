@@ -683,8 +683,8 @@
             "total": 25,
             "origin": "主线116",
             "personal": {
-                "quality": "",
-                "remark": "羽十六(优)-琪琪-暂无"
+                "quality": "优",
+                "remark": "琪琪-暂无"
             }
         },
         {
@@ -845,7 +845,7 @@
             "total": 20,
             "origin": "神级香酥鸭",
             "personal": {
-                "quality": "",
+                "quality": "可",
                 "remark": "孙香香(优)-升级孙香香-暂无"
             }
         },
@@ -1861,8 +1861,8 @@
             "total": 25,
             "origin": "晚秋壁池",
             "personal": {
-                "quality": "",
-                "remark": "羽十六(优)-琪琪-升级琪琪"
+                "quality": "优",
+                "remark": "琪琪-升级琪琪"
             }
         },
         {
@@ -1947,8 +1947,8 @@
             "total": 30,
             "origin": "新手奖池",
             "personal": {
-                "quality": "",
-                "remark": "任意(优)-粉雪-上宫晴"
+                "quality": "优",
+                "remark": "粉雪-上宫晴"
             }
         },
         {
@@ -2075,8 +2075,8 @@
             "total": 25,
             "origin": "神级葱油鸡",
             "personal": {
-                "quality": "可",
-                "remark": "二阶夏娃/三阶秋韵-二阶夏娃-三阶夏娃"
+                "quality": "特",
+                "remark": "三阶夏娃"
             }
         },
         {
@@ -2494,8 +2494,8 @@
             "total": 40,
             "origin": "新手奖池",
             "personal": {
-                "quality": "优",
-                "remark": "羽十六-暂无"
+                "quality": "特",
+                "remark": "暂无"
             }
         },
         {
@@ -3229,7 +3229,7 @@
             "total": 25,
             "origin": "主线125",
             "personal": {
-                "quality": "",
+                "quality": "可",
                 "remark": "升级孙香香(优)-大天狗-二阶不知火喵"
             }
         },
@@ -4897,8 +4897,8 @@
             "total": 40,
             "origin": "主线111",
             "personal": {
-                "quality": "特",
-                "remark": "任意"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -4931,8 +4931,8 @@
             "total": 30,
             "origin": "神级蛤蜊蒸蛋",
             "personal": {
-                "quality": "",
-                "remark": "羽十六(优)-三阶上宫晴-暂无"
+                "quality": "优",
+                "remark": "三阶上宫晴-暂无"
             }
         },
         {
@@ -4965,8 +4965,8 @@
             "total": 25,
             "origin": "壁池",
             "personal": {
-                "quality": "",
-                "remark": "羽十六-暂无-暂无-暂无"
+                "quality": "可",
+                "remark": "暂无-暂无-暂无"
             }
         },
         {
@@ -5115,7 +5115,7 @@
             "total": 30,
             "origin": "壁池",
             "personal": {
-                "quality": "",
+                "quality": "可",
                 "remark": "升级孙香香-大天狗-三阶不知火喵"
             }
         },
@@ -5900,8 +5900,8 @@
             "total": 20,
             "origin": "双11壁池",
             "personal": {
-                "quality": "可",
-                "remark": "羽十六-暂无-暂无"
+                "quality": "优",
+                "remark": "暂无-暂无"
             }
         },
         {

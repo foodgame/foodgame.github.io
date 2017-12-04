@@ -2633,7 +2633,7 @@
             "price": 0,
             "time": 708,
             "total": 0,
-            "origin": ""
+            "origin": "神级红烧排骨"
         },
         {
             "recipeId": 88,
@@ -2859,7 +2859,7 @@
             "price": 370,
             "time": 209,
             "total": 45,
-            "origin": ""
+            "origin": "神级鱼香茄子"
         },
         {
             "recipeId": 95,
@@ -2966,7 +2966,7 @@
             "price": 0,
             "time": 197,
             "total": 0,
-            "origin": ""
+            "origin": "神级牛肉串"
         },
         {
             "recipeId": 99,
@@ -3062,7 +3062,7 @@
             "recipeId": 102,
             "name": "干锅鱼头",
             "fire": 4,
-            "unlock": "干锅香辣虾",
+            "unlock": "",
             "stirfry": 0,
             "boil": 40,
             "cut": 0,
@@ -3171,7 +3171,7 @@
             "price": 0,
             "time": 342,
             "total": 0,
-            "origin": ""
+            "origin": "神级干锅鱼头"
         },
         {
             "recipeId": 106,
@@ -4763,7 +4763,7 @@
             "recipeId": 157,
             "name": "牛肉串",
             "fire": 3,
-            "unlock": "-",
+            "unlock": "洋葱小炒肉",
             "stirfry": 0,
             "boil": 0,
             "cut": 20,
@@ -5059,7 +5059,7 @@
             "recipeId": 167,
             "name": "鱼香茄子",
             "fire": 0,
-            "unlock": "-",
+            "unlock": "葱香烤鱼",
             "stirfry": 55,
             "boil": 0,
             "cut": 35,
@@ -5087,7 +5087,7 @@
             "price": 175,
             "time": 420,
             "total": 0,
-            "origin": ""
+            "origin": "神级葱香烤茄子"
         },
         {
             "recipeId": 168,
@@ -6787,19 +6787,19 @@
         },
         {
             "guestId": 32,
-            "name": "未知",
+            "name": "耶稣如来",
             "gifts": [
                 {
                     "recipe": "九转大肠",
-                    "rune": "未知"
+                    "rune": "鼓风机"
                 },
                 {
                     "recipe": "干锅鱼头",
-                    "rune": "未知"
+                    "rune": "焦虫"
                 },
                 {
                     "recipe": "佛跳墙",
-                    "rune": "未知"
+                    "rune": "千年煮鳖"
                 }
             ]
         },
@@ -6827,15 +6827,15 @@
             "gifts": [
                 {
                     "recipe": "撒尿牛丸",
-                    "rune": "未知"
+                    "rune": "刀嘴鹦鹉"
                 },
                 {
                     "recipe": "大骨高汤",
-                    "rune": "未知"
+                    "rune": "耐煮的水草"
                 },
                 {
                     "recipe": "蟹黄鱼翅",
-                    "rune": "未知"
+                    "rune": "恐怖利刃"
                 }
             ]
         },
@@ -6845,11 +6845,11 @@
             "gifts": [
                 {
                     "recipe": "夫妻肺片",
-                    "rune": "未知"
+                    "rune": "刀嘴鹦鹉"
                 },
                 {
                     "recipe": "蒜蓉芝士焗龙虾",
-                    "rune": "未知"
+                    "rune": "香烤鱼排"
                 }
             ]
         },
@@ -6859,11 +6859,11 @@
             "gifts": [
                 {
                     "recipe": "三杯鸡",
-                    "rune": "未知"
+                    "rune": "暖石"
                 },
                 {
                     "recipe": "咖喱香辣虾",
-                    "rune": "未知"
+                    "rune": "香烤鱼排"
                 }
             ]
         },

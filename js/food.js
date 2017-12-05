@@ -572,7 +572,7 @@ function generateData(json, private) {
                         }
 
                         if (hasSkill) {
-                            skillAddition += retData["chefs"][j].skill[k].addition;
+                            // skillAddition += retData["chefs"][j].skill[k].addition;
                         }
                     }
                 }

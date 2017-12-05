@@ -6922,7 +6922,6 @@
                 "fry": 0,
                 "roast": 0,
                 "steam": 30,
-                "private": false,
                 "show": true
             },
             {
@@ -6933,7 +6932,6 @@
                 "fry": 185,
                 "roast": 61,
                 "steam": 0,
-                "private": false,
                 "show": true,
                 "skill": [
                     {
@@ -6943,6 +6941,756 @@
                 ]
             },
             {
+                "name": "麦小咖",
+                "stirfry": 0,
+                "boil": 80,
+                "cut": 0,
+                "fry": 0,
+                "roast": 20,
+                "steam": 100,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "面类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "白祁右",
+                "stirfry": 40,
+                "boil": 0,
+                "cut": 40,
+                "fry": 120,
+                "roast": 0,
+                "steam": 0,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "炸类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "熊伏伏",
+                "stirfry": 0,
+                "boil": 0,
+                "cut": 30,
+                "fry": 61,
+                "roast": 92,
+                "steam": 15,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "肉类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "紫酱",
+                "stirfry": 66,
+                "boil": 100,
+                "cut": 0,
+                "fry": 0,
+                "roast": 0,
+                "steam": 33,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "煮类",
+                        "addition": 0.05
+                    }
+                ]
+            },
+            {
+                "name": "武葵",
+                "stirfry": 23,
+                "boil": 0,
+                "cut": 92,
+                "fry": 0,
+                "roast": 46,
+                "steam": 138,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "肉类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "郭锅",
+                "stirfry": 138,
+                "boil": 0,
+                "cut": 23,
+                "fry": 0,
+                "roast": 92,
+                "steam": 46,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "炒类",
+                        "addition": 0.05
+                    }
+                ]
+            },
+            {
+                "name": "农当午",
+                "stirfry": 23,
+                "boil": 138,
+                "cut": 0,
+                "fry": 0,
+                "roast": 46,
+                "steam": 92,
+                "show": false
+            },
+            {
+                "name": "鱼不斩",
+                "stirfry": 138,
+                "boil": 0,
+                "cut": 92,
+                "fry": 0,
+                "roast": 46,
+                "steam": 23,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "水产",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "雷椒",
+                "stirfry": 0,
+                "boil": 0,
+                "cut": 30,
+                "fry": 78,
+                "roast": 75,
+                "steam": 15,
+                "show": false
+            },
+            {
+                "name": "豆腕儿",
+                "stirfry": 0,
+                "boil": 92,
+                "cut": 30,
+                "fry": 15,
+                "roast": 0,
+                "steam": 61,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "面类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "申公子",
+                "stirfry": 0,
+                "boil": 0,
+                "cut": 33,
+                "fry": 166,
+                "roast": 66,
+                "steam": 166,
+                "show": false
+            },
+            {
+                "name": "禅优塔",
+                "stirfry": 0,
+                "boil": 21,
+                "cut": 150,
+                "fry": 52,
+                "roast": 0,
+                "steam": 85,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "切类",
+                        "addition": 0.05
+                    }
+                ]
+            },
+            {
+                "name": "武陵仔",
+                "stirfry": 0,
+                "boil": 33,
+                "cut": 0,
+                "fry": 100,
+                "roast": 66,
+                "steam": 0,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "水产",
+                        "addition": 0.05
+                    }
+                ]
+            },
+            {
+                "name": "傣弟",
+                "stirfry": 0,
+                "boil": 61,
+                "cut": 15,
+                "fry": 30,
+                "roast": 0,
+                "steam": 92,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "蒸类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "面小解",
+                "stirfry": 0,
+                "boil": 0,
+                "cut": 66,
+                "fry": 16,
+                "roast": 16,
+                "steam": 100,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "面类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "锄小禾",
+                "stirfry": 0,
+                "boil": 66,
+                "cut": 33,
+                "fry": 0,
+                "roast": 0,
+                "steam": 100,
+                "show": false
+            },
+            {
+                "name": "椒娃",
+                "stirfry": 0,
+                "boil": 40,
+                "cut": 0,
+                "fry": 80,
+                "roast": 53,
+                "steam": 40,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "炸类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "熊妮",
+                "stirfry": 15,
+                "boil": 0,
+                "cut": 92,
+                "fry": 61,
+                "roast": 0,
+                "steam": 30,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "切类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "藕多多",
+                "stirfry": 0,
+                "boil": 33,
+                "cut": 66,
+                "fry": 0,
+                "roast": 100,
+                "steam": 0,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "蔬菜",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "小当家",
+                "stirfry": 0,
+                "boil": 100,
+                "cut": 66,
+                "fry": 0,
+                "roast": 0,
+                "steam": 33,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "面类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "兜帽药师",
+                "stirfry": 66,
+                "boil": 100,
+                "cut": 0,
+                "fry": 0,
+                "roast": 0,
+                "steam": 33,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "煮类",
+                        "addition": 0.05
+                    }
+                ]
+            },
+            {
+                "name": "蓝孩子",
+                "stirfry": 85,
+                "boil": 0,
+                "cut": 0,
+                "fry": 128,
+                "roast": 21,
+                "steam": 64,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "炒类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "盲女",
+                "stirfry": 0,
+                "boil": 92,
+                "cut": 138,
+                "fry": 23,
+                "roast": 46,
+                "steam": 0,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "肉类",
+                        "addition": 0.15
+                    }
+                ]
+            },
+            {
+                "name": "蓝染",
+                "stirfry": 276,
+                "boil": 0,
+                "cut": 184,
+                "fry": 0,
+                "roast": 46,
+                "steam": 92,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "切类",
+                        "addition": 0.2
+                    }
+                ]
+            },
+            {
+                "name": "粉爪酱",
+                "stirfry": 0,
+                "boil": 15,
+                "cut": 92,
+                "fry": 30,
+                "roast": 61,
+                "steam": 0,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "水产",
+                        "addition": 0.05
+                    }
+                ]
+            },
+            {
+                "name": "蛋皇",
+                "stirfry": 0,
+                "boil": 184,
+                "cut": 0,
+                "fry": 46,
+                "roast": 92,
+                "steam": 276,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "蒸类",
+                        "addition": 0.15
+                    }
+                ]
+            },
+            {
+                "name": "苏吴安",
+                "stirfry": 0,
+                "boil": 0,
+                "cut": 66,
+                "fry": 33,
+                "roast": 0,
+                "steam": 100,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "蔬菜",
+                        "addition": 0.05
+                    }
+                ]
+            },
+            {
+                "name": "堂雪",
+                "stirfry": 33,
+                "boil": 199,
+                "cut": 0,
+                "fry": 0,
+                "roast": 66,
+                "steam": 133,
+                "show": false
+            },
+            {
+                "name": "方叔",
+                "stirfry": 0,
+                "boil": 0,
+                "cut": 0,
+                "fry": 33,
+                "roast": 100,
+                "steam": 66,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "面类",
+                        "addition": 0.05
+                    }
+                ]
+            },
+            {
+                "name": "辣子姬",
+                "stirfry": 138,
+                "boil": 46,
+                "cut": 0,
+                "fry": 92,
+                "roast": 0,
+                "steam": 23,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "炒类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "夏风",
+                "stirfry": 46,
+                "boil": 0,
+                "cut": 92,
+                "fry": 138,
+                "roast": 0,
+                "steam": 23,
+                "show": false
+            },
+            {
+                "name": "春日",
+                "stirfry": 46,
+                "boil": 92,
+                "cut": 0,
+                "fry": 138,
+                "roast": 23,
+                "steam": 0,
+                "show": false
+            },
+            {
+                "name": "蟹小星",
+                "stirfry": 23,
+                "boil": 0,
+                "cut": 138,
+                "fry": 46,
+                "roast": 0,
+                "steam": 92,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "蒸类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "小龙侠",
+                "stirfry": 92,
+                "boil": 0,
+                "cut": 138,
+                "fry": 46,
+                "roast": 23,
+                "steam": 0,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "切类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "叶姬",
+                "stirfry": 0,
+                "boil": 138,
+                "cut": 46,
+                "fry": 0,
+                "roast": 92,
+                "steam": 23,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "煮类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "不知火喵",
+                "stirfry": 0,
+                "boil": 46,
+                "cut": 184,
+                "fry": 0,
+                "roast": 276,
+                "steam": 92,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "烤类",
+                        "addition": 0.2
+                    }
+                ]
+            },
+            {
+                "name": "栗莉",
+                "stirfry": 92,
+                "boil": 46,
+                "cut": 0,
+                "fry": 23,
+                "roast": 138,
+                "steam": 0,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "烤类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "贝丽",
+                "stirfry": 0,
+                "boil": 46,
+                "cut": 138,
+                "fry": 0,
+                "roast": 23,
+                "steam": 92,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "切类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "粉雪",
+                "stirfry": 0,
+                "boil": 92,
+                "cut": 0,
+                "fry": 23,
+                "roast": 46,
+                "steam": 138,
+                "show": false
+            },
+            {
+                "name": "汤媛",
+                "stirfry": 23,
+                "boil": 138,
+                "cut": 46,
+                "fry": 0,
+                "roast": 0,
+                "steam": 92,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "面类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
+                "name": "上宫晴",
+                "stirfry": 124,
+                "boil": 249,
+                "cut": 62,
+                "fry": 0,
+                "roast": 0,
+                "steam": 374,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "蒸类",
+                        "addition": 0.25
+                    }
+                ]
+            },
+            {
+                "name": "火凤",
+                "stirfry": 276,
+                "boil": 0,
+                "cut": 46,
+                "fry": 92,
+                "roast": 184,
+                "steam": 0,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "炒类",
+                        "addition": 0.2
+                    }
+                ]
+            },
+            {
+                "name": "夏娃",
+                "stirfry": 92,
+                "boil": 46,
+                "cut": 276,
+                "fry": 0,
+                "roast": 0,
+                "steam": 184,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "切类",
+                        "addition": 0.2
+                    }
+                ]
+            },
+            {
+                "name": "秋韵",
+                "stirfry": 46,
+                "boil": 23,
+                "cut": 138,
+                "fry": 0,
+                "roast": 0,
+                "steam": 92,
+                "show": false
+            },
+            {
+                "name": "兔爷",
+                "stirfry": 66,
+                "boil": 33,
+                "cut": 133,
+                "fry": 0,
+                "roast": 0,
+                "steam": 199,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "蔬菜",
+                        "addition": 0.15
+                    }
+                ]
+            },
+            {
+                "name": "李一清",
+                "stirfry": 33,
+                "boil": 133,
+                "cut": 199,
+                "fry": 0,
+                "roast": 66,
+                "steam": 0,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "面类",
+                        "addition": 0.15
+                    }
+                ]
+            },
+            {
+                "name": "嫦娥",
+                "stirfry": 46,
+                "boil": 276,
+                "cut": 0,
+                "fry": 184,
+                "roast": 0,
+                "steam": 92,
+                "show": false
+            },
+            {
+                "name": "后羿",
+                "stirfry": 0,
+                "boil": 249,
+                "cut": 374,
+                "fry": 62,
+                "roast": 124,
+                "steam": 0,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "切类",
+                        "addition": 0.25
+                    }
+                ]
+            },
+            {
+                "name": "杨小倩",
+                "stirfry": 0,
+                "boil": 133,
+                "cut": 0,
+                "fry": 199,
+                "roast": 66,
+                "steam": 33,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "面类",
+                        "addition": 0.15
+                    }
+                ]
+            },
+            {
+                "name": "琪琪",
+                "stirfry": 199,
+                "boil": 0,
+                "cut": 133,
+                "fry": 0,
+                "roast": 33,
+                "steam": 66,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "炒类",
+                        "addition": 0.15
+                    }
+                ]
+            },
+            {
+                "name": "秦端雨",
+                "stirfry": 123,
+                "boil": 0,
+                "cut": 61,
+                "fry": 61,
+                "roast": 185,
+                "steam": 0,
+                "show": false
+            },
+            {
                 "name": "大天狗",
                 "stirfry": 232,
                 "boil": 0,
@@ -6950,12 +7698,27 @@
                 "fry": 348,
                 "roast": 174,
                 "steam": 0,
-                "private": false,
                 "show": false,
                 "skill": [
                     {
                         "type": "水产",
                         "addition": 0.2
+                    }
+                ]
+            },
+            {
+                "name": "孙香香",
+                "stirfry": 61,
+                "boil": 0,
+                "cut": 216,
+                "fry": 30,
+                "roast": 123,
+                "steam": 0,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "切类",
+                        "addition": 0.15
                     }
                 ]
             }

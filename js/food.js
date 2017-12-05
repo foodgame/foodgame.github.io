@@ -221,6 +221,7 @@ function init(json) {
         allSelectedText: '厨师',
         nonSelectedText: '厨师',
         nSelectedText: '厨师',
+        maxHeight: 200,
         onChange: function (option, checked, select) {
             initShow(table, data, private);
         }
@@ -312,9 +313,7 @@ function generateData(json, private) {
     retData["chefs"] = new Array();
 
     for (j in json.personal.chefs) {
-        if (private || !json.personal.chefs[j].private) {
-            retData["chefs"].push(json.personal.chefs[j]);
-        }
+        retData["chefs"].push(json.personal.chefs[j]);
     }
 
     var recipesData = new Array();
@@ -482,8 +481,8 @@ function generateData(json, private) {
                 var skillAddition = 0;
                 if (retData["chefs"][j].hasOwnProperty('skill')) {
                     for (k in retData["chefs"][j].skill) {
+                        var hasSkill = false;
                         if (retData["chefs"][j].skill[k].type == "水产") {
-                            var hasSkill = false;
                             for (m in json.recipes[i].ingredient) {
                                 for (n in json.ingredients) {
                                     if (json.recipes[i].ingredient[m].name == json.ingredients[n].name) {
@@ -494,20 +493,89 @@ function generateData(json, private) {
                                     }
                                 }
                             }
-                            if (hasSkill) {
-                                skillAddition += retData["chefs"][j].skill[k].addition;
+                        } else if (retData["chefs"][j].skill[k].type == "面类") {
+                            for (m in json.recipes[i].ingredient) {
+                                for (n in json.ingredients) {
+                                    if (json.recipes[i].ingredient[m].name == json.ingredients[n].name) {
+                                        if (json.ingredients[n].originId == 1) {
+                                            hasSkill = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        } else if (retData["chefs"][j].skill[k].type == "肉类") {
+                            for (m in json.recipes[i].ingredient) {
+                                for (n in json.ingredients) {
+                                    if (json.recipes[i].ingredient[m].name == json.ingredients[n].name) {
+                                        if (json.ingredients[n].originId == 2
+                                            || json.ingredients[n].originId == 3
+                                            || json.ingredients[n].originId == 4) {
+                                            hasSkill = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        } else if (retData["chefs"][j].skill[k].type == "蔬菜") {
+                            for (m in json.recipes[i].ingredient) {
+                                for (n in json.ingredients) {
+                                    if (json.recipes[i].ingredient[m].name == json.ingredients[n].name) {
+                                        if (json.ingredients[n].originId == 5
+                                            || json.ingredients[n].originId == 6
+                                            || json.ingredients[n].originId == 7) {
+                                            hasSkill = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        } else if (retData["chefs"][j].skill[k].type == "炒类") {
+                            for (k in json.recipes[i].ingredient) {
+                                if (json.recipes[i].stirfry > 0) {
+                                    hasSkill = true;
+                                    break;
+                                }
+                            }
+                        } else if (retData["chefs"][j].skill[k].type == "煮类") {
+                            for (k in json.recipes[i].ingredient) {
+                                if (json.recipes[i].boil > 0) {
+                                    hasSkill = true;
+                                    break;
+                                }
                             }
                         } else if (retData["chefs"][j].skill[k].type == "炸类") {
-                            var hasSkill = false;
                             for (k in json.recipes[i].ingredient) {
                                 if (json.recipes[i].fry > 0) {
                                     hasSkill = true;
                                     break;
                                 }
                             }
-                            if (hasSkill) {
-                                skillAddition += retData["chefs"][j].skill[k].addition;
+                        } else if (retData["chefs"][j].skill[k].type == "切类") {
+                            for (k in json.recipes[i].ingredient) {
+                                if (json.recipes[i].cut > 0) {
+                                    hasSkill = true;
+                                    break;
+                                }
                             }
+                        } else if (retData["chefs"][j].skill[k].type == "烤类") {
+                            for (k in json.recipes[i].ingredient) {
+                                if (json.recipes[i].roast > 0) {
+                                    hasSkill = true;
+                                    break;
+                                }
+                            }
+                        } else if (retData["chefs"][j].skill[k].type == "蒸类") {
+                            for (k in json.recipes[i].ingredient) {
+                                if (json.recipes[i].steam > 0) {
+                                    hasSkill = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (hasSkill) {
+                            skillAddition += retData["chefs"][j].skill[k].addition;
                         }
                     }
                 }

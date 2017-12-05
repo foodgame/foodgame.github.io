@@ -564,6 +564,9 @@ function generateData(json, private) {
                                 hasSkill = true;
                             }
                         }
+                        if (retData["chefs"][j].skill[k].type.indexOf("金币") >= 0) {
+                            hasSkill = true;
+                        }
 
                         if (hasSkill) {
                             skillAddition += retData["chefs"][j].skill[k].addition;

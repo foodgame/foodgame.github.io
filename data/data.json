@@ -7044,7 +7044,13 @@
                 "fry": 0,
                 "roast": 46,
                 "steam": 92,
-                "show": false
+                "show": false,
+                "skill": [
+                    {
+                        "type": "金币",
+                        "addition": 0.04
+                    }
+                ]
             },
             {
                 "name": "鱼不斩",
@@ -7170,7 +7176,13 @@
                 "fry": 0,
                 "roast": 0,
                 "steam": 100,
-                "show": false
+                "show": false,
+                "skill": [
+                    {
+                        "type": "金币",
+                        "addition": 0.02
+                    }
+                ]
             },
             {
                 "name": "椒娃",
@@ -7408,7 +7420,13 @@
                 "fry": 138,
                 "roast": 23,
                 "steam": 0,
-                "show": false
+                "show": false,
+                "skill": [
+                    {
+                        "type": "金币",
+                        "addition": 0.02
+                    }
+                ]
             },
             {
                 "name": "蟹小星",
@@ -7694,7 +7712,13 @@
                 "fry": 61,
                 "roast": 185,
                 "steam": 0,
-                "show": false
+                "show": false,
+                "skill": [
+                    {
+                        "type": "金币",
+                        "addition": 0.06
+                    }
+                ]
             },
             {
                 "name": "大天狗",

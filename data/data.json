@@ -2621,7 +2621,7 @@
         {
             "recipeId": 87,
             "name": "豆豉蒸排骨",
-            "fire": 0,
+            "fire": 4,
             "unlock": "-",
             "stirfry": 0,
             "boil": 0,
@@ -2629,10 +2629,27 @@
             "fry": 0,
             "roast": 0,
             "steam": 80,
-            "ingredient": [],
-            "price": 0,
+            "ingredient": [
+                {
+                    "name": "梅花肉",
+                    "quantity": 4
+                },
+                {
+                    "name": "黄豆",
+                    "quantity": 8
+                },
+                {
+                    "name": "葱",
+                    "quantity": 10
+                },
+                {
+                    "name": "猪油",
+                    "quantity": 8
+                }
+            ],
+            "price": 721,
             "time": 708,
-            "total": 0,
+            "total": 20,
             "origin": "神级红烧排骨"
         },
         {
@@ -2696,7 +2713,7 @@
             ],
             "price": 2482,
             "time": 0,
-            "total": 0,
+            "total": 15,
             "origin": "璧池"
         },
         {
@@ -3205,7 +3222,7 @@
         },
         {
             "recipeId": 107,
-            "name": "鸡蛋牛奶布丁",
+            "name": "牛奶鸡蛋布丁",
             "fire": 3,
             "unlock": "-",
             "stirfry": 0,
@@ -4487,7 +4504,7 @@
             ],
             "price": 315,
             "time": 401,
-            "total": 0,
+            "total": 25,
             "origin": "璧池"
         },
         {
@@ -5257,10 +5274,19 @@
             "fry": 0,
             "roast": 0,
             "steam": 0,
-            "ingredient": [],
+            "ingredient": [
+                {
+                    "name": "香菇",
+                    "quantity": 8
+                },
+                {
+                    "name": "牛五花",
+                    "quantity": 4
+                }
+            ],
             "price": 340,
             "time": 297,
-            "total": 0,
+            "total": 20,
             "origin": "璧池"
         },
         {
@@ -5424,7 +5450,7 @@
         },
         {
             "recipeId": 180,
-            "name": "粉丝扇贝",
+            "name": "粉丝蒸扇贝",
             "fire": 4,
             "unlock": "-",
             "stirfry": 0,
@@ -5620,7 +5646,7 @@
         },
         {
             "recipeId": 186,
-            "name": "",
+            "name": "紫米双皮奶",
             "fire": 2,
             "unlock": "-",
             "stirfry": 0,

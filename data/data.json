@@ -7630,7 +7630,13 @@
                 "fry": 184,
                 "roast": 0,
                 "steam": 92,
-                "show": false
+                "show": false,
+                "skill": [
+                    {
+                        "type": "炸煮",
+                        "addition": 0.1
+                    }
+                ]
             },
             {
                 "name": "后羿",

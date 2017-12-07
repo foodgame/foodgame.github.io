@@ -2971,7 +2971,7 @@
         {
             "recipeId": 98,
             "name": "洋葱小炒肉",
-            "fire": 0,
+            "fire": 3,
             "unlock": "-",
             "stirfry": 55,
             "boil": 0,
@@ -2979,11 +2979,24 @@
             "fry": 0,
             "roast": 0,
             "steam": 0,
-            "ingredient": [],
-            "price": 0,
-            "time": 197,
-            "total": 0,
-            "origin": "神级牛肉串"
+            "ingredient": [
+                {
+                    "name": "洋葱",
+                    "quantity": 5
+                },
+                {
+                    "name": "里脊肉",
+                    "quantity": 3
+                }
+            ],
+            "price": 137,
+            "time": 198,
+            "total": 25,
+            "origin": "神级牛肉串",
+            "personal": {
+                "quality": "",
+                "remark": "琪琪(优)-羽十六-大天狗"
+            }
         },
         {
             "recipeId": 99,
@@ -4783,9 +4796,9 @@
             "unlock": "洋葱小炒肉",
             "stirfry": 0,
             "boil": 0,
-            "cut": 20,
+            "cut": 15,
             "fry": 0,
-            "roast": 60,
+            "roast": 30,
             "steam": 0,
             "ingredient": [
                 {
@@ -4798,8 +4811,8 @@
             "total": 25,
             "origin": "主线95",
             "personal": {
-                "quality": "优",
-                "remark": "二阶不知火喵-三阶不知火喵"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -5139,19 +5152,32 @@
         {
             "recipeId": 169,
             "name": "串烤盐焗虾",
-            "fire": 0,
+            "fire": 2,
             "unlock": "-",
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
             "fry": 0,
-            "roast": 0,
+            "roast": 60,
             "steam": 0,
-            "ingredient": [],
-            "price": 0,
-            "time": 0,
-            "total": 0,
-            "origin": ""
+            "ingredient": [
+                {
+                    "name": "虾",
+                    "quantity": 3
+                },
+                {
+                    "name": "洋葱",
+                    "quantity": 6
+                }
+            ],
+            "price": 281,
+            "time": 346,
+            "total": 30,
+            "origin": "主线157",
+            "personal": {
+                "quality": "",
+                "remark": "任意(优)-升级不知火喵-三阶不知火喵"
+            }
         },
         {
             "recipeId": 170,

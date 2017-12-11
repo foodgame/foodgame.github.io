@@ -3821,7 +3821,7 @@
         {
             "recipeId": 126,
             "name": "糯米蛋",
-            "fire": 2,
+            "fire": 3,
             "unlock": "-",
             "stirfry": 0,
             "boil": 70,
@@ -3829,11 +3829,28 @@
             "fry": 0,
             "roast": 0,
             "steam": 0,
-            "ingredient": [],
-            "price": 64,
-            "time": 0,
-            "total": 30,
-            "origin": ""
+            "ingredient": [
+                {
+                    "name": "鸡蛋",
+                    "quantity": 5
+                },
+                {
+                    "name": "糯米",
+                    "quantity": 5
+                },
+                {
+                    "name": "里脊肉",
+                    "quantity": 3
+                }
+            ],
+            "price": 177,
+            "time": 392,
+            "total": 25,
+            "origin": "主线163",
+            "personal": {
+                "quality": "优",
+                "remark": "升级上宫晴-暂无"
+            }
         },
         {
             "recipeId": 127,

@@ -683,8 +683,8 @@
             "total": 25,
             "origin": "主线116",
             "personal": {
-                "quality": "优",
-                "remark": "琪琪-暂无"
+                "quality": "特",
+                "remark": "暂无"
             }
         },
         {
@@ -718,7 +718,7 @@
             "origin": "主线129",
             "personal": {
                 "quality": "特",
-                "remark": ""
+                "remark": "暂无"
             }
         },
         {
@@ -943,8 +943,8 @@
             "total": 25,
             "origin": "新手奖池",
             "personal": {
-                "quality": "特",
-                "remark": "羽十六"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -1237,8 +1237,8 @@
             "total": 30,
             "origin": "中级奖池",
             "personal": {
-                "quality": "大天狗(优)-不知火喵-升级不知火喵",
-                "remark": ""
+                "quality": "",
+                "remark": "大天狗(优)-不知火喵-升级不知火喵"
             }
         },
         {
@@ -1865,8 +1865,8 @@
             "total": 25,
             "origin": "晚秋壁池",
             "personal": {
-                "quality": "优",
-                "remark": "琪琪-升级琪琪"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -1923,7 +1923,11 @@
             "price": 357,
             "time": 288,
             "total": 20,
-            "origin": "璧池"
+            "origin": "璧池",
+            "personal": {
+                "quality": "",
+                "remark": "升级后羿(优)-升级后羿(特)-三阶后羿"
+            }
         },
         {
             "recipeId": 64,
@@ -2205,7 +2209,11 @@
             "price": 111,
             "time": 326,
             "total": 30,
-            "origin": "璧池"
+            "origin": "璧池",
+            "personal": {
+                "quality": "",
+                "remark": "羽十六(优)-升级上宫晴-升级上宫晴"
+            }
         },
         {
             "recipeId": 73,
@@ -2348,8 +2356,8 @@
             "total": 20,
             "origin": "壁池",
             "personal": {
-                "quality": "优",
-                "remark": "大天狗-暂无"
+                "quality": "特",
+                "remark": "暂无"
             }
         },
         {
@@ -2684,7 +2692,11 @@
             "price": 330,
             "time": 532,
             "total": 20,
-            "origin": "壁池"
+            "origin": "壁池",
+            "personal": {
+                "quality": "",
+                "remark": "升级夏娃(优)-三阶夏娃(特)-暂无"
+            }
         },
         {
             "recipeId": 89,
@@ -2718,7 +2730,11 @@
             "price": 2482,
             "time": 0,
             "total": 15,
-            "origin": "璧池"
+            "origin": "璧池",
+            "personal": {
+                "quality": "",
+                "remark": "三阶后羿(优)-暂无-暂无"
+            }
         },
         {
             "recipeId": 90,
@@ -2752,7 +2768,11 @@
             "price": 834,
             "time": 843,
             "total": 20,
-            "origin": "璧池"
+            "origin": "璧池",
+            "personal": {
+                "quality": "",
+                "remark": "任意-暂无-暂无-暂无"
+            }
         },
         {
             "recipeId": 91,
@@ -3658,7 +3678,11 @@
             "price": 1332,
             "time": 555,
             "total": 20,
-            "origin": "璧池"
+            "origin": "璧池",
+            "personal": {
+                "quality": "",
+                "remark": "兔爷(优)-暂无-暂无"
+            }
         },
         {
             "recipeId": 121,
@@ -3688,7 +3712,11 @@
             "price": 899,
             "time": 357,
             "total": 20,
-            "origin": "璧池"
+            "origin": "璧池",
+            "personal": {
+                "quality": "",
+                "remark": "任意-暂无-暂无-暂无"
+            }
         },
         {
             "recipeId": 122,
@@ -3720,8 +3748,8 @@
             "total": 25,
             "origin": "神级剁椒跑蛋",
             "personal": {
-                "quality": "优",
-                "remark": "大天狗-暂无"
+                "quality": "特",
+                "remark": "暂无"
             }
         },
         {
@@ -4080,7 +4108,11 @@
             "price": 665,
             "time": 618,
             "total": 20,
-            "origin": "璧池"
+            "origin": "璧池",
+            "personal": {
+                "quality": "",
+                "remark": "任意-暂无-暂无-暂无"
+            }
         },
         {
             "recipeId": 134,
@@ -4778,7 +4810,11 @@
             "price": 253,
             "time": 511,
             "total": 25,
-            "origin": "璧池"
+            "origin": "璧池",
+            "personal": {
+                "quality": "可",
+                "remark": "升级上宫晴(优)-暂无-暂无"
+            }
         },
         {
             "recipeId": 156,
@@ -5334,7 +5370,11 @@
             "price": 340,
             "time": 297,
             "total": 20,
-            "origin": "璧池"
+            "origin": "璧池",
+            "personal": {
+                "quality": "",
+                "remark": "升级后羿(优)-三阶后羿-暂无"
+            }
         },
         {
             "recipeId": 174,

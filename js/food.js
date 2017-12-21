@@ -83,6 +83,12 @@ function init(json) {
             "data": "guests"
         },
         {
+            "data": {
+                "_": "levelGuests.value",
+                "display": "levelGuests.display"
+            }
+        },
+        {
             "data": "get"
         },
         {
@@ -278,6 +284,7 @@ function init(json) {
         }
 
         $('#chk-show-origin').prop("checked", false)
+        $('#chk-show-level-guest').parent(".btn").removeClass('hidden');
         $('#chk-show-get').parent(".btn").removeClass('hidden');
         $('#chk-show-quality').prop("checked", true).parent(".btn").removeClass('hidden');
         $('#chk-show-remark').prop("checked", true).parent(".btn").removeClass('hidden');
@@ -289,7 +296,7 @@ function init(json) {
 
         $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
             var check = $('#chk-get').prop("checked");
-            var value = data[19];
+            var value = data[20];
 
             if (!check || check && value == "true") {
                 return true;
@@ -386,10 +393,21 @@ function generateData(json, private) {
             "value": ingredientsVal
         };
 
-        var guests = "";
+        var levelGuestsDisp = "";
+        var levelGuestsVal = "";
+        for (g in json.recipes[i].guests) {
+            if (json.recipes[i].guests[g].guest) {
+                levelGuestsDisp += json.recipes[i].guests[g].quality + "-" + json.recipes[i].guests[g].guest + "<br>";
+                levelGuestsVal += json.recipes[i].guests[g].guest;
+            }
+        }
+        recipesData[dataCount]["levelGuests"] = {
+            "display": levelGuestsDisp,
+            "value": levelGuestsVal
+        };
+
         var guests = "";
         for (m in json.guests) {
-            var hasGuest = false;
             for (n in json.guests[m].gifts) {
                 if (json.recipes[i].name == json.guests[m].gifts[n].recipe) {
                     guests += json.guests[m].name + "-" + json.guests[m].gifts[n].rune + "<br>";
@@ -616,19 +634,21 @@ function initShow(table, data, private) {
     table.column(18).visible($('#chk-show-guest').prop("checked"), false);
 
     if (private) {
-        table.column(19).visible($('#chk-show-get').prop("checked"), false);
-        table.column(20).visible($('#chk-show-quality').prop("checked"), false);
-        table.column(21).visible($('#chk-show-remark').prop("checked"), false);
+        table.column(19).visible($('#chk-show-level-guest').prop("checked"), false);
+        table.column(20).visible($('#chk-show-get').prop("checked"), false);
+        table.column(21).visible($('#chk-show-quality').prop("checked"), false);
+        table.column(22).visible($('#chk-show-remark').prop("checked"), false);
     } else {
         table.column(19).visible(false, false);
         table.column(20).visible(false, false);
         table.column(21).visible(false, false);
+        table.column(22).visible(false, false);
     }
 
     for (j in data.chefs) {
         var chkChefs = $('#chk-show-chef').val();
-        table.column(22 + 2 * j).visible(chkChefs.indexOf(j) > -1, false);
         table.column(23 + 2 * j).visible(chkChefs.indexOf(j) > -1, false);
+        table.column(24 + 2 * j).visible(chkChefs.indexOf(j) > -1, false);
     }
 
     table.columns.adjust().draw(false);

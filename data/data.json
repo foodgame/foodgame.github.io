@@ -6899,7 +6899,7 @@
             ]
         },
         {
-            "guestId": 32,
+            "guestId": 33,
             "name": "耶稣如来",
             "gifts": [
                 {
@@ -6917,7 +6917,7 @@
             ]
         },
         {
-            "guestId": 33,
+            "guestId": 34,
             "name": "木良木优",
             "gifts": [
                 {
@@ -6935,7 +6935,7 @@
             ]
         },
         {
-            "guestId": 34,
+            "guestId": 35,
             "name": "李白杜甫",
             "gifts": [
                 {
@@ -6953,7 +6953,7 @@
             ]
         },
         {
-            "guestId": 35,
+            "guestId": 36,
             "name": "诸葛亮黄月英",
             "gifts": [
                 {
@@ -6967,7 +6967,7 @@
             ]
         },
         {
-            "guestId": 36,
+            "guestId": 37,
             "name": "张飞刘备关羽",
             "gifts": [
                 {
@@ -6981,7 +6981,7 @@
             ]
         },
         {
-            "guestId": 37,
+            "guestId": 38,
             "name": "吕布貂蝉",
             "gifts": [
                 {
@@ -7815,7 +7815,7 @@
                 "fry": 348,
                 "roast": 174,
                 "steam": 0,
-                "show": false,
+                "show": true,
                 "skill": [
                     {
                         "type": "水产",
@@ -7835,6 +7835,22 @@
                 "skill": [
                     {
                         "type": "切类",
+                        "addition": 0.15
+                    }
+                ]
+            },
+            {
+                "name": "灯鬼",
+                "stirfry": 108,
+                "boil": 0,
+                "cut": 0,
+                "fry": 72,
+                "roast": 216,
+                "steam": 36,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "烤类",
                         "addition": 0.15
                     }
                 ]

@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style.min.css" />
     <script type="text/javascript" src="js/script.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/food.min.css" />
-    <script type="text/javascript" src="js/food.min.js?v=6"></script>
+    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=1" />
+    <script type="text/javascript" src="js/food.min.js?v=7"></script>
 </head>
 
 <body class="hidden">
@@ -85,6 +85,11 @@
                 <input type="checkbox" id="chk-show-level-guest" class="chk-show">
                 <i class="fa fa-check glyphicon glyphicon-ok"></i>
                 升阶贵客
+            </label>
+            <label class="btn btn-default hidden">
+                <input type="checkbox" id="chk-show-god-rune" class="chk-show">
+                <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                神级符文
             </label>
             <label class="btn btn-default hidden">
                 <input type="checkbox" id="chk-show-get" class="chk-show">
@@ -181,18 +186,24 @@
                 全选
             </a>
         </div>
-        <div class="box form-inline">
-            <div class="input-group">
-                <div class="input-group-addon">单价大于</div>
-                <input type="text" class="form-control" id="input-price">
-            </div>
-        </div>
         <div class="box">
             <label class="btn btn-default">
                 <input type="checkbox" id="chk-guest">
                 <i class="fa fa-check glyphicon glyphicon-ok"></i>
                 贵客
             </label>
+        </div>
+        <div class="box form-inline">
+            <div class="input-group">
+                <div class="input-group-addon">单价大于</div>
+                <input type="text" class="form-control" id="input-price">
+            </div>
+        </div>
+        <div class="box form-inline hidden">
+            <div class="input-group">
+                <div class="input-group-addon">查找</div>
+                <input type="text" class="form-control" id="input-guest-rune" placeholder="升阶贵客 神级符文">
+            </div>
         </div>
         <div class="box hidden">
             <label class="btn btn-default">
@@ -226,6 +237,7 @@
                     <th>可解锁</th>
                     <th>贵客</th>
                     <th>升阶贵客</th>
+                    <th>神级符文</th>
                     <th>已有</th>
                     <th>品质</th>
                     <th>备注</th>

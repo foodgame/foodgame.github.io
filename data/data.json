@@ -35,6 +35,7 @@
                     "guest": "迷思吹法师"
                 }
             ],
+            "godRune": "油火虫",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -75,6 +76,7 @@
                     "guest": "大胃王"
                 }
             ],
+            "godRune": "防水的柠檬",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -115,6 +117,7 @@
                     "guest": "迷思吹法师"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -163,6 +166,7 @@
                     "guest": "迷思吹法师"
                 }
             ],
+            "godRune": "五香果",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -210,7 +214,8 @@
                     "quality": "神",
                     "guest": "官爷"
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 6,
@@ -255,6 +260,7 @@
                     "guest": "屠夫老王"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -300,9 +306,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "耶稣"
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 8,
@@ -336,7 +343,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "大胃王"
                 },
                 {
                     "quality": "特",
@@ -344,9 +351,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "迷弟杜甫"
                 }
             ],
+            "godRune": "蒸汽宝石",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -384,17 +392,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "关羽"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "关羽"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "吕布"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "特",
                 "remark": "暂无"
@@ -432,17 +441,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富二代"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "富太太"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "关羽"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -480,17 +490,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "唐伯虎"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "唐伯虎"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "迷弟杜甫"
                 }
             ],
+            "godRune": "焦虫",
             "personal": {
                 "quality": "优",
                 "remark": "大天狗-暂无"
@@ -525,7 +536,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 13,
@@ -559,17 +571,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富二代"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "富二代"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "屠夫老王"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -607,7 +620,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "吕布"
                 },
                 {
                     "quality": "特",
@@ -615,9 +628,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "潇洒李白"
                 }
-            ]
+            ],
+            "godRune": "-"
         },
         {
             "recipeId": 15,
@@ -647,17 +661,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "刘备"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "官爷"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "张飞"
                 }
             ],
+            "godRune": "蒸汽耳环",
             "personal": {
                 "quality": "",
                 "remark": "任意(优)-任意-上宫晴"
@@ -699,17 +714,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "苏轼"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "苏轼"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 17,
@@ -739,17 +755,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "大胃王"
                 }
             ],
+            "godRune": "五香果",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -787,17 +804,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "刘备"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "刘备"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "刘备"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -835,17 +853,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "张飞"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "张飞"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "官爷"
                 }
             ],
+            "godRune": "防水的柠檬",
             "personal": {
                 "quality": "特",
                 "remark": "三阶上宫晴"
@@ -883,7 +902,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "诸葛亮"
                 },
                 {
                     "quality": "特",
@@ -894,6 +913,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "杨小倩-暂无-暂无-暂无"
@@ -931,17 +951,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "屠夫老王"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "屠夫老王"
                 }
             ],
+            "godRune": "防水的柠檬",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -979,17 +1000,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富人"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "富人"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "迷弟杜甫"
                 }
             ],
+            "godRune": "刀嘴鹦鹉",
             "personal": {
                 "quality": "特",
                 "remark": "暂无"
@@ -1027,17 +1049,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富人"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "木优"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "吕布"
                 }
             ],
+            "godRune": "刀嘴鹦鹉",
             "personal": {
                 "quality": "特",
                 "remark": "暂无"
@@ -1045,7 +1068,7 @@
         },
         {
             "recipeId": 24,
-            "name": "",
+            "name": "寿司",
             "fire": 0,
             "unlock": "-",
             "stirfry": 0,
@@ -1075,17 +1098,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "木良"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "富太太"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "富人"
                 }
-            ]
+            ],
+            "godRune": "刀嘴鹦鹉"
         },
         {
             "recipeId": 25,
@@ -1127,9 +1151,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "关羽"
                 }
-            ]
+            ],
+            "godRune": "剪刀蟹"
         },
         {
             "recipeId": 26,
@@ -1163,17 +1188,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "皇帝"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "屠夫老王"
                 }
             ],
+            "godRune": "蒸汽耳环",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -1211,17 +1237,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "吕布貂蝉"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "苏轼"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "可",
                 "remark": "孙香香(优)-升级孙香香-暂无"
@@ -1255,17 +1282,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "屠夫老王"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "屠夫老王"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "白富美"
                 }
             ],
+            "godRune": "烤焦的菊花",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -1313,7 +1341,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 30,
@@ -1351,7 +1380,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "大明湖畔的美女"
                 },
                 {
                     "quality": "特",
@@ -1359,9 +1388,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "唐伯虎"
                 }
             ],
+            "godRune": "耐煮的水草",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -1399,17 +1429,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "木良"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "富人"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "木优"
                 }
             ],
+            "godRune": "一昧真火",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -1443,17 +1474,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富二代"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "刘备"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "富二代"
                 }
             ],
+            "godRune": "蒸汽耳环",
             "personal": {
                 "quality": "",
                 "remark": "任意(优)-升级申公子-上宫晴"
@@ -1487,17 +1519,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "屠夫老王"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -1539,17 +1572,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "木良"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "富人"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "富太太"
                 }
             ],
+            "godRune": "刀嘴鹦鹉",
             "personal": {
                 "quality": "可",
                 "remark": "升级盲女(优)-暂无-暂无"
@@ -1587,17 +1621,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "刘备"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "官爷"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "富二代"
                 }
             ],
+            "godRune": "油火虫",
             "personal": {
                 "quality": "特",
                 "remark": "大天狗"
@@ -1631,17 +1666,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "大内侍卫"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "刘备"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "大内侍卫"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -1679,7 +1715,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "耶稣"
                 },
                 {
                     "quality": "特",
@@ -1687,9 +1723,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "貂蝉"
                 }
             ],
+            "godRune": "蒸汽宝石",
             "personal": {
                 "quality": "",
                 "remark": "升级武葵/三阶上宫晴(优)-暂无-暂无"
@@ -1731,9 +1768,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "丐帮帮主"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -1771,7 +1809,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "张飞"
                 },
                 {
                     "quality": "特",
@@ -1779,9 +1817,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "官爷"
                 }
             ],
+            "godRune": "剪刀蟹",
             "personal": {
                 "quality": "优",
                 "remark": "不知火喵-升级不知火喵"
@@ -1815,17 +1854,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "大内侍卫"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "富二代"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "白富美"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -1859,17 +1899,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "屠夫老王"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "大胃王"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 }
             ],
+            "godRune": "五香果",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -1903,7 +1944,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "白富美"
                 },
                 {
                     "quality": "特",
@@ -1911,9 +1952,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "丐帮帮主"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -1947,17 +1989,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "张飞"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "丐帮帮主"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "丐帮帮主"
                 }
             ],
+            "godRune": "烤焦的菊花",
             "personal": {
                 "quality": "优",
                 "remark": "大天狗-三阶不知火喵"
@@ -1987,17 +2030,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "丐帮帮主"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "官爷"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "大胃王"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -2039,7 +2083,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "屠夫老王"
                 },
                 {
                     "quality": "特",
@@ -2049,7 +2093,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 46,
@@ -2083,13 +2128,14 @@
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "吕布"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -2142,6 +2188,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "大天狗-暂无-暂无-暂无"
@@ -2175,17 +2222,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "王子"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "耶稣"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "大内侍卫"
                 }
             ],
+            "godRune": "蒸汽耳环",
             "personal": {
                 "quality": "特",
                 "remark": "上宫晴"
@@ -2219,17 +2267,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "大内侍卫"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "官爷"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "刘备"
                 }
             ],
+            "godRune": "蒸汽耳环",
             "personal": {
                 "quality": "",
                 "remark": "琪琪(优)-白稻荷-上宫晴"
@@ -2261,8 +2310,8 @@
                 }
             ],
             "price": 505,
-            "time": 0,
-            "total": 0,
+            "time": 741,
+            "total": 25,
             "origin": "主线176",
             "guests": [
                 {
@@ -2278,6 +2327,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "兔爷(优)-升级兔爷/上宫晴-升级上宫晴"
@@ -2311,17 +2361,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "白富美"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -2356,7 +2407,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 53,
@@ -2386,7 +2438,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富人"
                 },
                 {
                     "quality": "特",
@@ -2397,6 +2449,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "优",
                 "remark": "大天狗-暂无"
@@ -2430,17 +2483,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "张飞"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "官爷"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "刘备"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -2489,6 +2543,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -2522,7 +2577,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "吕布"
                 },
                 {
                     "quality": "特",
@@ -2533,6 +2588,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "升级兔爷(优)-暂无-暂无"
@@ -2574,17 +2630,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "迷弟杜甫"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "潇洒李白"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 58,
@@ -2614,17 +2671,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "白富美"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -2666,7 +2724,60 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "关羽"
+                },
+                {
+                    "quality": "特",
+                    "guest": "刘备"
+                },
+                {
+                    "quality": "神",
+                    "guest": "张飞"
+                }
+            ],
+            "godRune": "剪刀蟹",
+            "personal": {
+                "quality": "优",
+                "remark": "羽十六-暂无"
+            }
+        },
+        {
+            "recipeId": 60,
+            "name": "酸菜鱼",
+            "fire": 0,
+            "unlock": "-",
+            "stirfry": 0,
+            "boil": 0,
+            "cut": 0,
+            "fry": 0,
+            "roast": 0,
+            "steam": 0,
+            "ingredient": [
+                {
+                    "name": "",
+                    "quantity": 0
+                },
+                {
+                    "name": "",
+                    "quantity": 0
+                },
+                {
+                    "name": "",
+                    "quantity": 0
+                },
+                {
+                    "name": "",
+                    "quantity": 0
+                }
+            ],
+            "price": 0,
+            "time": 0,
+            "total": 0,
+            "origin": "",
+            "guests": [
+                {
+                    "quality": "优",
+                    "guest": "吕布貂蝉"
                 },
                 {
                     "quality": "特",
@@ -2677,10 +2788,7 @@
                     "guest": ""
                 }
             ],
-            "personal": {
-                "quality": "优",
-                "remark": "羽十六-暂无"
-            }
+            "godRune": ""
         },
         {
             "recipeId": 61,
@@ -2714,13 +2822,14 @@
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "貂蝉"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -2754,17 +2863,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "木良"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "木优"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "特",
                 "remark": "暂无"
@@ -2809,6 +2919,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "升级后羿(优)-升级后羿(特)-三阶后羿"
@@ -2842,17 +2953,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "刘备"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "张飞"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "张飞"
                 }
             ],
+            "godRune": "蒸汽耳环",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -2886,17 +2998,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "大胃王"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -2938,13 +3051,14 @@
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "诸葛亮"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": "耐煮的水草"
         },
         {
             "recipeId": 67,
@@ -2978,7 +3092,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "诸葛亮"
                 },
                 {
                     "quality": "特",
@@ -2988,7 +3102,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 68,
@@ -3026,17 +3141,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "木良"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "潇洒李白"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "特",
                 "remark": "三阶夏娃"
@@ -3074,17 +3190,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "屠夫老王"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "屠夫老王"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -3122,17 +3239,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "张飞"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "官爷"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "大内侍卫"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "特",
                 "remark": "三阶上宫晴"
@@ -3166,7 +3284,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "大内侍卫"
                 },
                 {
                     "quality": "特",
@@ -3174,9 +3292,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "官爷"
                 }
-            ]
+            ],
+            "godRune": "剪刀蟹"
         },
         {
             "recipeId": 72,
@@ -3210,17 +3329,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "关羽"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "刘备"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "关羽"
                 }
             ],
+            "godRune": "防水的柠檬",
             "personal": {
                 "quality": "优",
                 "remark": "升级上宫晴-升级上宫晴"
@@ -3255,7 +3375,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 74,
@@ -3285,17 +3406,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "大内侍卫"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "官爷"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "丐帮帮主"
                 }
             ],
+            "godRune": "剪刀蟹",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -3333,17 +3455,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "官爷"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "张飞"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "丐帮帮主"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -3392,6 +3515,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "大天狗(优)-暂无-暂无"
@@ -3425,17 +3549,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "木良木优"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "黄月英"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "王子"
                 }
             ],
+            "godRune": "一昧真火",
             "personal": {
                 "quality": "特",
                 "remark": "暂无"
@@ -3469,17 +3594,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "诸葛亮"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "吕布貂蝉"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
             ],
+            "godRune": "刀嘴鹦鹉",
             "personal": {
                 "quality": "",
                 "remark": "升级孙香香/二阶夏娃(优)-三阶夏娃-暂无"
@@ -3517,13 +3643,14 @@
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "关羽"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "关羽"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -3557,17 +3684,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "大内侍卫"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "官爷"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "关羽"
                 }
             ],
+            "godRune": "油火虫",
             "personal": {
                 "quality": "特",
                 "remark": "申公子"
@@ -3601,17 +3729,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "大胃王"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "大胃王"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "白富美"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -3653,9 +3782,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "特",
                 "remark": "暂无"
@@ -3693,17 +3823,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "屠夫老王"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "大胃王"
                 }
-            ]
+            ],
+            "godRune": "-"
         },
         {
             "recipeId": 84,
@@ -3747,7 +3878,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 85,
@@ -3777,7 +3909,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "潇洒李白"
                 },
                 {
                     "quality": "特",
@@ -3788,6 +3920,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "焦虫",
             "personal": {
                 "quality": "优",
                 "remark": "二阶不知火喵-三阶不知火喵"
@@ -3835,7 +3968,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 87,
@@ -3883,7 +4017,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 88,
@@ -3917,7 +4052,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "王子"
                 },
                 {
                     "quality": "特",
@@ -3928,6 +4063,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "升级夏娃(优)-三阶夏娃(特)-暂无"
@@ -3980,6 +4116,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "三阶后羿(优)-暂无-暂无"
@@ -4021,7 +4158,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "诸葛亮"
                 },
                 {
                     "quality": "特",
@@ -4032,6 +4169,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "任意-暂无-暂无-暂无"
@@ -4065,17 +4203,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "大胃王"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -4128,6 +4267,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "升级孙香香(优)-三阶不知火喵-暂无"
@@ -4161,17 +4301,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "官爷"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "白富美"
                 }
             ],
+            "godRune": "剪刀蟹",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -4219,7 +4360,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 95,
@@ -4263,7 +4405,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 96,
@@ -4293,17 +4436,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "大明湖畔的美女"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "木优"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "迷弟杜甫"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -4337,17 +4481,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "大胃王"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "屠夫老王"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "白富美"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -4381,17 +4526,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "木良"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "迷弟杜甫"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "貂蝉"
                 }
             ],
+            "godRune": "暖石",
             "personal": {
                 "quality": "",
                 "remark": "琪琪(优)-羽十六-大天狗"
@@ -4425,17 +4571,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "官爷"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "关羽"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "官爷"
                 }
             ],
+            "godRune": "剪刀蟹",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -4483,7 +4630,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 101,
@@ -4521,9 +4669,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "木优"
                 }
             ],
+            "godRune": "刀嘴鹦鹉",
             "personal": {
                 "quality": "",
                 "remark": "鱼不斩/大天狗(优)-羽十六-暂无"
@@ -4572,6 +4721,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "可",
                 "remark": "暂无-暂无-暂无"
@@ -4619,7 +4769,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 104,
@@ -4657,17 +4808,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "公主"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "诸葛亮"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 105,
@@ -4698,7 +4850,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 106,
@@ -4728,17 +4881,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "白富美"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "屠夫老王"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 }
             ],
+            "godRune": "剪刀蟹",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -4772,7 +4926,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "潇洒李白"
                 },
                 {
                     "quality": "特",
@@ -4780,9 +4934,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "迷弟杜甫"
                 }
             ],
+            "godRune": "焦虫",
             "personal": {
                 "quality": "可",
                 "remark": "升级孙香香(优)-大天狗-二阶不知火喵"
@@ -4816,17 +4971,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富二代"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "张飞"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "官爷"
                 }
             ],
+            "godRune": "油火虫",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -4860,17 +5016,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "官爷"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "丐帮帮主"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "官爷"
                 }
             ],
+            "godRune": "防水的柠檬",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -4912,17 +5069,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "王子"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "诸葛亮"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "羽十六(优)-暂无-暂无"
@@ -4970,7 +5128,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 112,
@@ -5008,7 +5167,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "耶稣"
                 },
                 {
                     "quality": "特",
@@ -5019,6 +5178,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "优",
                 "remark": "上宫晴-三阶上宫晴"
@@ -5053,7 +5213,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 114,
@@ -5097,7 +5258,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 115,
@@ -5127,17 +5289,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "潇洒李白"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "木优"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 116,
@@ -5181,7 +5344,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 117,
@@ -5225,7 +5389,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 118,
@@ -5255,17 +5420,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富二代"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "大内侍卫"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "刘备"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -5299,17 +5465,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "大内侍卫"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "官爷"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "官爷"
                 }
             ],
+            "godRune": "剪刀蟹",
             "personal": {
                 "quality": "可",
                 "remark": "夏娃/秋韵-武葵-升级武葵/二阶夏娃"
@@ -5355,13 +5522,14 @@
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "黄月英"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "兔爷(优)-暂无-暂无"
@@ -5399,7 +5567,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "如来"
                 },
                 {
                     "quality": "特",
@@ -5410,6 +5578,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "任意-暂无-暂无-暂无"
@@ -5447,7 +5616,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富人"
                 },
                 {
                     "quality": "特",
@@ -5455,9 +5624,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "木良"
                 }
             ],
+            "godRune": "焦虫",
             "personal": {
                 "quality": "特",
                 "remark": "暂无"
@@ -5495,17 +5665,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富太太"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "大明湖畔的美女"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "琪琪(优)-暂无-暂无"
@@ -5543,17 +5714,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "刘备"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "富二代"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "大内侍卫"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -5599,9 +5771,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "丐帮帮主"
                 }
-            ]
+            ],
+            "godRune": "防水的柠檬"
         },
         {
             "recipeId": 126,
@@ -5635,17 +5808,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "貂蝉"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "木良"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "富太太"
                 }
             ],
+            "godRune": "耐煮的水草",
             "personal": {
                 "quality": "优",
                 "remark": "升级上宫晴-暂无"
@@ -5683,7 +5857,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "大内侍卫"
                 },
                 {
                     "quality": "特",
@@ -5691,9 +5865,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "张飞"
                 }
             ],
+            "godRune": "油火虫",
             "personal": {
                 "quality": "",
                 "remark": "杨小倩(优)-熊麓-大天狗"
@@ -5723,17 +5898,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "大胃王"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "大胃王"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -5781,7 +5957,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 130,
@@ -5819,7 +5996,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "如来"
                 },
                 {
                     "quality": "特",
@@ -5830,6 +6007,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "熊麓-秋韵-三阶夏娃-暂无"
@@ -5877,7 +6055,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 132,
@@ -5915,7 +6094,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "皇帝"
                 },
                 {
                     "quality": "特",
@@ -5926,6 +6105,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "杨小倩-暂无-暂无-暂无"
@@ -5974,6 +6154,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "任意-暂无-暂无-暂无"
@@ -6026,6 +6207,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "羽十六(优)-上宫晴-暂无"
@@ -6073,7 +6255,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 136,
@@ -6117,7 +6300,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 137,
@@ -6161,7 +6345,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 138,
@@ -6210,6 +6395,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "暂无-暂无-暂无-暂无"
@@ -6259,9 +6445,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "富人"
                 }
             ],
+            "godRune": "一昧真火",
             "personal": {
                 "quality": "特",
                 "remark": "大天狗"
@@ -6303,17 +6490,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富二代"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "张飞"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "富二代"
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "暂无(优)-暂无(特)-熊麓"
@@ -6366,6 +6554,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "三阶上宫晴-暂无-暂无-暂无"
@@ -6410,6 +6599,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "羽十六-暂无-暂无-暂无"
@@ -6444,7 +6634,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 144,
@@ -6488,7 +6679,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 145,
@@ -6537,6 +6729,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "暖石",
             "personal": {
                 "quality": "特",
                 "remark": "大天狗"
@@ -6574,17 +6767,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "王子"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "公主"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
             ],
+            "godRune": "一昧真火",
             "personal": {
                 "quality": "",
                 "remark": "熊麓(优)-暂无-大天狗"
@@ -6622,17 +6816,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "木优"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "大明湖畔的美女"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 148,
@@ -6663,7 +6858,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 149,
@@ -6712,6 +6908,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "可",
                 "remark": "大天狗-三阶不知火喵-暂无"
@@ -6759,7 +6956,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 151,
@@ -6801,9 +6999,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "官爷"
                 }
-            ]
+            ],
+            "godRune": "蒸汽耳环"
         },
         {
             "recipeId": 152,
@@ -6844,6 +7043,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -6892,6 +7092,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "升级白稻荷-暂无-暂无-暂无"
@@ -6939,7 +7140,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 155,
@@ -6984,6 +7186,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "可",
                 "remark": "升级上宫晴(优)-暂无-暂无"
@@ -7021,7 +7224,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "吕布"
                 },
                 {
                     "quality": "特",
@@ -7031,7 +7234,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 157,
@@ -7057,17 +7261,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "潇洒李白"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "潇洒李白"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "苏轼"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -7108,6 +7313,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "大天狗(优)-三阶不知火喵-升级三阶不知火喵"
@@ -7141,7 +7347,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "官爷"
                 },
                 {
                     "quality": "特",
@@ -7149,9 +7355,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "大内侍卫"
                 }
             ],
+            "godRune": "剪刀蟹",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -7189,17 +7396,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富二代"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "张飞"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "张飞"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -7233,13 +7441,14 @@
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "迷思吹法师"
                 }
             ],
+            "godRune": "蒸汽耳环",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -7288,6 +7497,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "优",
                 "remark": "三阶上宫晴-暂无"
@@ -7325,7 +7535,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富太太"
                 },
                 {
                     "quality": "特",
@@ -7336,6 +7546,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "可",
                 "remark": "暂无-暂无-暂无"
@@ -7369,17 +7580,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富二代"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "官爷"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "张飞"
                 }
             ],
+            "godRune": "油火虫",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -7413,17 +7625,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富二代"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "官爷"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "关羽"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -7453,17 +7666,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "屠夫老王"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "大胃王"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "屠夫老王"
                 }
             ],
+            "godRune": "剪刀蟹",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -7515,7 +7729,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": "-"
         },
         {
             "recipeId": 168,
@@ -7545,17 +7760,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "刘备"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "关羽"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "可",
                 "remark": "升级孙香香-大天狗-三阶不知火喵"
@@ -7600,6 +7816,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "烤焦的菊花",
             "personal": {
                 "quality": "",
                 "remark": "任意(优)-升级不知火喵-三阶不知火喵"
@@ -7641,7 +7858,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "皇帝"
                 },
                 {
                     "quality": "特",
@@ -7652,6 +7869,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "二阶不知火喵-暂无-暂无-暂无"
@@ -7704,6 +7922,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "暖石",
             "personal": {
                 "quality": "",
                 "remark": "鱼不斩(优)-羽十六-大天狗"
@@ -7741,17 +7960,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "丐帮帮主"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "富二代"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "官爷"
                 }
             ],
+            "godRune": "剪刀蟹",
             "personal": {
                 "quality": "可",
                 "remark": "孙香香-升级孙香香-三阶夏娃"
@@ -7785,7 +8005,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "唐伯虎"
                 },
                 {
                     "quality": "特",
@@ -7796,6 +8016,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "升级后羿(优)-三阶后羿-暂无"
@@ -7837,9 +8058,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "张飞"
                 }
-            ]
+            ],
+            "godRune": "剪刀蟹"
         },
         {
             "recipeId": 175,
@@ -7870,7 +8092,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": "剪刀蟹"
         },
         {
             "recipeId": 176,
@@ -7908,9 +8131,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "迷弟杜甫"
                 }
-            ]
+            ],
+            "godRune": "刀嘴鹦鹉"
         },
         {
             "recipeId": 177,
@@ -7954,7 +8178,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 178,
@@ -7998,7 +8223,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 179,
@@ -8042,7 +8268,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 180,
@@ -8080,17 +8307,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "吕布"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "木良"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": "蒸汽宝石"
         },
         {
             "recipeId": 181,
@@ -8134,7 +8362,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 182,
@@ -8178,7 +8407,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 183,
@@ -8216,13 +8446,14 @@
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "官爷"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "关羽"
                 }
             ],
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -8272,9 +8503,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "吕布"
                 }
             ],
+            "godRune": "蒸汽宝石",
             "personal": {
                 "quality": "特",
                 "remark": "上宫晴"
@@ -8322,7 +8554,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 186,
@@ -8356,17 +8589,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富二代"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "张飞"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "张飞"
                 }
-            ]
+            ],
+            "godRune": "防水的柠檬"
         },
         {
             "recipeId": 187,
@@ -8396,7 +8630,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "刘备"
                 },
                 {
                     "quality": "特",
@@ -8404,9 +8638,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "刘备"
                 }
-            ]
+            ],
+            "godRune": "剪刀蟹"
         },
         {
             "recipeId": 188,
@@ -8452,9 +8687,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "木优"
                 }
-            ]
+            ],
+            "godRune": "蒸汽宝石"
         },
         {
             "recipeId": 189,
@@ -8499,6 +8735,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "三阶申公子(优)-暂无-暂无"
@@ -8546,7 +8783,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         },
         {
             "recipeId": 191,
@@ -8580,17 +8818,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "迷弟杜甫"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "貂蝉"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "貂蝉"
                 }
-            ]
+            ],
+            "godRune": "刀嘴鹦鹉"
         },
         {
             "recipeId": 192,
@@ -8624,7 +8863,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "丐帮帮主"
                 },
                 {
                     "quality": "特",
@@ -8632,9 +8871,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "张飞"
                 }
-            ]
+            ],
+            "godRune": "剪刀蟹"
         },
         {
             "recipeId": 193,
@@ -8668,7 +8908,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "公主"
                 },
                 {
                     "quality": "特",
@@ -8679,6 +8919,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "",
                 "remark": "三阶上宫晴(优)-暂无-暂无"
@@ -8731,6 +8972,7 @@
                     "guest": ""
                 }
             ],
+            "godRune": "",
             "personal": {
                 "quality": "优",
                 "remark": "暂无-暂无"
@@ -8782,7 +9024,8 @@
                     "quality": "神",
                     "guest": ""
                 }
-            ]
+            ],
+            "godRune": ""
         }
     ],
     "origins": [

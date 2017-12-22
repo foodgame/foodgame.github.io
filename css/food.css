@@ -14,8 +14,7 @@ label.btn input[type="checkbox"]:checked+.fa {
     opacity: 1;
 }
 
-.table-hover tbody tr:hover td,
-.table-hover tbody tr:hover th {
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
     background-color: #eee;
 }
 
@@ -35,9 +34,7 @@ label.btn input[type="checkbox"]:checked+.fa {
     margin-left: 5px;
 }
 
-.box>.btn,
-.box>.chk-show-chef-wrapper,
-.box>.input-group {
+.box>.btn, .box>.chk-show-chef-wrapper, .box>.input-group {
     margin: 3px 0;
 }
 
@@ -47,6 +44,10 @@ label.btn input[type="checkbox"]:checked+.fa {
 
 #input-price {
     width: 60px;
+}
+
+#input-guest-rune {
+    width: 150px;
 }
 
 .search-box {

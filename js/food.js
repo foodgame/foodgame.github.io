@@ -89,6 +89,9 @@ function init(json) {
             }
         },
         {
+            "data": "godRune"
+        },
+        {
             "data": "get"
         },
         {
@@ -285,18 +288,35 @@ function init(json) {
 
         $('#chk-show-origin').prop("checked", false)
         $('#chk-show-level-guest').parent(".btn").removeClass('hidden');
+        $('#chk-show-god-rune').parent(".btn").removeClass('hidden');
         $('#chk-show-get').parent(".btn").removeClass('hidden');
         $('#chk-show-quality').prop("checked", true).parent(".btn").removeClass('hidden');
         $('#chk-show-remark').prop("checked", true).parent(".btn").removeClass('hidden');
-        $('#chk-get').prop("checked", true).parents(".box").removeClass('hidden');
 
+        $('#input-guest-rune').parents(".box").removeClass('hidden');
+        $('#input-guest-rune').keyup(function () {
+            table.draw();
+        });
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            var value = $("#input-guest-rune").val();
+            var searchCols = [19, 20];
+
+            for (var i = 0, len = searchCols.length; i < len; i++) {
+                if (data[searchCols[i]].indexOf(value) !== -1) {
+                    return true;
+                }
+            }
+
+            return false;
+        });
+
+        $('#chk-get').prop("checked", true).parents(".box").removeClass('hidden');
         $('#chk-get').click(function () {
             table.draw();
         });
-
         $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
             var check = $('#chk-get').prop("checked");
-            var value = data[20];
+            var value = data[21];
 
             if (!check || check && value == "true") {
                 return true;
@@ -348,6 +368,7 @@ function generateData(json, private) {
         recipesData[dataCount]["total"] = json.recipes[i].total || "";
         recipesData[dataCount]["origin"] = json.recipes[i].origin;
         recipesData[dataCount]["unlock"] = json.recipes[i].unlock;
+        recipesData[dataCount]["godRune"] = json.recipes[i].godRune;
         recipesData[dataCount]["get"] = json.recipes[i].hasOwnProperty('personal') ? true : false;
         recipesData[dataCount]["quality"] = json.recipes[i].hasOwnProperty('personal') ? json.recipes[i].personal.quality : "";
         recipesData[dataCount]["remark"] = json.recipes[i].hasOwnProperty('personal') ? json.recipes[i].personal.remark : "";
@@ -635,20 +656,22 @@ function initShow(table, data, private) {
 
     if (private) {
         table.column(19).visible($('#chk-show-level-guest').prop("checked"), false);
-        table.column(20).visible($('#chk-show-get').prop("checked"), false);
-        table.column(21).visible($('#chk-show-quality').prop("checked"), false);
-        table.column(22).visible($('#chk-show-remark').prop("checked"), false);
+        table.column(20).visible($('#chk-show-god-rune').prop("checked"), false);
+        table.column(21).visible($('#chk-show-get').prop("checked"), false);
+        table.column(22).visible($('#chk-show-quality').prop("checked"), false);
+        table.column(23).visible($('#chk-show-remark').prop("checked"), false);
     } else {
         table.column(19).visible(false, false);
         table.column(20).visible(false, false);
         table.column(21).visible(false, false);
         table.column(22).visible(false, false);
+        table.column(23).visible(false, false);
     }
 
     for (j in data.chefs) {
         var chkChefs = $('#chk-show-chef').val();
-        table.column(23 + 2 * j).visible(chkChefs.indexOf(j) > -1, false);
         table.column(24 + 2 * j).visible(chkChefs.indexOf(j) > -1, false);
+        table.column(25 + 2 * j).visible(chkChefs.indexOf(j) > -1, false);
     }
 
     table.columns.adjust().draw(false);

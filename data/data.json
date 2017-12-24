@@ -3504,7 +3504,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "皇帝"
                 },
                 {
                     "quality": "特",
@@ -3517,8 +3517,8 @@
             ],
             "godRune": "",
             "personal": {
-                "quality": "",
-                "remark": "大天狗(优)-暂无-暂无"
+                "quality": "优",
+                "remark": "暂无-暂无"
             }
         },
         {
@@ -4103,7 +4103,7 @@
                 }
             ],
             "price": 2482,
-            "time": 0,
+            "time": 606,
             "total": 15,
             "origin": "璧池",
             "guests": [

@@ -325,6 +325,8 @@ function init(json) {
                 return false;
             }
         });
+
+        new $.fn.dataTable.FixedHeader(table, {});
     }
 
     initShow(table, data, private);
@@ -333,6 +335,7 @@ function init(json) {
     });
 
     $('body').removeClass("hidden");
+    table.draw();
 }
 
 function generateData(json, private) {

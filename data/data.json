@@ -503,8 +503,8 @@
             ],
             "godRune": "焦虫",
             "personal": {
-                "quality": "优",
-                "remark": "大天狗-升级秦瑞雨"
+                "quality": "特",
+                "remark": "升级秦瑞雨"
             }
         },
         {
@@ -3252,8 +3252,8 @@
             ],
             "godRune": "-",
             "personal": {
-                "quality": "特",
-                "remark": "升级上宫晴/二阶玄离"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -3278,7 +3278,7 @@
                 }
             ],
             "price": 73,
-            "time": 142,
+            "time": 143,
             "total": 30,
             "origin": "神级窝蛋牛肉粥",
             "guests": [
@@ -3295,7 +3295,11 @@
                     "guest": "官爷"
                 }
             ],
-            "godRune": "剪刀蟹"
+            "godRune": "剪刀蟹",
+            "personal": {
+                "quality": "",
+                "remark": "任意(优)-羽十六-玄离/后羿"
+            }
         },
         {
             "recipeId": 72,
@@ -3836,8 +3840,8 @@
             ],
             "godRune": "-",
             "personal": {
-                "quality": "",
-                "remark": "任意(优)-任意-任意"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -4823,7 +4827,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "李一清(优)-升级后羿-升级后羿"
+            }
         },
         {
             "recipeId": 105,
@@ -6730,13 +6738,13 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "潇洒李白"
                 }
             ],
             "godRune": "暖石",
             "personal": {
-                "quality": "特",
-                "remark": "大天狗"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -7306,7 +7314,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "迷弟杜甫"
                 },
                 {
                     "quality": "特",
@@ -7319,8 +7327,8 @@
             ],
             "godRune": "",
             "personal": {
-                "quality": "",
-                "remark": "大天狗(优)-三阶不知火喵-升级三阶不知火喵"
+                "quality": "优",
+                "remark": "三阶不知火喵-升级三阶不知火喵"
             }
         },
         {
@@ -7809,7 +7817,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "大内侍卫"
                 },
                 {
                     "quality": "特",
@@ -7822,8 +7830,8 @@
             ],
             "godRune": "烤焦的菊花",
             "personal": {
-                "quality": "",
-                "remark": "任意(优)-升级不知火喵-三阶不知火喵"
+                "quality": "优",
+                "remark": "升级不知火喵-三阶不知火喵"
             }
         },
         {
@@ -8191,33 +8199,29 @@
         },
         {
             "recipeId": 178,
-            "name": "",
-            "fire": 0,
+            "name": "章鱼小丸子",
+            "fire": 4,
             "unlock": "-",
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
-            "fry": 0,
-            "roast": 0,
+            "fry": 65,
+            "roast": 95,
             "steam": 0,
             "ingredient": [
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "鲜鱼",
+                    "quantity": 5
                 },
                 {
-                    "name": "",
-                    "quantity": 0
-                },
-                {
-                    "name": "",
-                    "quantity": 0
+                    "name": "面粉",
+                    "quantity": 8
                 }
             ],
-            "price": 0,
-            "time": 0,
-            "total": 0,
-            "origin": "",
+            "price": 742,
+            "time": 328,
+            "total": 20,
+            "origin": "主线184",
             "guests": [
                 {
                     "quality": "优",
@@ -8232,7 +8236,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "优",
+                "remark": "暂无-暂无"
+            }
         },
         {
             "recipeId": 179,
@@ -9181,7 +9189,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "吕布"
                 },
                 {
                     "quality": "特",
@@ -9194,8 +9202,8 @@
             ],
             "godRune": "",
             "personal": {
-                "quality": "",
-                "remark": "升级后羿/二阶玄离(优)-三阶后羿/二阶玄离-三阶玄离"
+                "quality": "优",
+                "remark": "升级玄离-三阶玄离"
             }
         },
         {
@@ -9483,7 +9491,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "如来"
                 },
                 {
                     "quality": "特",
@@ -9496,8 +9504,8 @@
             ],
             "godRune": "",
             "personal": {
-                "quality": "",
-                "remark": "大天狗(优)-暂无-暂无"
+                "quality": "优",
+                "remark": "暂无-暂无"
             }
         },
         {

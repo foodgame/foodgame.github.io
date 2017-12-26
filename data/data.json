@@ -12190,8 +12190,8 @@
                 "show": false,
                 "skill": [
                     {
-                        "type": "",
-                        "addition": 0
+                        "type": "烤类",
+                        "addition": 0.15
                     }
                 ]
             },

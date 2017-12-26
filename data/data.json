@@ -11278,7 +11278,7 @@
                 "skill": [
                     {
                         "type": "炸类",
-                        "addition": 0.1
+                        "addition": 0.05
                     }
                 ]
             },
@@ -11286,8 +11286,8 @@
                 "name": "熊伏伏",
                 "stirfry": 0,
                 "boil": 0,
-                "cut": 30,
-                "fry": 61,
+                "cut": 61,
+                "fry": 30,
                 "roast": 92,
                 "steam": 15,
                 "show": false,
@@ -11419,7 +11419,7 @@
                 "stirfry": 0,
                 "boil": 21,
                 "cut": 150,
-                "fry": 52,
+                "fry": 42,
                 "roast": 0,
                 "steam": 85,
                 "show": false,
@@ -11497,7 +11497,7 @@
             {
                 "name": "椒娃",
                 "stirfry": 0,
-                "boil": 40,
+                "boil": 26,
                 "cut": 0,
                 "fry": 80,
                 "roast": 53,
@@ -11538,7 +11538,7 @@
                 "skill": [
                     {
                         "type": "蔬菜",
-                        "addition": 0.1
+                        "addition": 0.05
                     }
                 ]
             },
@@ -11585,7 +11585,7 @@
                 "show": false,
                 "skill": [
                     {
-                        "type": "炒类",
+                        "type": "炸类",
                         "addition": 0.1
                     }
                 ]
@@ -11607,7 +11607,7 @@
                 ]
             },
             {
-                "name": "蓝染",
+                "name": "兰染",
                 "stirfry": 276,
                 "boil": 0,
                 "cut": 184,
@@ -11617,7 +11617,7 @@
                 "show": false,
                 "skill": [
                     {
-                        "type": "切类",
+                        "type": "炒类",
                         "addition": 0.2
                     }
                 ]
@@ -11819,22 +11819,6 @@
                 ]
             },
             {
-                "name": "贝丽",
-                "stirfry": 0,
-                "boil": 46,
-                "cut": 138,
-                "fry": 0,
-                "roast": 23,
-                "steam": 92,
-                "show": false,
-                "skill": [
-                    {
-                        "type": "切类",
-                        "addition": 0.1
-                    }
-                ]
-            },
-            {
                 "name": "粉雪",
                 "stirfry": 0,
                 "boil": 92,
@@ -11861,6 +11845,22 @@
                 ]
             },
             {
+                "name": "贝丽",
+                "stirfry": 0,
+                "boil": 46,
+                "cut": 138,
+                "fry": 0,
+                "roast": 23,
+                "steam": 92,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "切类",
+                        "addition": 0.1
+                    }
+                ]
+            },
+            {
                 "name": "上宫晴",
                 "stirfry": 124,
                 "boil": 249,
@@ -11873,6 +11873,22 @@
                     {
                         "type": "蒸类",
                         "addition": 0.25
+                    }
+                ]
+            },
+            {
+                "name": "毛利红",
+                "stirfry": 0,
+                "boil": 23,
+                "cut": 138,
+                "fry": 46,
+                "roast": 92,
+                "steam": 0,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "肉类",
+                        "addition": 0.1
                     }
                 ]
             },
@@ -11917,6 +11933,22 @@
                 "roast": 0,
                 "steam": 92,
                 "show": false
+            },
+            {
+                "name": "祖冲之",
+                "stirfry": 190,
+                "boil": 0,
+                "cut": 85,
+                "fry": 285,
+                "roast": 0,
+                "steam": 38,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "炸类",
+                        "addition": 0.2
+                    }
+                ]
             },
             {
                 "name": "兔爷",
@@ -11994,7 +12026,7 @@
                 "skill": [
                     {
                         "type": "面类",
-                        "addition": 0.15
+                        "addition": 0.2
                     }
                 ]
             },
@@ -12079,36 +12111,56 @@
                 ]
             },
             {
-                "name": "玄离",
-                "stirfry": 124,
-                "boil": 374,
-                "cut": 249,
+                "name": "白稻荷",
+                "stirfry": 0,
+                "boil": 92,
+                "cut": 30,
+                "fry": 0,
+                "roast": 123,
+                "steam": 185,
+                "show": false
+            },
+            {
+                "name": "姜小诗",
+                "stirfry": 20,
+                "boil": 100,
+                "cut": 80,
                 "fry": 0,
                 "roast": 0,
-                "steam": 62,
+                "steam": 0,
                 "show": false,
                 "skill": [
                     {
-                        "type": "",
-                        "addition": 0
+                        "type": "肉类",
+                        "addition": 0.05
                     }
                 ]
             },
             {
-                "name": "祖冲之",
-                "stirfry": 190,
+                "name": "努扎尔",
+                "stirfry": 133,
                 "boil": 0,
-                "cut": 85,
-                "fry": 285,
-                "roast": 0,
-                "steam": 38,
+                "cut": 199,
+                "fry": 66,
+                "roast": 33,
+                "steam": 0,
                 "show": false,
                 "skill": [
                     {
-                        "type": "",
-                        "addition": 0
+                        "type": "切类",
+                        "addition": 0.15
                     }
                 ]
+            },
+            {
+                "name": "紫燕",
+                "stirfry": 138,
+                "boil": 46,
+                "cut": 0,
+                "fry": 0,
+                "roast": 92,
+                "steam": 23,
+                "show": false
             },
             {
                 "name": "姜灵儿",
@@ -12127,50 +12179,18 @@
                 ]
             },
             {
-                "name": "努扎尔",
-                "stirfry": 133,
-                "boil": 0,
-                "cut": 199,
-                "fry": 66,
-                "roast": 33,
-                "steam": 0,
-                "show": false,
-                "skill": [
-                    {
-                        "type": "",
-                        "addition": 0
-                    }
-                ]
-            },
-            {
-                "name": "紫燕",
-                "stirfry": 138,
-                "boil": 46,
-                "cut": 0,
-                "fry": 0,
-                "roast": 92,
-                "steam": 23,
-                "show": false,
-                "skill": [
-                    {
-                        "type": "",
-                        "addition": 0
-                    }
-                ]
-            },
-            {
-                "name": "姜小诗",
-                "stirfry": 20,
-                "boil": 100,
-                "cut": 80,
+                "name": "玄离",
+                "stirfry": 124,
+                "boil": 374,
+                "cut": 249,
                 "fry": 0,
                 "roast": 0,
-                "steam": 0,
+                "steam": 62,
                 "show": false,
                 "skill": [
                     {
-                        "type": "",
-                        "addition": 0
+                        "type": "煮类",
+                        "addition": 0.25
                     }
                 ]
             }

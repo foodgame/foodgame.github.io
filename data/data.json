@@ -8094,7 +8094,20 @@
             "fry": 0,
             "roast": 0,
             "steam": 0,
-            "ingredient": [],
+            "ingredient": [
+                {
+                    "name": "面粉",
+                    "quantity": 4
+                },
+                {
+                    "name": "牛腩",
+                    "quantity": 2
+                },
+                {
+                    "name": "白菜",
+                    "quantity": 6
+                }
+            ],
             "price": 113,
             "time": 192,
             "total": 30,
@@ -8113,7 +8126,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": "剪刀蟹"
+            "godRune": "剪刀蟹",
+            "personal": {
+                "quality": "",
+                "remark": "熊麓(优)-升级后羿-升级后羿"
+            }
         },
         {
             "recipeId": 176,

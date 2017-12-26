@@ -1301,37 +1301,37 @@
         },
         {
             "recipeId": 29,
-            "name": "",
-            "fire": 0,
+            "name": "冰淇淋华夫饼",
+            "fire": 3,
             "unlock": "-",
             "stirfry": 0,
             "boil": 0,
-            "cut": 0,
+            "cut": 50,
             "fry": 0,
             "roast": 0,
             "steam": 0,
             "ingredient": [
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "牛乳",
+                    "quantity": 6
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "面粉",
+                    "quantity": 6
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "鸡蛋",
+                    "quantity": 4
                 }
             ],
-            "price": 0,
-            "time": 0,
-            "total": 0,
-            "origin": "",
+            "price": 110,
+            "time": 190,
+            "total": 25,
+            "origin": "主线186",
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "迷弟杜甫"
                 },
                 {
                     "quality": "特",
@@ -1342,7 +1342,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "优",
+                "remark": "任意-升级后羿"
+            }
         },
         {
             "recipeId": 30,
@@ -4942,7 +4946,7 @@
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "富人"
                 },
                 {
                     "quality": "神",
@@ -4951,8 +4955,8 @@
             ],
             "godRune": "焦虫",
             "personal": {
-                "quality": "可",
-                "remark": "升级孙香香(优)-大天狗-二阶不知火喵"
+                "quality": "特",
+                "remark": "二阶不知火喵"
             }
         },
         {
@@ -8225,7 +8229,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "潇洒李白"
                 },
                 {
                     "quality": "特",

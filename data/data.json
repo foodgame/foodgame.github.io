@@ -8637,7 +8637,11 @@
                     "guest": "张飞"
                 }
             ],
-            "godRune": "防水的柠檬"
+            "godRune": "防水的柠檬",
+            "personal": {
+                "quality": "",
+                "remark": "任意(优)-任意-任意"
+            }
         },
         {
             "recipeId": 187,

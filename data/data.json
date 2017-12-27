@@ -11646,10 +11646,10 @@
             {
                 "name": "粉爪酱",
                 "stirfry": 0,
-                "boil": 15,
-                "cut": 92,
-                "fry": 30,
-                "roast": 61,
+                "boil": 23,
+                "cut": 138,
+                "fry": 46,
+                "roast": 92,
                 "steam": 0,
                 "show": false,
                 "skill": [

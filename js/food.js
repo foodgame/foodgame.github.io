@@ -74,6 +74,9 @@ function init(json) {
             "data": "efficiency"
         },
         {
+            "data": "ingredientsEff"
+        },
+        {
             "data": "origin"
         },
         {
@@ -188,7 +191,7 @@ function init(json) {
 
     $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
         var check = $('#chk-guest').prop("checked");
-        var value = data[18];
+        var value = data[19];
 
         if (!check || check && value) {
             return true;
@@ -200,7 +203,7 @@ function init(json) {
 
     $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
         var value = $(".search-box input").val().toLowerCase();
-        var searchCols = [0, 1, 9, 18];
+        var searchCols = [0, 1, 9, 19];
 
         for (var i = 0, len = searchCols.length; i < len; i++) {
             if (data[searchCols[i]].toLowerCase().indexOf(value) !== -1) {
@@ -299,7 +302,7 @@ function init(json) {
         });
         $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
             var value = $("#input-guest-rune").val();
-            var searchCols = [19, 20];
+            var searchCols = [20, 21];
 
             for (var i = 0, len = searchCols.length; i < len; i++) {
                 if (data[searchCols[i]].indexOf(value) !== -1) {
@@ -316,7 +319,7 @@ function init(json) {
         });
         $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
             var check = $('#chk-get').prop("checked");
-            var value = data[21];
+            var value = data[22];
 
             if (!check || check && value == "true") {
                 return true;
@@ -408,14 +411,24 @@ function generateData(json, private) {
 
         var ingredientsDisp = "";
         var ingredientsVal = "";
+        var ingredientsCount = 0;
         for (k in json.recipes[i].ingredient) {
-            ingredientsDisp += json.recipes[i].ingredient[k].name + "*" + json.recipes[i].ingredient[k].quantity + " "
-            ingredientsVal += json.recipes[i].ingredient[k].name;
+            if (json.recipes[i].ingredient[k].name) {
+                ingredientsDisp += json.recipes[i].ingredient[k].name + "*" + json.recipes[i].ingredient[k].quantity + " ";
+                ingredientsVal += json.recipes[i].ingredient[k].name;
+                ingredientsCount += json.recipes[i].ingredient[k].quantity;
+            }
         }
         recipesData[dataCount]["ingredients"] = {
             "display": ingredientsDisp,
             "value": ingredientsVal
         };
+
+        var ingredientsEff = 0;
+        if (json.recipes[i].time > 0) {
+            ingredientsEff = ingredientsCount * 3600 / json.recipes[i].time;
+        }
+        recipesData[dataCount]["ingredientsEff"] = ingredientsEff ? parseInt(ingredientsEff) : "";
 
         var levelGuestsDisp = "";
         var levelGuestsVal = "";
@@ -653,28 +666,29 @@ function initShow(table, data, private) {
     table.column(13).visible($('#chk-show-total-price').prop("checked"), false);
     table.column(14).visible($('#chk-show-total-time').prop("checked"), false);
     table.column(15).visible($('#chk-show-efficiency').prop("checked"), false);
-    table.column(16).visible($('#chk-show-origin').prop("checked"), false);
-    table.column(17).visible($('#chk-show-unlock').prop("checked"), false);
-    table.column(18).visible($('#chk-show-guest').prop("checked"), false);
+    table.column(16).visible($('#chk-show-ingredient-efficiency').prop("checked"), false);
+    table.column(17).visible($('#chk-show-origin').prop("checked"), false);
+    table.column(18).visible($('#chk-show-unlock').prop("checked"), false);
+    table.column(19).visible($('#chk-show-guest').prop("checked"), false);
 
     if (private) {
-        table.column(19).visible($('#chk-show-level-guest').prop("checked"), false);
-        table.column(20).visible($('#chk-show-god-rune').prop("checked"), false);
-        table.column(21).visible($('#chk-show-get').prop("checked"), false);
-        table.column(22).visible($('#chk-show-quality').prop("checked"), false);
-        table.column(23).visible($('#chk-show-remark').prop("checked"), false);
+        table.column(20).visible($('#chk-show-level-guest').prop("checked"), false);
+        table.column(21).visible($('#chk-show-god-rune').prop("checked"), false);
+        table.column(22).visible($('#chk-show-get').prop("checked"), false);
+        table.column(23).visible($('#chk-show-quality').prop("checked"), false);
+        table.column(24).visible($('#chk-show-remark').prop("checked"), false);
     } else {
-        table.column(19).visible(false, false);
         table.column(20).visible(false, false);
         table.column(21).visible(false, false);
         table.column(22).visible(false, false);
         table.column(23).visible(false, false);
+        table.column(24).visible(false, false);
     }
 
     for (j in data.chefs) {
         var chkChefs = $('#chk-show-chef').val();
-        table.column(24 + 2 * j).visible(chkChefs.indexOf(j) > -1, false);
         table.column(25 + 2 * j).visible(chkChefs.indexOf(j) > -1, false);
+        table.column(26 + 2 * j).visible(chkChefs.indexOf(j) > -1, false);
     }
 
     table.columns.adjust().draw(false);

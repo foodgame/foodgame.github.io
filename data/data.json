@@ -614,7 +614,7 @@
                 }
             ],
             "price": 260,
-            "time": 302,
+            "time": 303,
             "total": 25,
             "origin": "中级奖池",
             "guests": [
@@ -631,7 +631,11 @@
                     "guest": "潇洒李白"
                 }
             ],
-            "godRune": "-"
+            "godRune": "-",
+            "personal": {
+                "quality": "",
+                "remark": "辣子姬(优)-升级祖冲之-大天狗"
+            }
         },
         {
             "recipeId": 15,
@@ -1014,7 +1018,7 @@
             "godRune": "刀嘴鹦鹉",
             "personal": {
                 "quality": "特",
-                "remark": "三阶蓝染"
+                "remark": "三阶兰染"
             }
         },
         {
@@ -1063,7 +1067,7 @@
             "godRune": "刀嘴鹦鹉",
             "personal": {
                 "quality": "特",
-                "remark": "琪琪/蓝染"
+                "remark": "琪琪/兰染"
             }
         },
         {
@@ -3107,7 +3111,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "羽十六(优)-暂无-暂无"
+            }
         },
         {
             "recipeId": 68,
@@ -4687,7 +4695,7 @@
             "godRune": "刀嘴鹦鹉",
             "personal": {
                 "quality": "",
-                "remark": "鱼不斩/大天狗(优)-羽十六-三阶蓝染"
+                "remark": "鱼不斩/大天狗(优)-羽十六-三阶兰染"
             }
         },
         {
@@ -5316,7 +5324,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "羽十六(优)-二阶玄离/三阶后羿-二阶玄离/三阶后羿"
+            }
         },
         {
             "recipeId": 116,
@@ -5695,7 +5707,7 @@
             "godRune": "",
             "personal": {
                 "quality": "",
-                "remark": "琪琪(优)-三阶蓝染-暂无"
+                "remark": "琪琪(优)-三阶兰染-暂无"
             }
         },
         {
@@ -7157,7 +7169,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "大天狗-暂无-暂无-暂无"
+            }
         },
         {
             "recipeId": 155,
@@ -7702,7 +7718,7 @@
         {
             "recipeId": 167,
             "name": "鱼香茄子",
-            "fire": 0,
+            "fire": 3,
             "unlock": "葱香烤鱼",
             "stirfry": 55,
             "boil": 0,
@@ -7712,25 +7728,21 @@
             "steam": 0,
             "ingredient": [
                 {
-                    "name": "糯米",
-                    "quantity": 6
-                },
-                {
-                    "name": "豆腐",
-                    "quantity": 4
-                },
-                {
-                    "name": "里脊肉",
+                    "name": "茄子",
                     "quantity": 3
                 },
                 {
-                    "name": "香菇",
+                    "name": "青椒",
+                    "quantity": 6
+                },
+                {
+                    "name": "猪腿肉",
                     "quantity": 3
                 }
             ],
             "price": 175,
-            "time": 420,
-            "total": 0,
+            "time": 421,
+            "total": 25,
             "origin": "神级葱香烤茄子",
             "guests": [
                 {
@@ -7746,7 +7758,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": "-"
+            "godRune": "-",
+            "personal": {
+                "quality": "",
+                "remark": "鱼不斩/琪琪(优)-兰染-三阶兰染"
+            }
         },
         {
             "recipeId": 168,
@@ -7784,13 +7800,13 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "张飞"
                 }
             ],
             "godRune": "-",
             "personal": {
-                "quality": "可",
-                "remark": "升级孙香香-大天狗-二阶不知火喵"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -9477,7 +9493,7 @@
             "godRune": "",
             "personal": {
                 "quality": "",
-                "remark": "升级蓝染(优)-暂无-暂无"
+                "remark": "升级兰染(优)-暂无-暂无"
             }
         },
         {

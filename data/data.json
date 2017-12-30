@@ -633,8 +633,8 @@
             ],
             "godRune": "-",
             "personal": {
-                "quality": "",
-                "remark": "辣子姬(优)-升级祖冲之-大天狗"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -4038,7 +4038,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "三阶夏娃(优)-暂无-暂无"
+            }
         },
         {
             "recipeId": 88,
@@ -5307,7 +5311,7 @@
                 }
             ],
             "price": 255,
-            "time": 365,
+            "time": 366,
             "total": 25,
             "origin": "中级奖池",
             "guests": [

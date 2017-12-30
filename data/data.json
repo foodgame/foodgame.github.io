@@ -870,8 +870,8 @@
             ],
             "godRune": "防水的柠檬",
             "personal": {
-                "quality": "特",
-                "remark": "三阶上宫晴"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -1830,8 +1830,8 @@
             ],
             "godRune": "剪刀蟹",
             "personal": {
-                "quality": "优",
-                "remark": "不知火喵-升级不知火喵"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -2389,7 +2389,7 @@
         {
             "recipeId": 52,
             "name": "大骨高汤",
-            "fire": 0,
+            "fire": 4,
             "unlock": "-",
             "stirfry": 0,
             "boil": 70,
@@ -2397,11 +2397,28 @@
             "fry": 0,
             "roast": 0,
             "steam": 0,
-            "ingredient": [],
-            "price": 0,
-            "time": 483,
-            "total": 0,
-            "origin": "",
+            "ingredient": [
+                {
+                    "name": "葱",
+                    "quantity": 10
+                },
+                {
+                    "name": "梅花肉",
+                    "quantity": 5
+                },
+                {
+                    "name": "白萝卜",
+                    "quantity": 5
+                },
+                {
+                    "name": "猪油",
+                    "quantity": 8
+                }
+            ],
+            "price": 636,
+            "time": 484,
+            "total": 20,
+            "origin": "主线193",
             "guests": [
                 {
                     "quality": "优",
@@ -2416,7 +2433,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "羽十六(优)-玄离-三阶玄离"
+            }
         },
         {
             "recipeId": 53,

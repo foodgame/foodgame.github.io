@@ -135,8 +135,11 @@ function init(json) {
         "pageLength": 20,
         "dom": "<'row'<'col-sm-4'l><'col-sm-4 text-center'i><'col-sm-4'<'search-box'>>>" +
             "<'row'<'col-sm-12'tr>>" +
-            "<'row'<'col-sm-12'p>>"
+            "<'row'<'col-sm-12'p>>",
+        fixedHeader: true
     });
+
+    table.fixedHeader.disable();
 
     $("div.search-box").html('<label>查找:<input type="search" class="form-control input-sm" placeholder="菜名 材料 符文 ..."></label>');
 
@@ -239,6 +242,14 @@ function init(json) {
         }
     });
 
+    $('#chk-fixed-header').change(function () {
+        if ($(this).prop("checked")) {
+            table.fixedHeader.enable();
+        } else {
+            table.fixedHeader.disable();
+        }
+    });
+
     $('.chk-fire input[type="checkbox"]').click(function () {
         table.draw();
     });
@@ -295,6 +306,7 @@ function init(json) {
         $('#chk-show-get').parent(".btn").removeClass('hidden');
         $('#chk-show-quality').prop("checked", true).parent(".btn").removeClass('hidden');
         $('#chk-show-remark').prop("checked", true).parent(".btn").removeClass('hidden');
+        $('#chk-fixed-header').parent(".btn").removeClass('hidden');
 
         $('#input-guest-rune').parents(".box").removeClass('hidden');
         $('#input-guest-rune').keyup(function () {
@@ -328,8 +340,6 @@ function init(json) {
                 return false;
             }
         });
-
-        new $.fn.dataTable.FixedHeader(table, {});
     }
 
     initShow(table, data, private);

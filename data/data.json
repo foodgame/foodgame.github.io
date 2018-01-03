@@ -215,7 +215,11 @@
                     "guest": "官爷"
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "任意(优)-羽十六-任意"
+            }
         },
         {
             "recipeId": 6,

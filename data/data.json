@@ -733,7 +733,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "上宫晴(优)-升级上宫晴-暂无"
+            }
         },
         {
             "recipeId": 17,

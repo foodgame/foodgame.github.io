@@ -2110,7 +2110,11 @@
                     "guest": "王子"
                 }
             ],
-            "godRune": "刀嘴鹦鹉"
+            "godRune": "刀嘴鹦鹉",
+            "personal": {
+                "quality": "",
+                "remark": "羽十六(优)-升级后羿/升级上宫晴-玄离"
+            }
         },
         {
             "recipeId": 46,
@@ -12206,6 +12210,22 @@
                 "skill": [
                     {
                         "type": "肉类",
+                        "addition": 0.05
+                    }
+                ]
+            },
+            {
+                "name": "李小染",
+                "stirfry": 20,
+                "boil": 100,
+                "cut": 0,
+                "fry": 80,
+                "roast": 0,
+                "steam": 0,
+                "show": false,
+                "skill": [
+                    {
+                        "type": "煮类",
                         "addition": 0.05
                     }
                 ]

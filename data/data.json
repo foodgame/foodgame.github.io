@@ -2787,8 +2787,8 @@
             "name": "酸菜鱼",
             "fire": 0,
             "unlock": "-",
-            "stirfry": 0,
-            "boil": 0,
+            "stirfry": 65,
+            "boil": 70,
             "cut": 0,
             "fry": 0,
             "roast": 0,
@@ -2811,9 +2811,9 @@
                     "quantity": 0
                 }
             ],
-            "price": 0,
-            "time": 0,
-            "total": 0,
+            "price": 818,
+            "time": 306,
+            "total": 20,
             "origin": "",
             "guests": [
                 {

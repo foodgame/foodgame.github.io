@@ -6704,33 +6704,33 @@
         },
         {
             "recipeId": 144,
-            "name": "",
-            "fire": 0,
+            "name": "凤梨酥",
+            "fire": 3,
             "unlock": "-",
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
             "fry": 0,
-            "roast": 0,
+            "roast": 75,
             "steam": 0,
             "ingredient": [
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "菠萝",
+                    "quantity": 6
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "面粉",
+                    "quantity": 8
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "鸡蛋",
+                    "quantity": 8
                 }
             ],
-            "price": 0,
-            "time": 0,
-            "total": 0,
-            "origin": "",
+            "price": 208,
+            "time": 493,
+            "total": 25,
+            "origin": "主线198",
             "guests": [
                 {
                     "quality": "优",
@@ -6745,7 +6745,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "大天狗(优)-三阶不知火喵-暂无"
+            }
         },
         {
             "recipeId": 145,

@@ -523,7 +523,7 @@
             "roast": 0,
             "steam": 0,
             "ingredient": [],
-            "price": 0,
+            "price": 440,
             "time": 631,
             "total": 0,
             "origin": "",
@@ -1081,32 +1081,32 @@
         {
             "recipeId": 24,
             "name": "寿司",
-            "fire": 0,
+            "fire": 3,
             "unlock": "-",
             "stirfry": 0,
             "boil": 0,
-            "cut": 0,
+            "cut": 50,
             "fry": 0,
             "roast": 0,
             "steam": 0,
             "ingredient": [
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "冻鱼",
+                    "quantity": 2
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "大米",
+                    "quantity": 6
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "鸡蛋",
+                    "quantity": 3
                 }
             ],
-            "price": 0,
-            "time": 0,
-            "total": 0,
-            "origin": "",
+            "price": 296,
+            "time": 179,
+            "total": 25,
+            "origin": "每周挑战",
             "guests": [
                 {
                     "quality": "优",
@@ -2785,36 +2785,32 @@
         {
             "recipeId": 60,
             "name": "酸菜鱼",
-            "fire": 0,
+            "fire": 4,
             "unlock": "-",
-            "stirfry": 0,
-            "boil": 0,
+            "stirfry": 65,
+            "boil": 70,
             "cut": 0,
             "fry": 0,
             "roast": 0,
             "steam": 0,
             "ingredient": [
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "辣椒",
+                    "quantity": 12
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "白菜",
+                    "quantity": 12
                 },
                 {
-                    "name": "",
-                    "quantity": 0
-                },
-                {
-                    "name": "",
-                    "quantity": 0
+                    "name": "鲜鱼",
+                    "quantity": 2
                 }
             ],
-            "price": 0,
-            "time": 0,
-            "total": 0,
-            "origin": "",
+            "price": 818,
+            "time": 306,
+            "total": 20,
+            "origin": "晚秋壁池",
             "guests": [
                 {
                     "quality": "优",
@@ -3398,7 +3394,7 @@
         {
             "recipeId": 73,
             "name": "油焖笋",
-            "fire": 0,
+            "fire": 4,
             "unlock": "-",
             "stirfry": 80,
             "boil": 40,
@@ -3407,9 +3403,9 @@
             "roast": 0,
             "steam": 0,
             "ingredient": [],
-            "price": 0,
+            "price": 207,
             "time": 324,
-            "total": 0,
+            "total": 20,
             "origin": "",
             "guests": [
                 {
@@ -4378,7 +4374,7 @@
         {
             "recipeId": 94,
             "name": "葱香烤鱼",
-            "fire": 0,
+            "fire": 3,
             "unlock": "-",
             "stirfry": 0,
             "boil": 0,
@@ -4402,7 +4398,7 @@
             ],
             "price": 370,
             "time": 209,
-            "total": 45,
+            "total": 25,
             "origin": "神级鱼香茄子",
             "guests": [
                 {
@@ -6371,32 +6367,32 @@
         {
             "recipeId": 137,
             "name": "水晶肴蹄",
-            "fire": 0,
+            "fire": 4,
             "unlock": "-",
             "stirfry": 0,
-            "boil": 0,
-            "cut": 0,
+            "boil": 80,
+            "cut": 65,
             "fry": 0,
             "roast": 0,
             "steam": 0,
             "ingredient": [
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "梅花肉",
+                    "quantity": 5
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "葱",
+                    "quantity": 6
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "酒",
+                    "quantity": 5
                 }
             ],
-            "price": 0,
-            "time": 0,
-            "total": 0,
-            "origin": "",
+            "price": 572,
+            "time": 500,
+            "total": 20,
+            "origin": "每周挑战",
             "guests": [
                 {
                     "quality": "优",

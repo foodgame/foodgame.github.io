@@ -1658,7 +1658,7 @@
             "recipeId": 36,
             "name": "小笼包",
             "fire": 2,
-            "unlock": "虾皇饺",
+            "unlock": "虾饺皇",
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -2592,7 +2592,7 @@
         },
         {
             "recipeId": 56,
-            "name": "虾皇饺",
+            "name": "虾饺皇",
             "fire": 3,
             "unlock": "-",
             "stirfry": 0,

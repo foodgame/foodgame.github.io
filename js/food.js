@@ -444,6 +444,13 @@ function generateData(json, private) {
         var levelGuestsVal = "";
         for (g in json.recipes[i].guests) {
             if (json.recipes[i].guests[g].guest) {
+                if (private && json.recipes[i].hasOwnProperty('personal')) {
+                    if (json.recipes[i].personal.quality == "优" && json.recipes[i].guests[g].quality == "优"
+                        || json.recipes[i].personal.quality == "特" && json.recipes[i].guests[g].quality != "神"
+                        || json.recipes[i].personal.quality == "神") {
+                        continue;
+                    }
+                }
                 levelGuestsDisp += json.recipes[i].guests[g].quality + "-" + json.recipes[i].guests[g].guest + "<br>";
                 levelGuestsVal += json.recipes[i].guests[g].guest;
             }

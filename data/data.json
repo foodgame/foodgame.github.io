@@ -673,7 +673,7 @@
                 },
                 {
                     "quality": "特",
-                    "guest": "官爷"
+                    "guest": "关羽"
                 },
                 {
                     "quality": "神",
@@ -2018,8 +2018,8 @@
             ],
             "godRune": "烤焦的菊花",
             "personal": {
-                "quality": "优",
-                "remark": "大天狗-三阶不知火喵"
+                "quality": "特",
+                "remark": "三阶不知火喵"
             }
         },
         {
@@ -3084,7 +3084,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": "公主"
+                    "guest": "如来"
                 },
                 {
                     "quality": "特",
@@ -11320,7 +11320,7 @@
                 "fry": 185,
                 "roast": 61,
                 "steam": 0,
-                "show": true,
+                "show": false,
                 "skill": [
                     {
                         "type": "炸类",

@@ -205,6 +205,19 @@ function init(json) {
     });
 
     $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+        var value = $("#input-guest-rune").val();
+        var searchCols = [20, 21];
+
+        for (var i = 0, len = searchCols.length; i < len; i++) {
+            if (data[searchCols[i]].indexOf(value) !== -1) {
+                return true;
+            }
+        }
+
+        return false;
+    });
+
+    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
         var value = $(".search-box input").val().toLowerCase();
         var searchCols = [0, 1, 9, 19];
 
@@ -215,16 +228,6 @@ function init(json) {
         }
 
         return false;
-    });
-
-    $('#chk-show-all').click(function () {
-        if ($('.btn:not(.hidden) .chk-show:checked').length == $('.btn:not(.hidden) .chk-show').length) {
-            $('.btn:not(.hidden) .chk-show').prop("checked", false);
-        }
-        else {
-            $('.btn:not(.hidden) .chk-show').prop("checked", true);
-        }
-        initShow(table, data, private);
     });
 
     $('#chk-show-chef').multiselect({
@@ -240,6 +243,56 @@ function init(json) {
         onChange: function (option, checked, select) {
             initShow(table, data, private);
         }
+    });
+
+    if (private) {
+        for (j in data.chefs) {
+            if (data.chefs[j].show) {
+                $('#chk-show-chef').multiselect('select', j);
+            }
+        }
+
+        $('#chk-show-origin').prop("checked", false)
+        $('#chk-show-get').parent(".btn").removeClass('hidden');
+        $('#chk-show-quality').prop("checked", true).parent(".btn").removeClass('hidden');
+        $('#chk-show-remark').prop("checked", true).parent(".btn").removeClass('hidden');
+        $('#chk-fixed-header').parent(".btn").removeClass('hidden');
+
+        $('#chk-get').prop("checked", true).parents(".box").removeClass('hidden');
+        $('#chk-get').click(function () {
+            table.draw();
+        });
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            var check = $('#chk-get').prop("checked");
+            var value = data[22];
+
+            if (!check || check && value == "true") {
+                return true;
+            }
+            else {
+                return false;
+            }
+        });
+    }
+
+    initShow(table, data, private);
+
+    $('.loading').hide();
+    $('.main').removeClass("hidden");
+    table.draw();
+
+    $('.chk-show').click(function () {
+        initShow(table, data, private);
+    });
+
+    $('#chk-show-all').click(function () {
+        if ($('.btn:not(.hidden) .chk-show:checked').length == $('.btn:not(.hidden) .chk-show').length) {
+            $('.btn:not(.hidden) .chk-show').prop("checked", false);
+        }
+        else {
+            $('.btn:not(.hidden) .chk-show').prop("checked", true);
+        }
+        initShow(table, data, private);
     });
 
     $('#chk-fixed-header').change(function () {
@@ -285,6 +338,10 @@ function init(json) {
         table.draw();
     });
 
+    $('#input-guest-rune').keyup(function () {
+        table.draw();
+    });
+
     $('#chk-guest').click(function () {
         table.draw();
     });
@@ -292,63 +349,6 @@ function init(json) {
     $('.search-box input').keyup(function () {
         table.draw();
     });
-
-    if (private) {
-        for (j in data.chefs) {
-            if (data.chefs[j].show) {
-                $('#chk-show-chef').multiselect('select', j);
-            }
-        }
-
-        $('#chk-show-origin').prop("checked", false)
-        $('#chk-show-level-guest').parent(".btn").removeClass('hidden');
-        $('#chk-show-god-rune').parent(".btn").removeClass('hidden');
-        $('#chk-show-get').parent(".btn").removeClass('hidden');
-        $('#chk-show-quality').prop("checked", true).parent(".btn").removeClass('hidden');
-        $('#chk-show-remark').prop("checked", true).parent(".btn").removeClass('hidden');
-        $('#chk-fixed-header').parent(".btn").removeClass('hidden');
-
-        $('#input-guest-rune').parents(".box").removeClass('hidden');
-        $('#input-guest-rune').keyup(function () {
-            table.draw();
-        });
-        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-            var value = $("#input-guest-rune").val();
-            var searchCols = [20, 21];
-
-            for (var i = 0, len = searchCols.length; i < len; i++) {
-                if (data[searchCols[i]].indexOf(value) !== -1) {
-                    return true;
-                }
-            }
-
-            return false;
-        });
-
-        $('#chk-get').prop("checked", true).parents(".box").removeClass('hidden');
-        $('#chk-get').click(function () {
-            table.draw();
-        });
-        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-            var check = $('#chk-get').prop("checked");
-            var value = data[22];
-
-            if (!check || check && value == "true") {
-                return true;
-            }
-            else {
-                return false;
-            }
-        });
-    }
-
-    initShow(table, data, private);
-    $('.chk-show').click(function () {
-        initShow(table, data, private);
-    });
-
-    $('body').removeClass("hidden");
-    table.draw();
 }
 
 function generateData(json, private) {
@@ -680,16 +680,14 @@ function initShow(table, data, private) {
     table.column(17).visible($('#chk-show-origin').prop("checked"), false);
     table.column(18).visible($('#chk-show-unlock').prop("checked"), false);
     table.column(19).visible($('#chk-show-guest').prop("checked"), false);
+    table.column(20).visible($('#chk-show-level-guest').prop("checked"), false);
+    table.column(21).visible($('#chk-show-god-rune').prop("checked"), false);
 
     if (private) {
-        table.column(20).visible($('#chk-show-level-guest').prop("checked"), false);
-        table.column(21).visible($('#chk-show-god-rune').prop("checked"), false);
         table.column(22).visible($('#chk-show-get').prop("checked"), false);
         table.column(23).visible($('#chk-show-quality').prop("checked"), false);
         table.column(24).visible($('#chk-show-remark').prop("checked"), false);
     } else {
-        table.column(20).visible(false, false);
-        table.column(21).visible(false, false);
         table.column(22).visible(false, false);
         table.column(23).visible(false, false);
         table.column(24).visible(false, false);

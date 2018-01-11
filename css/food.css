@@ -14,7 +14,8 @@ label.btn input[type="checkbox"]:checked+.fa {
     opacity: 1;
 }
 
-.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
     background-color: #eee;
 }
 
@@ -34,8 +35,14 @@ label.btn input[type="checkbox"]:checked+.fa {
     margin-left: 5px;
 }
 
-.box>.btn, .box>.chk-show-chef-wrapper, .box>.input-group {
+.box>.btn,
+.box>.chk-show-chef-wrapper,
+.box>.input-group {
     margin: 3px 0;
+}
+
+.box1 {
+    margin-right: 20px;
 }
 
 .chk-show-chef-wrapper {
@@ -64,4 +71,72 @@ label.btn input[type="checkbox"]:checked+.fa {
     margin-left: .5em;
     display: inline-block;
     width: auto;
+}
+
+.row1 {
+    position: relative;
+}
+
+.info {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    font-size: 15px;
+}
+
+.info a {
+    color: #999;
+    cursor: pointer;
+}
+
+.info a:hover {
+    color: #777;
+}
+
+.modal-center-wrap {
+    display: table;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+}
+
+.modal-center {
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events: none;
+}
+
+.modal-content {
+    width: inherit;
+    height: inherit;
+    margin: 0 auto;
+    pointer-events: all;
+}
+
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.loading h1 {
+    color: #333;
+    animation: pulse 2.5s linear infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1, 1);
+        opacity: .5;
+    }
+    50% {
+        transform: scale(1.1, 1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1, 1);
+        opacity: .5;
+    }
 }

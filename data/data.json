@@ -1166,7 +1166,11 @@
                     "guest": "关羽"
                 }
             ],
-            "godRune": "剪刀蟹"
+            "godRune": "剪刀蟹",
+            "personal": {
+                "quality": "",
+                "remark": "任意(优)-任意-任意"
+            }
         },
         {
             "recipeId": 26,
@@ -7304,7 +7308,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "祖冲之(优)-大天狗(特)-暂无"
+            }
         },
         {
             "recipeId": 157,
@@ -7323,8 +7331,8 @@
                     "quantity": 4
                 }
             ],
-            "price": 110,
-            "time": 140,
+            "price": 92,
+            "time": 106,
             "total": 25,
             "origin": "主线95",
             "guests": [
@@ -12289,6 +12297,6 @@
                 ]
             }
         ],
-        "furniture": 0.57
+        "furniture": 0.466
     }
 }

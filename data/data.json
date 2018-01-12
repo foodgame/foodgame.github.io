@@ -409,8 +409,8 @@
             ],
             "godRune": "-",
             "personal": {
-                "quality": "特",
-                "remark": "暂无"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -1168,8 +1168,8 @@
             ],
             "godRune": "剪刀蟹",
             "personal": {
-                "quality": "",
-                "remark": "任意(优)-任意-任意"
+                "quality": "优",
+                "remark": "任意-任意"
             }
         },
         {
@@ -2686,7 +2686,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "羽十六(优)-暂无-暂无"
+            }
         },
         {
             "recipeId": 58,
@@ -2782,8 +2786,8 @@
             ],
             "godRune": "剪刀蟹",
             "personal": {
-                "quality": "优",
-                "remark": "羽十六-升级后羿/二阶玄离"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -4596,8 +4600,8 @@
             ],
             "godRune": "暖石",
             "personal": {
-                "quality": "",
-                "remark": "琪琪(优)-羽十六-大天狗"
+                "quality": "特",
+                "remark": "大天狗"
             }
         },
         {

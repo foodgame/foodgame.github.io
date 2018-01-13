@@ -514,19 +514,36 @@
         {
             "recipeId": 12,
             "name": "咖喱土豆牛肉",
-            "fire": 0,
+            "fire": 3,
             "unlock": "-",
             "stirfry": 0,
-            "boil": 60,
-            "cut": 25,
+            "boil": 65,
+            "cut": 45,
             "fry": 0,
             "roast": 0,
             "steam": 0,
-            "ingredient": [],
-            "price": 440,
-            "time": 631,
-            "total": 0,
-            "origin": "",
+            "ingredient": [
+                {
+                    "name": "咖喱",
+                    "quantity": 3
+                },
+                {
+                    "name": "牛五花",
+                    "quantity": 3
+                },
+                {
+                    "name": "土豆",
+                    "quantity": 7
+                },
+                {
+                    "name": "牛乳",
+                    "quantity": 4
+                }
+            ],
+            "price": 514,
+            "time": 843,
+            "total": 25,
+            "origin": "神级咖喱土豆鸡",
             "guests": [
                 {
                     "quality": "优",
@@ -541,7 +558,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "升级后羿(优)-玄离-三阶玄离"
+            }
         },
         {
             "recipeId": 13,
@@ -1368,7 +1389,7 @@
             "recipeId": 30,
             "name": "咖喱土豆鸡",
             "fire": 3,
-            "unlock": "-",
+            "unlock": "咖喱土豆牛肉",
             "stirfry": 45,
             "boil": 20,
             "cut": 0,
@@ -1411,7 +1432,7 @@
                     "guest": "潇洒李白"
                 }
             ],
-            "godRune": "耐煮的水草",
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -1985,7 +2006,7 @@
             "recipeId": 43,
             "name": "菠萝派",
             "fire": 2,
-            "unlock": "-",
+            "unlock": "菠萝班戟",
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -2020,10 +2041,10 @@
                     "guest": "丐帮帮主"
                 }
             ],
-            "godRune": "烤焦的菊花",
+            "godRune": "-",
             "personal": {
-                "quality": "特",
-                "remark": "三阶不知火喵"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -4426,33 +4447,37 @@
         },
         {
             "recipeId": 95,
-            "name": "",
-            "fire": 0,
+            "name": "菠萝班戟",
+            "fire": 4,
             "unlock": "-",
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
             "fry": 0,
-            "roast": 0,
+            "roast": 48,
             "steam": 0,
             "ingredient": [
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "菠萝",
+                    "quantity": 4
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "面粉",
+                    "quantity": 8
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "牛乳",
+                    "quantity": 6
+                },
+                {
+                    "name": "鸡蛋",
+                    "quantity": 6
                 }
             ],
-            "price": 0,
-            "time": 0,
-            "total": 0,
-            "origin": "",
+            "price": 194,
+            "time": 176,
+            "total": 20,
+            "origin": "神级菠萝派",
             "guests": [
                 {
                     "quality": "优",
@@ -4467,7 +4492,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "姜灵儿(优)-升级姜灵儿/升级秦瑞雨-不知火喵/大天狗"
+            }
         },
         {
             "recipeId": 96,
@@ -4563,7 +4592,7 @@
             "recipeId": 98,
             "name": "洋葱小炒肉",
             "fire": 3,
-            "unlock": "-",
+            "unlock": "煎牛排",
             "stirfry": 55,
             "boil": 0,
             "cut": 0,
@@ -4598,10 +4627,10 @@
                     "guest": "貂蝉"
                 }
             ],
-            "godRune": "暖石",
+            "godRune": "-",
             "personal": {
-                "quality": "特",
-                "remark": "大天狗"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -5153,33 +5182,37 @@
         },
         {
             "recipeId": 111,
-            "name": "",
-            "fire": 0,
+            "name": "煎牛排",
+            "fire": 5,
             "unlock": "-",
             "stirfry": 0,
             "boil": 0,
-            "cut": 0,
+            "cut": 120,
             "fry": 0,
-            "roast": 0,
+            "roast": 150,
             "steam": 0,
             "ingredient": [
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "牛排",
+                    "quantity": 10
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "鸡蛋",
+                    "quantity": 12
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "土豆",
+                    "quantity": 10
+                },
+                {
+                    "name": "番茄",
+                    "quantity": 12
                 }
             ],
-            "price": 0,
-            "time": 0,
-            "total": 0,
-            "origin": "",
+            "price": 1311,
+            "time": 693,
+            "total": 15,
+            "origin": "神级洋葱小炒肉",
             "guests": [
                 {
                     "quality": "优",
@@ -5194,7 +5227,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "不知火喵-暂无-暂无-暂无"
+            }
         },
         {
             "recipeId": 112,

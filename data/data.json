@@ -4776,7 +4776,7 @@
             "recipeId": 102,
             "name": "干锅鱼头",
             "fire": 4,
-            "unlock": "",
+            "unlock": "干锅香辣虾",
             "stirfry": 0,
             "boil": 40,
             "cut": 0,
@@ -4815,7 +4815,7 @@
                     "guest": ""
                 }
             ],
-            "godRune": "",
+            "godRune": "-",
             "personal": {
                 "quality": "可",
                 "remark": "三阶姜灵儿(优)-暂无-暂无"

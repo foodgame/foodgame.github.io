@@ -3107,7 +3107,7 @@
                 }
             ],
             "price": 449,
-            "time": 318,
+            "time": 319,
             "total": 20,
             "origin": "神级口水鸡",
             "guests": [
@@ -3124,7 +3124,11 @@
                     "guest": "唐伯虎"
                 }
             ],
-            "godRune": "耐煮的水草"
+            "godRune": "耐煮的水草",
+            "personal": {
+                "quality": "",
+                "remark": "上宫晴(优)-羽十六-暂无"
+            }
         },
         {
             "recipeId": 67,
@@ -3224,8 +3228,8 @@
             ],
             "godRune": "-",
             "personal": {
-                "quality": "特",
-                "remark": "三阶夏娃"
+                "quality": "神",
+                "remark": ""
             }
         },
         {

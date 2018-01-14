@@ -7116,7 +7116,11 @@
                     "guest": "官爷"
                 }
             ],
-            "godRune": "蒸汽耳环"
+            "godRune": "蒸汽耳环",
+            "personal": {
+                "quality": "",
+                "remark": "任意(优)-任意-任意"
+            }
         },
         {
             "recipeId": 152,

@@ -8792,7 +8792,11 @@
                     "guest": "刘备"
                 }
             ],
-            "godRune": "剪刀蟹"
+            "godRune": "剪刀蟹",
+            "personal": {
+                "quality": "",
+                "remark": "任意(优)-任意-任意"
+            }
         },
         {
             "recipeId": 188,

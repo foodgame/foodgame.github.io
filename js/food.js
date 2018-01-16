@@ -349,15 +349,30 @@ function init(json) {
     $('.search-box input').keyup(function () {
         table.draw();
     });
+
+    $('#pagination-history').pagination({
+        dataSource: data.history,
+        callback: function (data, pagination) {
+            var html = historyTemplate(data);
+            $('#data-history').html(html);
+        },
+        pageSize: 5,
+        showPageNumbers: false,
+        showNavigator: false,
+        showPrevious: false,
+        showNext: false
+    })
 }
 
 function generateData(json, private) {
     var retData = new Object();
     retData["chefs"] = new Array();
 
-    for (j in json.personal.chefs) {
-        retData["chefs"].push(json.personal.chefs[j]);
+    for (j in json.chefs) {
+        retData["chefs"].push(json.chefs[j]);
     }
+
+    retData["history"] = json.history;
 
     var recipesData = new Array();
     var dataCount = 0;
@@ -647,7 +662,7 @@ function generateData(json, private) {
                 }
 
                 if (efficiency > 0) {
-                    chefEff = (1 + qualityAddition + skillAddition + (private ? json.personal.furniture : 0)) * efficiency;
+                    chefEff = (1 + qualityAddition + skillAddition + (private ? json.furniture : 0)) * efficiency;
                 }
             }
 
@@ -707,6 +722,14 @@ function initShow(table, data, private) {
     }
 
     table.columns.adjust().draw(false);
+}
+
+function historyTemplate(data) {
+    var html = '';
+    $.each(data, function (index, item) {
+        html += '<p>' + item + '</p>';
+    });
+    return html;
 }
 
 function secondsToTime(sec) {

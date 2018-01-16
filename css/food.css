@@ -140,3 +140,31 @@ label.btn input[type="checkbox"]:checked+.fa {
         opacity: .5;
     }
 }
+
+.paginationjs-pages ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.paginationjs-pages li {
+    display: inline-block;
+}
+
+.paginationjs-pages,
+.paginationjs-nav {
+    display: inline-block;
+}
+
+.paginationjs-pages li a {
+    margin-right: 10px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.paginationjs-pages li.disabled a {
+    color: #ccc;
+}

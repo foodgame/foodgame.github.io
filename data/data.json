@@ -1751,7 +1751,7 @@
             ],
             "price": 237,
             "time": 452,
-            "total": 15,
+            "total": 25,
             "origin": "神级麻婆豆腐",
             "guests": [
                 {
@@ -2987,8 +2987,8 @@
             ],
             "godRune": "刀嘴鹦鹉",
             "personal": {
-                "quality": "",
-                "remark": "升级后羿(优)-升级后羿(特)-三阶后羿"
+                "quality": "优",
+                "remark": "升级后羿(特)-三阶后羿"
             }
         },
         {
@@ -3435,11 +3435,24 @@
             "fry": 0,
             "roast": 0,
             "steam": 0,
-            "ingredient": [],
+            "ingredient": [
+                {
+                    "name": "笋",
+                    "quantity": 3
+                },
+                {
+                    "name": "葱",
+                    "quantity": 10
+                },
+                {
+                    "name": "猪油",
+                    "quantity": 10
+                }
+            ],
             "price": 207,
             "time": 324,
             "total": 20,
-            "origin": "",
+            "origin": "神级笋干烧豆",
             "guests": [
                 {
                     "quality": "优",
@@ -4823,48 +4836,56 @@
         },
         {
             "recipeId": 103,
-            "name": "",
-            "fire": 0,
+            "name": "鸡肉蔬菜沙拉",
+            "fire": 2,
             "unlock": "-",
             "stirfry": 0,
             "boil": 0,
-            "cut": 0,
+            "cut": 35,
             "fry": 0,
             "roast": 0,
             "steam": 0,
             "ingredient": [
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "鸡胸肉",
+                    "quantity": 2
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "鸡蛋",
+                    "quantity": 4
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "番茄",
+                    "quantity": 6
+                },
+                {
+                    "name": "黄瓜",
+                    "quantity": 6
                 }
             ],
-            "price": 0,
-            "time": 0,
-            "total": 0,
-            "origin": "",
+            "price": 175,
+            "time": 305,
+            "total": 30,
+            "origin": "主线216",
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "耶稣"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "黄月英"
                 },
                 {
                     "quality": "神",
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "特",
+                "remark": "任意"
+            }
         },
         {
             "recipeId": 104,
@@ -4915,8 +4936,8 @@
             ],
             "godRune": "刀嘴鹦鹉",
             "personal": {
-                "quality": "",
-                "remark": "李一清(优)-升级后羿-升级后羿"
+                "quality": "优",
+                "remark": "升级后羿-升级后羿"
             }
         },
         {
@@ -6370,33 +6391,29 @@
         },
         {
             "recipeId": 136,
-            "name": "",
-            "fire": 0,
-            "unlock": "-",
-            "stirfry": 0,
+            "name": "笋干烧豆",
+            "fire": 3,
+            "unlock": "油焖笋",
+            "stirfry": 55,
             "boil": 0,
             "cut": 0,
             "fry": 0,
-            "roast": 0,
+            "roast": 20,
             "steam": 0,
             "ingredient": [
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "笋",
+                    "quantity": 5
                 },
                 {
-                    "name": "",
-                    "quantity": 0
-                },
-                {
-                    "name": "",
-                    "quantity": 0
+                    "name": "黄豆",
+                    "quantity": 6
                 }
             ],
-            "price": 0,
-            "time": 0,
-            "total": 0,
-            "origin": "",
+            "price": 163,
+            "time": 439,
+            "total": 25,
+            "origin": "主线206",
             "guests": [
                 {
                     "quality": "优",
@@ -6411,7 +6428,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "鱼不斩(优)-二阶火凤-大天狗"
+            }
         },
         {
             "recipeId": 137,
@@ -9843,8 +9864,8 @@
             ],
             "godRune": "刀嘴鹦鹉",
             "personal": {
-                "quality": "",
-                "remark": "升级后羿(优)-三阶后羿-升级三阶后羿"
+                "quality": "优",
+                "remark": "三阶后羿-升级三阶后羿"
             }
         },
         {

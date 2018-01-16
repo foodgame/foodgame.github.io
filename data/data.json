@@ -4132,8 +4132,8 @@
             "steam": 60,
             "ingredient": [
                 {
-                    "name": "鸡胸肉",
-                    "quantity": 6
+                    "name": "笋",
+                    "quantity": 8
                 },
                 {
                     "name": "香菇",
@@ -4141,6 +4141,10 @@
                 },
                 {
                     "name": "里脊肉",
+                    "quantity": 6
+                },
+                {
+                    "name": "鸡胸肉",
                     "quantity": 6
                 }
             ],

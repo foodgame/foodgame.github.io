@@ -141,7 +141,7 @@ function init(json) {
 
     table.fixedHeader.disable();
 
-    $("div.search-box").html('<label>查找:<input type="search" class="form-control input-sm" placeholder="菜名 材料 符文 ..."></label>');
+    $("div.search-box").html('<label>查找:<input type="search" class="form-control input-sm" placeholder="菜名 材料 贵客 符文"></label>');
 
     $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
         var chkFire0 = $('#chk-fire-0').prop("checked");

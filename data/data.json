@@ -6481,7 +6481,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "玄离(优)-三阶玄离-暂无"
+            }
         },
         {
             "recipeId": 138,

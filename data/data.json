@@ -12156,7 +12156,11 @@
             "show": false,
             "skill": [
                 {
-                    "type": "炸煮",
+                    "type": "炸类",
+                    "addition": 0.1
+                },
+                {
+                    "type": "煮类",
                     "addition": 0.1
                 }
             ]

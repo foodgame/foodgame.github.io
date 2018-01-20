@@ -1189,8 +1189,8 @@
             ],
             "godRune": "剪刀蟹",
             "personal": {
-                "quality": "优",
-                "remark": "任意-任意"
+                "quality": "特",
+                "remark": "任意"
             }
         },
         {
@@ -3449,8 +3449,8 @@
                     "quantity": 10
                 }
             ],
-            "price": 207,
-            "time": 324,
+            "price": 238,
+            "time": 326,
             "total": 20,
             "origin": "神级笋干烧豆",
             "guests": [
@@ -3467,7 +3467,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "羽十六(优)-暂无-暂无"
+            }
         },
         {
             "recipeId": 74,
@@ -6421,21 +6425,21 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "迷弟杜甫"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "迷弟杜甫"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "木优"
                 }
             ],
-            "godRune": "",
+            "godRune": "-",
             "personal": {
-                "quality": "",
-                "remark": "鱼不斩(优)-二阶火凤-大天狗"
+                "quality": "神",
+                "remark": ""
             }
         },
         {
@@ -7339,8 +7343,8 @@
             ],
             "godRune": "",
             "personal": {
-                "quality": "可",
-                "remark": "升级上宫晴(优)-暂无-暂无"
+                "quality": "优",
+                "remark": "暂无-暂无"
             }
         },
         {

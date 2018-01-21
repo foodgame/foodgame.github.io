@@ -5443,33 +5443,37 @@
         },
         {
             "recipeId": 116,
-            "name": "",
-            "fire": 0,
+            "name": "三鲜砂锅",
+            "fire": 3,
             "unlock": "-",
             "stirfry": 0,
-            "boil": 0,
+            "boil": 35,
             "cut": 0,
             "fry": 0,
             "roast": 0,
-            "steam": 0,
+            "steam": 35,
             "ingredient": [
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "冻鱼",
+                    "quantity": 2
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "虾",
+                    "quantity": 4
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "里脊肉",
+                    "quantity": 4
+                },
+                {
+                    "name": "香菇",
+                    "quantity": 6
                 }
             ],
-            "price": 0,
-            "time": 0,
-            "total": 0,
-            "origin": "",
+            "price": 230,
+            "time": 547,
+            "total": 25,
+            "origin": "限时任务",
             "guests": [
                 {
                     "quality": "优",
@@ -5484,7 +5488,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "粉雪(优)-升级蛋皇-上宫晴"
+            }
         },
         {
             "recipeId": 117,

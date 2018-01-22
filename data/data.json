@@ -4027,33 +4027,37 @@
         },
         {
             "recipeId": 86,
-            "name": "",
-            "fire": 0,
+            "name": "猪肚鸡",
+            "fire": 4,
             "unlock": "-",
             "stirfry": 0,
-            "boil": 0,
-            "cut": 0,
+            "boil": 65,
+            "cut": 30,
             "fry": 0,
             "roast": 0,
             "steam": 0,
             "ingredient": [
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "童子鸡",
+                    "quantity": 3
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "猪杂",
+                    "quantity": 8
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "黄豆",
+                    "quantity": 4
+                },
+                {
+                    "name": "牛乳",
+                    "quantity": 6
                 }
             ],
-            "price": 0,
-            "time": 0,
-            "total": 0,
-            "origin": "",
+            "price": 558,
+            "time": 416,
+            "total": 20,
+            "origin": "限时任务",
             "guests": [
                 {
                     "quality": "优",
@@ -4068,7 +4072,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "羽十六(优)-玄离-升级玄离"
+            }
         },
         {
             "recipeId": 87,
@@ -12396,6 +12404,7 @@
     ],
     "furniture": 0.466,
     "history": [
+        "2018/1/23 加入限时任务菜谱 三鲜砂锅 猪肚鸡",
         "2018/1/16 加入菜谱 笋干烧豆 鸡肉蔬菜沙拉",
         "2018/1/14 加入3个新的解锁菜谱 咖喱土豆牛肉 菠萝班戟 煎牛排",
         "2018/1/11 加入升阶贵客符文显示查找功能"

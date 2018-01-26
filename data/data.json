@@ -1442,7 +1442,7 @@
             "recipeId": 31,
             "name": "炸鱼排",
             "fire": 3,
-            "unlock": "-",
+            "unlock": "豆豉蒸鱼",
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
@@ -1481,7 +1481,7 @@
                     "guest": "木优"
                 }
             ],
-            "godRune": "一昧真火",
+            "godRune": "-",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -3937,33 +3937,37 @@
         },
         {
             "recipeId": 84,
-            "name": "",
-            "fire": 0,
+            "name": "豆豉蒸鱼",
+            "fire": 3,
             "unlock": "-",
             "stirfry": 0,
             "boil": 0,
             "cut": 0,
             "fry": 0,
             "roast": 0,
-            "steam": 0,
+            "steam": 65,
             "ingredient": [
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "黄豆",
+                    "quantity": 3
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "冻鱼",
+                    "quantity": 2
                 },
                 {
-                    "name": "",
-                    "quantity": 0
+                    "name": "葱",
+                    "quantity": 6
+                },
+                {
+                    "name": "辣椒",
+                    "quantity": 6
                 }
             ],
-            "price": 0,
-            "time": 0,
-            "total": 0,
-            "origin": "",
+            "price": 417,
+            "time": 306,
+            "total": 25,
+            "origin": "神级炸鱼排",
             "guests": [
                 {
                     "quality": "优",
@@ -3978,7 +3982,11 @@
                     "guest": ""
                 }
             ],
-            "godRune": ""
+            "godRune": "",
+            "personal": {
+                "quality": "",
+                "remark": "兔爷(优)-夏娃-上宫晴"
+            }
         },
         {
             "recipeId": 85,
@@ -12404,6 +12412,7 @@
     ],
     "furniture": 0.466,
     "history": [
+        "2018/1/26 加入菜谱 豆豉蒸鱼",
         "2018/1/23 加入限时任务菜谱 三鲜砂锅 猪肚鸡",
         "2018/1/16 加入菜谱 笋干烧豆 鸡肉蔬菜沙拉",
         "2018/1/14 加入3个新的解锁菜谱 咖喱土豆牛肉 菠萝班戟 煎牛排",

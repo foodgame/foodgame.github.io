@@ -2978,7 +2978,7 @@
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "王子"
                 },
                 {
                     "quality": "神",
@@ -2987,8 +2987,8 @@
             ],
             "godRune": "刀嘴鹦鹉",
             "personal": {
-                "quality": "优",
-                "remark": "升级后羿(特)-三阶后羿"
+                "quality": "特",
+                "remark": "三阶后羿"
             }
         },
         {
@@ -4960,8 +4960,8 @@
             ],
             "godRune": "刀嘴鹦鹉",
             "personal": {
-                "quality": "优",
-                "remark": "升级后羿-升级后羿"
+                "quality": "特",
+                "remark": "升级后羿"
             }
         },
         {
@@ -5322,7 +5322,7 @@
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "耶稣"
                 },
                 {
                     "quality": "神",
@@ -5331,8 +5331,8 @@
             ],
             "godRune": "",
             "personal": {
-                "quality": "优",
-                "remark": "上宫晴-三阶上宫晴"
+                "quality": "特",
+                "remark": "上宫晴"
             }
         },
         {

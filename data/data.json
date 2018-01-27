@@ -1769,8 +1769,8 @@
             ],
             "godRune": "蒸汽宝石",
             "personal": {
-                "quality": "",
-                "remark": "升级武葵/三阶上宫晴(优)-兔爷-暂无"
+                "quality": "优",
+                "remark": "兔爷-暂无"
             }
         },
         {
@@ -4029,8 +4029,8 @@
             ],
             "godRune": "焦虫",
             "personal": {
-                "quality": "优",
-                "remark": "二阶不知火喵-三阶不知火喵"
+                "quality": "特",
+                "remark": "不知火喵"
             }
         },
         {
@@ -5694,8 +5694,8 @@
             ],
             "godRune": "",
             "personal": {
-                "quality": "",
-                "remark": "兔爷(优)-暂无-暂无"
+                "quality": "优",
+                "remark": "暂无-暂无"
             }
         },
         {

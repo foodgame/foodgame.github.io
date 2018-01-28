@@ -4467,7 +4467,7 @@
                 }
             ],
             "price": 370,
-            "time": 209,
+            "time": 240,
             "total": 25,
             "origin": "神级鱼香茄子",
             "guests": [
@@ -4484,7 +4484,11 @@
                     "guest": "富人"
                 }
             ],
-            "godRune": "焦虫"
+            "godRune": "焦虫",
+            "personal": {
+                "quality": "",
+                "remark": "灯鬼(优)-升级秦瑞雨-不知火喵"
+            }
         },
         {
             "recipeId": 95,
@@ -7902,7 +7906,7 @@
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "木优"
                 },
                 {
                     "quality": "神",
@@ -7911,8 +7915,8 @@
             ],
             "godRune": "-",
             "personal": {
-                "quality": "",
-                "remark": "鱼不斩/琪琪(优)-兰染-三阶兰染"
+                "quality": "神",
+                "remark": ""
             }
         },
         {

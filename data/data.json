@@ -547,7 +547,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "貂蝉"
                 },
                 {
                     "quality": "特",
@@ -555,10 +555,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "大明湖畔的美女"
                 }
             ],
-            "godRune": "",
+            "godRune": "刀嘴鹦鹉",
             "personal": {
                 "quality": "",
                 "remark": "升级后羿(优)-玄离-三阶玄离"
@@ -751,10 +751,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "苏轼"
                 }
             ],
-            "godRune": "",
+            "godRune": "蒸汽宝石",
             "personal": {
                 "quality": "",
                 "remark": "上宫晴(优)-升级上宫晴-暂无"
@@ -2177,10 +2177,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "大明湖畔的美女"
                 }
             ],
-            "godRune": "",
+            "godRune": "一昧真火",
             "personal": {
                 "quality": "神",
                 "remark": ""
@@ -2365,7 +2365,7 @@
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "刘备"
                 },
                 {
                     "quality": "神",
@@ -2459,18 +2459,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "苏轼"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "如来"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "唐伯虎"
                 }
             ],
-            "godRune": "",
+            "godRune": "刀嘴鹦鹉",
             "personal": {
                 "quality": "",
                 "remark": "羽十六(优)-玄离-三阶玄离"
@@ -2647,7 +2647,7 @@
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "富太太"
                 },
                 {
                     "quality": "神",
@@ -3456,7 +3456,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "公主"
                 },
                 {
                     "quality": "特",
@@ -4069,7 +4069,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "唐伯虎"
                 },
                 {
                     "quality": "特",
@@ -4126,7 +4126,7 @@
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "诸葛亮"
                 },
                 {
                     "quality": "神",
@@ -4526,18 +4526,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "王子"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "王子"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "苏轼"
                 }
             ],
-            "godRune": "",
+            "godRune": "焦虫",
             "personal": {
                 "quality": "",
                 "remark": "姜灵儿(优)-升级姜灵儿/升级秦瑞雨-不知火喵/大天狗"
@@ -4906,10 +4906,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "唐伯虎"
                 }
             ],
-            "godRune": "",
+            "godRune": "焦虫",
             "personal": {
                 "quality": "特",
                 "remark": "任意"
@@ -5497,7 +5497,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "潇洒李白"
                 },
                 {
                     "quality": "特",
@@ -6840,18 +6840,18 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "皇帝"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "皇帝"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "皇帝"
                 }
             ],
-            "godRune": "",
+            "godRune": "恐怖利刃",
             "personal": {
                 "quality": "",
                 "remark": "大天狗(优)-三阶不知火喵-暂无"
@@ -6893,11 +6893,11 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富太太"
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "潇洒李白"
                 },
                 {
                     "quality": "神",
@@ -7211,7 +7211,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富太太"
                 },
                 {
                     "quality": "特",
@@ -7366,10 +7366,10 @@
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "富太太"
                 }
             ],
-            "godRune": "",
+            "godRune": "蒸汽宝石",
             "personal": {
                 "quality": "优",
                 "remark": "暂无-暂无"
@@ -7996,11 +7996,11 @@
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "刘备"
                 },
                 {
                     "quality": "神",
-                    "guest": ""
+                    "guest": "官爷"
                 }
             ],
             "godRune": "烤焦的菊花",
@@ -8241,7 +8241,7 @@
                 },
                 {
                     "quality": "特",
-                    "guest": ""
+                    "guest": "大内侍卫"
                 },
                 {
                     "quality": "神",
@@ -8331,7 +8331,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "富人"
                 },
                 {
                     "quality": "特",
@@ -9189,7 +9189,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "黄月英"
                 },
                 {
                     "quality": "特",
@@ -9242,7 +9242,7 @@
             "guests": [
                 {
                     "quality": "优",
-                    "guest": ""
+                    "guest": "迷弟杜甫"
                 },
                 {
                     "quality": "特",

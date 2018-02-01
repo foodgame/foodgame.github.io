@@ -756,8 +756,8 @@
             ],
             "godRune": "蒸汽宝石",
             "personal": {
-                "quality": "",
-                "remark": "上宫晴(优)-升级上宫晴-暂无"
+                "quality": "特",
+                "remark": "暂无"
             }
         },
         {
@@ -2472,8 +2472,8 @@
             ],
             "godRune": "刀嘴鹦鹉",
             "personal": {
-                "quality": "",
-                "remark": "羽十六(优)-玄离-三阶玄离"
+                "quality": "优",
+                "remark": "玄离-三阶玄离"
             }
         },
         {
@@ -4858,8 +4858,8 @@
             ],
             "godRune": "-",
             "personal": {
-                "quality": "可",
-                "remark": "三阶姜灵儿(优)-暂无-暂无"
+                "quality": "优",
+                "remark": "姜灵儿-暂无"
             }
         },
         {
@@ -4964,8 +4964,8 @@
             ],
             "godRune": "刀嘴鹦鹉",
             "personal": {
-                "quality": "特",
-                "remark": "升级后羿"
+                "quality": "神",
+                "remark": ""
             }
         },
         {

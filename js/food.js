@@ -105,6 +105,8 @@ function init(json) {
         }
     ];
 
+    var j;
+
     for (j in data.chefs) {
         $('#chk-show-chef').append("<option value='" + j + "'>" + data.chefs[j].name + "</option>");
         $('#food-table thead tr').append("<th>" + data.chefs[j].name + "</th>").append("<th>效率</th>");
@@ -118,6 +120,16 @@ function init(json) {
             "searchable": false
         });
     }
+
+    $('#food-table thead tr').append("<th>最佳厨师</th>").append("<th>最大效率</th>");
+    columns.push({
+        "data": "chefs."  + (parseInt(j) + 1) + ".chefQlty",
+        "searchable": false
+    });
+    columns.push({
+        "data": "chefs."  + (parseInt(j) + 1) + ".chefEff",
+        "searchable": false
+    });
 
     var table = $('#food-table').DataTable({
         data: data.recipes,
@@ -134,8 +146,8 @@ function init(json) {
         "lengthMenu": [[20, 50, 100, -1], [20, 50, 100, "所有"]],
         "pageLength": 20,
         "dom": "<'row'<'col-sm-4'l><'col-sm-4 text-center'i><'col-sm-4'<'search-box'>>>" +
-            "<'row'<'col-sm-12'tr>>" +
-            "<'row'<'col-sm-12'p>>",
+        "<'row'<'col-sm-12'tr>>" +
+        "<'row'<'col-sm-12'p>>",
         fixedHeader: true
     });
 
@@ -487,6 +499,10 @@ function generateData(json, private) {
         recipesData[dataCount]["guests"] = guests;
 
         recipesData[dataCount]["chefs"] = new Array();
+
+        var maxEff = 0;
+        var maxQlty = "";
+
         for (j in retData["chefs"]) {
 
             var times = Number.MAX_VALUE;
@@ -666,11 +682,23 @@ function generateData(json, private) {
                 }
             }
 
+            if (maxEff < chefEff) {
+                maxEff = chefEff;
+                maxQlty = retData["chefs"][j].name + "[" + chefQlty + "]";
+            }else if (maxEff === chefEff) {
+                maxQlty += "," + retData["chefs"][j].name + "[" + chefQlty + "]";
+            }
+
             recipesData[dataCount]["chefs"].push({
                 "chefQlty": chefQlty,
                 "chefEff": chefEff ? parseInt(chefEff) : ""
             });
         }
+
+        recipesData[dataCount]["chefs"].push({
+            "chefQlty": maxEff ? maxQlty : "-",
+            "chefEff": maxEff ? parseInt(maxEff) : ""
+        });
 
         dataCount++;
     }

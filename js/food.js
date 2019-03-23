@@ -3487,7 +3487,7 @@ function checkMaterials2(custom, materials) {
             for (var m in recipe.data.materials) {
                 for (var n in materialsData) {
                     if (recipe.data.materials[m].material == materialsData[n].materialId) {
-                        if (Number.isInteger(materialsData[n].quantity)) {
+                        if (Number.isInteger(parseInt(materialsData[n].quantity))) {
                             materialsData[n].quantity -= recipe.data.materials[m].quantity * recipe.quantity;
                         }
                     }

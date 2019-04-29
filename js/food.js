@@ -3984,7 +3984,7 @@ function initCalResultsTable(data) {
             panel.find(".cal-results-progress .progress-bar span").text("预处理中");
             panel.find(".cal-results-progress").removeClass("hidden");
 
-            calOptimalWorker = new Worker("others/js/cal.js");
+            calOptimalWorker = new Worker("others/js/cal.js?v=" + (new Date()).getTime());
 
             calOptimalWorker.onmessage = function (event) {
                 if (event.data.progress) {

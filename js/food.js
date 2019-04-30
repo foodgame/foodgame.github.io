@@ -2031,6 +2031,18 @@ function importData(data, input) {
     }
     $("#select-cal-rule").append(options).selectpicker('refresh');
 
+    if (person.calEquips) {
+        $('#cal-equips-table').DataTable().rows().deselect();
+        $('#cal-equips-table').DataTable().rows(function (idx, data, node) {
+            for (var i in person.calEquips) {
+                if (data.equipId == person.calEquips[i]) {
+                    return true;
+                }
+            }
+            return false;
+        }).select();
+    }
+
     updateMenu(person);
 
     if (person.decorationEffect) {
@@ -3812,6 +3824,16 @@ function initCalEquipsTable(data) {
     $('#btn-cal-equips-deselect-all').click(function () {
         $('.chk-cal-equips-origin input[type="checkbox"]').prop("checked", false);
         calEquipsTable.rows().deselect();
+    });
+
+    $('#btn-cal-equips-export').click(function () {
+        var selectedData = $('#cal-equips-table').DataTable().rows({ selected: true }).data().toArray();
+        var exportData = {};
+        exportData["calEquips"] = [];
+        for (var i in selectedData) {
+            exportData.calEquips.push(selectedData[i].equipId);
+        }
+        $("#input-export-import").val(JSON.stringify(exportData));
     });
 
     initCalEquipsShow(calEquipsTable);

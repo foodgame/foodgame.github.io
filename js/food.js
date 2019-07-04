@@ -3298,11 +3298,22 @@ function calCustomResults(rule, data) {
     }
     $("#pane-cal-self-select .selected-sum").append(" 总得分：" + score);
     if (rule.showTime) {
+
+        for (var i in partialUltimateData) {
+            timeAddition += getTimeAddition(partialUltimateData[i].effect);
+        }
+
         if (+timeAddition.toFixed(2) != 0) {
             $("#pane-cal-self-select .selected-sum").append(" 原时间：" + (secondsToTime(time) || 0));
         }
         var finalTime = Math.ceil(+(time * (1 + timeAddition / 100)).toFixed(2));
         $("#pane-cal-self-select .selected-sum").append(" 总时间：" + (secondsToTime(finalTime) || 0));
+
+        var finalEff = 0;
+        if (finalTime > 0) {
+            finalEff = Math.floor(score * 3600 / finalTime);
+        }
+        $("#pane-cal-self-select .selected-sum").append(" 总效率：" + finalEff + "金币/小时");
     }
 
     if (materialsResult.message) {
@@ -5085,7 +5096,9 @@ function setPartialUltimateOptions(chefs, skills) {
                         if (skills[k].effect[m].condition == "Partial") {
                             var skillInfo = getSkillInfo(skills, skills[k].skillId);
                             var option = "<option value='" + chefs[i].chefId + "' data-subtext='" + skillInfo.skillDisp + "'>" + chefs[i].name + "</option>";
-                            $('#chk-chef-partial-ultimate').append(option);
+                            if (skills[k].effect[m].type != "OpenTime") {
+                                $('#chk-chef-partial-ultimate').append(option);
+                            }
                             $('#chk-cal-partial-ultimate').append(option);
                         }
                     }

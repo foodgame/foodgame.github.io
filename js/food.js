@@ -2341,6 +2341,8 @@ function initCalTables(data) {
         initCalChefsTable(data);
         initCalEquipsTable(data);
         initCalMaterialsTable(data);
+
+        $('#input-cal-thread').val(navigator.hardwareConcurrency);
     }
 }
 
@@ -4046,10 +4048,11 @@ function initCalResultsTable(data) {
             var calEquipsData = $('#cal-equips-table').DataTable().rows({ selected: true }).data().toArray();
             var calMaterialsData = $('#cal-materials-table').DataTable().rows({ selected: true }).data().toArray();
             var noEquips = $('#chk-cal-results-no-equips').prop("checked");
-            var autoEquips = $('#chk-cal-results-equips').prop("checked");
-            var changeEquips = $('#chk-cal-results-equips-change').prop("checked");
-            var minEquip = $('#chk-cal-results-min-score-equip').prop("checked");
+            var addEquips = $('#chk-cal-results-add-equips').prop("checked");
+            var changeEquips = $('#chk-cal-results-change-equips').prop("checked");
+            var fixEquips = $('#chk-cal-results-fix-equips').prop("checked");
             var minScore = Number($('#input-cal-min-score').val());
+            var thread = Number($('#input-cal-thread').val());
             var mode = $('#select-cal-type').val();
 
             calOptimalWorker.postMessage({
@@ -4062,10 +4065,11 @@ function initCalResultsTable(data) {
                 "materials": calMaterialsData,
                 "odata": data,
                 "noEquips": noEquips,
-                "autoEquips": autoEquips,
+                "addEquips": addEquips,
                 "changeEquips": changeEquips,
-                "minEquip": minEquip,
-                "minScore": minScore
+                "fixEquips": fixEquips,
+                "minScore": minScore,
+                "thread": thread
             });
         });
 

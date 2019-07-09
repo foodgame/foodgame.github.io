@@ -255,6 +255,7 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
     var score = Math.ceil(+(recipe.price * (1 + priceAddition + bonusAddition)).toFixed(2));
     resultData["bonusScore"] = score - resultData.realPrice;
     resultData["totalBonusScore"] = resultData.bonusScore * quantity;
+    resultData["score"] = score;
     resultData["totalScore"] = score * quantity;
     resultData["totalTime"] = recipe.time * quantity;
     resultData["totalTimeDisp"] = secondsToTime(resultData.totalTime);
@@ -522,4 +523,60 @@ function getPartialUltimateData(chefs, skills, useUltimate, ids) {
         }
     }
     return result;
+}
+
+function updateMaterialsData(materialsData, recipe, quantity) {
+    for (var m in recipe.data.materials) {
+        for (var n in materialsData) {
+            if (recipe.data.materials[m].material == materialsData[n].materialId) {
+                if (Number.isInteger(parseInt(materialsData[n].quantity))) {
+                    materialsData[n].quantity -= recipe.data.materials[m].quantity * quantity;
+                }
+            }
+        }
+    }
+}
+
+function getMaxNSum(recipesData, num) {
+    recipesData.sort(function (a, b) {
+        return b.totalScore - a.totalScore
+    });
+    var sum = 0;
+    var toIndex = Math.min(recipesData.length, num);
+    for (var m = 0; m < toIndex; m++) {
+        sum += recipesData[m].totalScore;
+    }
+    return sum;
+}
+
+function getMaxNSumRecipes(combsData, data) {
+    var allRecipes = [];
+    for (var j in combsData) {
+        for (var k in combsData[j].recipes) {
+            allRecipes.push(combsData[j].recipes[k]);
+        }
+    }
+
+    allRecipes.sort(function (a, b) {
+        return b.totalScore - a.totalScore
+    });
+
+    var recipeArray = [];
+    var recipeIdArray = [];
+    var sum = 0;
+    for (var m in allRecipes) {
+        if (recipeIdArray.indexOf(allRecipes[m].recipeId) < 0) {
+            recipeIdArray.push(allRecipes[m].recipeId);
+            recipeArray.push(allRecipes[m]);
+
+            if (recipeIdArray.length <= data.rule.RecipesNumLimit) {
+                sum += allRecipes[m].totalScore;
+            }
+
+            if (recipeIdArray.length == data.rule.ChefNumLimit * data.rule.RecipesNumLimit) {
+                break;
+            }
+        }
+    }
+    return { "recipes": recipeArray, "sum": sum };
 }

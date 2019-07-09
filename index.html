@@ -7,9 +7,9 @@
     <link rel="shortcut icon" href="favicon.ico?v=1" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="css/style.min.css?v=3" />
     <script type="text/javascript" src="js/script.min.js?v=9"></script>
-    <script type="text/javascript" src="js/common.min.js?v=28"></script>
-    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=34" />
-    <script type="text/javascript" src="js/food.min.js?v=126"></script>
+    <script type="text/javascript" src="js/common.min.js?v=29"></script>
+    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=35" />
+    <script type="text/javascript" src="js/food.min.js?v=127"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=28" />
 </head>
 
@@ -1494,23 +1494,27 @@
                                         不带厨具
                                     </label>
                                     <label class="btn btn-default">
-                                        <input type="checkbox" id="chk-cal-results-equips">
+                                        <input type="checkbox" id="chk-cal-results-add-equips">
                                         <i class="fa fa-check glyphicon glyphicon-ok"></i>
                                         无厨具可带厨具
                                     </label>
                                     <label class="btn btn-default">
-                                        <input type="checkbox" id="chk-cal-results-equips-change">
+                                        <input type="checkbox" id="chk-cal-results-change-equips">
                                         <i class="fa fa-check glyphicon glyphicon-ok"></i>
                                         有厨具可换厨具
                                     </label>
-                                    <label class="btn btn-default cal-min">
-                                        <input type="checkbox" id="chk-cal-results-min-score-equip">
+                                    <label class="btn btn-default">
+                                        <input type="checkbox" id="chk-cal-results-fix-equips">
                                         <i class="fa fa-check glyphicon glyphicon-ok"></i>
-                                        30%最低分
+                                        30%厨具
                                     </label>
-                                    <div class="input-group cal-min">
-                                        <div class="input-group-addon">指定最低分</div>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">最低分</div>
                                         <input type="text" class="form-control" id="input-cal-min-score">
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">线程</div>
+                                        <input type="text" class="form-control" id="input-cal-thread">
                                     </div>
                                     <button class="btn btn-default btn-cal-results-cal start" type="button">
                                         <span class="glyphicon glyphicon-pencil"></span>&nbsp;计算最优解

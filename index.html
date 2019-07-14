@@ -1052,7 +1052,7 @@
                             <a href="#pane-cal-materials" data-toggle="tab">配置食材</a>
                         </li>
                         <li>
-                            <a href="#pane-cal-optimal-results" data-toggle="tab">最优组合</a>
+                            <a href="#pane-cal-optimal-results" data-toggle="tab">计算组合</a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -1484,8 +1484,9 @@
                             <div>
                                 <div class="box form-inline">
                                     <select id="select-cal-type" class="form-control">
-                                        <option value='normal'>正常模式</option>
-                                        <option value='recipe'>选菜模式</option>
+                                        <option value='mode1'>正常模式</option>
+                                        <option value='mode2'>选菜模式</option>
+                                        <option value='mode3'>脚本模式</option>
                                         <option value='guest'>贵客模式</option>
                                     </select>
                                     <label class="btn btn-default">
@@ -1517,7 +1518,7 @@
                                         <input type="text" class="form-control" id="input-cal-thread">
                                     </div>
                                     <button class="btn btn-default btn-cal-results-cal start" type="button">
-                                        <span class="glyphicon glyphicon-pencil"></span>&nbsp;计算最优解
+                                        <span class="glyphicon glyphicon-pencil"></span>&nbsp;开始计算
                                     </button>
                                     <button class="btn btn-default btn-cal-results-cal stop" type="button" disabled>
                                         <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;停止计算

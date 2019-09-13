@@ -72,6 +72,8 @@ function initTables(data, person) {
 
     setPartialUltimateOptions(data.chefs, data.skills);
 
+    setSelfUltimateOptions(data.chefs, data.skills);
+
     initRecipeTable(data);
 
     initChefTable(data);
@@ -2425,6 +2427,10 @@ function initCalRules(data) {
         $("#btn-cal-update").removeClass("btn-default").addClass("btn-danger");
     });
 
+    $('#chk-cal-self-ultimate').selectpicker().on('changed.bs.select', function () {
+        $("#btn-cal-update").removeClass("btn-default").addClass("btn-danger");
+    });
+
     $("#btn-cal-load-ultimate").click(function () {
         $("#btn-cal-update").removeClass("btn-default").addClass("btn-danger");
         $("#cal-ultimate input").val("");
@@ -2441,6 +2447,7 @@ function initCalRules(data) {
         $("#btn-cal-update").removeClass("btn-default").addClass("btn-danger");
         $("#cal-ultimate input").val("");
         $('#chk-cal-partial-ultimate').selectpicker('deselectAll');
+        $('#chk-cal-self-ultimate').selectpicker('deselectAll');
     });
 
     $("#chk-cal-got").click(function () {
@@ -2553,6 +2560,13 @@ function loadUltimate(data, usePerson) {
         partialIds.push(partialUltimate[i].chefId);
     }
     $('#chk-cal-partial-ultimate').selectpicker('val', partialIds);
+
+    var selfUltimate = ultimateData.self;
+    var selfIds = [];
+    for (var i in selfUltimate) {
+        selfIds.push(selfUltimate[i].chefId);
+    }
+    $('#chk-cal-self-ultimate').selectpicker('val', selfIds);
 }
 
 function setCalConfigData(rule, data) {
@@ -2819,8 +2833,15 @@ function setCalConfigData(rule, data) {
     }
     var selfPartialUltimateData = getPartialUltimateData(data.chefs, data.partialSkill, true, partialChefIds);
 
+    var selfChefIds = $('#chk-cal-self-ultimate').val();
+    for (var i in selfChefIds) {
+        selfChefIds[i] = Number(selfChefIds[i]);
+    }
+    var selfUltimateData = getSelfUltimateData(data.chefs, data.skills, true, selfChefIds);
+
     rule["calGlobalUltimateData"] = globalUltimate;
     rule["calPartialChefIds"] = partialChefIds;
+    rule["calSelfUltimateData"] = selfUltimateData;
 
     for (var i in rule.menus) {
         setDataForRecipe(rule.menus[i].recipe.data, globalUltimate);
@@ -2835,7 +2856,7 @@ function setCalConfigData(rule, data) {
     }
 
     for (var i in rule.chefs) {
-        setDataForChef(rule.chefs[i], null, false, globalUltimate, selfPartialUltimateData, null);
+        setDataForChef(rule.chefs[i], null, false, globalUltimate, selfPartialUltimateData, null, selfUltimateData);
     }
 }
 
@@ -3231,7 +3252,7 @@ function calCustomResults(rule, data) {
 
     for (var i in custom) {
         if (custom[i].chef.chefId) {
-            setDataForChef(custom[i].chef, custom[i].equip, true, rule.calGlobalUltimateData, partialUltimateData, partialUltimateData);
+            setDataForChef(custom[i].chef, custom[i].equip, true, rule.calGlobalUltimateData, partialUltimateData, partialUltimateData, rule.calSelfUltimateData);
 
             if (i % 3 == 0) {
                 if (!rule || !rule.hasOwnProperty("DisableChefSkillEffect") || rule.DisableChefSkillEffect == false) {
@@ -3239,7 +3260,8 @@ function calCustomResults(rule, data) {
                 }
                 if (!rule || !rule.hasOwnProperty("DisableEquipSkillEffect") || rule.DisableEquipSkillEffect == false) {
                     if (custom[i].equip) {
-                        timeAddition += getTimeAddition(custom[i].equip.effect);
+                        var equipEffect = updateEquipmentEffect(custom[i].equip.effect, custom[i].chef.selfUltimateEffect);
+                        timeAddition += getTimeAddition(equipEffect);
                     }
                 }
             }
@@ -4676,7 +4698,7 @@ function generateData(json, json2, person) {
             }
         }
 
-        setDataForChef(chefData, chefData.equip, useEquip, ultimateData.global, ultimateData.partial, null);
+        setDataForChef(chefData, chefData.equip, useEquip, ultimateData.global, ultimateData.partial, null, ultimateData.self);
 
         chefsData.push(chefData);
     }
@@ -4811,7 +4833,7 @@ function getUpdateData(data) {
     var otherPartialUltimateData = getPartialUltimateData(data.chefs, data.partialSkill, useUltimate, partialChefIds);
 
     for (var i in data.chefs) {
-        setDataForChef(data.chefs[i], data.chefs[i].equip, useEquip, ultimateData.global, ultimateData.partial, otherPartialUltimateData);
+        setDataForChef(data.chefs[i], data.chefs[i].equip, useEquip, ultimateData.global, ultimateData.partial, otherPartialUltimateData, ultimateData.self);
     }
 
     for (var i in data.recipes) {
@@ -5027,6 +5049,7 @@ function getRankGuestInfo(recipe, rank) {
 function getUltimateData(chefs, person, skills, useUltimate, usePerson) {
     var globalEffect = [];
     var partialEffect = [];
+    var selfEffect = [];
 
     for (var i in chefs) {
         if (useUltimate && chefs[i].ultimateSkill) {
@@ -5052,6 +5075,7 @@ function getUltimateData(chefs, person, skills, useUltimate, usePerson) {
                 for (var k in skills) {
                     if (chefs[i].ultimateSkill == skills[k].skillId) {
                         var tempEffect = [];
+                        var tempEffect2 = [];
                         for (var m in skills[k].effect) {
                             if (skills[k].effect[m].condition == "Partial") {
                                 tempEffect.push(skills[k].effect[m]);
@@ -5070,6 +5094,8 @@ function getUltimateData(chefs, person, skills, useUltimate, usePerson) {
                                 if (!found) {
                                     globalEffect.push(JSON.parse(JSON.stringify(skills[k].effect[m])));
                                 }
+                            } else if (skills[k].effect[m].condition == "Self") {
+                                tempEffect2.push(skills[k].effect[m]);
                             }
                         }
                         if (tempEffect.length) {
@@ -5077,6 +5103,12 @@ function getUltimateData(chefs, person, skills, useUltimate, usePerson) {
                             partialData["chefId"] = chefs[i].chefId;
                             partialData["effect"] = tempEffect;
                             partialEffect.push(partialData);
+                        }
+                        if (tempEffect2.length) {
+                            var selfData = {};
+                            selfData["chefId"] = chefs[i].chefId;
+                            selfData["effect"] = tempEffect2;
+                            selfEffect.push(selfData);
                         }
                         break;
                     }
@@ -5088,6 +5120,7 @@ function getUltimateData(chefs, person, skills, useUltimate, usePerson) {
     var result = {};
     result["global"] = globalEffect;
     result["partial"] = partialEffect;
+    result["self"] = selfEffect;
     return result;
 }
 
@@ -5104,6 +5137,26 @@ function setPartialUltimateOptions(chefs, skills) {
                                 $('#chk-chef-partial-ultimate').append(option);
                             }
                             $('#chk-cal-partial-ultimate').append(option);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+function setSelfUltimateOptions(chefs, skills) {
+    for (var i in chefs) {
+        if (chefs[i].ultimateSkill) {
+            for (var k in skills) {
+                if (chefs[i].ultimateSkill == skills[k].skillId) {
+                    for (var m in skills[k].effect) {
+                        if (skills[k].effect[m].condition == "Self") {
+                            var skillInfo = getSkillInfo(skills, skills[k].skillId);
+                            var option = "<option value='" + chefs[i].chefId + "' data-subtext='" + skillInfo.skillDisp + "'>" + chefs[i].name + "</option>";
+                            if (skills[k].effect[m].type == "MutiEquipmentSkill") {
+                                $('#chk-cal-self-ultimate').append(option);
+                            }
                         }
                     }
                 }

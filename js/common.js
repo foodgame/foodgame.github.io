@@ -220,7 +220,8 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
 
         if (!rule || !rule.hasOwnProperty("DisableEquipSkillEffect") || rule.DisableEquipSkillEffect == false) {
             if (equip) {
-                equipSkillAddition = getRecipeSkillAddition(equip.effect, recipe, rule);
+                var equipEffect = updateEquipmentEffect(equip.effect, chef.selfUltimateEffect);
+                equipSkillAddition = getRecipeSkillAddition(equipEffect, recipe, rule);
             }
         }
         resultData["equipSkillAdditionDisp"] = getPercentDisp(equipSkillAddition);
@@ -286,6 +287,20 @@ function getTimeAddition(effects) {
     return +addition.toFixed(2);
 }
 
+function updateEquipmentEffect(effect, selfUltimateEffect) {
+    for (var i in selfUltimateEffect) {
+        if (selfUltimateEffect[i].type == "MutiEquipmentSkill") {
+            effect = JSON.parse(JSON.stringify(effect));
+            for (var j in effect) {
+                var equipAddtion = new Addition();
+                setAddition(equipAddtion, selfUltimateEffect[i]);
+                effect[j].value = calAddition(effect[j].value, equipAddtion);
+            }
+        }
+    }
+    return effect;
+}
+
 function setAddition(addition, effect) {
     if (effect.cal == "Abs") {
         addition.abs = +(addition.abs + effect.value).toFixed(2);
@@ -340,7 +355,7 @@ function getEquipInfo(equipName, equips) {
     return info;
 }
 
-function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartialUltimateData, otherPartialUltimateData) {
+function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartialUltimateData, otherPartialUltimateData, selfUltimateEffect) {
 
     var stirfryAddition = new Addition();
     var boilAddition = new Addition();
@@ -356,8 +371,20 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartial
 
     var effects = globalUltimateEffect;
 
+    chef["selfUltimateEffect"] = [];
+
     if (useEquip && equip && equip.effect) {
-        effects = effects.concat(equip.effect);
+        var equipEffect = equip.effect;
+        if (selfUltimateEffect) {
+            for (var i in selfUltimateEffect) {
+                if (chef.chefId == selfUltimateEffect[i].chefId) {
+                    chef.selfUltimateEffect = selfUltimateEffect[i].effect;
+                    equipEffect = updateEquipmentEffect(equipEffect, chef.selfUltimateEffect);
+                    break;
+                }
+            }
+        }
+        effects = effects.concat(equipEffect);
     }
 
     var selfPartialAdded = false;
@@ -513,6 +540,37 @@ function getPartialUltimateData(chefs, skills, useUltimate, ids) {
                                 partialData["chefId"] = chefs[j].chefId;
                                 partialData["effect"] = tempEffect;
                                 result.push(partialData);
+                            }
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+function getSelfUltimateData(chefs, skills, useUltimate, ids) {
+    var result = [];
+    if (useUltimate) {
+        for (var i in ids) {
+            for (var j in chefs) {
+                if (ids[i] == chefs[j].chefId) {
+                    for (var k in skills) {
+                        if (chefs[j].ultimateSkill == skills[k].skillId) {
+                            var tempEffect = [];
+                            for (var m in skills[k].effect) {
+                                if (skills[k].effect[m].condition == "Self") {
+                                    tempEffect.push(skills[k].effect[m]);
+                                }
+                            }
+                            if (tempEffect.length) {
+                                var selfData = {};
+                                selfData["chefId"] = chefs[j].chefId;
+                                selfData["effect"] = tempEffect;
+                                result.push(selfData);
                             }
                             break;
                         }

@@ -6,10 +6,10 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="favicon.ico?v=1" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="css/style.min.css?v=3" />
-    <script type="text/javascript" src="js/script.min.js?v=9"></script>
+    <script type="text/javascript" src="js/script.js?v=9"></script>
     <script type="text/javascript" src="js/common.min.js?v=30"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=35" />
-    <script type="text/javascript" src="js/food.min.js?v=128"></script>
+    <script type="text/javascript" src="js/food.js?v=128"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=31" />
 </head>
 
@@ -161,13 +161,13 @@
                             已有
                         </label>
                         <div class="chk-recipe-show-material-wrapper">
-                            <select id="chk-recipe-show-material" multiple data-live-search="true" data-live-search-placeholder="查找"
+                            <select id="chk-recipe-show-material" multiple data-live-search="true" data-live-search-style="commaSplitContains" data-live-search-placeholder="查找"
                                 data-width="auto" data-dropdown-align-right='auto' data-none-selected-text="耗材效率" data-selected-text-format="count"
                                 data-count-selected-text="{0} 食材" data-none-results-text="没有找到" data-actions-box="true"
                                 data-deselect-all-text="清空"></select>
                         </div>
                         <div class="chk-recipe-show-chef-wrapper">
-                            <select id="chk-recipe-show-chef" multiple data-live-search="true" data-live-search-placeholder="查找" data-width="auto"
+                            <select id="chk-recipe-show-chef" multiple data-live-search="true" data-live-search-style="commaSplitContains" data-live-search-placeholder="查找" data-width="auto"
                                 data-dropdown-align-right='auto' data-none-selected-text="选择厨师" data-selected-text-format="count"
                                 data-count-selected-text="{0} 厨师" data-none-results-text="没有找到" data-actions-box="true"
                                 data-deselect-all-text="清空"></select>
@@ -424,7 +424,7 @@
                             已有
                         </label>
                         <div class="chk-chef-show-recipe-wrapper">
-                            <select id="chk-chef-show-recipe" multiple data-live-search="true" data-live-search-placeholder="查找" data-width="auto"
+                            <select id="chk-chef-show-recipe" multiple data-live-search="true" data-live-search-style="commaSplitContains" data-live-search-placeholder="查找" data-width="auto"
                                 data-dropdown-align-right='auto' data-none-selected-text="选择菜谱" data-selected-text-format="count"
                                 data-count-selected-text="{0} 菜谱" data-none-results-text="没有找到" data-actions-box="true"
                                 data-deselect-all-text="清空"></select>
@@ -1058,7 +1058,7 @@
                         <div id="pane-cal-rules" class="tab-pane active">
                             <div>
                                 <div class="box form-inline">
-                                    <select id="select-cal-rule" class="selectpicker" data-live-search='true' data-width='auto'
+                                    <select id="select-cal-rule" class="selectpicker" data-live-search='true' data-live-search-style="commaSplitContains" data-width='auto'
                                         data-dropdown-align-right='auto' data-live-search-placeholder='查找' data-none-results-text='没有找到'
                                         data-none-selected-text=''></select>
                                     <button id="btn-cal-rule-load" class="btn btn-danger" type="button">

@@ -31363,6 +31363,54 @@ if (typeof jQuery === 'undefined') {
     (function ($) {
         'use strict';
 
+        if (!String.prototype.commaSplitContains) {
+            (function () {
+                'use strict'; // needed to support `apply`/`call` with `undefined`/`null`
+                var toString = {}.toString;
+                var defineProperty = (function () {
+                    // IE 8 only supports `Object.defineProperty` on DOM elements
+                    try {
+                        var object = {};
+                        var $defineProperty = Object.defineProperty;
+                        var result = $defineProperty(object, object, object) && $defineProperty;
+                    } catch (error) {
+                    }
+                    return result;
+                }());
+                var indexOf = ''.indexOf;
+                var commaSplitContains = function (search) {
+                    if (this == null) {
+                        throw new TypeError();
+                    }
+                    var string = String(this);
+                    if (search && toString.call(search) == '[object RegExp]') {
+                        throw new TypeError();
+                    }
+
+                    var searchString = String(search);
+
+                    if (searchString.length === 0) return true;
+                    var values = searchString.split(/[,\s]/);
+                    for (var i = 0; i < values.length; i++) {
+                      if (values[i].length === 0) continue;
+                      if (string.indexOf(values[i]) !== -1) {
+                        return true;
+                      }
+                    }
+                    return false;
+                };
+                if (defineProperty) {
+                    defineProperty(String.prototype, 'commaSplitContains', {
+                        'value': commaSplitContains,
+                        'configurable': true,
+                        'writable': true
+                    });
+                } else {
+                    String.prototype.commaSplitContains = commaSplitContains;
+                }
+            }());
+        }
+
         //<editor-fold desc="Shims">
         if (!String.prototype.includes) {
             (function () {
@@ -31540,6 +31588,13 @@ if (typeof jQuery === 'undefined') {
             }
         };
         //</editor-fold>
+
+        // Case insensitive commaSplitContains search
+        $.expr.pseudos.commaSplitContains = function (obj, index, meta) {
+            var $obj = $(obj).find('a');
+            var haystack = ($obj.data('tokens') || $obj.text()).toString().toUpperCase();
+            return haystack.commaSplitContains(meta[3].toUpperCase());
+        };
 
         // Case insensitive contains search
         $.expr.pseudos.icontains = function (obj, index, meta) {
@@ -32846,7 +32901,8 @@ if (typeof jQuery === 'undefined') {
             _searchStyle: function () {
                 var styles = {
                     begins: 'ibegins',
-                    startsWith: 'ibegins'
+                    startsWith: 'ibegins',
+                    commaSplitContains: 'commaSplitContains'
                 };
 
                 return styles[this.options.liveSearchStyle] || 'icontains';

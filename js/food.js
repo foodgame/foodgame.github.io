@@ -5749,6 +5749,8 @@ function initVersionTip(person) {
         }
         if (showTip) {
             $("#alert-version").removeClass("hidden");
+            $(".btn-new-version").removeClass("btn-default").addClass("btn-info");
+            $(".toggle-new-version").closest(".toggle").find(".toggle-on, .toggle-off").removeClass("btn-default").addClass("btn-info");
         }
 
         $('#alert-version').on('close.bs.alert', function () {

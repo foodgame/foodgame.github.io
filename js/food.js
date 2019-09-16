@@ -72,8 +72,6 @@ function initTables(data, person) {
 
     setPartialUltimateOptions(data.chefs, data.skills);
 
-    setSelfUltimateOptions(data.chefs, data.skills);
-
     initRecipeTable(data);
 
     initChefTable(data);
@@ -193,7 +191,7 @@ function initRecipeTable(data) {
         }
 
         var check = $('#chk-recipe-guest').prop("checked");
-        var guest = data[21];   // guest
+        var guest = data[24];   // guest
 
         if (!check || check && guest) {
             return true;
@@ -209,7 +207,7 @@ function initRecipeTable(data) {
         }
 
         var check = $('#chk-recipe-no-origin').prop("checked");
-        var origin = data[18];   // origin
+        var origin = data[20];   // origin
 
         if (check || !check && origin) {
             return true;
@@ -225,7 +223,7 @@ function initRecipeTable(data) {
         }
 
         var value = $.trim($("#input-recipe-guest-antique").val());
-        var searchCols = [22, 23];  // rank guest, rank antique
+        var searchCols = [25, 26];  // rank guest, rank antique
 
         for (var i = 0, len = searchCols.length; i < len; i++) {
             if (data[searchCols[i]].indexOf(value) !== -1) {
@@ -243,7 +241,7 @@ function initRecipeTable(data) {
         }
 
         var check = $('#chk-recipe-got').prop("checked");
-        var got = data[25];   // got
+        var got = data[29];   // got
 
         if (!check || check && got) {
             return true;
@@ -258,14 +256,14 @@ function initRecipeTable(data) {
         }
 
         var value = $.trim($("#pane-recipes .search-box input").val());
-        var searchCols = [0, 2, 10, 18, 20, 21]; // id, name, materials, origin, tags, guest
+        var searchCols = [0, 2, 10, 20, 23, 24]; // id, name, materials, origin, tags, guest
 
         for (var i = 0, len = searchCols.length; i < len; i++) {
             if (searchCols[i] == 0) {  // id
                 if (data[searchCols[i]] == value) {
                     return true;
                 }
-            } else if (searchCols[i] == 18) {  // origin
+            } else if (searchCols[i] == 20) {  // origin
                 if (data[searchCols[i]].indexOf(value) !== -1 && data[searchCols[i]].indexOf("神级") == -1) {
                     return true;
                 }
@@ -394,7 +392,29 @@ function initRecipeTable(data) {
         $('#recipe-table').DataTable().draw();
     });
 
+    $('#chk-recipe-show-final').change(function () {
+        updateRecipeChefTable(data);
+    });
+
+    $('#chk-recipe-apply-ex').change(function () {
+        if ($(this).prop("checked")) {
+            $('.recipe-apply-ex').show();
+        } else {
+            $('.recipe-apply-ex').hide();
+        }
+        updateRecipeChefTable(data);
+    });
+
+    $('#chk-recipe-apply-ex-person').change(function () {
+        updateRecipeChefTable(data);
+    });
+
+    $('#btn-recipe-recal').click(function () {
+        updateRecipeChefTable(data);
+    });
+
     if (private) {
+        $('#chk-recipe-show-ex-time').closest(".btn").removeClass('hidden');
         $('#chk-recipe-no-origin').closest(".box").removeClass('hidden');
     }
 
@@ -454,8 +474,21 @@ function reInitRecipeTable(data) {
             }
         },
         {
-            "data": "price",
+            "data": {
+                "_": "price",
+                "display": "priceDisp"
+            },
             "orderSequence": ["desc", "asc"]
+        },
+        {
+            "data": "exPrice",
+            "orderSequence": ["desc", "asc"]
+        },
+        {
+            "data": {
+                "_": "exTime",
+                "display": "exTimeDisp"
+            }
         },
         {
             "data": {
@@ -464,7 +497,10 @@ function reInitRecipeTable(data) {
             }
         },
         {
-            "data": "limitVal",
+            "data": {
+                "_": "limitVal",
+                "display": "limitDisp"
+            },
             "orderSequence": ["desc", "asc"]
         },
         {
@@ -492,6 +528,9 @@ function reInitRecipeTable(data) {
             "data": "unlock"
         },
         {
+            "data": "combo"
+        },
+        {
             "data": "tagsDisp",
             "defaultContent": ""
         },
@@ -509,6 +548,10 @@ function reInitRecipeTable(data) {
         },
         {
             "data": "rank",
+            "width": "31px"
+        },
+        {
+            "data": "ex",
             "width": "31px"
         },
         {
@@ -606,15 +649,20 @@ function reInitRecipeTable(data) {
     var rankOptions = getRankOptions();
     var gotOptions = getGotOptions();
     recipeTable.MakeCellsEditable({
-        "columns": [24, 25],  // rank, got
+        "columns": [27, 28, 29],  // rank, ex, got
         "inputTypes": [
             {
-                "column": 24,
+                "column": 27,
                 "type": "list",
                 "options": rankOptions
             },
             {
-                "column": 25,
+                "column": 28,
+                "type": "list",
+                "options": gotOptions
+            },
+            {
+                "column": 29,
                 "type": "list",
                 "options": gotOptions
             }
@@ -624,8 +672,10 @@ function reInitRecipeTable(data) {
             var rankGuestInfo = getRankGuestInfo(recipe, recipe.rank);
             recipe.rankGuestsVal = rankGuestInfo.rankGuestsVal;
             recipe.rankGuestsDisp = rankGuestInfo.rankGuestsDisp;
-            $(table.cell(row.index(), 22).node()).html(recipe.rankGuestsDisp);  // rank guest
-
+            $(table.cell(row.index(), 25).node()).html(recipe.rankGuestsDisp);  // rank guest
+            if (cell.index().column == 28 && cell.data() != oldValue) {   // ex
+                $("#btn-recipe-recal").closest(".box").removeClass("hidden");
+            }
             updateRecipesLocalData();
         }
     });
@@ -951,6 +1001,10 @@ function initChefTable(data) {
         $('#chef-table').DataTable().draw();
     });
 
+    $('#chk-chef-show-final').change(function () {
+        updateRecipeChefTable(data);
+    });
+
     $('#chk-chef-apply-ultimate').change(function () {
         if ($(this).prop("checked")) {
             $('.chef-apply-ultimate').show();
@@ -1224,7 +1278,7 @@ function reInitChefTable(data) {
                 $(cell.node()).html(equipDisp);
             }
             if ((cell.index().column == 18 || cell.index().column == 21) && cell.data() != oldValue) {   // equipName, ultimate
-                $("#btn-chef-recal").removeClass("btn-default").addClass("btn-danger");
+                $("#btn-chef-recal").closest(".box").removeClass("hidden");
             }
             updateChefsLocalData();
         }
@@ -1967,6 +2021,9 @@ function importData(data, input) {
                     data.recipes[i].rankGuestsVal = rankGuestInfo.rankGuestsVal;
                     data.recipes[i].rankGuestsDisp = rankGuestInfo.rankGuestsDisp;
                 }
+                if (person.recipes[j].hasOwnProperty("ex")) {
+                    data.recipes[i].ex = person.recipes[j].ex;
+                }
                 if (person.recipes[j].hasOwnProperty("got")) {
                     data.recipes[i].got = person.recipes[j].got;
                 }
@@ -1978,6 +2035,8 @@ function importData(data, input) {
             if (data.recipes[i].recipeId == person.recipesTags[j].recipeId) {
                 data.recipes[i].tags = person.recipesTags[j].tags;
                 data.recipes[i].tagsDisp = getTagsDisp(person.recipesTags[j].tags, person.tags);
+                data.recipes[i].exTime = person.recipesTags[j].experienceTime;
+                data.recipes[i].exTimeDisp = getExTimeDisp(person.recipesTags[j].experienceTime, data.recipes[i].time);
                 break;
             }
         }
@@ -2063,8 +2122,6 @@ function importData(data, input) {
     initRecipeShow();
     initChefShow();
     initEquipShow();
-
-    $("#btn-chef-recal").removeClass("btn-danger").addClass("btn-default");
 
     return true;
 }
@@ -2176,6 +2233,7 @@ function generateRecipesExportData() {
         var recipe = {};
         recipe["id"] = recipes[i].recipeId;
         recipe["rank"] = recipes[i].rank;
+        recipe["ex"] = recipes[i].ex;
         recipe["got"] = recipes[i].got;
         exportRecipes.push(recipe);
     }
@@ -2208,6 +2266,8 @@ function generateMenuExportData() {
     recipeMenu["skill"] = $("#chk-recipe-show-skill").prop("checked");
     recipeMenu["materials"] = $("#chk-recipe-show-materials").prop("checked");
     recipeMenu["price"] = $("#chk-recipe-show-price").prop("checked");
+    recipeMenu["exPrice"] = $("#chk-recipe-show-ex-price").prop("checked");
+    recipeMenu["exTime"] = $("#chk-recipe-show-ex-time").prop("checked");
     recipeMenu["time"] = $("#chk-recipe-show-time").prop("checked");
     recipeMenu["limit"] = $("#chk-recipe-show-limit").prop("checked");
     recipeMenu["totalPrice"] = $("#chk-recipe-show-total-price").prop("checked");
@@ -2216,11 +2276,13 @@ function generateMenuExportData() {
     recipeMenu["materialsEfficiency"] = $("#chk-recipe-show-materials-efficiency").prop("checked");
     recipeMenu["origin"] = $("#chk-recipe-show-origin").prop("checked");
     recipeMenu["unlock"] = $("#chk-recipe-show-unlock").prop("checked");
+    recipeMenu["combo"] = $("#chk-recipe-show-combo").prop("checked");
     recipeMenu["tags"] = $("#chk-recipe-show-tags").prop("checked");
     recipeMenu["guest"] = $("#chk-recipe-show-guest").prop("checked");
     recipeMenu["rankGuest"] = $("#chk-recipe-show-rank-guest").prop("checked");
     recipeMenu["rankAntique"] = $("#chk-recipe-show-rank-antique").prop("checked");
     recipeMenu["rank"] = $("#chk-recipe-show-rank").prop("checked");
+    recipeMenu["ex"] = $("#chk-recipe-show-ex").prop("checked");
     recipeMenu["got"] = $("#chk-recipe-show-got").prop("checked");
     exportData["recipe"] = recipeMenu;
 
@@ -2274,6 +2336,8 @@ function updateMenu(person) {
             $("#chk-recipe-show-skill").prop("checked", recipeMenu.skill || false);
             $("#chk-recipe-show-materials").prop("checked", recipeMenu.materials || false);
             $("#chk-recipe-show-price").prop("checked", recipeMenu.price || false);
+            $("#chk-recipe-show-ex-price").prop("checked", recipeMenu.exPrice || false);
+            $("#chk-recipe-show-ex-time").prop("checked", recipeMenu.exTime || false);
             $("#chk-recipe-show-time").prop("checked", recipeMenu.time || false);
             $("#chk-recipe-show-limit").prop("checked", recipeMenu.limit || false);
             $("#chk-recipe-show-total-price").prop("checked", recipeMenu.totalPrice || false);
@@ -2282,11 +2346,13 @@ function updateMenu(person) {
             $("#chk-recipe-show-materials-efficiency").prop("checked", recipeMenu.materialsEfficiency || false);
             $("#chk-recipe-show-origin").prop("checked", recipeMenu.origin || false);
             $("#chk-recipe-show-unlock").prop("checked", recipeMenu.unlock || false);
+            $("#chk-recipe-show-combo").prop("checked", recipeMenu.combo || false);
             $("#chk-recipe-show-tags").prop("checked", recipeMenu.tags || false);
             $("#chk-recipe-show-guest").prop("checked", recipeMenu.guest || false);
             $("#chk-recipe-show-rank-guest").prop("checked", recipeMenu.rankGuest || false);
             $("#chk-recipe-show-rank-antique").prop("checked", recipeMenu.rankAntique || false);
             $("#chk-recipe-show-rank").prop("checked", recipeMenu.rank || false);
+            $("#chk-recipe-show-ex").prop("checked", recipeMenu.ex || false);
             $("#chk-recipe-show-got").prop("checked", recipeMenu.got || false);
         }
 
@@ -2334,6 +2400,8 @@ function updateMenu(person) {
 
 function initCalTables(data) {
 
+    setSelfUltimateOptions(data.chefs, data.skills);
+    setExOptions(data.recipes);
     initCalResultsTable(data);
     initCalRules(data);
 
@@ -2431,6 +2499,10 @@ function initCalRules(data) {
         $("#btn-cal-update").removeClass("btn-default").addClass("btn-danger");
     });
 
+    $('#chk-cal-ex').selectpicker().on('changed.bs.select', function () {
+        $("#btn-cal-update").removeClass("btn-default").addClass("btn-danger");
+    });
+
     $("#btn-cal-load-ultimate").click(function () {
         $("#btn-cal-update").removeClass("btn-default").addClass("btn-danger");
         $("#cal-ultimate input").val("");
@@ -2448,6 +2520,7 @@ function initCalRules(data) {
         $("#cal-ultimate input").val("");
         $('#chk-cal-partial-ultimate').selectpicker('deselectAll');
         $('#chk-cal-self-ultimate').selectpicker('deselectAll');
+        $('#chk-cal-ex').selectpicker('deselectAll');
     });
 
     $("#chk-cal-got").click(function () {
@@ -2567,6 +2640,14 @@ function loadUltimate(data, usePerson) {
         selfIds.push(selfUltimate[i].chefId);
     }
     $('#chk-cal-self-ultimate').selectpicker('val', selfIds);
+
+    var exRecipeIds = [];
+    for (var i in data.recipes) {
+        if (usePerson && data.recipes[i].ex == "是" || !usePerson) {
+            exRecipeIds.push(data.recipes[i].recipeId);
+        }
+    }
+    $('#chk-cal-ex').selectpicker('val', exRecipeIds);
 }
 
 function setCalConfigData(rule, data) {
@@ -2843,8 +2924,14 @@ function setCalConfigData(rule, data) {
     rule["calPartialChefIds"] = partialChefIds;
     rule["calSelfUltimateData"] = selfUltimateData;
 
+    var exRecipeIds = $('#chk-cal-ex').val();
+    for (var i in exRecipeIds) {
+        exRecipeIds[i] = Number(exRecipeIds[i]);
+    }
+
     for (var i in rule.menus) {
-        setDataForRecipe(rule.menus[i].recipe.data, globalUltimate);
+        var useEx = exRecipeIds.indexOf(rule.menus[i].recipe.data.recipeId) >= 0;
+        setDataForRecipe(rule.menus[i].recipe.data, globalUltimate, useEx, false);
 
         var quantity = getRecipeQuantity(rule.menus[i].recipe.data, rule.materials, rule);
 
@@ -2856,7 +2943,7 @@ function setCalConfigData(rule, data) {
     }
 
     for (var i in rule.chefs) {
-        setDataForChef(rule.chefs[i], null, false, globalUltimate, selfPartialUltimateData, null, selfUltimateData);
+        setDataForChef(rule.chefs[i], null, false, globalUltimate, selfPartialUltimateData, null, selfUltimateData, false);
     }
 }
 
@@ -3252,7 +3339,7 @@ function calCustomResults(rule, data) {
 
     for (var i in custom) {
         if (custom[i].chef.chefId) {
-            setDataForChef(custom[i].chef, custom[i].equip, true, rule.calGlobalUltimateData, partialUltimateData, partialUltimateData, rule.calSelfUltimateData);
+            setDataForChef(custom[i].chef, custom[i].equip, true, rule.calGlobalUltimateData, partialUltimateData, partialUltimateData, rule.calSelfUltimateData, false);
 
             if (i % 3 == 0) {
                 if (!rule || !rule.hasOwnProperty("DisableChefSkillEffect") || rule.DisableChefSkillEffect == false) {
@@ -4241,7 +4328,10 @@ function initCalResultTableCommon(mode, panel, data) {
             "width": "60px"
         },
         {
-            "data": "recipe.data.price",
+            "data": {
+                "_": "recipe.data.price",
+                "display": "recipe.data.priceDisp"
+            },
             "defaultContent": "",
             "orderSequence": ["desc", "asc"],
             "width": "32px"
@@ -4617,6 +4707,7 @@ function generateData(json, json2, person) {
     }
     retData["quests"] = questsData;
 
+    var showChefFinal = $("#chk-chef-show-final").prop("checked");
     var useEquip = $("#chk-chef-apply-equips").prop("checked");
     var useUltimate = $("#chk-chef-apply-ultimate").prop("checked");
     var usePerson = $("#chk-chef-apply-ultimate-person").prop("checked");
@@ -4698,11 +4789,13 @@ function generateData(json, json2, person) {
             }
         }
 
-        setDataForChef(chefData, chefData.equip, useEquip, ultimateData.global, ultimateData.partial, null, ultimateData.self);
+        setDataForChef(chefData, chefData.equip, useEquip, ultimateData.global, ultimateData.partial, null, ultimateData.self, showChefFinal);
 
         chefsData.push(chefData);
     }
     retData["chefs"] = chefsData;
+
+    var showRecipeFinal = $("#chk-recipe-show-final").prop("checked");
 
     var recipesData = [];
     for (var i in json.recipes) {
@@ -4735,19 +4828,23 @@ function generateData(json, json2, person) {
 
         recipeData["tags"] = json.recipes[i].tags || {};
         recipeData["tagsDisp"] = "";
+        recipeData["exTime"] = 0;
+        recipeData["exTimeDisp"] = "";
+
         if (json2) {
             for (var j in json2.recipesTags) {
                 if (json2.recipesTags[j].recipeId == json.recipes[i].recipeId) {
                     recipeData.tags = json2.recipesTags[j].tags;
                     recipeData.tagsDisp = getTagsDisp(json2.recipesTags[j].tags, json2.tags);
+                    recipeData.exTime = json2.recipesTags[j].experienceTime;
+                    recipeData.exTimeDisp = getExTimeDisp(json2.recipesTags[j].experienceTime, json.recipes[i].time);
                     break;
                 }
             }
         }
 
-        setDataForRecipe(recipeData, ultimateData.global);
-
         recipeData["rank"] = "";
+        recipeData["ex"] = "";
         recipeData["got"] = "";
 
         if (person) {
@@ -4756,6 +4853,9 @@ function generateData(json, json2, person) {
                     if (person.recipes[j].hasOwnProperty("rank")) {
                         recipeData["rank"] = person.recipes[j].rank;
                     }
+                    if (person.recipes[j].hasOwnProperty("ex")) {
+                        recipeData["ex"] = person.recipes[j].ex;
+                    }
                     if (person.recipes[j].hasOwnProperty("got")) {
                         recipeData["got"] = person.recipes[j].got;
                     }
@@ -4763,6 +4863,10 @@ function generateData(json, json2, person) {
                 }
             }
         }
+
+        recipeData["oPrice"] = json.recipes[i].price;
+        var useEx = ifUseEx(recipeData);
+        setDataForRecipe(recipeData, ultimateData.global, useEx, showRecipeFinal);
 
         recipeData["efficiency"] = Math.floor(json.recipes[i].price * 3600 / json.recipes[i].time);
 
@@ -4779,6 +4883,21 @@ function generateData(json, json2, person) {
             materialsEff = materialsInfo.materialsCount * 3600 / json.recipes[i].time;
         }
         recipeData["allMaterialsEff"] = materialsEff ? Math.floor(materialsEff) : "";
+
+        recipeData["combo"] = "";
+        for (var m in json.combos) {
+            for (var n in json.combos[m].recipes) {
+                if (json.combos[m].recipes[n] == json.recipes[i].recipeId) {
+                    for (var o in json.recipes) {
+                        if (json.recipes[o].recipeId == json.combos[m].recipeId) {
+                            recipeData["combo"] = json.recipes[o].name;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
 
         var rankGuestInfo = getRankGuestInfo(json.recipes[i], recipeData.rank);
         recipeData["rankGuestsVal"] = rankGuestInfo.rankGuestsVal;
@@ -4813,7 +4932,8 @@ function updateRecipeChefTable(data) {
         $('.loading').addClass("hidden");
     }, 500);
 
-    $("#btn-chef-recal").removeClass("btn-danger").addClass("btn-default");
+    $("#btn-chef-recal").closest(".box").addClass("hidden");
+    $("#btn-recipe-recal").closest(".box").addClass("hidden");
 }
 
 function getUpdateData(data) {
@@ -4824,6 +4944,7 @@ function getUpdateData(data) {
         person = JSON.parse(localData);
     } catch (e) { }
 
+    var showChefFinal = $("#chk-chef-show-final").prop("checked");
     var useEquip = $("#chk-chef-apply-equips").prop("checked");
     var useUltimate = $("#chk-chef-apply-ultimate").prop("checked");
     var usePerson = $("#chk-chef-apply-ultimate-person").prop("checked");
@@ -4833,11 +4954,13 @@ function getUpdateData(data) {
     var otherPartialUltimateData = getPartialUltimateData(data.chefs, data.partialSkill, useUltimate, partialChefIds);
 
     for (var i in data.chefs) {
-        setDataForChef(data.chefs[i], data.chefs[i].equip, useEquip, ultimateData.global, ultimateData.partial, otherPartialUltimateData, ultimateData.self);
+        setDataForChef(data.chefs[i], data.chefs[i].equip, useEquip, ultimateData.global, ultimateData.partial, otherPartialUltimateData, ultimateData.self, showChefFinal);
     }
 
+    var showRecipeFinal = $("#chk-recipe-show-final").prop("checked");
     for (var i in data.recipes) {
-        setDataForRecipe(data.recipes[i], ultimateData.global);
+        var useEx = ifUseEx(data.recipes[i]);
+        setDataForRecipe(data.recipes[i], ultimateData.global, useEx, showRecipeFinal);
     }
 
     updateRecipesChefsData(data);
@@ -4988,6 +5111,17 @@ function getTagsDisp(tagIds, tags) {
     return disp;
 }
 
+function getExTimeDisp(exTime, time) {
+    var time1 = exTime / 1.5;
+    var time2 = exTime / 2;
+    var time3 = exTime / 2.5;
+    var result = "可-" + Math.ceil(exTime / time) + "-" + secondsToTime(exTime)
+        + "<br>优-" + Math.ceil(time1 / time) + "-" + secondsToTime(time1)
+        + "<br>特-" + Math.ceil(time2 / time) + "-" + secondsToTime(time2)
+        + "<br>神-" + Math.ceil(time3 / time) + "-" + secondsToTime(time3);
+    return result;
+}
+
 function getOriginVal(origin) {
     var originVal = 0;
     if (origin == "菜棚") {
@@ -5044,6 +5178,18 @@ function getRankGuestInfo(recipe, rank) {
     retData["rankGuestsVal"] = rankGuestsVal;
     retData["rankGuestsDisp"] = rankGuestsDisp;
     return retData;
+}
+
+function ifUseEx(recipe) {
+    var useEx = $("#chk-recipe-apply-ex").prop("checked");
+    var useExPerson = $("#chk-recipe-apply-ex-person").prop("checked");
+
+    if (useEx) {
+        if (useExPerson && recipe.ex == "是" || !useExPerson) {
+            return true;
+        }
+    }
+    return false;
 }
 
 function getUltimateData(chefs, person, skills, useUltimate, usePerson) {
@@ -5165,7 +5311,14 @@ function setSelfUltimateOptions(chefs, skills) {
     }
 }
 
-function setDataForRecipe(recipeData, ultimateData) {
+function setExOptions(recipes) {
+    for (var i in recipes) {
+        var option = "<option value='" + recipes[i].recipeId + "' data-subtext='+" + recipes[i].exPrice + "'>" + recipes[i].name + "</option>";
+        $('#chk-cal-ex').append(option);
+    }
+}
+
+function setDataForRecipe(recipeData, ultimateData, useEx, showFinal) {
     recipeData["limitVal"] = recipeData.limit;
     recipeData["ultimateAddition"] = 0;
 
@@ -5179,7 +5332,16 @@ function setDataForRecipe(recipeData, ultimateData) {
         }
     }
 
+    recipeData["limitDisp"] = getAtrributeDisp(recipeData.limitVal, recipeData.limit, showFinal);
+
     recipeData["ultimateAdditionDisp"] = getPercentDisp(recipeData.ultimateAddition);
+
+    recipeData.price = recipeData.oPrice;
+    if (useEx) {
+        recipeData.price += recipeData.exPrice;
+    }
+    recipeData["priceDisp"] = getAtrributeDisp(recipeData.price, recipeData.oPrice, showFinal);
+
     recipeData["totalPrice"] = recipeData.price * recipeData.limitVal;
     recipeData["totalTime"] = recipeData.time * recipeData.limitVal;
     recipeData["totalTimeDisp"] = secondsToTime(recipeData.totalTime);
@@ -5348,26 +5510,30 @@ function initRecipeShow() {
     recipeTable.column(9).visible(chkSkill, false);
     recipeTable.column(10).visible($('#chk-recipe-show-materials').prop("checked"), false);
     recipeTable.column(11).visible($('#chk-recipe-show-price').prop("checked"), false);
-    recipeTable.column(12).visible($('#chk-recipe-show-time').prop("checked"), false);
-    recipeTable.column(13).visible($('#chk-recipe-show-limit').prop("checked"), false);
-    recipeTable.column(14).visible($('#chk-recipe-show-total-price').prop("checked"), false);
-    recipeTable.column(15).visible($('#chk-recipe-show-total-time').prop("checked"), false);
-    recipeTable.column(16).visible($('#chk-recipe-show-efficiency').prop("checked"), false);
-    recipeTable.column(17).visible($('#chk-recipe-show-materials-efficiency').prop("checked"), false);
-    recipeTable.column(18).visible($('#chk-recipe-show-origin').prop("checked"), false);
-    recipeTable.column(19).visible($('#chk-recipe-show-unlock').prop("checked"), false);
+    recipeTable.column(12).visible($('#chk-recipe-show-ex-price').prop("checked"), false);
+    recipeTable.column(13).visible($('#chk-recipe-show-ex-time').prop("checked"), false);
+    recipeTable.column(14).visible($('#chk-recipe-show-time').prop("checked"), false);
+    recipeTable.column(15).visible($('#chk-recipe-show-limit').prop("checked"), false);
+    recipeTable.column(16).visible($('#chk-recipe-show-total-price').prop("checked"), false);
+    recipeTable.column(17).visible($('#chk-recipe-show-total-time').prop("checked"), false);
+    recipeTable.column(18).visible($('#chk-recipe-show-efficiency').prop("checked"), false);
+    recipeTable.column(19).visible($('#chk-recipe-show-materials-efficiency').prop("checked"), false);
+    recipeTable.column(20).visible($('#chk-recipe-show-origin').prop("checked"), false);
+    recipeTable.column(21).visible($('#chk-recipe-show-unlock').prop("checked"), false);
+    recipeTable.column(22).visible($('#chk-recipe-show-combo').prop("checked"), false);
 
     if (cal) {
-        recipeTable.column(20).visible($('#chk-recipe-show-tags').prop("checked"), false);
+        recipeTable.column(23).visible($('#chk-recipe-show-tags').prop("checked"), false);
     } else {
-        recipeTable.column(20).visible(false, false);
+        recipeTable.column(23).visible(false, false);
     }
 
-    recipeTable.column(21).visible($('#chk-recipe-show-guest').prop("checked"), false);
-    recipeTable.column(22).visible($('#chk-recipe-show-rank-guest').prop("checked"), false);
-    recipeTable.column(23).visible($('#chk-recipe-show-rank-antique').prop("checked"), false);
-    recipeTable.column(24).visible($('#chk-recipe-show-rank').prop("checked"), false);
-    recipeTable.column(25).visible($('#chk-recipe-show-got').prop("checked"), false);
+    recipeTable.column(24).visible($('#chk-recipe-show-guest').prop("checked"), false);
+    recipeTable.column(25).visible($('#chk-recipe-show-rank-guest').prop("checked"), false);
+    recipeTable.column(26).visible($('#chk-recipe-show-rank-antique').prop("checked"), false);
+    recipeTable.column(27).visible($('#chk-recipe-show-rank').prop("checked"), false);
+    recipeTable.column(28).visible($('#chk-recipe-show-ex').prop("checked"), false);
+    recipeTable.column(29).visible($('#chk-recipe-show-got').prop("checked"), false);
 
     recipeTable.columns.adjust().draw(false);
 }

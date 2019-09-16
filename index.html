@@ -7,10 +7,10 @@
     <link rel="shortcut icon" href="favicon.ico?v=1" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="css/style.min.css?v=3" />
     <script type="text/javascript" src="js/script.min.js?v=9"></script>
-    <script type="text/javascript" src="js/common.min.js?v=30"></script>
+    <script type="text/javascript" src="js/common.min.js?v=31"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=35" />
-    <script type="text/javascript" src="js/food.min.js?v=128"></script>
-    <link rel="stylesheet" type="text/css" href="css/image.css?v=31" />
+    <script type="text/javascript" src="js/food.min.js?v=129"></script>
+    <link rel="stylesheet" type="text/css" href="css/image.css?v=32" />
 </head>
 
 <body>
@@ -21,7 +21,8 @@
     <div class="loading loading-bg"></div>
 
     <div class="main-function hidden">
-        <div id="alert-version" class="alert alert-info alert-dismissible hidden" data-version="9" data-show="false">
+        <div id="alert-version" class="alert alert-info alert-dismissible hidden" data-version="10" data-show="true">
+            蓝色按钮为新功能
             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
         </div>
         <ul class="nav nav-tabs">
@@ -90,6 +91,16 @@
                             <i class="fa fa-check glyphicon glyphicon-ok"></i>
                             单价
                         </label>
+                        <label class="btn btn-info">
+                            <input type="checkbox" id="chk-recipe-show-ex-price" class="chk-recipe-show">
+                            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                            熟练加价
+                        </label>
+                        <label class="btn btn-default hidden">
+                            <input type="checkbox" id="chk-recipe-show-ex-time" class="chk-recipe-show">
+                            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                            熟练时间
+                        </label>
                         <label class="btn btn-default">
                             <input type="checkbox" id="chk-recipe-show-time" class="chk-recipe-show" checked>
                             <i class="fa fa-check glyphicon glyphicon-ok"></i>
@@ -130,6 +141,11 @@
                             <i class="fa fa-check glyphicon glyphicon-ok"></i>
                             解锁
                         </label>
+                        <label class="btn btn-info">
+                            <input type="checkbox" id="chk-recipe-show-combo" class="chk-recipe-show">
+                            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                            合成
+                        </label>
                         <label class="btn btn-default hidden">
                             <input type="checkbox" id="chk-recipe-show-tags" class="chk-recipe-show">
                             <i class="fa fa-check glyphicon glyphicon-ok"></i>
@@ -154,6 +170,11 @@
                             <input type="checkbox" id="chk-recipe-show-rank" class="chk-recipe-show" checked>
                             <i class="fa fa-check glyphicon glyphicon-ok"></i>
                             品阶
+                        </label>
+                        <label class="btn btn-info">
+                            <input type="checkbox" id="chk-recipe-show-ex" class="chk-recipe-show">
+                            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                            已熟练
                         </label>
                         <label class="btn btn-default">
                             <input type="checkbox" id="chk-recipe-show-got" class="chk-recipe-show">
@@ -307,6 +328,25 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                    <div class="box">
+                        <input type="checkbox" id="chk-recipe-apply-ex" data-toggle="toggle" data-on="熟练加成开" data-off="熟练加成关"
+                            data-onstyle="info" data-width="105px" checked>
+                        <span class="recipe-apply-ex">
+                            <input type="checkbox" id="chk-recipe-apply-ex-person" data-toggle="toggle" data-on="已熟练" data-off="全熟练"
+                                data-onstyle="info" data-width="80px" checked>
+                        </span>
+                    </div>
+                    <div class="box">
+                        <input type="checkbox" id="chk-recipe-show-final" data-toggle="toggle" data-on="显示最终值" data-off="显示加成值"
+                            data-onstyle="info" data-width="105px" checked>
+                    </div>
+                    <div class="box hidden">
+                        <a id="btn-recipe-recal" class="btn btn-danger">
+                            重新计算
+                        </a>
+                    </div>
+                </div>
                 <div class="text-center">
                     <span class="partial-warning hidden">额外上场类技能使用中</span>
                 </div>
@@ -328,6 +368,8 @@
                                 <th>蒸</th>
                                 <th>材料</th>
                                 <th>单价</th>
+                                <th>熟练加价</th>
+                                <th>熟练时间</th>
                                 <th>单时间</th>
                                 <th>一组</th>
                                 <th>总价</th>
@@ -336,11 +378,13 @@
                                 <th>耗材/小时</th>
                                 <th>来源</th>
                                 <th>可解锁</th>
+                                <th>可合成</th>
                                 <th>类别</th>
                                 <th>贵客</th>
                                 <th>升阶贵客</th>
                                 <th>神级符文</th>
                                 <th>品阶</th>
+                                <th>熟练</th>
                                 <th>已有</th>
                             </tr>
                         </thead>
@@ -534,7 +578,11 @@
                             data-onstyle="default" data-width="105px" checked>
                     </div>
                     <div class="box">
-                        <a id="btn-chef-recal" class="btn btn-default">
+                        <input type="checkbox" id="chk-chef-show-final" data-toggle="toggle" data-on="显示最终值" data-off="显示加成值"
+                            data-onstyle="info" data-width="105px" checked>
+                    </div>
+                    <div class="box hidden">
+                        <a id="btn-chef-recal" class="btn btn-danger">
                             重新计算
                         </a>
                     </div>
@@ -1200,6 +1248,9 @@
                                     <select id="chk-cal-self-ultimate" multiple data-live-search="false" data-width="auto"
                                         data-dropdown-align-right='auto' data-none-selected-text="个人类技能已修炼 0" data-selected-text-format="count > 0"
                                         data-count-selected-text="个人类技能已修炼 {0}" data-actions-box="true" data-deselect-all-text="清空"></select>
+                                    <select id="chk-cal-ex" multiple data-live-search="true" data-live-search-placeholder="查找" data-width="auto" data-dropdown-align-right='auto'
+                                        data-none-selected-text="菜谱已熟练 0" data-selected-text-format="count > 0" data-count-selected-text="菜谱已熟练 {0}"
+                                        data-actions-box="true" data-deselect-all-text="清空"></select>
                                     <button id="btn-cal-load-ultimate" class="btn btn-default" type="button">
                                         读取已修炼
                                     </button>
@@ -1790,7 +1841,7 @@
                 <p>下载个人数据文件 - 生成个人数据文件并下载.</p>
                 <p>导入个人数据文件 - 选择个人数据文件并导入.</p>
                 <br>
-                <p>难免有数据缺失或错误, 敬请谅解. 如想纠错或补充数据可以联系我, 官方1群或2群 L</p>
+                <p>难免有数据缺失或错误, 敬请谅解. 如想纠错或补充数据可以联系我, 官方2群/贴吧1群 L</p>
                 <hr>
                 <h3>
                     <span class="label label-primary">更新</span>

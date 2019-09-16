@@ -355,7 +355,7 @@ function getEquipInfo(equipName, equips) {
     return info;
 }
 
-function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartialUltimateData, otherPartialUltimateData, selfUltimateEffect) {
+function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartialUltimateData, otherPartialUltimateData, selfUltimateEffect, showFinal) {
 
     var stirfryAddition = new Addition();
     var boilAddition = new Addition();
@@ -443,10 +443,10 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartial
     chef["vegVal"] = chef.veg + vegAddition;
     chef["fishVal"] = chef.fish + fishAddition;
 
-    chef["meatDisp"] = getChefAtrributeDisp(chef.meatVal, chef.meat);
-    chef["creationDisp"] = getChefAtrributeDisp(chef.creationVal, chef.creation);
-    chef["vegDisp"] = getChefAtrributeDisp(chef.vegVal, chef.veg);
-    chef["fishDisp"] = getChefAtrributeDisp(chef.fishVal, chef.fish);
+    chef["meatDisp"] = getAtrributeDisp(chef.meatVal, chef.meat, showFinal);
+    chef["creationDisp"] = getAtrributeDisp(chef.creationVal, chef.creation, showFinal);
+    chef["vegDisp"] = getAtrributeDisp(chef.vegVal, chef.veg, showFinal);
+    chef["fishDisp"] = getAtrributeDisp(chef.fishVal, chef.fish, showFinal);
 
     chef["stirfryVal"] = Math.ceil(calAddition(chef.stirfry, stirfryAddition));
     chef["boilVal"] = Math.ceil(calAddition(chef.boil, boilAddition));
@@ -455,12 +455,12 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartial
     chef["bakeVal"] = Math.ceil(calAddition(chef.bake, bakeAddition));
     chef["steamVal"] = Math.ceil(calAddition(chef.steam, steamAddition));
 
-    chef["stirfryDisp"] = getChefAtrributeDisp(chef.stirfryVal, chef.stirfry);
-    chef["boilDisp"] = getChefAtrributeDisp(chef.boilVal, chef.boil);
-    chef["knifeDisp"] = getChefAtrributeDisp(chef.knifeVal, chef.knife);
-    chef["fryDisp"] = getChefAtrributeDisp(chef.fryVal, chef.fry);
-    chef["bakeDisp"] = getChefAtrributeDisp(chef.bakeVal, chef.bake);
-    chef["steamDisp"] = getChefAtrributeDisp(chef.steamVal, chef.steam);
+    chef["stirfryDisp"] = getAtrributeDisp(chef.stirfryVal, chef.stirfry, showFinal);
+    chef["boilDisp"] = getAtrributeDisp(chef.boilVal, chef.boil, showFinal);
+    chef["knifeDisp"] = getAtrributeDisp(chef.knifeVal, chef.knife, showFinal);
+    chef["fryDisp"] = getAtrributeDisp(chef.fryVal, chef.fry, showFinal);
+    chef["bakeDisp"] = getAtrributeDisp(chef.bakeVal, chef.bake, showFinal);
+    chef["steamDisp"] = getAtrributeDisp(chef.steamVal, chef.steam, showFinal);
 
     chef["disp"] = chef.name + "<br><small>";
     var count = 0;
@@ -502,8 +502,14 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartial
     chef.disp += "</small>"
 }
 
-function getChefAtrributeDisp(final, origin) {
+function getAtrributeDisp(final, origin, showFinal) {
     var disp = "";
+    if (showFinal) {
+        if (final) {
+            disp = final;
+        }
+        return disp;
+    }
     if (origin) {
         disp += origin;
     }

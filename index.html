@@ -9,7 +9,7 @@
     <script type="text/javascript" src="js/script.min.js?v=9"></script>
     <script type="text/javascript" src="js/common.min.js?v=31"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=35" />
-    <script type="text/javascript" src="js/food.min.js?v=130"></script>
+    <script type="text/javascript" src="js/food.min.js?v=131"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=32" />
 </head>
 
@@ -21,8 +21,8 @@
     <div class="loading loading-bg"></div>
 
     <div class="main-function hidden">
-        <div id="alert-version" class="alert alert-info alert-dismissible hidden" data-version="10" data-show="true">
-            蓝色按钮为新功能
+        <div id="alert-version" class="alert alert-info alert-dismissible hidden" data-version="11" data-show="true">
+            又加了3个菜谱过滤按钮（关闭此处刷新页面恢复颜色）
             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
         </div>
         <ul class="nav nav-tabs">
@@ -299,6 +299,25 @@
                             <input type="checkbox" id="chk-recipe-filter-guest" checked>
                             <i class="fa fa-check glyphicon glyphicon-ok"></i>
                             过滤升阶贵客
+                        </label>
+                    </div>
+                    <div class="box">
+                        <label class="btn btn-default btn-new-version">
+                            <input type="checkbox" id="chk-recipe-combo">
+                            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                            可合成
+                        </label>
+                    </div>
+                    <div class="box">
+                        <label class="btn btn-default btn-new-version">
+                            <input type="checkbox" id="chk-recipe-ex-yes" checked>
+                            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                            已熟练
+                        </label>
+                        <label class="btn btn-default btn-new-version">
+                            <input type="checkbox" id="chk-recipe-ex-no" checked>
+                            <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                            未熟练
                         </label>
                     </div>
                     <div class="box">

@@ -222,6 +222,21 @@ function initRecipeTable(data) {
             return true;
         }
 
+        var check = $('#chk-recipe-combo').prop("checked");
+        var combo = data[22];   // combo
+
+        if (!check || check && combo) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
+    $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex) {
+        if (settings.nTable != document.getElementById('recipe-table')) {
+            return true;
+        }
+
         var value = $.trim($("#input-recipe-guest-antique").val());
         var searchCols = [25, 26];  // rank guest, rank antique
 
@@ -234,6 +249,19 @@ function initRecipeTable(data) {
         return false;
     });
 
+    $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
+        if (settings.nTable != document.getElementById('recipe-table')) {
+            return true;
+        }
+
+        var ex = data[28];   // ex
+        if ($('#chk-recipe-ex-yes').prop("checked") && ex
+            || $('#chk-recipe-ex-no').prop("checked") && !ex) {
+            return true;
+        } else {
+            return false;
+        }
+    });
 
     $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex) {
         if (settings.nTable != document.getElementById('recipe-table')) {
@@ -381,6 +409,14 @@ function initRecipeTable(data) {
             this.data(recipe);
         });
 
+        $('#recipe-table').DataTable().draw();
+    });
+
+    $('#chk-recipe-combo').click(function () {
+        $('#recipe-table').DataTable().draw();
+    });
+
+    $('#chk-recipe-ex-yes, #chk-recipe-ex-no').click(function () {
         $('#recipe-table').DataTable().draw();
     });
 

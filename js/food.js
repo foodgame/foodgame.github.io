@@ -4930,6 +4930,10 @@ function generateData(json, json2, person) {
                             break;
                         }
                     }
+                    // hardcode
+                    if (json.combos[m].recipeId == 5004) {
+                        recipeData["combo"] = "港式早茶";
+                    }
                     break;
                 }
             }
@@ -5790,6 +5794,8 @@ function initVersionTip(person) {
         }
 
         $('#alert-version').on('close.bs.alert', function () {
+            $(".btn-new-version").removeClass("btn-info").addClass("btn-default");
+            $(".toggle-new-version").closest(".toggle").find(".toggle-on, .toggle-off").removeClass("btn-info").addClass("btn-default");
             updateVersionLocalData();
         })
     }

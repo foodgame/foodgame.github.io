@@ -460,7 +460,7 @@ function initRecipeTable(data) {
 function reInitRecipeTable(data) {
     var recipeColumns = [
         {
-            "data": "recipeId",
+            "data": "galleryId",
             "width": "1px"
         },
         {
@@ -1087,7 +1087,7 @@ function initChefTable(data) {
 function reInitChefTable(data) {
     var chefColumns = [
         {
-            "data": "chefId",
+            "data": "galleryId",
             "width": "1px"
         },
         {
@@ -1328,7 +1328,7 @@ function reInitChefTable(data) {
 function initEquipTable(data) {
     var equipColumns = [
         {
-            "data": "equipId",
+            "data": "galleryId",
             "width": "1px"
         },
         {
@@ -3687,7 +3687,7 @@ function initCalChefsTable(data) {
             "width": "30px"
         },
         {
-            "data": "chefId",
+            "data": "galleryId",
             "width": "1px"
         },
         {
@@ -3882,7 +3882,7 @@ function initCalEquipsTable(data) {
             "width": "30px"
         },
         {
-            "data": "equipId",
+            "data": "galleryId",
             "width": "1px"
         },
         {
@@ -4267,7 +4267,7 @@ function initCalResultTableCommon(mode, panel, data) {
             "defaultContent": ""
         },
         {
-            "data": "recipe.data.recipeId",
+            "data": "recipe.data.galleryId",
             "defaultContent": "",
             "width": "1px"
         },

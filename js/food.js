@@ -5340,7 +5340,7 @@ function setSelfUltimateOptions(chefs, skills) {
                         if (skills[k].effect[m].condition == "Self") {
                             var skillInfo = getSkillInfo(skills, skills[k].skillId);
                             var option = "<option value='" + chefs[i].chefId + "' data-subtext='" + skillInfo.skillDisp + "'>" + chefs[i].name + "</option>";
-                            if (skills[k].effect[m].type == "MutiEquipmentSkill") {
+                            if (skills[k].effect[m].type != "Material_Gain" && skills[k].effect[m].type != "GuestDropCount") {
                                 $('#chk-cal-self-ultimate').append(option);
                             }
                         }

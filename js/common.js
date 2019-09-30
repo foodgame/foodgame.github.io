@@ -215,6 +215,8 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
 
         if (!rule || !rule.hasOwnProperty("DisableChefSkillEffect") || rule.DisableChefSkillEffect == false) {
             chefSkillAddition = getRecipeSkillAddition(chef.specialSkillEffect, recipe, rule);
+            var chefSkillUltimateAddition = getRecipeSkillAddition(chef.selfUltimateEffect, recipe, rule);
+            chefSkillAddition = chefSkillAddition + chefSkillUltimateAddition;
         }
         resultData["chefSkillAdditionDisp"] = getPercentDisp(chefSkillAddition);
 

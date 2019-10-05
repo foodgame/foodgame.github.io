@@ -3382,7 +3382,7 @@ function calCustomResults(rule, data) {
                     timeAddition += getTimeAddition(custom[i].chef.specialSkillEffect);
                 }
                 if (!rule || !rule.hasOwnProperty("DisableEquipSkillEffect") || rule.DisableEquipSkillEffect == false) {
-                    if (custom[i].equip) {
+                    if (custom[i].equip && custom[i].equip.effect) {
                         var equipEffect = updateEquipmentEffect(custom[i].equip.effect, custom[i].chef.selfUltimateEffect);
                         timeAddition += getTimeAddition(equipEffect);
                     }

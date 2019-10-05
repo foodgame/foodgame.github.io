@@ -221,7 +221,7 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
         resultData["chefSkillAdditionDisp"] = getPercentDisp(chefSkillAddition);
 
         if (!rule || !rule.hasOwnProperty("DisableEquipSkillEffect") || rule.DisableEquipSkillEffect == false) {
-            if (equip) {
+            if (equip && equip.effect) {
                 var equipEffect = updateEquipmentEffect(equip.effect, chef.selfUltimateEffect);
                 equipSkillAddition = getRecipeSkillAddition(equipEffect, recipe, rule);
             }
@@ -290,17 +290,18 @@ function getTimeAddition(effects) {
 }
 
 function updateEquipmentEffect(effect, selfUltimateEffect) {
+    var result = effect;
     for (var i in selfUltimateEffect) {
         if (selfUltimateEffect[i].type == "MutiEquipmentSkill") {
-            effect = JSON.parse(JSON.stringify(effect));
-            for (var j in effect) {
+            result = JSON.parse(JSON.stringify(effect));
+            for (var j in result) {
                 var equipAddtion = new Addition();
                 setAddition(equipAddtion, selfUltimateEffect[i]);
-                effect[j].value = calAddition(effect[j].value, equipAddtion);
+                result[j].value = calAddition(result[j].value, equipAddtion);
             }
         }
     }
-    return effect;
+    return result;
 }
 
 function setAddition(addition, effect) {
@@ -375,17 +376,17 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartial
 
     chef["selfUltimateEffect"] = [];
 
-    if (useEquip && equip && equip.effect) {
-        var equipEffect = equip.effect;
-        if (selfUltimateEffect) {
-            for (var i in selfUltimateEffect) {
-                if (chef.chefId == selfUltimateEffect[i].chefId) {
-                    chef.selfUltimateEffect = selfUltimateEffect[i].effect;
-                    equipEffect = updateEquipmentEffect(equipEffect, chef.selfUltimateEffect);
-                    break;
-                }
+    if (selfUltimateEffect) {
+        for (var i in selfUltimateEffect) {
+            if (chef.chefId == selfUltimateEffect[i].chefId) {
+                chef.selfUltimateEffect = selfUltimateEffect[i].effect;
+                break;
             }
         }
+    }
+
+    if (useEquip && equip && equip.effect) {
+        var equipEffect = updateEquipmentEffect(equip.effect, chef.selfUltimateEffect);
         effects = effects.concat(equipEffect);
     }
 

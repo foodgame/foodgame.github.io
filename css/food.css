@@ -432,10 +432,8 @@ table.history-table tr td.history-dt {
 }
 
 #alert-version {
-    position: absolute;
-    right: 5px;
-    top: 0;
     padding: 8px 30px 8px 20px;
+    text-align: center;
 }
 
 #material-table th {

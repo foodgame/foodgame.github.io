@@ -5338,10 +5338,11 @@ function setSelfUltimateOptions(chefs, skills) {
                 if (chefs[i].ultimateSkill == skills[k].skillId) {
                     for (var m in skills[k].effect) {
                         if (skills[k].effect[m].condition == "Self") {
-                            var skillInfo = getSkillInfo(skills, skills[k].skillId);
-                            var option = "<option value='" + chefs[i].chefId + "' data-subtext='" + skillInfo.skillDisp + "'>" + chefs[i].name + "</option>";
                             if (skills[k].effect[m].type != "Material_Gain" && skills[k].effect[m].type != "GuestDropCount") {
+                                var skillInfo = getSkillInfo(skills, skills[k].skillId);
+                                var option = "<option value='" + chefs[i].chefId + "' data-subtext='" + skillInfo.skillDisp + "'>" + chefs[i].name + "</option>";
                                 $('#chk-cal-self-ultimate').append(option);
+                                break;
                             }
                         }
                     }

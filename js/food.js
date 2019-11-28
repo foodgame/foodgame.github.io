@@ -304,7 +304,7 @@ function initRecipeTable(data) {
                     return true;
                 }
             } else if (searchCols[i] == 20) {  // origin
-(??)                if (data[searchCols[i]].indexOf(value) !== -1 && data[searchCols[i]].indexOf("神级") == -1) {
+                if (commaSeparatedMatch(data[searchCols[i]], value) && data[searchCols[i]].indexOf("神级") == -1) {
                     return true;
                 }
             } else {
@@ -5350,10 +5350,9 @@ function setSelfUltimateOptions(chefs, skills) {
                 if (chefs[i].ultimateSkill == skills[k].skillId) {
                     for (var m in skills[k].effect) {
                         if (skills[k].effect[m].condition == "Self") {
-(??)                            var skillInfo = getSkillInfo(skills, skills[k].skillId);
-(??)                            var option = "<option value='" + chefs[i].chefId + "' data-subtext='" + skillInfo.skillDisp + "'>" + chefs[i].name + "</option>";
                             if (skills[k].effect[m].type != "Material_Gain" && skills[k].effect[m].type != "GuestDropCount") {
-(??)
+                                var skillInfo = getSkillInfo(skills, skills[k].skillId);
+                                var option = "<option value='" + chefs[i].chefId + "' data-subtext='" + skillInfo.skillDisp + "'>" + chefs[i].name + "</option>";
                                 $('#chk-cal-self-ultimate').append(option);
                                 break;
                             }

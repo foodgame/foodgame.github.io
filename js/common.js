@@ -380,6 +380,7 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartial
         for (var i in selfUltimateEffect) {
             if (chef.chefId == selfUltimateEffect[i].chefId) {
                 chef.selfUltimateEffect = selfUltimateEffect[i].effect;
+                effects = effects.concat(selfUltimateEffect[i].effect);
                 break;
             }
         }

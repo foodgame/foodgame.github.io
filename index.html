@@ -21,8 +21,8 @@
     <div class="loading loading-bg"></div>
 
     <div class="main-function hidden">
-        <div id="alert-version" class="alert alert-info alert-dismissible hidden" data-version="11" data-show="false">
-            又加了3个菜谱过滤按钮（点右边X恢复颜色）
+        <div id="alert-version" class="alert alert-warning alert-dismissible hidden" data-version="12" data-show="true">
+            <a href='https://foodgame.github.io'>github服务器</a>在国外,国内访问会有速度慢和偶尔访问不了的情况,可以访问<a href='https://foodgame.gitee.io'>国内gitee服务器</a>,详情见说明页的蓝色说明
             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
         </div>
         <ul class="nav nav-tabs">
@@ -91,7 +91,7 @@
                             <i class="fa fa-check glyphicon glyphicon-ok"></i>
                             单价
                         </label>
-                        <label class="btn btn-default btn-new-version">
+                        <label class="btn btn-default">
                             <input type="checkbox" id="chk-recipe-show-ex-price" class="chk-recipe-show">
                             <i class="fa fa-check glyphicon glyphicon-ok"></i>
                             熟练加价
@@ -141,7 +141,7 @@
                             <i class="fa fa-check glyphicon glyphicon-ok"></i>
                             解锁
                         </label>
-                        <label class="btn btn-default btn-new-version">
+                        <label class="btn btn-default">
                             <input type="checkbox" id="chk-recipe-show-combo" class="chk-recipe-show">
                             <i class="fa fa-check glyphicon glyphicon-ok"></i>
                             合成
@@ -171,7 +171,7 @@
                             <i class="fa fa-check glyphicon glyphicon-ok"></i>
                             品阶
                         </label>
-                        <label class="btn btn-default btn-new-version">
+                        <label class="btn btn-default">
                             <input type="checkbox" id="chk-recipe-show-ex" class="chk-recipe-show">
                             <i class="fa fa-check glyphicon glyphicon-ok"></i>
                             已熟练
@@ -302,19 +302,19 @@
                         </label>
                     </div>
                     <div class="box">
-                        <label class="btn btn-default btn-new-version">
+                        <label class="btn btn-default">
                             <input type="checkbox" id="chk-recipe-combo">
                             <i class="fa fa-check glyphicon glyphicon-ok"></i>
                             可合成
                         </label>
                     </div>
                     <div class="box">
-                        <label class="btn btn-default btn-new-version">
+                        <label class="btn btn-default">
                             <input type="checkbox" id="chk-recipe-ex-yes" checked>
                             <i class="fa fa-check glyphicon glyphicon-ok"></i>
                             已熟练
                         </label>
-                        <label class="btn btn-default btn-new-version">
+                        <label class="btn btn-default">
                             <input type="checkbox" id="chk-recipe-ex-no" checked>
                             <i class="fa fa-check glyphicon glyphicon-ok"></i>
                             未熟练
@@ -350,15 +350,15 @@
                 <div>
                     <div class="box">
                         <input type="checkbox" id="chk-recipe-apply-ex" data-toggle="toggle" data-on="熟练加成开" data-off="熟练加成关"
-                            data-onstyle="default" class="toggle-new-version" data-width="105px" checked>
+                            data-onstyle="default" data-width="105px" checked>
                         <span class="recipe-apply-ex">
                             <input type="checkbox" id="chk-recipe-apply-ex-person" data-toggle="toggle" data-on="已熟练" data-off="全熟练"
-                                data-onstyle="default" class="toggle-new-version" data-width="80px" checked>
+                                data-onstyle="default" data-width="80px" checked>
                         </span>
                     </div>
                     <div class="box">
                         <input type="checkbox" id="chk-recipe-show-final" data-toggle="toggle" data-on="显示最终值" data-off="显示加成值"
-                            data-onstyle="default" class="toggle-new-version" data-width="105px" checked>
+                            data-onstyle="default" data-width="105px" checked>
                     </div>
                     <div class="box hidden">
                         <a id="btn-recipe-recal" class="btn btn-danger">
@@ -598,7 +598,7 @@
                     </div>
                     <div class="box">
                         <input type="checkbox" id="chk-chef-show-final" data-toggle="toggle" data-on="显示最终值" data-off="显示加成值"
-                            data-onstyle="default" class="toggle-new-version" data-width="105px" checked>
+                            data-onstyle="default" data-width="105px" checked>
                     </div>
                     <div class="box hidden">
                         <a id="btn-chef-recal" class="btn btn-danger">
@@ -1777,7 +1777,7 @@
                     <a href='https://foodgame.gitee.io'>https://foodgame.gitee.io</a>
                 </p>
                 <p class="text-primary">国外镜像 -
-                    <a href='https://foodgame.github.io'>https://foodgame.github.io</a>
+                    <a href='https://foodgame.github.io'>https://foodgame.github.io</a> (国内访问会有速度慢和偶尔访问不了的情况)
                 </p>
                 <p class="text-primary">注意, 个人数据在两个网站不同步, 换网站时可在原网站导出个人数据, 再在新网站导入数据.</p>
                 <p>图鉴第一组按钮选择显示项, 默认没有全部显示, 后面的负责筛选, 点击列名可以排序.</p>

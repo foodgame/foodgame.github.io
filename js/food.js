@@ -103,10 +103,60 @@ function initTables(data, person) {
 
     initVersionTip(person);
 
+    initTooltip(person);
+
+    $('.main-nav a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        reInitFixedHeader();
+    });
+
     $('.loading').addClass("hidden");
     $('.main-function').removeClass("hidden");
+
+    reInitFixedHeader();
 }
 
+function reInitFixedHeader() {
+    $('#recipe-table').DataTable().fixedHeader.adjust();
+    $('#chef-table').DataTable().fixedHeader.adjust();
+    $('#equip-table').DataTable().fixedHeader.adjust();
+    $('#decoration-table').DataTable().fixedHeader.adjust();
+    $('#quest-table').DataTable().fixedHeader.adjust();
+}
+
+function initTooltip(person) {
+    if (person && person["help"] == false) {
+        $('#chk-show-help').bootstrapToggle('off');
+    }
+
+    $('.tooltip-pin[data-toggle="tooltip"]').tooltip(
+        {
+            animation: false,
+            delay: { "show": 0, "hide": 0 },
+            trigger: "hover"
+        }
+    );
+
+    $('#chk-show-help').change(function () {
+        updateLocalData("help", $(this).prop("checked"));
+        updateTooltip();
+    });
+
+    updateTooltip();
+}
+
+function updateTooltip() {
+    if ($("#chk-show-help").prop("checked")) {
+        $('[data-toggle="tooltip"]:not(.tooltip-pin)').tooltip(
+            {
+                animation: false,
+                delay: { "show": 0, "hide": 0 },
+                trigger: "hover"
+            }
+        );
+    } else {
+        $('[data-toggle="tooltip"]:not(.tooltip-pin)').tooltip('destroy');
+    }
+}
 
 function initRecipeTable(data) {
 
@@ -305,6 +355,26 @@ function initRecipeTable(data) {
         return false;
     });
 
+    $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
+        if (settings.nTable != document.getElementById('recipe-table')) {
+            return true;
+        }
+
+        var chkMaterials = $('#chk-recipe-show-material').val();
+        if (chkMaterials.length > 0) {
+            for (var i in chkMaterials) {
+                for (var j in rowData.materials) {
+                    if (rowData.materials[j].material == chkMaterials[i]) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        } else {
+            return true;
+        }
+    });
+
     for (var j in data.materials) {
         $('#chk-recipe-show-material').append("<option value='" + data.materials[j].materialId + "'>" + data.materials[j].name + "</option>");
     }
@@ -374,7 +444,7 @@ function initRecipeTable(data) {
 
     $('#chk-recipe-skill-all').click(function () {
         if ($('#chk-recipe-single-skill').prop("checked")) {
-            $('#chk-recipe-single-skill').bootstrapToggle('off')
+            $('#chk-recipe-single-skill').bootstrapToggle('off');
         }
         $(".chk-recipe-skill").prop("checked", true);
         $('#recipe-table').DataTable().draw();
@@ -425,6 +495,23 @@ function initRecipeTable(data) {
     });
 
     $('#chk-recipe-no-origin').click(function () {
+        $('#recipe-table').DataTable().draw();
+    });
+
+    $('#btn-recipe-reset').click(function () {
+        $('.chk-recipe-rarity input[type="checkbox"]').prop("checked", true);
+        if ($('#chk-recipe-single-skill').prop("checked")) {
+            $('#chk-recipe-single-skill').bootstrapToggle('off');
+        }
+        $(".chk-recipe-skill").prop("checked", true);
+        $('.chk-recipe-category input[type="checkbox"]').prop("checked", true);
+        $("#chk-recipe-guest").prop("checked", false);
+        $("#chk-recipe-combo").prop("checked", false);
+        $("#chk-recipe-ex-yes, #chk-recipe-ex-no").prop("checked", true);
+        $("#chk-recipe-got").prop("checked", false);
+        $('#input-recipe-price').val("");
+        $('#input-recipe-guest-antique').val("");
+        $('#chk-recipe-show-material').selectpicker("deselectAll");
         $('#recipe-table').DataTable().draw();
     });
 
@@ -677,10 +764,11 @@ function reInitRecipeTable(data) {
             "<'row'<'col-sm-12'p>>",
         deferRender: true,
         order: order,
-        autoWidth: false
+        autoWidth: false,
+        fixedHeader: true
     });
 
-    $("#pane-recipes div.search-box").html('<label>查找:<input type="search" value="' + searchValue + '" class="form-control input-sm" placeholder="菜名 材料 贵客 符文 来源"></label>');
+    $("#pane-recipes div.search-box").html('<label data-toggle="tooltip" title="该搜索不含升阶贵客和神级符文">查找:<input type="search" value="' + searchValue + '" class="form-control input-sm" placeholder="菜名 材料 贵客 符文 来源"></label>');
 
     var rankOptions = getRankOptions();
     var gotOptions = getGotOptions();
@@ -719,6 +807,16 @@ function reInitRecipeTable(data) {
     $('#pane-recipes .search-box input').keyup(function () {
         recipeTable.draw();
     });
+
+    if ($("#chk-show-help").prop("checked")) {
+        $('#recipe-table_wrapper [data-toggle="tooltip"]').tooltip(
+            {
+                animation: false,
+                delay: { "show": 0, "hide": 0 },
+                trigger: "hover"
+            }
+        );
+    }
 }
 
 function updateRecipesMaterialsData(data) {
@@ -1295,7 +1393,8 @@ function reInitChefTable(data) {
             "<'row'<'col-sm-12'p>>",
         deferRender: true,
         order: order,
-        autoWidth: false
+        autoWidth: false,
+        fixedHeader: true
     });
 
     $("#pane-chefs div.search-box").html('<label>查找:<input type="search" value="' + searchValue + '" class="form-control input-sm" placeholder="名字 技能 来源"></label>');
@@ -1402,7 +1501,8 @@ function initEquipTable(data) {
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12'p>>",
         deferRender: true,
-        autoWidth: false
+        autoWidth: false,
+        fixedHeader: true
     });
 
     $("#pane-equips div.search-box").html('<label>查找:<input type="search" class="form-control input-sm" placeholder="名字 技能 来源"></label>');
@@ -1522,7 +1622,7 @@ function initEquipTable(data) {
 
     $('#chk-equip-skill-all').click(function () {
         if ($('#chk-equip-single-skill').prop("checked")) {
-            $('#chk-equip-single-skill').bootstrapToggle('off')
+            $('#chk-equip-single-skill').bootstrapToggle('off');
         }
         $(".chk-equip-skill").prop("checked", true);
         equipTable.draw();
@@ -1652,7 +1752,8 @@ function initDecorationTable(data) {
         },
         order: [[0, "desc"], [10, "desc"]],  //avg eff
         deferRender: false, // for select
-        autoWidth: false
+        autoWidth: false,
+        fixedHeader: true
     });
 
     $("#pane-decorations div.search-box").html('<label>查找:<input type="search" class="form-control input-sm" placeholder="名字 套装 来源"></label>');
@@ -1758,7 +1859,7 @@ function initDecorationTable(data) {
 
     $('#chk-decoration-position-all').click(function () {
         if ($('#chk-decoration-single-position').prop("checked")) {
-            $('#chk-decoration-single-position').bootstrapToggle('off')
+            $('#chk-decoration-single-position').bootstrapToggle('off');
         }
         $(".chk-decoration-position").prop("checked", true);
         decorationTable.draw();
@@ -1993,7 +2094,8 @@ function initQuestTable(data) {
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12'p>>",
         deferRender: true,
-        autoWidth: false
+        autoWidth: false,
+        fixedHeader: true
     });
 
     $("#pane-quest div.search-box").html('<label>查找:<input type="search" class="form-control input-sm" placeholder="编号 任务 奖励"></label>');
@@ -2146,6 +2248,7 @@ function importData(data, input) {
         var exist = false;
         for (var j in data.rules) {
             if (person.rules[i].Id == data.rules[j].Id) {
+                data.rules[j] = person.rules[i];
                 exist = true;
                 break;
             }
@@ -2263,7 +2366,7 @@ function updateDecorationLocalData() {
     } catch (e) { }
 }
 
-function updateVersionLocalData() {
+function updateLocalData(key, value) {
     var person;
     try {
         var localData = localStorage.getItem('data');
@@ -2274,7 +2377,7 @@ function updateVersionLocalData() {
         person = {};
     }
 
-    person["version"] = Number($("#alert-version").attr("data-version"));
+    person[key] = value;
 
     try {
         localStorage.setItem('data', JSON.stringify(person));
@@ -5567,6 +5670,8 @@ function getSkillDisp(recipe) {
 function initRecipeShow() {
     var recipeTable = $('#recipe-table').DataTable();
 
+    recipeTable.fixedHeader.disable();
+
     recipeTable.column(0).visible($('#chk-recipe-show-id').prop("checked"), false);
     recipeTable.column(1).visible($('#chk-recipe-show-icon').prop("checked"), false);
     recipeTable.column(3).visible($('#chk-recipe-show-rarity').prop("checked"), false);
@@ -5606,10 +5711,13 @@ function initRecipeShow() {
     recipeTable.column(29).visible($('#chk-recipe-show-got').prop("checked"), false);
 
     recipeTable.columns.adjust().draw(false);
+    recipeTable.fixedHeader.enable();
 }
 
 function initChefShow() {
     var chefTable = $('#chef-table').DataTable();
+
+    chefTable.fixedHeader.disable();
 
     chefTable.column(0).visible($('#chk-chef-show-id').prop("checked"), false);
     chefTable.column(1).visible($('#chk-chef-show-icon').prop("checked"), false);
@@ -5644,10 +5752,13 @@ function initChefShow() {
     chefTable.column(22).visible($('#chk-chef-show-got').prop("checked"), false);
 
     chefTable.columns.adjust().draw(false);
+    chefTable.fixedHeader.enable();
 }
 
 function initEquipShow() {
     var equipTable = $('#equip-table').DataTable();
+
+    equipTable.fixedHeader.disable();
 
     equipTable.column(0).visible($('#chk-equip-show-id').prop("checked"), false);
     equipTable.column(1).visible($('#chk-equip-show-icon').prop("checked"), false);
@@ -5656,10 +5767,13 @@ function initEquipShow() {
     equipTable.column(5).visible($('#chk-equip-show-origin').prop("checked"), false);
 
     equipTable.columns.adjust().draw(false);
+    equipTable.fixedHeader.enable();
 }
 
 function initDecorationShow() {
     var decorationTable = $('#decoration-table').DataTable();
+
+    decorationTable.fixedHeader.disable();
 
     decorationTable.column(0).visible($('#chk-decoration-show-select').prop("checked"), false);
     decorationTable.column(1).visible($('#chk-decoration-show-id').prop("checked"), false);
@@ -5673,11 +5787,14 @@ function initDecorationShow() {
     decorationTable.column(14).visible($('#chk-decoration-show-origin').prop("checked"), false);
 
     decorationTable.columns.adjust().draw(false);
+    decorationTable.fixedHeader.enable();
 }
 
 function initQuestShow(questTable) {
+    questTable.fixedHeader.disable();
     questTable.column(1).visible($('#select-quest-type').val() == "支线任务", false);
     questTable.columns.adjust().draw(false);
+    questTable.fixedHeader.enable();
 }
 
 function initCalChefsShow(calChefsTable) {
@@ -5810,25 +5927,25 @@ function historyTemplate(data) {
 }
 
 function initVersionTip(person) {
-    if ($("#alert-version").attr("data-show") == "true") {
-        var showTip = true;
-        if (person && person.version) {
-            if (Number(person.version) == Number($("#alert-version").attr("data-version"))) {
-                showTip = false;
+    $(".alert-version").each(function () {
+        if ($(this).attr("data-show") == "true") {
+            var key = $(this).attr("data-id");
+            var value = Number($(this).attr("data-version"));
+            var showTip = true;
+            if (person && person[key]) {
+                if (Number(person[key]) == value) {
+                    showTip = false;
+                }
             }
-        }
-        if (showTip) {
-            $("#alert-version").removeClass("hidden");
-            $(".btn-new-version").removeClass("btn-default").addClass("btn-info");
-            $(".toggle-new-version").closest(".toggle").find(".toggle-on, .toggle-off").removeClass("btn-default").addClass("btn-info");
-        }
+            if (showTip) {
+                $(this).removeClass("hidden");
+            }
 
-        $('#alert-version').on('close.bs.alert', function () {
-            $(".btn-new-version").removeClass("btn-info").addClass("btn-default");
-            $(".toggle-new-version").closest(".toggle").find(".toggle-on, .toggle-off").removeClass("btn-info").addClass("btn-default");
-            updateVersionLocalData();
-        })
-    }
+            $(this).on('close.bs.alert', function () {
+                updateLocalData(key, value);
+            })
+        }
+    });
 }
 
 $.fn.dataTable.Api.register('MakeCellsEditable()', function (settings) {

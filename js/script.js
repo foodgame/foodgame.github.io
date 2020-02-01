@@ -28178,7 +28178,7 @@ if (typeof jQuery === 'undefined') {
                 }
 
                 itemDom.floating = $(dt.table().node().cloneNode(false))
-                    .css('table-layout', 'fixed')
+                    //.css('table-layout', 'fixed')
                     .removeAttr('id')
                     .append(itemElement)
                     .appendTo('body');

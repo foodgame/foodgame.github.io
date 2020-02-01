@@ -153,10 +153,6 @@ function updateTooltip() {
                 trigger: "hover"
             }
         );
-
-        $('[data-toggle="tooltip"]').on('show.bs.tooltip', function () {
-            $('[data-toggle="tooltip"]').not(this).tooltip('hide');
-        });
     } else {
         $('[data-toggle="tooltip"]:not(.tooltip-pin)').tooltip('destroy');
     }

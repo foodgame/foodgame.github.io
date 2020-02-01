@@ -153,6 +153,10 @@ function updateTooltip() {
                 trigger: "hover"
             }
         );
+
+        $('[data-toggle="tooltip"]').on('show.bs.tooltip', function () {
+            $('[data-toggle="tooltip"]').not(this).tooltip('hide');
+        });
     } else {
         $('[data-toggle="tooltip"]:not(.tooltip-pin)').tooltip('destroy');
     }
@@ -808,15 +812,7 @@ function reInitRecipeTable(data) {
         recipeTable.draw();
     });
 
-    if ($("#chk-show-help").prop("checked")) {
-        $('#recipe-table_wrapper [data-toggle="tooltip"]').tooltip(
-            {
-                animation: false,
-                delay: { "show": 0, "hide": 0 },
-                trigger: "hover"
-            }
-        );
-    }
+    updateTooltip();
 }
 
 function updateRecipesMaterialsData(data) {

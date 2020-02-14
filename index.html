@@ -10,7 +10,7 @@
     <script type="text/javascript" src="js/common.min.js?v=34"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=37" />
     <script type="text/javascript" src="js/food.min.js?v=140"></script>
-    <link rel="stylesheet" type="text/css" href="css/image.css?v=40" />
+    <link rel="stylesheet" type="text/css" href="css/image.css?v=41" />
 </head>
 
 <body>
@@ -25,7 +25,7 @@
             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
             <a href='https://foodgame.github.io'>github服务器</a>在国外,国内访问会有速度慢和偶尔访问不了的情况,可以访问<a href='https://foodgame.gitee.io'>国内gitee服务器</a>,详情见说明页的蓝色说明
         </div>
-        <div class="alert alert-info alert-dismissible alert-version hidden" data-id="alert1" data-version="1" data-show="true">
+        <div class="alert alert-info alert-dismissible alert-version hidden" data-id="alert1" data-version="1" data-show="false">
             <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
             1. 蓝色按钮为最近新加或者改动的按钮<br>
             2. 鼠标指向部分按钮时显示帮助信息, 右侧新加开关可关闭此功能
@@ -62,7 +62,7 @@
             </ul>
             <div class="help-switch tooltip-pin" data-toggle="tooltip" data-placement="bottom" title="鼠标指向部分按钮时显示帮助信息">
                 <input type="checkbox" id="chk-show-help" data-toggle="toggle" data-on="帮助开" data-off="帮助关"
-                    data-onstyle="info" data-width="70" data-size="small" checked>
+                    data-onstyle="default" data-width="70" data-size="small" checked>
             </div>
         </div>
         <div class="tab-content">
@@ -356,11 +356,11 @@
                             <select id="chk-recipe-show-material" multiple data-live-search="true" data-live-search-placeholder="查找"
                                 data-width="auto" data-dropdown-align-right='auto' data-none-selected-text="耗材效率" data-selected-text-format="count"
                                 data-count-selected-text="{0} 食材" data-none-results-text="没有找到" data-actions-box="true"
-                                data-deselect-all-text="清空" data-style="btn-info"></select>
+                                data-deselect-all-text="清空"></select>
                         </div>
                     </div>
                     <div class="box">
-                        <a id="btn-recipe-reset" class="btn btn-info" data-toggle="tooltip" title="清空所有过滤菜谱条件">
+                        <a id="btn-recipe-reset" class="btn btn-default" data-toggle="tooltip" title="清空所有过滤菜谱条件">
                             清空过滤
                         </a>
                     </div>
@@ -512,7 +512,7 @@
                                 data-count-selected-text="{0} 菜谱" data-none-results-text="没有找到" data-actions-box="true"
                                 data-deselect-all-text="清空"></select>
                         </div>
-                        <label class="btn btn-info" data-toggle="tooltip" title="显示厨师做神级菜的能力差">
+                        <label class="btn btn-default" data-toggle="tooltip" title="显示厨师做神级菜的能力差">
                             <input type="checkbox" id="chk-chef-show-skill-diff">
                             <i class="fa fa-check glyphicon glyphicon-ok"></i>
                             神级能力差

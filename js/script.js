@@ -32870,7 +32870,7 @@ if (typeof jQuery === 'undefined') {
                 this.findLis();
 
                 var $options = this.$element.find('option'),
-                    $lisVisible = this.$lis.not('.divider, .dropdown-header, .disabled, .hidden'),
+                    $lisVisible = this.$lis.not('.divider, .dropdown-header, .disabled'),
                     lisVisLen = $lisVisible.length,
                     selectedOptions = [];
 

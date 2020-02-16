@@ -70,7 +70,7 @@ function initTables(data, person) {
 
     updateMenu(person);
 
-    setPartialUltimateOptions(data.chefs, data.skills);
+    setPartialUltimateOptions(data.chefs, data.partialSkill);
 
     initRecipeTable(data);
 
@@ -516,6 +516,7 @@ function initRecipeTable(data) {
         $('#input-recipe-price').val("");
         $('#input-recipe-guest-antique').val("");
         $('#chk-recipe-show-material').selectpicker("deselectAll");
+        $("#pane-recipes .search-box input").val("");
         $('#recipe-table').DataTable().draw();
     });
 
@@ -761,7 +762,7 @@ function reInitRecipeTable(data) {
             infoFiltered: "(从 _MAX_ 个菜谱中过滤)"
         },
         pagingType: "numbers",
-        lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "所有"]],
+        lengthMenu: [[5, 10, 20, 50, 100, -1], [5, 10, 20, 50, 100, "所有"]],
         pageLength: pageLength,
         dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'i><'col-sm-4'<'search-box'>>>" +
             "<'row'<'col-sm-12'tr>>" +
@@ -5439,6 +5440,7 @@ function getUltimateData(chefs, person, skills, useUltimate, usePerson) {
 }
 
 function setPartialUltimateOptions(chefs, skills) {
+    var partialArray = [];
     for (var i in chefs) {
         if (chefs[i].ultimateSkill) {
             for (var k in skills) {
@@ -5446,16 +5448,33 @@ function setPartialUltimateOptions(chefs, skills) {
                     for (var m in skills[k].effect) {
                         if (skills[k].effect[m].condition == "Partial") {
                             var skillInfo = getSkillInfo(skills, skills[k].skillId);
-                            var option = "<option value='" + chefs[i].chefId + "' data-subtext='" + skillInfo.skillDisp + "'>" + chefs[i].name + "</option>";
-                            if (skills[k].effect[m].type != "OpenTime") {
-                                $('#chk-chef-partial-ultimate').append(option);
-                            }
-                            $('#chk-cal-partial-ultimate').append(option);
+                            var partialItem = {};
+                            partialItem["skill"] = skillInfo;
+                            partialItem["chef"] = chefs[i];
+                            partialArray.push(partialItem);
                         }
                     }
                 }
             }
         }
+    }
+
+    partialArray.sort(function (a, b) {
+        return a.skill.skillDisp.localeCompare(b.skill.skillDisp)
+    });
+
+    for (var i in partialArray) {
+        var option = "<option value='" + partialArray[i].chef.chefId + "' data-subtext='" + partialArray[i].skill.skillDisp + "'>" + partialArray[i].chef.name + "</option>";
+        var toAdd = false;
+        for (var j in partialArray[i].skill.skillEffect) {
+            if (partialArray[i].skill.skillEffect[j].type != "OpenTime") {
+                toAdd = true;
+            }
+        }
+        if (toAdd) {
+            $('#chk-chef-partial-ultimate').append(option);
+        }
+        $('#chk-cal-partial-ultimate').append(option);
     }
 }
 

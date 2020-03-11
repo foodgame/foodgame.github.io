@@ -33,25 +33,17 @@ label.btn input[type="checkbox"]:checked+.fa {
 }
 
 .box>.btn,
-.box>.chk-recipe-show-chef-wrapper,
-.box>.chk-recipe-show-material-wrapper,
-.box>.chk-chef-show-recipe-wrapper,
+.box>.inline-wrapper,
 .box>.input-group {
     margin: 3px 0;
 }
 
-.box1 {
-    margin-bottom: 10px;
-}
-
-.chk-recipe-show-chef-wrapper,
-.chk-recipe-show-material-wrapper,
-.chk-chef-show-recipe-wrapper {
+.box>.inline-wrapper {
     display: inline-block;
 }
 
-.chk-chef-show-recipe-wrapper .dropdown-menu {
-    min-width: 215px;
+.box1 {
+    margin-bottom: 10px;
 }
 
 #input-recipe-price {
@@ -314,6 +306,13 @@ table.dataTable tbody>tr>.selected {
     width: inherit;
 }
 
+.bootstrap-select>.dropdown-toggle.bs-placeholder.btn-info,
+.bootstrap-select>.dropdown-toggle.bs-placeholder.btn-info:hover,
+.bootstrap-select>.dropdown-toggle.bs-placeholder.btn-info:focus,
+.bootstrap-select>.dropdown-toggle.bs-placeholder.btn-info:active {
+    color: #fff;
+}
+
 .bs-actionsbox .btn-group button {
     width: 100%;
 }
@@ -366,6 +365,20 @@ table.dataTable tbody>tr>.selected {
 
 .main-function {
     position: relative;
+}
+
+.main-nav {
+    position: relative;
+}
+
+.help-switch {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+
+.main-function .tooltip-inner {
+    background-color: rgba(0, 0, 0, .6);
 }
 
 td.td-chef-icon {
@@ -431,7 +444,7 @@ table.history-table tr td.history-dt {
     margin-left: 10px;
 }
 
-#alert-version {
+.alert-version {
     padding: 8px 30px 8px 20px;
     text-align: center;
 }

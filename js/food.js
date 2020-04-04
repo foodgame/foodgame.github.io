@@ -8,6 +8,18 @@ $(function () {
     });
 });
 
+function commaSeparatedMatch(data, value) {
+    if (value.length === 0) return true;
+    var values = value.split(/[,\s]/);
+    for (var i = 0; i < values.length; i++) {
+        if (values[i].length === 0) continue;
+        if (data.indexOf(values[i]) !== -1) {
+            return true;
+        }
+    }
+    return false;
+}
+
 function init(json) {
 
     initFunction();
@@ -295,7 +307,7 @@ function initRecipeTable(data) {
         var searchCols = [25, 26];  // rank guest, rank antique
 
         for (var i = 0, len = searchCols.length; i < len; i++) {
-            if (data[searchCols[i]].indexOf(value) !== -1) {
+            if (commaSeparatedMatch(data[searchCols[i]], value)) {
                 return true;
             }
         }
@@ -346,11 +358,11 @@ function initRecipeTable(data) {
                     return true;
                 }
             } else if (searchCols[i] == 20) {  // origin
-                if (data[searchCols[i]].indexOf(value) !== -1 && data[searchCols[i]].indexOf("神级") == -1) {
+                if (commaSeparatedMatch(data[searchCols[i]], value) && data[searchCols[i]].indexOf("神级") == -1) {
                     return true;
                 }
             } else {
-                if (data[searchCols[i]].indexOf(value) !== -1) {
+                if (commaSeparatedMatch(data[searchCols[i]], value)) {
                     return true;
                 }
             }
@@ -1085,7 +1097,7 @@ function initChefTable(data) {
         var searchCols = [2, 10, 16, 17, 20];    //  name, skill, origin, tags, ultimateskill
 
         for (var i = 0, len = searchCols.length; i < len; i++) {
-            if (data[searchCols[i]].indexOf(value) !== -1) {
+            if (commaSeparatedMatch(data[searchCols[i]], value)) {
                 return true;
             }
         }
@@ -1575,7 +1587,7 @@ function initEquipTable(data) {
         var searchCols = [2, 4, 5];    // name, skill, origin
 
         for (var i = 0, len = searchCols.length; i < len; i++) {
-            if (data[searchCols[i]].indexOf(value) !== -1) {
+            if (commaSeparatedMatch(data[searchCols[i]], value)) {
                 return true;
             }
         }
@@ -1812,7 +1824,7 @@ function initDecorationTable(data) {
         var searchCols = [3, 12, 14];    // name, suit, origin
 
         for (var i = 0, len = searchCols.length; i < len; i++) {
-            if (data[searchCols[i]].indexOf(value) !== -1) {
+            if (commaSeparatedMatch(data[searchCols[i]], value)) {
                 return true;
             }
         }
@@ -2106,7 +2118,7 @@ function initQuestTable(data) {
         var searchCols = [0, 2, 3];    // questId, goal, rewards
 
         for (var i = 0, len = searchCols.length; i < len; i++) {
-            if (data[searchCols[i]].indexOf(value) !== -1) {
+            if (commaSeparatedMatch(data[searchCols[i]], value)) {
                 return true;
             }
         }
@@ -3942,7 +3954,7 @@ function initCalChefsTable(data) {
         var searchCols = [2, 11, 13];   //name, gender, tags
 
         for (var i = 0, len = searchCols.length; i < len; i++) {
-            if (data[searchCols[i]].indexOf(value) !== -1) {
+            if (commaSeparatedMatch(data[searchCols[i]], value)) {
                 return true;
             }
         }
@@ -4078,7 +4090,7 @@ function initCalEquipsTable(data) {
         var searchCols = [2, 4, 5];   // name, skill, origin
 
         for (var i = 0, len = searchCols.length; i < len; i++) {
-            if (data[searchCols[i]].indexOf(value) !== -1) {
+            if (commaSeparatedMatch(data[searchCols[i]], value)) {
                 return true;
             }
         }
@@ -4206,7 +4218,7 @@ function initCalMaterialsTable(data) {
         var searchCols = [2, 3];   //name, origin
 
         for (var i = 0, len = searchCols.length; i < len; i++) {
-            if (data[searchCols[i]].indexOf(value) !== -1) {
+            if (commaSeparatedMatch(data[searchCols[i]], value)) {
                 return true;
             }
         }
@@ -4642,7 +4654,7 @@ function initCalResultTableCommon(mode, panel, data) {
             var searchCols = [5, 13];   //recipename, materials
 
             for (var i = 0, len = searchCols.length; i < len; i++) {
-                if (data[searchCols[i]].indexOf(value) !== -1) {
+                if (commaSeparatedMatch(data[searchCols[i]], value)) {
                     return true;
                 }
             }

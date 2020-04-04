@@ -6,10 +6,10 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="favicon.ico?v=1" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="css/style.min.css?v=3" />
-    <script type="text/javascript" src="js/script.min.js?v=11"></script>
+    <script type="text/javascript" src="js/script.min.js?v=12"></script>
     <script type="text/javascript" src="js/common.min.js?v=34"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=37" />
-    <script type="text/javascript" src="js/food.min.js?v=141"></script>
+    <script type="text/javascript" src="js/food.min.js?v=142"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=45" />
 </head>
 
@@ -193,7 +193,7 @@
                             已有
                         </label>
                         <div class="inline-wrapper" data-toggle="tooltip" title="显示厨师可做的品阶以及效率">
-                            <select id="chk-recipe-show-chef" multiple data-live-search="true" data-live-search-placeholder="查找" data-width="auto"
+                            <select id="chk-recipe-show-chef" multiple data-live-search="true" data-live-search-style="commaSplitContains" data-live-search-placeholder="查找" data-width="auto"
                                 data-dropdown-align-right='auto' data-none-selected-text="选择厨师" data-selected-text-format="count"
                                 data-count-selected-text="{0} 厨师" data-none-results-text="没有找到" data-actions-box="true"
                                 data-deselect-all-text="清空"></select>
@@ -507,7 +507,7 @@
                             已有
                         </label>
                         <div class="inline-wrapper" data-toggle="tooltip" title="显示厨师可做的品阶以及效率">
-                            <select id="chk-chef-show-recipe" multiple data-live-search="true" data-live-search-placeholder="查找" data-width="auto"
+                            <select id="chk-chef-show-recipe" multiple data-live-search="true" data-live-search-style="commaSplitContains" data-live-search-placeholder="查找" data-width="auto"
                                 data-dropdown-align-right='auto' data-none-selected-text="选择菜谱" data-selected-text-format="count"
                                 data-count-selected-text="{0} 菜谱" data-none-results-text="没有找到" data-actions-box="true"
                                 data-deselect-all-text="清空"></select>
@@ -1809,6 +1809,7 @@
                 <p class="text-primary">注意, 个人数据在两个网站不同步, 换网站时可在原网站导出个人数据, 再在新网站导入数据.</p>
                 <br>
                 <p>图鉴第一组按钮选择显示项, 默认没有全部显示, 后面的负责筛选, 点击列名可以排序.</p>
+                <p>搜索框可同时搜索多个, 中间用空格分隔.</p>
                 <br>
                 <h4>
                     <span class="label label-info">菜谱图鉴</span>

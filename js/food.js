@@ -5235,7 +5235,7 @@ function getMaterialsInfo(recipe, materials) {
         for (var m in materials) {
             if (recipe.materials[k].material == materials[m].materialId) {
                 materialsDisp += materials[m].name + "*" + recipe.materials[k].quantity + " ";
-                materialsVal += materials[m].name;
+                materialsVal += materials[m].name + " ";
                 materialsCount += recipe.materials[k].quantity;
                 recipe.materials[k]["origin"] = materials[m].origin;
                 if (materials[m].origin == "菜棚" || materials[m].origin == "菜地" || materials[m].origin == "森林") {

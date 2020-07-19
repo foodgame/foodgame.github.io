@@ -5464,6 +5464,7 @@ function setPartialUltimateOptions(chefs, skills) {
                             partialItem["skill"] = skillInfo;
                             partialItem["chef"] = chefs[i];
                             partialArray.push(partialItem);
+                            break;
                         }
                     }
                 }
@@ -5479,8 +5480,9 @@ function setPartialUltimateOptions(chefs, skills) {
         var option = "<option value='" + partialArray[i].chef.chefId + "' data-subtext='" + partialArray[i].skill.skillDisp + "'>" + partialArray[i].chef.name + "</option>";
         var toAdd = false;
         for (var j in partialArray[i].skill.skillEffect) {
-            if (partialArray[i].skill.skillEffect[j].type != "OpenTime") {
+            if (partialArray[i].skill.skillEffect[j].condition == "Partial" && partialArray[i].skill.skillEffect[j].type != "OpenTime") {
                 toAdd = true;
+                break;
             }
         }
         if (toAdd) {

@@ -222,6 +222,21 @@ function initSetting(data) {
         updateRecipeChefTable(data);
         updateSettingLocalData();
     });
+
+    $('#chk-setting-done-mark').change(function () {
+        $('#recipe-table').DataTable().rows().every(function (rowIdx, tableLoop, rowLoop) {
+            var recipe = this.data();
+            var rankGuestInfo = getRankGuestInfo(recipe, recipe.rank);
+            recipe.rankGuestsVal = rankGuestInfo.rankGuestsVal;
+            recipe.rankGuestsDisp = rankGuestInfo.rankGuestsDisp;
+            var rankGiftInfo = getRankGiftInfo(recipe, recipe.rank);
+            recipe.rankGiftVal = rankGiftInfo.rankGiftVal;
+            recipe.rankGiftDisp = rankGiftInfo.rankGiftDisp;
+            this.data(recipe);
+        });
+        $('#recipe-table').DataTable().draw(false);
+        updateSettingLocalData();
+    });
 }
 
 function initRecipeTable(data) {
@@ -314,9 +329,7 @@ function initRecipeTable(data) {
         for (var i in checks) {
             if (rowData.guestsVal.indexOf(checks[i]) >= 0) {
                 return true;
-            } else if ($('#chk-recipe-rank-antique').prop("checked")
-                && (!$('#chk-recipe-filter-antique').prop("checked") && rowData.giftDisp.indexOf(checks[i]) >= 0
-                    || $('#chk-recipe-filter-antique').prop("checked") && rowData.giftDisp.indexOf(checks[i] + " (可用)") >= 0)) {
+            } else if ($('#chk-recipe-rank-antique').prop("checked") && rowData.rankGiftVal.indexOf(checks[i]) >= 0) {
                 return true;
             }
         }
@@ -615,7 +628,9 @@ function initRecipeTable(data) {
     $('#chk-recipe-filter-antique').click(function () {
         $('#recipe-table').DataTable().rows().every(function (rowIdx, tableLoop, rowLoop) {
             var recipe = this.data();
-            recipe.giftDisp = getGiftDisp(recipe, recipe.rank);
+            var rankGiftInfo = getRankGiftInfo(recipe, recipe.rank);
+            recipe.rankGiftVal = rankGiftInfo.rankGiftVal;
+            recipe.rankGiftDisp = rankGiftInfo.rankGiftDisp;
             this.data(recipe);
         });
         $('#recipe-table').DataTable().draw();
@@ -960,7 +975,10 @@ function reInitRecipeTable(data) {
             }
         },
         {
-            "data": "giftDisp"
+            "data": {
+                "_": "rankGiftVal",
+                "display": "rankGiftDisp"
+            }
         },
         {
             "data": "rank",
@@ -1163,7 +1181,9 @@ function reInitRecipeTable(data) {
                 recipe.rankGuestsVal = rankGuestInfo.rankGuestsVal;
                 recipe.rankGuestsDisp = rankGuestInfo.rankGuestsDisp;
 
-                recipe.giftDisp = getGiftDisp(recipe, recipe.rank);
+                var rankGiftInfo = getRankGiftInfo(recipe, recipe.rank);
+                recipe.rankGiftVal = rankGiftInfo.rankGiftVal;
+                recipe.rankGiftDisp = rankGiftInfo.rankGiftDisp;
 
                 row.data(recipe);
                 recipeTable.draw();
@@ -2561,7 +2581,9 @@ function importData(data, input) {
                     data.recipes[i].rankGuestsVal = rankGuestInfo.rankGuestsVal;
                     data.recipes[i].rankGuestsDisp = rankGuestInfo.rankGuestsDisp;
 
-                    data.recipes[i].giftDisp = getGiftDisp(data.recipes[i], data.recipes[i].rank);
+                    var rankGiftInfo = getRankGiftInfo(data.recipes[i], data.recipes[i].rank);
+                    data.recipes[i].rankGiftVal = rankGiftInfo.rankGiftVal;
+                    data.recipes[i].rankGiftDisp = rankGiftInfo.rankGiftDisp;
                 }
                 if (person.recipes[j].hasOwnProperty("ex")) {
                     data.recipes[i].ex = person.recipes[j].ex;
@@ -2844,6 +2866,7 @@ function generateSettingExportData() {
     exportData["expand"] = $("#chk-setting-expand").prop("checked");
     exportData["auto"] = $("#chk-setting-auto-update").prop("checked");
     exportData["final"] = $("#chk-setting-show-final").prop("checked");
+    exportData["mark"] = $("#chk-setting-done-mark").prop("checked");
     return exportData;
 }
 
@@ -2875,6 +2898,13 @@ function updateSetting(person) {
                 $('#chk-setting-show-final').bootstrapToggle('on');
             } else {
                 $('#chk-setting-show-final').bootstrapToggle('off');
+            }
+        }
+        if ($('#chk-setting-done-mark').prop("checked") != person.setting.mark) {
+            if (person.setting.mark) {
+                $('#chk-setting-done-mark').bootstrapToggle('on');
+            } else {
+                $('#chk-setting-done-mark').bootstrapToggle('off');
             }
         }
     }
@@ -5473,7 +5503,9 @@ function generateData(json, json2, person) {
         recipeData["rankGuestsVal"] = rankGuestInfo.rankGuestsVal;
         recipeData["rankGuestsDisp"] = rankGuestInfo.rankGuestsDisp;
 
-        recipeData["giftDisp"] = getGiftDisp(json.recipes[i], recipeData.rank);
+        var rankGiftInfo = getRankGiftInfo(json.recipes[i], recipeData.rank);
+        recipeData["rankGiftVal"] = rankGiftInfo.rankGiftVal;
+        recipeData["rankGiftDisp"] = rankGiftInfo.rankGiftDisp;
 
         var guestsVal = "";
         var guestsDisp = "";
@@ -5732,6 +5764,7 @@ function getRankGuestInfo(recipe, rank) {
     var rankGuestsVal = "";
 
     var filter = $('#chk-recipe-filter-guest').prop("checked");
+    var mark = $("#chk-setting-done-mark").prop("checked");
 
     for (var i in recipe.guests) {
         var done = false;
@@ -5750,7 +5783,9 @@ function getRankGuestInfo(recipe, rank) {
             rankDisp = "神"
         }
 
-        rankGuestsDisp += rankDisp + "-" + (recipe.guests[i].guest ? recipe.guests[i].guest : "未知") + (done ? "" : " (可用)") + "<br>";
+        rankGuestsDisp += (done && mark ? "<span class='rank-done'>" : "")
+            + rankDisp + "-" + (recipe.guests[i].guest ? recipe.guests[i].guest : "未知")
+            + (done && mark ? "</span>" : "") + "<br>";
 
         if (!filter || filter && !done) {
             rankGuestsVal += " " + recipe.guests[i].guest + " ";
@@ -5763,14 +5798,25 @@ function getRankGuestInfo(recipe, rank) {
     return retData;
 }
 
-function getGiftDisp(recipe, rank) {
+function getRankGiftInfo(recipe, rank) {
     var rankGiftDisp = recipe.gift;
+    var rankGiftVal = "";
 
-    if (rank != "神" && rankGiftDisp != "-" && rankGiftDisp != "未知") {
-        rankGiftDisp += " (可用)";
+    var filter = $('#chk-recipe-filter-antique').prop("checked");
+    var mark = $("#chk-setting-done-mark").prop("checked");
+
+    if (rank == "神" && mark) {
+        rankGiftDisp = "<span class='rank-done'>" + rankGiftDisp + "</span>";
     }
 
-    return rankGiftDisp;
+    if (!filter || filter && rank != "神") {
+        rankGiftVal = recipe.gift;
+    }
+
+    var retData = {};
+    retData["rankGiftDisp"] = rankGiftDisp;
+    retData["rankGiftVal"] = rankGiftVal;
+    return retData;
 }
 
 function ifUseEx(recipe) {
@@ -6230,6 +6276,7 @@ function initRecipeShow() {
 
     recipeTable.responsive.rebuild();
     recipeTable.responsive.recalc();
+    recipeTable.columns.adjust().draw(false);
 }
 
 function initChefShow() {
@@ -6251,6 +6298,7 @@ function initChefShow() {
 
     chefTable.responsive.rebuild();
     chefTable.responsive.recalc();
+    chefTable.columns.adjust().draw(false);
 }
 
 function initEquipShow() {
@@ -6262,6 +6310,7 @@ function initEquipShow() {
 
     equipTable.responsive.rebuild();
     equipTable.responsive.recalc();
+    equipTable.columns.adjust().draw(false);
 }
 
 function initDecorationShow() {
@@ -6273,6 +6322,7 @@ function initDecorationShow() {
 
     decorationTable.responsive.rebuild();
     decorationTable.responsive.recalc();
+    decorationTable.columns.adjust().draw(false);
 }
 
 function initQuestShow(questTable) {
@@ -6295,6 +6345,7 @@ function initCalChefsShow(calChefsTable) {
 
     calChefsTable.responsive.rebuild();
     calChefsTable.responsive.recalc();
+    calChefsTable.columns.adjust().draw(false);
 }
 
 function initCalEquipsShow(calEquipsTable) {
@@ -6305,6 +6356,7 @@ function initCalEquipsShow(calEquipsTable) {
 
     calEquipsTable.responsive.rebuild();
     calEquipsTable.responsive.recalc();
+    calEquipsTable.columns.adjust().draw(false);
 }
 
 function initCalMaterialsShow(calMaterialsTable) {
@@ -6315,6 +6367,7 @@ function initCalMaterialsShow(calMaterialsTable) {
 
     calMaterialsTable.responsive.rebuild();
     calMaterialsTable.responsive.recalc();
+    calMaterialsTable.columns.adjust().draw(false);
 }
 
 function initCalResultsShow(mode, calResultsTable, panel) {

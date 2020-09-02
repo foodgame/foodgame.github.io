@@ -639,3 +639,7 @@ table.dataTable thead>tr>td.sorting {
 .alert {
     margin-bottom: 5px;
 }
+
+.rank-done {
+    color: #999;
+}

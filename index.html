@@ -8,8 +8,8 @@
     <link rel="stylesheet" type="text/css" href="css/style.min.css?v=4" />
     <script type="text/javascript" src="js/script.min.js?v=13"></script>
     <script type="text/javascript" src="js/common.min.js?v=34"></script>
-    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=40" />
-    <script type="text/javascript" src="js/food.min.js?v=146"></script>
+    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=41" />
+    <script type="text/javascript" src="js/food.min.js?v=147"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=55" />
     <script>
         $(function () {
@@ -18,7 +18,7 @@
                 success: function (json) {
                     init(json);
                 },
-                url: 'data/data.min.json?v=1'
+                url: 'data/data.min.json?v=2'
             });
         });
     </script>
@@ -1403,6 +1403,13 @@
                             data-off="显示加成值" data-onstyle="default" data-size="small" data-width="90px" checked>
                         <span class="setting-tip">
                             已熟练/已修炼/厨具加成的显示方式 比如单价显示8还是7+1
+                        </span>
+                    </p>
+                    <p>
+                        <input type="checkbox" id="chk-setting-done-mark" data-toggle="toggle" data-on="完成标识开"
+                            data-off="完成标识关" data-onstyle="default" data-size="small" data-width="90px" checked>
+                        <span class="setting-tip">
+                            根据你的菜谱品阶 完成的升阶贵客和神级符文灰色显示
                         </span>
                     </p>
                 </div>

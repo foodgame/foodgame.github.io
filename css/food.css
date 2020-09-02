@@ -542,17 +542,16 @@ table.history-table tr td.history-dt {
     height: 35px;
 }
 
+.form-control.input-sm {
+    height: 30px;
+}
+
 .header-wrapper .btn {
     height: 35px;
 }
 
 .btn-group-sm .btn {
     height: 30px;
-}
-
-input.form-control,
-input.input-sm {
-    font-size: 16px;
 }
 
 .child-inner {
@@ -593,18 +592,6 @@ input.input-sm {
     border-top-left-radius: 0px !important;
     border-bottom-left-radius: 0px !important;
     margin-left: -1px !important;
-}
-
-:-ms-input-placeholder {
-    font-size: 14px;
-}
-
-::placeholder {
-    font-size: 14px;
-}
-
-::-webkit-input-placeholder {
-    font-size: 14px;
 }
 
 .btn:focus,

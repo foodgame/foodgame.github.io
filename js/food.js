@@ -118,7 +118,7 @@ function initTables(data, person) {
     });
 
     $('.main-nav a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        reInitFixedHeader();
+        // reInitFixedHeader();
     });
 
     if (window.location.href.indexOf("github") > 0) {
@@ -128,18 +128,25 @@ function initTables(data, person) {
     $('.loading').addClass("hidden");
     $('.main-function').removeClass("hidden");
 
-    reInitFixedHeader();
+    // reInitFixedHeader();
 
     monitorStyle();
+
+    $(window).on('resize', function(){
+        $('#recipe-table').DataTable().columns.adjust();
+        var otherHeight = $('body').height() - $('.dataTables_scrollBody').height();
+        var tableHeight = $(this).height() - otherHeight - 20;
+        $('.dataTables_scrollBody').css('height', tableHeight + 'px');
+  });
 }
 
-function reInitFixedHeader() {
-    $('#recipe-table').DataTable().fixedHeader.adjust();
-    $('#chef-table').DataTable().fixedHeader.adjust();
-    $('#equip-table').DataTable().fixedHeader.adjust();
-    $('#decoration-table').DataTable().fixedHeader.adjust();
-    $('#quest-table').DataTable().fixedHeader.adjust();
-}
+// function reInitFixedHeader() {
+//     $('#recipe-table').DataTable().fixedHeader.adjust();
+//     $('#chef-table').DataTable().fixedHeader.adjust();
+//     $('#equip-table').DataTable().fixedHeader.adjust();
+//     $('#decoration-table').DataTable().fixedHeader.adjust();
+//     $('#quest-table').DataTable().fixedHeader.adjust();
+// }
 
 function initTooltip() {
     $('.tooltip-pin[data-toggle="tooltip"]').tooltip(
@@ -1074,7 +1081,8 @@ function reInitRecipeTable(data) {
         deferRender: true,
         order: order,
         autoWidth: false,
-        fixedHeader: true,
+        // fixedHeader: true,
+        scrollX: true,
         responsive: {
             details: {
                 type: 'column',
@@ -1683,7 +1691,7 @@ function reInitChefTable(data) {
         deferRender: true,
         order: order,
         autoWidth: false,
-        fixedHeader: true,
+        // fixedHeader: true,
         responsive: {
             details: {
                 type: 'column',
@@ -1849,7 +1857,7 @@ function initEquipTable(data) {
             "<'row'<'col-sm-12'p>>",
         deferRender: true,
         autoWidth: false,
-        fixedHeader: true,
+        // fixedHeader: true,
         responsive: {
             details: {
                 type: 'column',
@@ -2134,7 +2142,7 @@ function initDecorationTable(data) {
         order: [[0, "desc"], [10, "desc"]],  //avg eff
         deferRender: false, // for select
         autoWidth: false,
-        fixedHeader: true,
+        // fixedHeader: true,
         responsive: {
             details: {
                 type: 'column',
@@ -2446,7 +2454,7 @@ function initQuestTable(data) {
             "<'row'<'col-sm-12'p>>",
         deferRender: true,
         autoWidth: false,
-        fixedHeader: true
+        // fixedHeader: true
     });
 
     $("#pane-quest div.search-box").html('<label>查找:<input type="search" class="form-control input-sm monitor-none" placeholder="编号 任务 奖励"></label>');
@@ -6209,6 +6217,7 @@ function initRecipeShow() {
 
     recipeTable.responsive.rebuild();
     recipeTable.responsive.recalc();
+    $('#recipe-table').DataTable().columns.adjust();
 }
 
 function initChefShow() {
@@ -6255,10 +6264,10 @@ function initDecorationShow() {
 }
 
 function initQuestShow(questTable) {
-    questTable.fixedHeader.disable();
+    // questTable.fixedHeader.disable();
     questTable.column(1).visible($('#select-quest-type').val() == "支线任务", false);
     questTable.columns.adjust().draw(false);
-    questTable.fixedHeader.enable();
+    // questTable.fixedHeader.enable();
 }
 
 function initCalChefsShow(calChefsTable) {

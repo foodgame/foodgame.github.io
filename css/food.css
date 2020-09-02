@@ -38,20 +38,31 @@ label.btn input[type="checkbox"]:checked+.fa {
     margin: 3px 0;
 }
 
-.box>.inline-wrapper {
+.inline-wrapper {
     display: inline-block;
 }
 
-.box1 {
-    margin-bottom: 10px;
+.header-wrapper {
+    margin-bottom: 5px;
+}
+
+.header-wrapper:not(:first-child) {
+    margin-top: -5px;
+}
+
+.header-wrapper .btn,
+.header-wrapper>select,
+.header-wrapper .input-group,
+.header-wrapper>input.form-control {
+    margin-bottom: 5px;
+}
+
+.header-wrapper .input-group .btn {
+    margin-bottom: 0;
 }
 
 #input-recipe-price {
-    width: 60px;
-}
-
-#input-recipe-guest-antique {
-    width: 150px;
+    width: 95px;
 }
 
 .search-box {
@@ -67,7 +78,7 @@ label.btn input[type="checkbox"]:checked+.fa {
 .search-box input.form-control {
     margin-left: .5em;
     display: inline-block;
-    width: 160px;
+    width: 150px;
 }
 
 .loading-bg {
@@ -87,11 +98,15 @@ label.btn input[type="checkbox"]:checked+.fa {
     transform: translate(-50%, -50%);
     text-align: center;
     z-index: 50;
+    color: #fff;
 }
 
 .loading-text h1 {
-    color: #fff;
     animation: pulse 2.5s linear infinite;
+}
+
+.loading-text a {
+    color: #fff;
 }
 
 @keyframes pulse {
@@ -137,15 +152,6 @@ label.btn input[type="checkbox"]:checked+.fa {
 
 .paginationjs-pages li.disabled a {
     color: #ccc;
-}
-
-#input-chef-stirfry,
-#input-chef-boil,
-#input-chef-knife,
-#input-chef-fry,
-#input-chef-bake,
-#input-chef-steam {
-    width: 50px;
 }
 
 .btn-cal-results-cal .glyphicon {
@@ -210,6 +216,10 @@ label.btn input[type="checkbox"]:checked+.fa {
 
 .table-hover tbody tr.selected:hover td {
     background-color: #eee;
+}
+
+table.dataTable tbody td {
+    outline: none;
 }
 
 table.dataTable tbody td.selected,
@@ -298,8 +308,23 @@ table.dataTable tbody>tr>.selected {
     width: 60px;
 }
 
-.bootstrap-select.btn-group .dropdown-menu li a {
+.bootstrap-select>select.mobile-device:focus+.dropdown-toggle,
+.bootstrap-select .dropdown-toggle:focus {
+    outline: none !important;
+}
+
+.bootstrap-select.show-tick .dropdown-menu li a span.text {
+    max-width: 350px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bootstrap-select .dropdown-menu li a {
     color: #333;
+}
+
+.bootstrap-select .dropdown-menu li a.selected {
+    background-color: #ddd;
 }
 
 .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
@@ -313,7 +338,7 @@ table.dataTable tbody>tr>.selected {
     color: #fff;
 }
 
-.bs-actionsbox .btn-group button {
+.bs-actionsbox .btn-group button:only-child {
     width: 100%;
 }
 
@@ -360,7 +385,7 @@ table.dataTable tbody>tr>.selected {
 }
 
 #cal-ultimate .input-group .form-control {
-    width: 50px;
+    width: 55px;
 }
 
 .main-function {
@@ -371,10 +396,19 @@ table.dataTable tbody>tr>.selected {
     position: relative;
 }
 
-.help-switch {
+#setting-btn {
     position: absolute;
     top: 2px;
     right: 2px;
+}
+
+.setting-tip {
+    padding-left: 5px;
+}
+
+.modal-header .modal-title {
+    color: #337ab7;
+    font-size: 16px;
 }
 
 .main-function .tooltip-inner {
@@ -408,10 +442,6 @@ table.history-table tr td {
 table.history-table tr td.history-dt {
     width: 80px;
     padding-left: 0px;
-}
-
-.cal-menu {
-    display: inline;
 }
 
 .select-file {
@@ -472,27 +502,32 @@ table.history-table tr td.history-dt {
     width: 60px;
 }
 
-.relative {
-    position: relative;
-}
-
 #decoration-sum {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    text-align: center;
     color: #337ab7;
     font-size: 18px;
+    font-weight: bold;
+    line-height: 18px;
+    margin-bottom: 10px;
+    min-height: 1em;
+}
+
+.partial-warning,
+.quest-warning {
+    border-radius: .15em;
+    padding: 6px 8px 4px;
+    display: inline-block;
     font-weight: bold;
 }
 
 .partial-warning {
     color: #fff;
-    border-radius: .15em;
-    padding: 4px 8px 5px;
-    display: inline-block;
     background-color: #ff5353;
-    font-weight: bold;
+}
+
+.quest-warning {
+    color: #fff;
+    background-color: #5bc0de;
 }
 
 .option-warning {
@@ -501,4 +536,107 @@ table.history-table tr td.history-dt {
 
 .option-sub-warning .text-muted {
     color: #ff5353 !important;
+}
+
+.form-control {
+    height: 35px;
+}
+
+.header-wrapper .btn {
+    height: 35px;
+}
+
+.btn-group-sm .btn {
+    height: 30px;
+}
+
+input.form-control,
+input.input-sm {
+    font-size: 16px;
+}
+
+.child-inner {
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+}
+
+.child-inner .child-key {
+    display: inline-block;
+    font-weight: bold;
+    vertical-align: top;
+    padding: 5px 2px 5px 5px;
+}
+
+.child-inner .child-value {
+    display: inline-block;
+    padding: 5px 2px;
+}
+
+.input-group-last>.btn {
+    border-top-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+    margin-left: -2px !important;
+}
+
+.input-group-mid>.btn {
+    border-radius: 0 !important;
+    margin-left: -1px !important;
+}
+
+.input-group-first .bootstrap-select>.dropdown-toggle {
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
+.input-group-last .bootstrap-select>.dropdown-toggle {
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    margin-left: -1px !important;
+}
+
+:-ms-input-placeholder {
+    font-size: 14px;
+}
+
+::placeholder {
+    font-size: 14px;
+}
+
+::-webkit-input-placeholder {
+    font-size: 14px;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none;
+}
+
+a:focus {
+    outline: none;
+}
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:after {
+    right: 5px;
+}
+
+table.dataTable thead>tr>th.sorting_asc,
+table.dataTable thead>tr>th.sorting_desc,
+table.dataTable thead>tr>th.sorting,
+table.dataTable thead>tr>td.sorting_asc,
+table.dataTable thead>tr>td.sorting_desc,
+table.dataTable thead>tr>td.sorting {
+    padding-right: 20px;
+}
+
+.alert {
+    margin-bottom: 5px;
 }

@@ -121,6 +121,27 @@ function initTables(data, person) {
         reInitFixedHeader();
     });
 
+    $('.bootstrap-select').hover(
+        function () {
+            $('.bootstrap-select').removeClass("hover-item");
+            var element = $(this);
+            element.addClass("hover-item");
+            setTimeout(function () {
+                if (!element.hasClass("open") && element.hasClass("hover-item")) {
+                    element.find("select").selectpicker('toggle');
+                }
+            }, 10);
+        }, function () {
+            var element = $(this);
+            element.removeClass("hover-item");
+            setTimeout(function () {
+                if (element.hasClass("open")) {
+                    element.find("select").selectpicker('toggle');
+                }
+            }, 10);
+        }
+    );
+
     if (window.location.href.indexOf("github") > 0) {
         $('.loading h3').remove();
     }
@@ -504,9 +525,9 @@ function initRecipeTable(data) {
         if ($(this).val().length) {
             $('#recipe-table').DataTable().order([30, 'desc']).draw(); // first material eff
         }
-        if (isSelected) {
-            $(this).selectpicker('toggle');
-        }
+        // if (isSelected) {
+        //     $(this).selectpicker('toggle');
+        // }
     });
 
     for (var j in data.chefs) {
@@ -539,9 +560,9 @@ function initRecipeTable(data) {
         updateRecipesChefsData(data);
         updateRecipeQuest(data, true);
 
-        if (isSelected) {
-            $(this).selectpicker('toggle');
-        }
+        // if (isSelected) {
+        //     $(this).selectpicker('toggle');
+        // }
     });
 
     $('#select-recipe-chef-quest').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
@@ -562,9 +583,9 @@ function initRecipeTable(data) {
     }
 
     $('#chk-recipe-guest').selectpicker().on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-        if (isSelected) {
-            $(this).selectpicker('toggle');
-        }
+        // if (isSelected) {
+        //     $(this).selectpicker('toggle');
+        // }
         $('#recipe-table').DataTable().order([14, 'asc']).draw();
     });
 
@@ -614,9 +635,9 @@ function initRecipeTable(data) {
     }
 
     $('#select-recipe-quest').selectpicker().on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-        if (isSelected) {
-            $(this).selectpicker('toggle');
-        }
+        // if (isSelected) {
+        //     $(this).selectpicker('toggle');
+        // }
         updateRecipeQuest(data);
         $('#recipe-table').DataTable().draw();
     });
@@ -1372,9 +1393,9 @@ function initChefTable(data) {
         updateChefsRecipesData(data);
         reInitChefTable(data);
         initChefShow();
-        if (isSelected) {
-            $(this).selectpicker('toggle');
-        }
+        // if (isSelected) {
+        //     $(this).selectpicker('toggle');
+        // }
     });
 
     $('#chk-chef-show-skill-diff').click(function () {

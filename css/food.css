@@ -319,12 +319,24 @@ table.dataTable tbody>tr>.selected {
     text-overflow: ellipsis;
 }
 
+.bootstrap-select .dropdown-menu {
+    margin-top: -5px;
+}
+
+.header-wrapper .input-group .bootstrap-select .dropdown-menu {
+    margin-top: 0;
+}
+
 .bootstrap-select .dropdown-menu li a {
     color: #333;
 }
 
 .bootstrap-select .dropdown-menu li a.selected {
     background-color: #ddd;
+}
+
+.bootstrap-select .dropdown-menu input.form-control {
+    border-radius: 4px;
 }
 
 .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {

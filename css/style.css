@@ -8652,32 +8652,6 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-chil
     padding-left: 12px;
 }
 
-
-/*! FixedHeader 3.1.3
- * ©2009-2017 SpryMedia Ltd - datatables.net/license
- */
-
-table.dataTable.fixedHeader-floating,
-table.dataTable.fixedHeader-locked {
-    background-color: white;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-}
-
-table.dataTable.fixedHeader-floating {
-    position: fixed !important;
-}
-
-table.dataTable.fixedHeader-locked {
-    position: absolute !important;
-}
-
-@media print {
-    table.fixedHeader-floating {
-        display: none;
-    }
-}
-
 /*! Responsive 2.2.5
  * 2014-2020 SpryMedia Ltd - datatables.net/license
  */
@@ -9580,3 +9554,71 @@ select.selectpicker {
 }
 
 /*# sourceMappingURL=bootstrap-select.css.map */
+
+/*! FixedColumns 3.3.1
+ * ©2009-2017 SpryMedia Ltd - datatables.net/license
+ */
+
+table.DTFC_Cloned tr {
+    background-color: white;
+    margin-bottom: 0;
+}
+
+div.DTFC_LeftHeadWrapper table,
+div.DTFC_RightHeadWrapper table {
+    border-bottom: none !important;
+    margin-bottom: 0 !important;
+    background-color: white;
+}
+
+div.DTFC_LeftBodyWrapper table,
+div.DTFC_RightBodyWrapper table {
+    border-top: none;
+    margin: 0 !important;
+    z-index: 2;
+}
+
+div.DTFC_LeftBodyWrapper table thead .sorting:before,
+div.DTFC_LeftBodyWrapper table thead .sorting:after,
+div.DTFC_LeftBodyWrapper table thead .sorting_asc:before,
+div.DTFC_LeftBodyWrapper table thead .sorting_asc:after,
+div.DTFC_LeftBodyWrapper table thead .sorting_desc:before,
+div.DTFC_LeftBodyWrapper table thead .sorting_desc:after,
+div.DTFC_LeftBodyWrapper table thead .sorting:before,
+div.DTFC_LeftBodyWrapper table thead .sorting:after,
+div.DTFC_LeftBodyWrapper table thead .sorting_asc:before,
+div.DTFC_LeftBodyWrapper table thead .sorting_asc:after,
+div.DTFC_LeftBodyWrapper table thead .sorting_desc:before,
+div.DTFC_LeftBodyWrapper table thead .sorting_desc:after,
+div.DTFC_RightBodyWrapper table thead .sorting:before,
+div.DTFC_RightBodyWrapper table thead .sorting:after,
+div.DTFC_RightBodyWrapper table thead .sorting_asc:before,
+div.DTFC_RightBodyWrapper table thead .sorting_asc:after,
+div.DTFC_RightBodyWrapper table thead .sorting_desc:before,
+div.DTFC_RightBodyWrapper table thead .sorting_desc:after,
+div.DTFC_RightBodyWrapper table thead .sorting:before,
+div.DTFC_RightBodyWrapper table thead .sorting:after,
+div.DTFC_RightBodyWrapper table thead .sorting_asc:before,
+div.DTFC_RightBodyWrapper table thead .sorting_asc:after,
+div.DTFC_RightBodyWrapper table thead .sorting_desc:before,
+div.DTFC_RightBodyWrapper table thead .sorting_desc:after {
+    display: none;
+}
+
+div.DTFC_LeftBodyWrapper table tbody tr:first-child th,
+div.DTFC_LeftBodyWrapper table tbody tr:first-child td,
+div.DTFC_RightBodyWrapper table tbody tr:first-child th,
+div.DTFC_RightBodyWrapper table tbody tr:first-child td {
+    border-top: none;
+}
+
+div.DTFC_LeftFootWrapper table,
+div.DTFC_RightFootWrapper table {
+    border-top: none;
+    margin-top: 0 !important;
+    background-color: white;
+}
+
+div.DTFC_Blocker {
+    background-color: white;
+}

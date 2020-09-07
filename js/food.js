@@ -118,7 +118,14 @@ function initTables(data, person) {
     });
 
     $('.main-nav a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        reInitFixedHeader();
+        if ($(this).attr("data-init") != "true") {
+            $('.dataTables_scrollBody:visible table.dataTable').DataTable().draw(false);
+            updateScrollHeight();
+        }
+    });
+
+    $('.dataTables_scrollBody table.dataTable').on('page.dt', function () {
+        $(this).closest('.dataTables_scrollBody').scrollTop(0);
     });
 
     $('.bootstrap-select').hover(
@@ -142,6 +149,8 @@ function initTables(data, person) {
         }
     );
 
+    monitorStyle();
+
     if (window.location.href.indexOf("github") > 0) {
         $('.loading h3').remove();
     }
@@ -149,17 +158,54 @@ function initTables(data, person) {
     $('.loading').addClass("hidden");
     $('.main-function').removeClass("hidden");
 
-    reInitFixedHeader();
+    $('#recipe-table').DataTable().draw(false);
 
-    monitorStyle();
+    updateScrollHeight();
+
+    window.onresize = function () {
+        $('.main-nav a[data-toggle="tab"]').attr("data-init", "false");
+        updateScrollHeight(true);
+    };
 }
 
-function reInitFixedHeader() {
-    $('#recipe-table').DataTable().fixedHeader.adjust();
-    $('#chef-table').DataTable().fixedHeader.adjust();
-    $('#equip-table').DataTable().fixedHeader.adjust();
-    $('#decoration-table').DataTable().fixedHeader.adjust();
-    $('#quest-table').DataTable().fixedHeader.adjust();
+function updateScrollHeight(redraw) {
+    var otherHeight = $('body').height() - $('.dataTables_scrollBody:visible').height();
+    var tableHeight = ($(window).height() - otherHeight - 10) + "px";
+    if ($('.dataTables_scrollBody:visible').css('max-height') != tableHeight) {
+        $('.dataTables_scrollBody:visible').css('max-height', tableHeight);
+        redraw = true;
+    }
+    if (redraw) {
+        $('.dataTables_scrollBody:visible table.dataTable').DataTable().columns.adjust().draw(false);
+        $('.main-nav li.active a[data-toggle="tab"]').attr("data-init", "true");
+    }
+}
+
+function initTableResponsiveDisplayEvent(table) {
+    table.on('responsive-display', function (e, datatable, row, showHide, update) {
+        datatable.fixedColumns().relayout();
+        var wrapper = $(this).closest(".DTFC_ScrollWrapper");
+        var scroll = wrapper.find(".dataTables_scrollBody");
+        if (showHide) {
+            var nextTr = $(row.node()).next("tr");
+            if (nextTr.offset().top - scroll.offset().top + nextTr.outerHeight() >= scroll.height()) {
+                scroll.scrollTop(nextTr.offset().top - scroll.offset().top + nextTr.outerHeight() - scroll.height() + 1 + scroll.scrollTop());
+            }
+        }
+        wrapper.find(".DTFC_LeftBodyLiner").scrollTop(scroll.scrollTop());
+    });
+}
+
+function initTableScrollEvent(pane) {
+    $(pane).find(".dataTables_scrollBody").on("scroll", function (e) {
+        var wrapper = $(this).closest(".DTFC_ScrollWrapper");
+        if (wrapper.find(".dataTables_scrollHeadInner th.fixedcolumn").offset().left - $(this).offset().left < 0) {
+            wrapper.find(".DTFC_LeftWrapper").css("display", "block");
+        } else {
+            wrapper.find(".DTFC_LeftWrapper").css("display", "none");
+        }
+        wrapper.find(".child-inner").css("margin-left", $(this).scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width() + "px");
+    });
 }
 
 function initTooltip() {
@@ -533,11 +579,11 @@ function initRecipeTable(data) {
     }
 
     $('#chk-recipe-show-material').selectpicker().on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-        reInitRecipeTable(data);
-        initRecipeShow();
+        updateRecipeTableData(data);
         if ($(this).val().length) {
-            $('#recipe-table').DataTable().order([30, 'desc']).draw(); // first material eff
+            $('#recipe-table').DataTable().order([30, 'desc']); // first material eff
         }
+        $('#recipe-table').DataTable().draw();
         // if (isSelected) {
         //     $(this).selectpicker('toggle');
         // }
@@ -587,7 +633,6 @@ function initRecipeTable(data) {
 
         if (previousValue != $(this).val()) {
             updateRecipeQuest(data, reinit);
-            $('#recipe-table').DataTable().draw();
         }
     });
 
@@ -654,7 +699,6 @@ function initRecipeTable(data) {
         //     $(this).selectpicker('toggle');
         // }
         updateRecipeQuest(data);
-        $('#recipe-table').DataTable().draw();
     });
 
     $('#chk-recipe-show').on('changed.bs.select', function () {
@@ -763,7 +807,7 @@ function updateRecipeQuest(data, forceReinit) {
                     if (data.quests[i].type != "修炼任务") {
                         text += data.quests[i].questIdDisp + ". ";
                     }
-                    text += data.quests[i].goal + "<br>";
+                    text += data.quests[i].goal + " ";
 
                     for (var j in data.quests[i].conditions) {
                         if (data.quests[i].conditions[j].newGuest) {
@@ -821,15 +865,15 @@ function updateRecipeQuest(data, forceReinit) {
     }
 
     if (reinit || forceReinit) {
-        reInitRecipeTable(data);
-        initRecipeShow();
+        updateRecipeTableData(data);
     }
 
     if (diffOrder) {
-        order = [[$('#recipe-table').DataTable().columns().indexes().length - 2, 'asc'], [14, 'asc']];   // skill diff
+        order = [[data.recipeColNum + data.recipeAddColNum - 2, 'asc'], [14, 'asc']];   // skill diff
     }
 
     $('#recipe-table').DataTable().order(order).draw();
+    updateScrollHeight();
 }
 
 function reInitRecipeTable(data) {
@@ -847,14 +891,15 @@ function reInitRecipeTable(data) {
         {
             "data": "name",
             "width": "86px",
-            "className": "all"
+            "className": "all fixedcolumn"
         },
         {
             "data": {
                 "_": "rarity",
                 "display": "rarityDisp"
             },
-            "width": "60px",
+            "className": "rarity",
+            "width": "50px",
             "orderSequence": ["desc", "asc"]
         },
         {
@@ -1002,7 +1047,7 @@ function reInitRecipeTable(data) {
     var order = [];
 
     if ($.fn.DataTable.isDataTable('#recipe-table')) {
-        // pageLength = $("#pane-recipes #recipe-table_length select").val();
+        pageLength = $("#pane-recipes #recipe-table_length select").val();
         searchValue = $("#pane-recipes .search-box input").val();
         order = getTableOrder($('#recipe-table').DataTable(), recipeColumns.length);
         $('#recipe-table').DataTable().MakeCellsEditable("destroy");
@@ -1011,86 +1056,17 @@ function reInitRecipeTable(data) {
 
     $('#recipe-table').html($('#recipe-table-header').html());
 
-    data.allSelectedMaterials = [];
-    var selectedMaterials = $("#chk-recipe-show-material").val();
-    for (var i in selectedMaterials) {
-        data.allSelectedMaterials.push(Number(selectedMaterials[i]));
-    }
-    for (var i in data.questMaterials) {
-        if (data.allSelectedMaterials.indexOf(data.questMaterials[i]) < 0) {
-            data.allSelectedMaterials.push(data.questMaterials[i]);
-        }
-    }
-
-    for (var i in data.recipes) {
-        data.recipes[i]["materialsEff"] = [];
-        for (var m in data.allSelectedMaterials) {
-            var mNum = 0;
-            for (var k in data.recipes[i].materials) {
-                if (data.recipes[i].materials[k].material == data.allSelectedMaterials[m]) {
-                    mNum = data.recipes[i].materials[k].quantity;
-                    break;
-                }
-            }
-
-            var mEfficiency = 0;
-            if (data.recipes[i].time > 0) {
-                mEfficiency = mNum * 3600 / data.recipes[i].time;
-            }
-            var effDisp = mEfficiency ? Math.floor(mEfficiency) : "";
-            data.recipes[i]["materialsEff"].push(effDisp);
-        }
-    }
-
-    for (var m in data.allSelectedMaterials) {
-        for (j in data.materials) {
-            if (data.allSelectedMaterials[m] == data.materials[j].materialId) {
-                $('#recipe-table thead tr').append("<th>" + data.materials[j].name + "/小时</th>");
-                recipeColumns.push({
-                    "data": "materialsEff." + m,
-                    "orderSequence": ["desc", "asc"],
-                    "className": "all"
-                });
-                break;
-            }
-        }
-    }
-
-    var chkSkillDiff = $('#select-recipe-chef-quest').val();
-    var chkChefs = $('#chk-recipe-show-chef').val();
-    for (var i in chkChefs) {
-        for (j in data.chefs) {
-            if (chkChefs[i] == data.chefs[j].chefId) {
-                $('#recipe-table thead tr').append("<th>" + data.chefs[j].name + "</th>");
-                if (chkSkillDiff) {
-                    $('#recipe-table thead tr').append("<th>神差值</th>");
-                }
-                $('#recipe-table thead tr').append("<th>效率</th>");
-                recipeColumns.push({
-                    "data": {
-                        "_": "chefs." + i + ".rankVal",
-                        "display": "chefs." + i + ".rankDisp"
-                    },
-                    "orderSequence": ["desc", "asc"],
-                    "className": "all"
-                });
-                if (chkSkillDiff) {
-                    recipeColumns.push({
-                        "data": {
-                            "_": "chefs." + i + ".skillDiffVal",
-                            "display": "chefs." + i + ".skillDiffDisp"
-                        },
-                        "className": "all"
-                    });
-                }
-                recipeColumns.push({
-                    "data": "chefs." + i + ".efficiency",
-                    "orderSequence": ["desc", "asc"],
-                    "className": "all"
-                });
-                break;
-            }
-        }
+    for (var i = 0; i < data.recipeAddColNumMax; i++) {
+        recipeColumns.push({
+            "data": {
+                "_": "custom." + i + ".value",
+                "display": "custom." + i + ".display"
+            },
+            "defaultContent": "",
+            "orderSequence": ["desc", "asc"],
+            "className": "never"
+        });
+        $('#recipe-table thead tr').append("<th></th>");
     }
 
     var recipeTable = $('#recipe-table').DataTable({
@@ -1113,7 +1089,10 @@ function reInitRecipeTable(data) {
         deferRender: true,
         order: order,
         autoWidth: false,
-        fixedHeader: true,
+        scrollX: true,
+        fixedColumns: {
+            leftColumns: 3
+        },
         responsive: {
             details: {
                 type: 'column',
@@ -1125,7 +1104,7 @@ function reInitRecipeTable(data) {
                             if (i > 4 && i <= 9) {
                                 continue;
                             } else if (i == 4) {
-                                data += "<div class='col-lg-3 col-sm-4 col-xs-12'>";
+                                data += "<div class='col-lg-3 col-sm-6 col-xs-12'>";
                                 for (var j = 4; j <= 9; j++) {
                                     if (columns[j].data) {
                                         data += "<span class='child-key'>" + columns[j].title + "</span>"
@@ -1135,7 +1114,7 @@ function reInitRecipeTable(data) {
                                 data += "</div>";
                             }
                             else {
-                                data += "<div class='col-lg-3 col-sm-4 col-xs-12'>"
+                                data += "<div class='col-lg-3 col-sm-6 col-xs-12'>"
                                     + "<span class='child-key'>" + columns[i].title + (i == 0 || i == 1 ? "" : "：") + "</span>"
                                     + "<span class='child-value'>"
                                     + (columns[i].data ? columns[i].data : i == 27 ? "无" : i == 28 || i == 29 ? "否" : "")
@@ -1144,7 +1123,10 @@ function reInitRecipeTable(data) {
                             }
                         }
                     }
-                    return data ? "<div class='child-inner'>" + data + "</div>" : false;
+                    var wrapper = $('#recipe-table').closest(".DTFC_ScrollWrapper");
+                    var scroll = wrapper.find(".dataTables_scrollBody");
+                    return data ? "<div class='child-inner' style='max-width:" + scroll.width()
+                        + "px;margin-left:" + (scroll.scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width()) + "px'>" + data + "</div>" : false;
                 }
             }
         }
@@ -1205,6 +1187,114 @@ function reInitRecipeTable(data) {
         recipeTable.draw();
         changeInputStyle(this);
     });
+
+    initTableResponsiveDisplayEvent(recipeTable);
+    initTableScrollEvent("#pane-recipes");
+}
+
+function updateRecipeTableData(data) {
+
+    data.allSelectedMaterials = [];
+    var selectedMaterials = $("#chk-recipe-show-material").val();
+    for (var i in selectedMaterials) {
+        data.allSelectedMaterials.push(Number(selectedMaterials[i]));
+    }
+    for (var i in data.questMaterials) {
+        if (data.allSelectedMaterials.indexOf(data.questMaterials[i]) < 0) {
+            data.allSelectedMaterials.push(data.questMaterials[i]);
+        }
+    }
+
+    var chkSkillDiff = $('#select-recipe-chef-quest').val();
+    var chkChefs = $('#chk-recipe-show-chef').val();
+
+    data.recipeAddColNum = chkChefs.length * 2 + (chkSkillDiff.length > 0 ? 1 : 0) + data.allSelectedMaterials.length;
+    if (data.recipeAddColNum > data.recipeAddColNumMax) {
+        data.recipeAddColNumMax = data.recipeAddColNum;
+        reInitRecipeTable(data);
+        initRecipeShow();
+        updateScrollHeight();
+    }
+
+    for (var i = 0; i < data.recipeAddColNumMax; i++) {
+        $($('#recipe-table').DataTable().column(data.recipeColNum + i).header()).removeClass("all").addClass("never");
+    }
+
+    for (var i in data.recipes) {
+        data.recipes[i]["custom"] = [];
+        for (var m in data.allSelectedMaterials) {
+            var mNum = 0;
+            for (var k in data.recipes[i].materials) {
+                if (data.recipes[i].materials[k].material == data.allSelectedMaterials[m]) {
+                    mNum = data.recipes[i].materials[k].quantity;
+                    break;
+                }
+            }
+
+            var mEfficiency = 0;
+            if (data.recipes[i].time > 0) {
+                mEfficiency = mNum * 3600 / data.recipes[i].time;
+            }
+            var effDisp = mEfficiency ? Math.floor(mEfficiency) : "";
+
+            data.recipes[i]["custom"].push({
+                "display": effDisp,
+                "value": mEfficiency
+            });
+        }
+
+        for (var c = 0; c < chkChefs.length; c++) {
+            data.recipes[i]["custom"].push({
+                "display": data.recipes[i]["chefs"][c].rankDisp,
+                "value": data.recipes[i]["chefs"][c].rankVal
+            });
+
+            if (chkSkillDiff.length) {
+                data.recipes[i]["custom"].push({
+                    "display": data.recipes[i]["chefs"][c].skillDiffDisp,
+                    "value": data.recipes[i]["chefs"][c].skillDiffVal
+                });
+            }
+
+            data.recipes[i]["custom"].push({
+                "display": data.recipes[i]["chefs"][c].efficiency,
+                "value": data.recipes[i]["chefs"][c].efficiency
+            });
+        }
+    }
+
+    var recipeAddColCount = 0;
+
+    for (var m in data.allSelectedMaterials) {
+        for (j in data.materials) {
+            if (data.allSelectedMaterials[m] == data.materials[j].materialId) {
+                $($('#recipe-table').DataTable().column(data.recipeColNum + recipeAddColCount).header()).text(data.materials[j].name + "/h").removeClass("never").addClass("all");
+                recipeAddColCount++;
+                break;
+            }
+        }
+    }
+
+    for (var i in chkChefs) {
+        for (j in data.chefs) {
+            if (chkChefs[i] == data.chefs[j].chefId) {
+                $($('#recipe-table').DataTable().column(data.recipeColNum + recipeAddColCount).header()).text(data.chefs[j].name).removeClass("never").addClass("all");
+                recipeAddColCount++;
+                if (chkSkillDiff.length) {
+                    $($('#recipe-table').DataTable().column(data.recipeColNum + recipeAddColCount).header()).text("神差值").removeClass("never").addClass("all");
+                    recipeAddColCount++;
+                }
+                $($('#recipe-table').DataTable().column(data.recipeColNum + recipeAddColCount).header()).text("效率").removeClass("never").addClass("all");
+                recipeAddColCount++;
+                break;
+            }
+        }
+    }
+
+    $('#recipe-table').DataTable().clear().rows.add(data.recipes);
+    $('#recipe-table').DataTable().responsive.rebuild();
+    $('#recipe-table').DataTable().responsive.recalc();
+    $('#recipe-table').DataTable().columns.adjust();
 }
 
 function updateRecipesChefsData(data) {
@@ -1228,7 +1318,7 @@ function updateRecipesChefsData(data) {
                         resultData["rankDisp"] = resultInfo.rankDisp;
                         resultData["efficiency"] = resultInfo.chefEff || "";
 
-                        if (chkSkillDiff) {
+                        if (chkSkillDiff.length) {
                             var skillDiff = getSkillDiff(data.chefs[j], data.recipes[i], 4);
                             resultData["skillDiffDisp"] = skillDiff.disp;
                             resultData["skillDiffVal"] = skillDiff.value;
@@ -1282,6 +1372,77 @@ function getSkillDiff(chef, recipe, rank) {
     result["disp"] = disp;
     result["value"] = -value;
     return result;
+}
+
+function updateChefTableData(data) {
+    var chkSkillDiff = $('#chk-chef-show-skill-diff').prop("checked");
+    var chkRecipes = $('#chk-chef-show-recipe').val();
+
+    data.chefAddColNum = chkRecipes.length * (2 + (chkSkillDiff ? 1 : 0));
+    if (data.chefAddColNum > data.chefAddColNumMax) {
+        data.chefAddColNumMax = data.chefAddColNum;
+        reInitChefTable(data);
+        initChefShow();
+        updateScrollHeight();
+    }
+
+    for (var i = 0; i < data.chefAddColNumMax; i++) {
+        $($('#chef-table').DataTable().column(data.chefColNum + i).header()).removeClass("all").addClass("never");
+    }
+
+    for (var i in data.chefs) {
+        data.chefs[i]["custom"] = [];
+        for (var c = 0; c < chkRecipes.length; c++) {
+            data.chefs[i]["custom"].push({
+                "display": data.chefs[i]["recipes"][c].rankDisp,
+                "value": data.chefs[i]["recipes"][c].rankVal
+            });
+
+            if (chkSkillDiff) {
+                data.chefs[i]["custom"].push({
+                    "display": data.chefs[i]["recipes"][c].skillDiffDisp,
+                    "value": data.chefs[i]["recipes"][c].skillDiffVal
+                });
+            }
+
+            data.chefs[i]["custom"].push({
+                "display": data.chefs[i]["recipes"][c].efficiency,
+                "value": data.chefs[i]["recipes"][c].efficiency
+            });
+        }
+    }
+
+    var chefAddColCount = 0;
+
+    for (var i in chkRecipes) {
+        for (j in data.recipes) {
+            if (chkRecipes[i] == data.recipes[j].recipeId) {
+                $($('#chef-table').DataTable().column(data.chefColNum + chefAddColCount).header()).text(data.recipes[j].name).removeClass("never").addClass("all");
+                chefAddColCount++;
+                if (chkSkillDiff) {
+                    $($('#chef-table').DataTable().column(data.chefColNum + chefAddColCount).header()).text("神差值").removeClass("never").addClass("all");
+                    chefAddColCount++;
+                }
+                $($('#chef-table').DataTable().column(data.chefColNum + chefAddColCount).header()).text("效率").removeClass("never").addClass("all");
+                chefAddColCount++;
+                break;
+            }
+        }
+    }
+
+    if (chkRecipes.length) {
+        if (chkSkillDiff) {
+            order = [[data.chefColNum + 1, 'asc'], [data.chefColNum + 2, 'desc']];    // diff, eff
+        } else {
+            order = [data.chefColNum + 1, 'desc'];   // eff
+        }
+        $('#chef-table').DataTable().order(order);
+    }
+
+    $('#chef-table').DataTable().clear().rows.add(data.chefs);
+    $('#chef-table').DataTable().responsive.rebuild();
+    $('#chef-table').DataTable().responsive.recalc();
+    $('#chef-table').DataTable().columns.adjust();
 }
 
 function updateChefsRecipesData(data) {
@@ -1411,8 +1572,8 @@ function initChefTable(data) {
 
     $('#chk-chef-show-recipe').selectpicker().on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
         updateChefsRecipesData(data);
-        reInitChefTable(data);
-        initChefShow();
+        updateChefTableData(data);
+        $('#chef-table').DataTable().draw();
         // if (isSelected) {
         //     $(this).selectpicker('toggle');
         // }
@@ -1421,8 +1582,8 @@ function initChefTable(data) {
     $('#chk-chef-show-skill-diff').click(function () {
         if ($('#chk-chef-show-recipe').val().length) {
             updateChefsRecipesData(data);
-            reInitChefTable(data);
-            initChefShow();
+            updateChefTableData(data);
+            $('#chef-table').DataTable().draw();
         }
     });
 
@@ -1450,14 +1611,8 @@ function initChefTable(data) {
     $('#chk-chef-apply-ultimate').change(function () {
         if ($(this).prop("checked")) {
             $('.chef-apply-ultimate').show();
-            if ($('#chk-chef-partial-ultimate').val().length) {
-                $(".partial-warning").removeClass("hidden");
-            } else {
-                $(".partial-warning").addClass("hidden");
-            }
         } else {
             $('.chef-apply-ultimate').hide();
-            $(".partial-warning").addClass("hidden");
         }
         updateRecipeChefTable(data);
     });
@@ -1467,11 +1622,6 @@ function initChefTable(data) {
     });
 
     $('#chk-chef-partial-ultimate').selectpicker().on('changed.bs.select', function () {
-        if ($(this).val().length) {
-            $(".partial-warning").removeClass("hidden");
-        } else {
-            $(".partial-warning").addClass("hidden");
-        }
         updateRecipeChefTable(data);
     });
 
@@ -1513,14 +1663,15 @@ function reInitChefTable(data) {
         {
             "data": "name",
             "width": "81px",
-            "className": "all"
+            "className": "all fixedcolumn"
         },
         {
             "data": {
                 "_": "rarity",
                 "display": "rarityDisp"
             },
-            "width": "60px",
+            "className": "rarity",
+            "width": "50px",
             "orderSequence": ["desc", "asc"]
         },
         {
@@ -1649,7 +1800,7 @@ function reInitChefTable(data) {
     var order = [];
 
     if ($.fn.DataTable.isDataTable('#chef-table')) {
-        // pageLength = $("#pane-chefs #chef-table_length select").val();
+        pageLength = $("#pane-chefs #chef-table_length select").val();
         searchValue = $("#pane-chefs .search-box input").val();
         order = getTableOrder($('#chef-table').DataTable(), chefColumns.length);
         $('#chef-table').DataTable().MakeCellsEditable("destroy");
@@ -1658,50 +1809,17 @@ function reInitChefTable(data) {
 
     $('#chef-table').html($('#chef-table-header').html());
 
-    var chkSkillDiff = $('#chk-chef-show-skill-diff').prop("checked");
-    var chkRecipes = $('#chk-chef-show-recipe').val();
-    for (var i in chkRecipes) {
-        for (var j in data.recipes) {
-            if (chkRecipes[i] == data.recipes[j].recipeId) {
-                $('#chef-table thead tr').append("<th title='" + data.recipes[j].skillDisp + "'>" + data.recipes[j].name + "</th>");
-                if (chkSkillDiff) {
-                    $('#chef-table thead tr').append("<th>神差值</th>");
-                }
-                $('#chef-table thead tr').append("<th>效率</th>");
-
-                chefColumns.push({
-                    "data": {
-                        "_": "recipes." + i + ".rankVal",
-                        "display": "recipes." + i + ".rankDisp"
-                    },
-                    "orderSequence": ["desc", "asc"],
-                    "className": "all"
-                });
-                if (chkSkillDiff) {
-                    chefColumns.push({
-                        "data": {
-                            "_": "recipes." + i + ".skillDiffVal",
-                            "display": "recipes." + i + ".skillDiffDisp"
-                        },
-                        "className": "all"
-                    });
-                }
-                chefColumns.push({
-                    "data": "recipes." + i + ".efficiency",
-                    "orderSequence": ["desc", "asc"],
-                    "className": "all"
-                });
-                break;
-            }
-        }
-    }
-
-    if (chkRecipes.length) {
-        if (chkSkillDiff) {
-            order = [[24, 'asc'], [25, 'desc']];    // diff, eff
-        } else {
-            order = [24, 'desc'];   // eff
-        }
+    for (var i = 0; i < data.chefAddColNumMax; i++) {
+        chefColumns.push({
+            "data": {
+                "_": "custom." + i + ".value",
+                "display": "custom." + i + ".display"
+            },
+            "defaultContent": "",
+            "orderSequence": ["desc", "asc"],
+            "className": "never"
+        });
+        $('#chef-table thead tr').append("<th></th>");
     }
 
     var chefTable = $('#chef-table').DataTable({
@@ -1724,7 +1842,10 @@ function reInitChefTable(data) {
         deferRender: true,
         order: order,
         autoWidth: false,
-        fixedHeader: true,
+        scrollX: true,
+        fixedColumns: {
+            leftColumns: 3
+        },
         responsive: {
             details: {
                 type: 'column',
@@ -1736,7 +1857,7 @@ function reInitChefTable(data) {
                             if (i > 4 && i <= 9) {
                                 continue;
                             } else if (i == 4) {
-                                data += "<div class='col-lg-3 col-sm-4 col-xs-12'>";
+                                data += "<div class='col-lg-3 col-sm-6 col-xs-12'>";
                                 for (var j = 4; j <= 9; j++) {
                                     if (columns[j].data) {
                                         data += "<span class='child-key'>" + columns[j].title + "</span>"
@@ -1747,7 +1868,7 @@ function reInitChefTable(data) {
                             } else if (i > 11 && i <= 14) {
                                 continue;
                             } else if (i == 11) {
-                                data += "<div class='col-lg-3 col-sm-4 col-xs-12'><span class='child-key'>采集：</span>";
+                                data += "<div class='col-lg-3 col-sm-6 col-xs-12'><span class='child-key'>采集：</span>";
                                 for (var j = 11; j <= 14; j++) {
                                     if (columns[j].data) {
                                         data += "<span class='child-key'>" + columns[j].title + "</span>"
@@ -1757,7 +1878,7 @@ function reInitChefTable(data) {
                                 data += "</div>";
                             }
                             else {
-                                data += "<div class='col-lg-3 col-sm-4 col-xs-12'>"
+                                data += "<div class='col-lg-3 col-sm-6 col-xs-12'>"
                                     + "<span class='child-key'>" + columns[i].title + (i == 0 || i == 1 ? "" : "：") + "</span>"
                                     + "<span class='child-value'>"
                                     + (columns[i].data ? columns[i].data : i == 18 ? "无" : i == 21 || i == 22 ? "否" : "")
@@ -1766,7 +1887,10 @@ function reInitChefTable(data) {
                             }
                         }
                     }
-                    return data ? "<div class='child-inner'>" + data + "</div>" : false;
+                    var wrapper = $('#chef-table').closest(".DTFC_ScrollWrapper");
+                    var scroll = wrapper.find(".dataTables_scrollBody");
+                    return data ? "<div class='child-inner' style='max-width:" + scroll.width()
+                        + "px;margin-left:" + (scroll.scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width()) + "px'>" + data + "</div>" : false;
                 }
             }
         }
@@ -1832,6 +1956,9 @@ function reInitChefTable(data) {
         chefTable.draw();
         changeInputStyle(this);
     });
+
+    initTableResponsiveDisplayEvent(chefTable);
+    initTableScrollEvent("#pane-chefs");
 }
 
 function initEquipTable(data) {
@@ -1849,13 +1976,14 @@ function initEquipTable(data) {
         {
             "data": "name",
             "width": "80px",
-            "className": "all"
+            "className": "all fixedcolumn"
         },
         {
             "data": {
                 "_": "rarity",
                 "display": "rarityDisp"
             },
+            "className": "rarity",
             "width": "35px",
             "orderSequence": ["desc", "asc"]
         },
@@ -1890,7 +2018,10 @@ function initEquipTable(data) {
             "<'row'<'col-sm-12'p>>",
         deferRender: true,
         autoWidth: false,
-        fixedHeader: true,
+        scrollX: true,
+        fixedColumns: {
+            leftColumns: 3
+        },
         responsive: {
             details: {
                 type: 'column',
@@ -1899,7 +2030,7 @@ function initEquipTable(data) {
                     var data = "";
                     for (var i in columns) {
                         if (columns[i].hidden) {
-                            data += "<div class='col-lg-3 col-sm-4 col-xs-12'>"
+                            data += "<div class='col-lg-3 col-sm-6 col-xs-12'>"
                                 + "<span class='child-key'>" + columns[i].title + (i == 0 || i == 1 ? "" : "：") + "</span>"
                                 + "<span class='child-value'>"
                                 + columns[i].data
@@ -1907,7 +2038,10 @@ function initEquipTable(data) {
                                 + "</div>";
                         }
                     }
-                    return data ? "<div class='child-inner'>" + data + "</div>" : false;
+                    var wrapper = $('#equip-table').closest(".DTFC_ScrollWrapper");
+                    var scroll = wrapper.find(".dataTables_scrollBody");
+                    return data ? "<div class='child-inner' style='max-width:" + scroll.width()
+                        + "px;margin-left:" + (scroll.scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width()) + "px'>" + data + "</div>" : false;
                 }
             }
         }
@@ -2057,6 +2191,9 @@ function initEquipTable(data) {
         changeInputStyle(this);
     });
 
+    initTableResponsiveDisplayEvent(equipTable);
+    initTableScrollEvent("#pane-equips");
+
     initEquipShow();
 }
 
@@ -2083,7 +2220,7 @@ function initDecorationTable(data) {
         {
             "data": "name",
             "width": "145px",
-            "className": "all"
+            "className": "all fixedcolumn"
         },
         {
             "data": {
@@ -2175,7 +2312,10 @@ function initDecorationTable(data) {
         order: [[0, "desc"], [10, "desc"]],  //avg eff
         deferRender: false, // for select
         autoWidth: false,
-        fixedHeader: true,
+        scrollX: true,
+        fixedColumns: {
+            leftColumns: 4
+        },
         responsive: {
             details: {
                 type: 'column',
@@ -2184,7 +2324,7 @@ function initDecorationTable(data) {
                     var data = "";
                     for (var i in columns) {
                         if (columns[i].hidden) {
-                            data += "<div class='col-lg-3 col-sm-4 col-xs-12'>"
+                            data += "<div class='col-lg-3 col-sm-6 col-xs-12'>"
                                 + "<span class='child-key'>" + columns[i].title + (i == 1 || i == 2 ? "" : "：") + "</span>"
                                 + "<span class='child-value'>"
                                 + columns[i].data
@@ -2192,7 +2332,10 @@ function initDecorationTable(data) {
                                 + "</div>";
                         }
                     }
-                    return data ? "<div class='child-inner'>" + data + "</div>" : false;
+                    var wrapper = $('#decoration-table').closest(".DTFC_ScrollWrapper");
+                    var scroll = wrapper.find(".dataTables_scrollBody");
+                    return data ? "<div class='child-inner' style='max-width:" + scroll.width()
+                        + "px;margin-left:" + (scroll.scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width()) + "px'>" + data + "</div>" : false;
                 }
             }
         }
@@ -2308,6 +2451,9 @@ function initDecorationTable(data) {
         updateDecorationSum(data);
     });
 
+    initTableResponsiveDisplayEvent(decorationTable);
+    initTableScrollEvent("#pane-decorations");
+
     initDecorationShow();
 }
 
@@ -2367,7 +2513,7 @@ function initMaterialTable(data) {
 
     reInitMaterialTable(data);
 
-    $('#select-material-origin').change(function () {
+    $('#select-material-origin').selectpicker().change(function () {
         reInitMaterialTable(data);
     });
 
@@ -2385,7 +2531,8 @@ function initMaterialTable(data) {
 function reInitMaterialTable(data) {
     var materialColumns = [
         {
-            "data": "name"
+            "data": "name",
+            "className": "fixedcolumn"
         },
         {
             "data": "skill",
@@ -2432,8 +2579,14 @@ function reInitMaterialTable(data) {
         ordering: false,
         info: false,
         deferRender: true,
-        autoWidth: false
+        autoWidth: false,
+        scrollX: true,
+        fixedColumns: {
+            leftColumns: 1
+        }
     });
+
+    initTableScrollEvent("#pane-materials");
 
     materialTable.draw();
 }
@@ -2447,7 +2600,8 @@ function initQuestTable(data) {
     var questColumns = [
         {
             "data": "questIdDisp",
-            "width": "25px"
+            "width": "25px",
+            "className": "fixedcolumn"
         },
         {
             "data": "preId",
@@ -2487,7 +2641,10 @@ function initQuestTable(data) {
             "<'row'<'col-sm-12'p>>",
         deferRender: true,
         autoWidth: false,
-        fixedHeader: true
+        scrollX: true,
+        fixedColumns: {
+            leftColumns: 1
+        }
     });
 
     $("#pane-quest div.search-box").html('<label>查找:<input type="search" class="form-control input-sm monitor-none" placeholder="编号 任务 奖励"></label>');
@@ -2514,11 +2671,13 @@ function initQuestTable(data) {
         changeInputStyle(this);
     });
 
-    $('#select-quest-type').change(function () {
+    $('#select-quest-type').selectpicker().change(function () {
         var questsData = getQuestsData(data.quests, $(this).val());
         questTable.clear().rows.add(questsData).draw();
         initQuestShow(questTable);
     });
+
+    initTableScrollEvent("#pane-quest");
 
     initQuestShow(questTable);
 }
@@ -2537,7 +2696,7 @@ function initImportExport(data) {
             } else {
                 $("#import-msg-2").html("导入失败 !");
             }
-        }, 500);
+        }, 0);
     });
 
     $('#btn-export-download').click(function () {
@@ -2560,7 +2719,7 @@ function initImportExport(data) {
             };
             reader.readAsText(file, "UTF-8");
             $(this).val("");
-        }, 500);
+        }, 0);
     });
 }
 
@@ -2683,8 +2842,8 @@ function importData(data, input) {
 
     data = getUpdateData(data);
 
-    reInitRecipeTable(data);
-    reInitChefTable(data);
+    updateRecipeTableData(data);
+    updateChefTableData(data);
     initRecipeShow();
     initChefShow();
     initEquipShow();
@@ -2969,7 +3128,7 @@ function initCalRules(data) {
             $("#pane-cal-recipes-results .cal-results-wrapper").removeClass("hidden");
             $("#btn-cal-rule-load").prop("disabled", false).removeClass("btn-danger").addClass("btn-default");
 
-        }, 500);
+        }, 0);
 
     });
 
@@ -2991,7 +3150,7 @@ function initCalRules(data) {
             $("#btn-cal-rule-load").prop("disabled", false);
             $("#btn-cal-decoration").prop("disabled", false);
 
-        }, 500);
+        }, 0);
     });
 
     $("#input-cal-decoration").keyup(function () {
@@ -4168,7 +4327,8 @@ function initCalChefsTable(data) {
                 "_": "rarity",
                 "display": "rarityDisp"
             },
-            "width": "60px",
+            "className": "rarity",
+            "width": "50px",
             "orderSequence": ["desc", "asc"]
         },
         {
@@ -4289,7 +4449,7 @@ function initCalChefsTable(data) {
                             if (i > 4 && i <= 9) {
                                 continue;
                             } else if (i == 4) {
-                                data += "<div class='col-lg-3 col-sm-4 col-xs-12'>";
+                                data += "<div class='col-lg-3 col-sm-6 col-xs-12'>";
                                 for (var j = 4; j <= 9; j++) {
                                     if (columns[j].data) {
                                         data += "<span class='child-key'>" + columns[j].title + "</span>"
@@ -4298,7 +4458,7 @@ function initCalChefsTable(data) {
                                 }
                                 data += "</div>";
                             } else {
-                                data += "<div class='col-lg-3 col-sm-4 col-xs-12'>"
+                                data += "<div class='col-lg-3 col-sm-6 col-xs-12'>"
                                     + "<span class='child-key'>" + columns[i].title + (i == 1 ? "" : "：") + "</span>"
                                     + "<span class='child-value'>"
                                     + columns[i].data
@@ -4407,6 +4567,7 @@ function initCalEquipsTable(data) {
                 "_": "rarity",
                 "display": "rarityDisp"
             },
+            "className": "rarity",
             "width": "35px",
             "orderSequence": ["desc", "asc"]
         },
@@ -4459,7 +4620,7 @@ function initCalEquipsTable(data) {
                     var data = "";
                     for (var i in columns) {
                         if (columns[i].hidden) {
-                            data += "<div class='col-lg-3 col-sm-4 col-xs-12'>"
+                            data += "<div class='col-lg-3 col-sm-6 col-xs-12'>"
                                 + "<span class='child-key'>" + columns[i].title + (i == 1 ? "" : "：") + "</span>"
                                 + "<span class='child-value'>"
                                 + columns[i].data
@@ -4609,7 +4770,7 @@ function initCalMaterialsTable(data) {
                     var data = "";
                     for (var i in columns) {
                         if (columns[i].hidden) {
-                            data += "<div class='col-lg-3 col-sm-4 col-xs-12'>"
+                            data += "<div class='col-lg-3 col-sm-6 col-xs-12'>"
                                 + "<span class='child-key'>" + columns[i].title + (i == 1 ? "" : "：") + "</span>"
                                 + "<span class='child-value'>"
                                 + columns[i].data
@@ -4844,7 +5005,8 @@ function initCalResultTableCommon(mode, panel) {
             },
             "defaultContent": "",
             "orderSequence": ["desc", "asc"],
-            "width": "60px"
+            "className": "rarity",
+            "width": "50px"
         },
         {
             "data": "recipe.data.stirfry",
@@ -5530,6 +5692,14 @@ function generateData(json, json2, person) {
     retData["questMaterials"] = [];
     retData["allSelectedMaterials"] = [];
 
+    retData["recipeColNum"] = $("#recipe-table-header th").length;
+    retData["recipeAddColNum"] = 0;
+    retData["recipeAddColNumMax"] = 15;
+
+    retData["chefColNum"] = $("#chef-table-header th").length;
+    retData["chefAddColNum"] = 0;
+    retData["chefAddColNumMax"] = 15;
+
     return retData;
 }
 
@@ -5538,10 +5708,12 @@ function updateRecipeChefTable(data) {
 
     setTimeout(function () {
         data = getUpdateData(data);
-        $('#recipe-table').DataTable().clear().rows.add(data.recipes).draw(false);
-        $('#chef-table').DataTable().clear().rows.add(data.chefs).draw(false);
+        updateRecipeTableData(data);
+        updateChefTableData(data);
+        $('#recipe-table').DataTable().draw(false);
+        $('#chef-table').DataTable().draw(false);
         $('.loading').addClass("hidden");
-    }, 500);
+    }, 0);
 
     $("#btn-chef-recal").closest(".inline-wrapper").addClass("hidden");
     $("#btn-recipe-recal").closest(".inline-wrapper").addClass("hidden");
@@ -5578,6 +5750,13 @@ function getUpdateData(data) {
 
     updateRecipesChefsData(data);
     updateChefsRecipesData(data);
+
+    if (!$('#recipe-table').is(':visible')) {
+        $('.main-nav a[data-id="1"]').attr("data-init", "false");
+    }
+    if (!$('#chef-table').is(':visible')) {
+        $('.main-nav a[data-id="2"]').attr("data-init", "false");
+    }
 
     return data;
 }
@@ -6326,10 +6505,8 @@ function initDecorationShow() {
 }
 
 function initQuestShow(questTable) {
-    questTable.fixedHeader.disable();
     questTable.column(1).visible($('#select-quest-type').val() == "支线任务", false);
     questTable.columns.adjust().draw(false);
-    questTable.fixedHeader.enable();
 }
 
 function initCalChefsShow(calChefsTable) {
@@ -6477,8 +6654,9 @@ function initVersionTip(person) {
                 $(this).removeClass("hidden");
             }
 
-            $(this).on('close.bs.alert', function () {
+            $(this).on('closed.bs.alert', function () {
                 updateLocalData(key, value);
+                updateScrollHeight();
             })
         }
     });

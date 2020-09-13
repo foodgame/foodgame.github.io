@@ -171,8 +171,8 @@ function initTables(data, person) {
 function updateScrollHeight(redraw) {
     var otherHeight = $('body').height() - $('.dataTables_scrollBody:visible').height();
     var tableHeight = ($(window).height() - otherHeight - 10) + "px";
-    if ($('.dataTables_scrollBody:visible').css('max-height') != tableHeight) {
-        $('.dataTables_scrollBody:visible').css('max-height', tableHeight);
+    if ($('.dataTables_scrollBody:visible').css('height') != tableHeight) {
+        $('.dataTables_scrollBody:visible').css('height', tableHeight);
         redraw = true;
     }
     if (redraw) {

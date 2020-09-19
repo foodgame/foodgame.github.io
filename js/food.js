@@ -307,12 +307,28 @@ function initRecipeTable(data) {
         }
 
         var checks = $("#chk-recipe-skill").val();
+        if (checks.length == 0) {
+            return false;
+        }
+
+        var multiple = $('#chk-recipe-multiple-skill').prop("checked");
+
         for (var i in checks) {
             if (rowData["" + checks[i] + ""] > 0) {
-                return true;
+                if (!multiple) {
+                    return true;
+                }
+            } else {
+                if (multiple) {
+                    return false;
+                }
             }
         }
-        return false;
+        if (multiple) {
+            return true;
+        } else {
+            return false;
+        }
     });
 
     $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
@@ -321,12 +337,28 @@ function initRecipeTable(data) {
         }
 
         var checks = $("#chk-recipe-category").val();
+        if (checks.length == 0) {
+            return false;
+        }
+
+        var multiple = $('#chk-recipe-multiple-category').prop("checked");
+
         for (var i in checks) {
             if (rowData["" + checks[i] + ""]) {
-                return true;
+                if (!multiple) {
+                    return true;
+                }
+            } else {
+                if (multiple) {
+                    return false;
+                }
             }
         }
-        return false;
+        if (multiple) {
+            return true;
+        } else {
+            return false;
+        }
     });
 
     $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
@@ -458,17 +490,34 @@ function initRecipeTable(data) {
             return true;
         }
 
-        if (data.allSelectedMaterials.length > 0) {
-            for (var i in data.allSelectedMaterials) {
-                for (var j in rowData.materials) {
-                    if (rowData.materials[j].material == data.allSelectedMaterials[i]) {
-                        return true;
-                    }
+        if (data.allSelectedMaterials.length == 0) {
+            return true;
+        }
+
+        var multiple = $('#chk-recipe-multiple-material').prop("checked");
+
+        for (var i in data.allSelectedMaterials) {
+            var pass = false;
+            for (var j in rowData.materials) {
+                if (rowData.materials[j].material == data.allSelectedMaterials[i]) {
+                    pass = true;
+                    break;
                 }
             }
-            return false;
-        } else {
+            if (pass) {
+                if (!multiple) {
+                    return true;
+                }
+            } else {
+                if (multiple) {
+                    return false;
+                }
+            }
+        }
+        if (multiple) {
             return true;
+        } else {
+            return false;
         }
     });
 
@@ -587,6 +636,10 @@ function initRecipeTable(data) {
         // if (isSelected) {
         //     $(this).selectpicker('toggle');
         // }
+    });
+
+    $('#chk-recipe-multiple-material').click(function () {
+        $('#recipe-table').DataTable().draw();
     });
 
     for (var j in data.chefs) {
@@ -714,7 +767,15 @@ function initRecipeTable(data) {
         $('#recipe-table').DataTable().draw();
     });
 
+    $('#chk-recipe-multiple-skill').click(function () {
+        $('#recipe-table').DataTable().draw();
+    });
+
     $('#chk-recipe-category').on('changed.bs.select', function () {
+        $('#recipe-table').DataTable().draw();
+    });
+
+    $('#chk-recipe-multiple-category').click(function () {
         $('#recipe-table').DataTable().draw();
     });
 
@@ -741,7 +802,9 @@ function initRecipeTable(data) {
     $('#btn-recipe-reset').click(function () {
         $('#chk-recipe-rarity').selectpicker("selectAll");
         $("#chk-recipe-skill").selectpicker("selectAll");
+        $("#chk-recipe-multiple-skill").prop("checked", false);
         $("#chk-recipe-category").selectpicker("selectAll");
+        $("#chk-recipe-multiple-category").prop("checked", false);
         $("#chk-recipe-combo").prop("checked", false);
         $("#chk-recipe-ex-no").prop("checked", false);
         $("#chk-recipe-got").prop("checked", false);
@@ -751,6 +814,7 @@ function initRecipeTable(data) {
         $("#chk-recipe-rank-guest").prop("checked", true);
         $("#chk-recipe-antique").selectpicker("deselectAll");
         $('#chk-recipe-show-material').selectpicker("deselectAll");
+        $("#chk-recipe-multiple-material").prop("checked", false);
         $("#pane-recipes .search-box input").val("");
         $('#chk-recipe-show-chef').selectpicker("deselectAll");
         $("#select-recipe-chef-quest").selectpicker("val", '');

@@ -9,7 +9,7 @@
     <script type="text/javascript" src="js/script.min.js?v=14"></script>
     <script type="text/javascript" src="js/common.min.js?v=34"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=42" />
-    <script type="text/javascript" src="js/food.min.js?v=150"></script>
+    <script type="text/javascript" src="js/food.min.js?v=151"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=55" />
     <script>
         $(function () {
@@ -145,29 +145,47 @@
                             <option value="5" selected>5星</option>
                         </select>
                     </div>
-                    <div class="inline-wrapper" data-toggle="tooltip" title="选择技法,过滤菜谱">
-                        <select id="chk-recipe-skill" multiple class="selectpicker monitor-all" data-width="150px"
-                            data-dropdown-align-right='auto' data-none-selected-text="选择技法"
-                            data-selected-text-format="count>5" data-count-selected-text="全技法" data-actions-box="true"
-                            data-select-all-text="全选" data-deselect-all-text="清空">
-                            <option value="stirfry" selected>炒</option>
-                            <option value="boil" selected>煮</option>
-                            <option value="knife" selected>切</option>
-                            <option value="fry" selected>炸</option>
-                            <option value="bake" selected>烤</option>
-                            <option value="steam" selected>蒸</option>
-                        </select>
+                    <div class="input-group">
+                        <div class="inline-wrapper input-group-first" data-toggle="tooltip" title="选择技法,过滤菜谱">
+                            <select id="chk-recipe-skill" multiple class="selectpicker monitor-all" data-width="150px"
+                                data-dropdown-align-right='auto' data-none-selected-text="选择技法"
+                                data-selected-text-format="count>5" data-count-selected-text="全技法"
+                                data-actions-box="true" data-select-all-text="全选" data-deselect-all-text="清空">
+                                <option value="stirfry" selected>炒</option>
+                                <option value="boil" selected>煮</option>
+                                <option value="knife" selected>切</option>
+                                <option value="fry" selected>炸</option>
+                                <option value="bake" selected>烤</option>
+                                <option value="steam" selected>蒸</option>
+                            </select>
+                        </div>
+                        <span class="input-group-btn input-group-last">
+                            <label class="btn btn-default">
+                                <input type="checkbox" id="chk-recipe-multiple-skill" class="monitor-none">
+                                <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                                同时
+                            </label>
+                        </span>
                     </div>
-                    <div class="inline-wrapper" data-toggle="tooltip" title="选择类型,过滤菜谱">
-                        <select id="chk-recipe-category" multiple class="selectpicker monitor-all" data-width="150px"
-                            data-dropdown-align-right='auto' data-none-selected-text="选择类型"
-                            data-selected-text-format="count>3" data-count-selected-text="全类型" data-actions-box="true"
-                            data-select-all-text="全选" data-deselect-all-text="清空">
-                            <option value="veg" selected>蔬菜</option>
-                            <option value="meat" selected>肉类</option>
-                            <option value="creation" selected>面类</option>
-                            <option value="fish" selected>水产</option>
-                        </select>
+                    <div class="input-group">
+                        <div class="inline-wrapper input-group-first" data-toggle="tooltip" title="选择类型,过滤菜谱">
+                            <select id="chk-recipe-category" multiple class="selectpicker monitor-all"
+                                data-width="150px" data-dropdown-align-right='auto' data-none-selected-text="选择类型"
+                                data-selected-text-format="count>3" data-count-selected-text="全类型"
+                                data-actions-box="true" data-select-all-text="全选" data-deselect-all-text="清空">
+                                <option value="veg" selected>蔬菜</option>
+                                <option value="meat" selected>肉类</option>
+                                <option value="creation" selected>面类</option>
+                                <option value="fish" selected>水产</option>
+                            </select>
+                        </div>
+                        <span class="input-group-btn input-group-last">
+                            <label class="btn btn-default">
+                                <input type="checkbox" id="chk-recipe-multiple-category" class="monitor-none">
+                                <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                                同时
+                            </label>
+                        </span>
                     </div>
                     <input type="text" id="input-recipe-price" placeholder="单价大于" class="form-control monitor-none"
                         data-toggle="tooltip" title="填入单价,过滤菜谱">
@@ -191,12 +209,21 @@
                         <i class="fa fa-check glyphicon glyphicon-ok"></i>
                         未出
                     </label>
-                    <div class="inline-wrapper" data-toggle="tooltip" title="显示食材的消耗效率, 并过滤菜谱">
-                        <select id="chk-recipe-show-material" multiple class="monitor-none" data-live-search="true"
-                            data-live-search-placeholder="查找" data-width="135px" data-dropdown-align-right='auto'
-                            data-none-selected-text="耗材效率" data-selected-text-format="count>2"
-                            data-count-selected-text="{0} 食材" data-none-results-text="没有找到" data-actions-box="true"
-                            data-actions-box-only-clear="true" data-deselect-all-text="清空"></select>
+                    <div class="input-group">
+                        <div class="inline-wrapper input-group-first" data-toggle="tooltip" title="显示食材的消耗效率, 并过滤菜谱">
+                            <select id="chk-recipe-show-material" multiple class="monitor-none" data-live-search="true"
+                                data-live-search-placeholder="查找" data-width="135px" data-dropdown-align-right='auto'
+                                data-none-selected-text="耗材效率" data-selected-text-format="count>2"
+                                data-count-selected-text="{0} 食材" data-none-results-text="没有找到" data-actions-box="true"
+                                data-actions-box-only-clear="true" data-deselect-all-text="清空"></select>
+                        </div>
+                        <span class="input-group-btn input-group-last">
+                            <label class="btn btn-default">
+                                <input type="checkbox" id="chk-recipe-multiple-material" class="monitor-none">
+                                <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                                同时
+                            </label>
+                        </span>
                     </div>
                     <div class="input-group">
                         <div class="inline-wrapper input-group-first" data-toggle="tooltip" title="选择贵客,过滤菜谱">
@@ -468,7 +495,7 @@
                 </div>
             </div>
             <div id="pane-equips" class="tab-pane">
-                <div class="header-wrapper">
+                <div class="header-wrapper form-inline">
                     <div class="inline-wrapper" data-toggle="tooltip" title="单击一条数据会显示所有非固定列内容">
                         <select id="chk-equip-show" class="selectpicker" multiple data-width="fit"
                             data-dropdown-align-right='auto' data-none-selected-text="固定显示列"
@@ -480,45 +507,49 @@
                             <option value='5' selected>来源</option>
                         </select>
                     </div>
-                    <div class="inline-wrapper" data-toggle="tooltip" title="选择类型,过滤厨具">
-                        <select id="chk-equip-skill" multiple class="monitor-all" data-width="150px"
-                            data-dropdown-align-right='auto' data-none-selected-text="选择类型"
-                            data-selected-text-format="count" data-actions-box="true" data-select-all-text="全选"
-                            data-deselect-all-text="清空">
-                            <option value="UseStirfry" selected>炒类售价</option>
-                            <option value="UseBoil" selected>煮类售价</option>
-                            <option value="UseKnife" selected>切类售价</option>
-                            <option value="UseFry" selected>炸类售价</option>
-                            <option value="UseBake" selected>烤类售价</option>
-                            <option value="UseSteam" selected>蒸类售价</option>
-                            <option value="UseMeat" selected>肉类售价</option>
-                            <option value="UseCreation" selected>面类售价</option>
-                            <option value="UseVegetable" selected>蔬菜售价</option>
-                            <option value="UseFish" selected>水产售价</option>
-                            <option value="Gold_Gain" selected>金币获得</option>
-                            <option value="Stirfry" selected>炒技法</option>
-                            <option value="Boil" selected>煮技法</option>
-                            <option value="Knife" selected>切技法</option>
-                            <option value="Fry" selected>炸技法</option>
-                            <option value="Bake" selected>烤技法</option>
-                            <option value="Steam" selected>蒸技法</option>
-                            <option value="Stirfry,Boil,Knife,Fry,Bake,Steam" selected>全技法</option>
-                            <option value="GuestApearRate" selected>贵客概率</option>
-                            <option value="GuestDropCount" selected>贵客赠礼</option>
-                            <option value="OpenTime" selected>开业时间</option>
-                            <option value="Material_Gain" selected>素材获得</option>
-                            <option value="Meat" selected>肉类采集</option>
-                            <option value="Creation" selected>面类采集</option>
-                            <option value="Vegetable" selected>蔬菜采集</option>
-                            <option value="Fish" selected>水产采集</option>
-                            <option value="Meat,Creation,Vegetable,Fish" selected>全采集</option>
-                        </select>
+                    <div class="input-group">
+                        <div class="inline-wrapper input-group-first" data-toggle="tooltip" title="选择类型,过滤厨具">
+                            <select id="chk-equip-skill" multiple class="monitor-all" data-width="150px"
+                                data-dropdown-align-right='auto' data-none-selected-text="选择类型"
+                                data-selected-text-format="count" data-actions-box="true" data-select-all-text="全选"
+                                data-deselect-all-text="清空">
+                                <option value="UseStirfry" selected>炒类售价</option>
+                                <option value="UseBoil" selected>煮类售价</option>
+                                <option value="UseKnife" selected>切类售价</option>
+                                <option value="UseFry" selected>炸类售价</option>
+                                <option value="UseBake" selected>烤类售价</option>
+                                <option value="UseSteam" selected>蒸类售价</option>
+                                <option value="UseMeat" selected>肉类售价</option>
+                                <option value="UseCreation" selected>面类售价</option>
+                                <option value="UseVegetable" selected>蔬菜售价</option>
+                                <option value="UseFish" selected>水产售价</option>
+                                <option value="Gold_Gain" selected>金币获得</option>
+                                <option value="Stirfry" selected>炒技法</option>
+                                <option value="Boil" selected>煮技法</option>
+                                <option value="Knife" selected>切技法</option>
+                                <option value="Fry" selected>炸技法</option>
+                                <option value="Bake" selected>烤技法</option>
+                                <option value="Steam" selected>蒸技法</option>
+                                <option value="Stirfry,Boil,Knife,Fry,Bake,Steam" selected>全技法</option>
+                                <option value="GuestApearRate" selected>贵客概率</option>
+                                <option value="GuestDropCount" selected>贵客赠礼</option>
+                                <option value="OpenTime" selected>开业时间</option>
+                                <option value="Material_Gain" selected>素材获得</option>
+                                <option value="Meat" selected>肉类采集</option>
+                                <option value="Creation" selected>面类采集</option>
+                                <option value="Vegetable" selected>蔬菜采集</option>
+                                <option value="Fish" selected>水产采集</option>
+                                <option value="Meat,Creation,Vegetable,Fish" selected>全采集</option>
+                            </select>
+                        </div>
+                        <span class="input-group-btn input-group-last">
+                            <label class="btn btn-default">
+                                <input type="checkbox" id="chk-equip-multiple-skill" class="monitor-none">
+                                <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                                同时
+                            </label>
+                        </span>
                     </div>
-                    <label class="btn btn-default" data-toggle="tooltip" title="多类型厨具">
-                        <input type="checkbox" id="chk-equip-multiple-skill" class="monitor-none">
-                        <i class="fa fa-check glyphicon glyphicon-ok"></i>
-                        同时
-                    </label>
                     <label class="btn btn-default" data-toggle="tooltip" title="选择一种类型或选择同时时生效">
                         <input type="checkbox" id="chk-equip-filter-negative-skill" class="monitor-none">
                         <i class="fa fa-check glyphicon glyphicon-ok"></i>

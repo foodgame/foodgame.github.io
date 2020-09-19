@@ -1592,6 +1592,39 @@ function initChefTable(data) {
             return true;
         }
 
+        var checks = $("#chk-chef-category").val();
+        if (checks.length == 0) {
+            return true;
+        }
+
+        var checkEquip = $("#chk-chef-category-equip").prop("checked");
+
+        var effects = rowData.specialSkillEffect.concat(rowData.ultimateSkillEffect);
+        if (checkEquip && rowData.equip) {
+            effects = effects.concat(rowData.equip.effect);
+        }
+
+        for (var i in checks) {
+            for (var j in effects) {
+                if (effects[j].type == checks[i]) {
+                    if (effects[j].type == "OpenTime") {
+                        if (effects[j].value < 0) {
+                            return true;
+                        }
+                    } else {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    });
+
+    $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
+        if (settings.nTable != document.getElementById('chef-table')) {
+            return true;
+        }
+
         var check = $('#chk-chef-no-origin').prop("checked");
         if (check || !check && rowData.origin) {
             return true;
@@ -1664,6 +1697,14 @@ function initChefTable(data) {
         $('#chef-table').DataTable().draw();
     });
 
+    $('#chk-chef-category').on('changed.bs.select', function () {
+        $('#chef-table').DataTable().draw();
+    });
+
+    $('#chk-chef-category-equip').click(function () {
+        $('#chef-table').DataTable().draw();
+    });
+
     $('#chk-chef-got').click(function () {
         $('#chef-table').DataTable().draw();
     });
@@ -1700,6 +1741,7 @@ function initChefTable(data) {
     $('#btn-chef-reset').click(function () {
         $('#chk-chef-rarity').selectpicker("selectAll");
         $("#chk-chef-gender").selectpicker("selectAll");
+        $('#chk-chef-category').selectpicker("deselectAll");
         $("#chk-chef-got").prop("checked", false);
         $("#chk-chef-no-origin").prop("checked", true);
         $('#chk-chef-show-recipe').selectpicker("deselectAll");
@@ -5615,11 +5657,11 @@ function generateData(json, json2, person) {
                 }
             }
         }
-        var ultimateSkillInfo = getSkillInfo(json.skills, json.chefs[i].ultimateSkill);
-        var ultimateSkillDisp = ultimateSkillInfo.skillDisp;
-
         chefData["ultimateGoalDisp"] = ultimateGoalDisp;
-        chefData["ultimateSkillDisp"] = ultimateSkillDisp;
+
+        var ultimateSkillInfo = getSkillInfo(json.skills, json.chefs[i].ultimateSkill);
+        chefData["ultimateSkillDisp"] = ultimateSkillInfo.skillDisp;
+        chefData["ultimateSkillEffect"] = ultimateSkillInfo.skillEffect;
 
         chefData["got"] = "";
         chefData["ultimate"] = "";

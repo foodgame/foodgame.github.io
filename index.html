@@ -9,7 +9,7 @@
     <script type="text/javascript" src="js/script.min.js?v=14"></script>
     <script type="text/javascript" src="js/common.min.js?v=34"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=42" />
-    <script type="text/javascript" src="js/food.min.js?v=151"></script>
+    <script type="text/javascript" src="js/food.min.js?v=152"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=55" />
     <script>
         $(function () {
@@ -428,6 +428,25 @@
                             <option value="女" selected>女</option>
                             <option value="" selected>无</option>
                         </select>
+                    </div>
+                    <div class="input-group">
+                        <div class="inline-wrapper" data-toggle="tooltip" title="选择类型,过滤厨师">
+                            <select id="chk-chef-category" multiple class="selectpicker monitor-none" data-width="120px"
+                                data-dropdown-align-right='auto' data-none-selected-text="选择类型"
+                                data-selected-text-format="count>1" data-count-selected-text="{0} 类型"
+                                data-actions-box="true" data-actions-box-only-clear="true" data-deselect-all-text="清空">
+                                <option value="GuestApearRate">贵客</option>
+                                <option value="OpenTime">减时间</option>
+                                <option value="Material_Gain">加素材</option>
+                            </select>
+                        </div>
+                        <span class="input-group-btn input-group-last">
+                            <label class="btn btn-default" data-toggle="tooltip" title="含厨具技能">
+                                <input type="checkbox" id="chk-chef-category-equip">
+                                <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                                含厨具
+                            </label>
+                        </span>
                     </div>
                     <label class="btn btn-default" data-toggle="tooltip" title="只显示你已有的厨师">
                         <input type="checkbox" id="chk-chef-got" class="monitor-none">

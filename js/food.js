@@ -2056,6 +2056,13 @@ function initEquipTable(data) {
 
         var effects = rowData.effect;
         var checks = $("#chk-equip-skill").val();
+        var multiple = $('#chk-equip-multiple-skill').prop("checked");
+
+        var negative = false;
+        if (checks.length == 1 || multiple) {
+            negative = $('#chk-equip-filter-negative-skill').prop("checked");
+        }
+
         for (var i in checks) {
             var allPass = true;
             var values = checks[i].split(',');
@@ -2063,20 +2070,30 @@ function initEquipTable(data) {
                 var exist = false;
                 for (var k in effects) {
                     if (effects[k].type == values[j]) {
+                        if (negative && effects[k].value < 0) {
+                            return false;
+                        }
                         exist = true;
                         break;
                     }
                 }
                 if (!exist) {
+                    if (multiple) {
+                        return false;
+                    }
                     allPass = false;
                     break;
                 }
             }
-            if (allPass) {
+            if (!multiple && allPass) {
                 return true;
             }
         }
-        return false;
+        if (multiple) {
+            return true;
+        } else {
+            return false;
+        }
     });
 
     $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
@@ -2084,7 +2101,7 @@ function initEquipTable(data) {
             return true;
         }
 
-        var check = $('#chk-equip-fiter-all-skill').prop("checked");
+        var check = $('#chk-equip-filter-all-skill').prop("checked");
         if (!check) {
             return true;
         }
@@ -2182,13 +2199,32 @@ function initEquipTable(data) {
         equipTable.draw();
     });
 
-    $('#chk-equip-fiter-all-skill').click(function () {
+    $('#chk-equip-multiple-skill').click(function () {
+        equipTable.draw();
+    });
+
+    $('#chk-equip-filter-negative-skill').click(function () {
+        equipTable.draw();
+    });
+
+    $('#chk-equip-filter-all-skill').click(function () {
         equipTable.draw();
     });
 
     $('#pane-equips .search-box input').keyup(function () {
         equipTable.draw();
         changeInputStyle(this);
+    });
+
+    $('#btn-equip-reset').click(function () {
+        $('#chk-equip-skill').selectpicker("selectAll");
+        $("#chk-equip-multiple-skill").prop("checked", false);
+        $("#chk-equip-filter-negative-skill").prop("checked", false);
+        $("#chk-equip-filter-all-skill").prop("checked", false);
+        $("#chk-equip-no-origin").prop("checked", true);
+        $("#pane-equips .search-box input").val("");
+        checkMonitorStyle();
+        equipTable.draw();
     });
 
     initTableResponsiveDisplayEvent(equipTable);

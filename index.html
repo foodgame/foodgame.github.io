@@ -9,7 +9,7 @@
     <script type="text/javascript" src="js/script.min.js?v=14"></script>
     <script type="text/javascript" src="js/common.min.js?v=34"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=42" />
-    <script type="text/javascript" src="js/food.min.js?v=149"></script>
+    <script type="text/javascript" src="js/food.min.js?v=150"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=55" />
     <script>
         $(function () {
@@ -18,7 +18,7 @@
                 success: function (json) {
                     init(json);
                 },
-                url: 'data/data.min.json?v=3'
+                url: 'data/data.min.json?v=4'
             });
         });
     </script>
@@ -514,8 +514,18 @@
                             <option value="Meat,Creation,Vegetable,Fish" selected>全采集</option>
                         </select>
                     </div>
+                    <label class="btn btn-default" data-toggle="tooltip" title="多类型厨具">
+                        <input type="checkbox" id="chk-equip-multiple-skill" class="monitor-none">
+                        <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                        同时
+                    </label>
+                    <label class="btn btn-default" data-toggle="tooltip" title="选择一种类型或选择同时时生效">
+                        <input type="checkbox" id="chk-equip-filter-negative-skill" class="monitor-none">
+                        <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                        增益
+                    </label>
                     <label class="btn btn-default" data-toggle="tooltip" title="过滤掉全技法厨具">
-                        <input type="checkbox" id="chk-equip-fiter-all-skill" class="monitor-none">
+                        <input type="checkbox" id="chk-equip-filter-all-skill" class="monitor-none">
                         <i class="fa fa-check glyphicon glyphicon-ok"></i>
                         去除全技法
                     </label>
@@ -524,6 +534,9 @@
                         <i class="fa fa-check glyphicon glyphicon-ok"></i>
                         未出
                     </label>
+                    <a id="btn-equip-reset" class="btn btn-default" data-toggle="tooltip" title="清空所有选择">
+                        清空所有
+                    </a>
                 </div>
                 <div>
                     <table id="equip-table" class="table table-hover table-bordered" width="100%">

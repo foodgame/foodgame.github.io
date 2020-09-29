@@ -118,9 +118,9 @@ function initTables(data, person) {
     });
 
     $('.main-nav a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        $('.dataTables_scrollBody:visible table.dataTable').DataTable().draw(false);
         if ($(this).attr("data-init") != "true") {
-            $('.dataTables_scrollBody:visible table.dataTable').DataTable().draw(false);
-            updateScrollHeight();
+            updateScrollHeight(true);
         }
     });
 
@@ -160,23 +160,35 @@ function initTables(data, person) {
 
     $('#recipe-table').DataTable().draw(false);
 
-    updateScrollHeight();
+    if ($(window).width() <= 768) {
+        $('#chk-setting-desktop').bootstrapToggle('off');
+    }
+    initLayout();
 
     window.onresize = function () {
-        $('.main-nav a[data-toggle="tab"]').attr("data-init", "false");
-        updateScrollHeight(true);
+        if ($('#chk-setting-desktop').prop("checked")) {
+            $('.main-nav a[data-toggle="tab"]').attr("data-init", "false");
+            updateScrollHeight(true, true);
+        }
     };
 }
 
-function updateScrollHeight(redraw) {
-    var otherHeight = $('body').height() - $('.dataTables_scrollBody:visible').height();
-    var tableHeight = ($(window).height() - otherHeight - 10) + "px";
-    if ($('.dataTables_scrollBody:visible').css('height') != tableHeight) {
-        $('.dataTables_scrollBody:visible').css('height', tableHeight);
-        redraw = true;
+function updateScrollHeight(height, redraw) {
+    if (height) {
+        var item = $('.dataTables_scrollBody:visible');
+        var otherHeight = $('body').height() - item.height();
+        var tableHeight = ($(window).height() - otherHeight - 5) + "px";
+        var style = "height";
+        if (item.closest(".pane-materials").length > 0) {
+            style = "max-height";
+        }
+        if (item.css(style) != tableHeight) {
+            item.css(style, tableHeight);
+            redraw = true;
+        }
     }
     if (redraw) {
-        $('.dataTables_scrollBody:visible table.dataTable').DataTable().columns.adjust().draw(false);
+        item.find('table.dataTable').DataTable().columns.adjust().draw(false);
         $('.main-nav li.active a[data-toggle="tab"]').attr("data-init", "true");
     }
 }
@@ -216,6 +228,13 @@ function initTooltip() {
             trigger: "hover"
         }
     );
+    $('body').on('click', function (e) {
+        $('[data-toggle="tooltip"]').each(function () {
+            if (!$(this).is(e.target) && $(this).has(e.target).length == 0) {
+                $(this).tooltip('hide');
+            }
+        });
+    });
     updateTooltip();
 }
 
@@ -238,8 +257,11 @@ function updateTooltip() {
 }
 
 function initSetting(data) {
+    $('#chk-setting-desktop').change(function () {
+        initLayout();
+    });
+
     $('#chk-setting-show-help').change(function () {
-        console.log("check loop change");
         updateTooltip();
         updateSettingLocalData();
     });
@@ -253,9 +275,9 @@ function initSetting(data) {
         initEquipShow();
         initDecorationShow();
         if (private) {
-            initCalChefsShow();
-            initCalEquipsShow();
-            initCalMaterialsShow();
+            initCalChefsShow($('#cal-chefs-table').DataTable());
+            initCalEquipsShow($('#cal-equips-table').DataTable());
+            initCalMaterialsShow($('#cal-materials-table').DataTable());
         }
         updateSettingLocalData();
     });
@@ -283,6 +305,38 @@ function initSetting(data) {
         $('#recipe-table').DataTable().draw(false);
         updateSettingLocalData();
     });
+
+    $('#select-setting-page-length').on('changed.bs.select', function () {
+        var length = $(this).val();
+        $('.main-nav a[data-toggle="tab"]').attr("data-init", "false");
+
+        $('#recipe-table').DataTable().page.len(length).draw();
+        $('#chef-table').DataTable().page.len(length).draw();
+        $('#equip-table').DataTable().page.len(length).draw();
+        $('#decoration-table').DataTable().page.len(length).draw();
+        $('#quest-table').DataTable().page.len(length).draw();
+        if (private) {
+            $('#cal-chefs-table').DataTable().page.len(length).draw();
+            $('#cal-equips-table').DataTable().page.len(length).draw();
+            $('#cal-materials-table').DataTable().page.len(length).draw();
+            $('#pane-cal-recipes-results .cal-results-table').DataTable().page.len(length).draw();
+        }
+
+        updateSettingLocalData();
+    });
+}
+
+function initLayout() {
+    if ($('#chk-setting-desktop').prop("checked")) {
+        $('#top-menu').appendTo("#desktop-menu");
+        $('#mobile-menu-btn').addClass("hidden");
+        document.getElementById("viewport").setAttribute("content", "");
+    } else {
+        $('#top-menu').appendTo("#menu-modal .modal-body");
+        $('#mobile-menu-btn').removeClass("hidden");
+        document.getElementById("viewport").setAttribute("content", "width=device-width");
+    }
+    updateScrollHeight(true, true);
 }
 
 function initRecipeTable(data) {
@@ -471,7 +525,7 @@ function initRecipeTable(data) {
             return true;
         }
 
-        var value = $.trim($("#pane-recipes .search-box input").val());
+        var value = $.trim($(".pane-recipes .search-box input").val());
         if (commaSeparatedMatch(rowData.name, value)) {
             return true;
         } else if (commaSeparatedMatch(rowData.materialsVal, value)) {
@@ -759,11 +813,27 @@ function initRecipeTable(data) {
         updateMenuLocalData();
     });
 
-    $('#chk-recipe-rarity').on('changed.bs.select', function () {
+    $('#chk-recipe-rarity').selectpicker({
+        countSelectedText: function (num, total) {
+            if (num < total) {
+                return num + "/" + total + " 星";
+            } else {
+                return "全星";
+            }
+        }
+    }).on('changed.bs.select', function () {
         $('#recipe-table').DataTable().draw();
     });
 
-    $('#chk-recipe-skill').on('changed.bs.select', function () {
+    $('#chk-recipe-skill').selectpicker({
+        countSelectedText: function (num, total) {
+            if (num < total) {
+                return num + "/" + total + " 技法";
+            } else {
+                return "全技法";
+            }
+        }
+    }).on('changed.bs.select', function () {
         $('#recipe-table').DataTable().draw();
     });
 
@@ -771,7 +841,15 @@ function initRecipeTable(data) {
         $('#recipe-table').DataTable().draw();
     });
 
-    $('#chk-recipe-category').on('changed.bs.select', function () {
+    $('#chk-recipe-category').selectpicker({
+        countSelectedText: function (num, total) {
+            if (num < total) {
+                return num + "/" + total + " 类型";
+            } else {
+                return "全类型";
+            }
+        }
+    }).on('changed.bs.select', function () {
         $('#recipe-table').DataTable().draw();
     });
 
@@ -815,7 +893,7 @@ function initRecipeTable(data) {
         $("#chk-recipe-antique").selectpicker("deselectAll");
         $('#chk-recipe-show-material').selectpicker("deselectAll");
         $("#chk-recipe-multiple-material").prop("checked", false);
-        $("#pane-recipes .search-box input").val("");
+        $(".pane-recipes .search-box input").val("");
         $('#chk-recipe-show-chef').selectpicker("deselectAll");
         $("#select-recipe-chef-quest").selectpicker("val", '');
         $('#select-recipe-quest').selectpicker("deselectAll");
@@ -937,7 +1015,7 @@ function updateRecipeQuest(data, forceReinit) {
     }
 
     $('#recipe-table').DataTable().order(order).draw();
-    updateScrollHeight();
+    updateScrollHeight($('#chk-setting-desktop').prop("checked"), false);
 }
 
 function reInitRecipeTable(data) {
@@ -1106,13 +1184,11 @@ function reInitRecipeTable(data) {
         }
     ];
 
-    var pageLength = 20;
     var searchValue = "";
     var order = [];
 
     if ($.fn.DataTable.isDataTable('#recipe-table')) {
-        pageLength = $("#pane-recipes #recipe-table_length select").val();
-        searchValue = $("#pane-recipes .search-box input").val();
+        searchValue = $(".pane-recipes .search-box input").val();
         order = getTableOrder($('#recipe-table').DataTable(), recipeColumns.length);
         $('#recipe-table').DataTable().MakeCellsEditable("destroy");
         $('#recipe-table').DataTable().destroy();
@@ -1138,16 +1214,14 @@ function reInitRecipeTable(data) {
         columns: recipeColumns,
         language: {
             search: "查找:",
-            lengthMenu: "一页显示 _MENU_ 个",
             zeroRecords: "没有找到",
-            info: "第 _PAGE_ 页 共 _PAGES_ 页 _TOTAL_ 个菜谱",
-            infoEmpty: "没有数据",
-            infoFiltered: "(从 _MAX_ 个菜谱中过滤)"
+            info: "_TOTAL_个",
+            infoEmpty: "0",
+            infoFiltered: "/ _MAX_"
         },
         pagingType: "numbers",
-        lengthMenu: [[5, 10, 20, 50, 100, -1], [5, 10, 20, 50, 100, "所有"]],
-        pageLength: pageLength,
-        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'i><'col-sm-4'<'search-box'>>>" +
+        pageLength: Number($("#select-setting-page-length").val()),
+        dom: "<'table-top clearfix'<'left'i><'right'<'search-box'>>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12'p>>",
         deferRender: true,
@@ -1189,14 +1263,16 @@ function reInitRecipeTable(data) {
                     }
                     var wrapper = $('#recipe-table').closest(".DTFC_ScrollWrapper");
                     var scroll = wrapper.find(".dataTables_scrollBody");
-                    return data ? "<div class='child-inner' style='max-width:" + scroll.width()
-                        + "px;margin-left:" + (scroll.scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width()) + "px'>" + data + "</div>" : false;
+                    var mleft = scroll.scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width();
+                    var mWidth = scroll.width() - wrapper.find(".DTFC_LeftWrapper").width() - 20;
+                    return data ? "<div class='child-inner' style='max-width:" + mWidth
+                        + "px;margin-left:" + mleft + "px'>" + data + "</div>" : false;
                 }
             }
         }
     });
 
-    $("#pane-recipes div.search-box").html('查找:<input type="search" value="' + searchValue + '" class="form-control input-sm monitor-none" placeholder="菜名 材料 来源"></label>');
+    $(".pane-recipes div.search-box").html('<input type="search" value="' + searchValue + '" class="form-control input-sm monitor-none" placeholder="查找 菜名 材料 来源">');
 
     var rankOptions = getRankOptions();
     var gotOptions = getGotOptions();
@@ -1247,13 +1323,13 @@ function reInitRecipeTable(data) {
         }
     });
 
-    $('#pane-recipes .search-box input').keyup(function () {
+    $('.pane-recipes .search-box input').keyup(function () {
         recipeTable.draw();
         changeInputStyle(this);
     });
 
     initTableResponsiveDisplayEvent(recipeTable);
-    initTableScrollEvent("#pane-recipes");
+    initTableScrollEvent(".pane-recipes");
 }
 
 function updateRecipeTableData(data) {
@@ -1277,7 +1353,7 @@ function updateRecipeTableData(data) {
         data.recipeAddColNumMax = data.recipeAddColNum;
         reInitRecipeTable(data);
         initRecipeShow();
-        updateScrollHeight();
+        updateScrollHeight(true);
     }
 
     for (var i = 0; i < data.recipeAddColNumMax; i++) {
@@ -1447,7 +1523,7 @@ function updateChefTableData(data) {
         data.chefAddColNumMax = data.chefAddColNum;
         reInitChefTable(data);
         initChefShow();
-        updateScrollHeight();
+        updateScrollHeight(true);
     }
 
     for (var i = 0; i < data.chefAddColNumMax; i++) {
@@ -1651,7 +1727,7 @@ function initChefTable(data) {
             return true;
         }
 
-        var value = $.trim($("#pane-chefs .search-box input").val());
+        var value = $.trim($(".pane-chefs .search-box input").val());
         if (commaSeparatedMatch(rowData.name, value)) {
             return true;
         } else if (commaSeparatedMatch(rowData.specialSkillDisp, value)) {
@@ -1689,7 +1765,15 @@ function initChefTable(data) {
         updateMenuLocalData();
     });
 
-    $('#chk-chef-rarity').on('changed.bs.select', function () {
+    $('#chk-chef-rarity').selectpicker({
+        countSelectedText: function (num, total) {
+            if (num < total) {
+                return num + "/" + total + " 星";
+            } else {
+                return "全星";
+            }
+        }
+    }).on('changed.bs.select', function () {
         $('#chef-table').DataTable().draw();
     });
 
@@ -1745,7 +1829,7 @@ function initChefTable(data) {
         $("#chk-chef-got").prop("checked", false);
         $("#chk-chef-no-origin").prop("checked", true);
         $('#chk-chef-show-recipe').selectpicker("deselectAll");
-        $("#pane-chefs .search-box input").val("");
+        $(".pane-chefs .search-box input").val("");
         $('#chk-chef-partial-ultimate').selectpicker("deselectAll");
         checkMonitorStyle();
         $('#chef-table').DataTable().draw();
@@ -1901,13 +1985,11 @@ function reInitChefTable(data) {
         }
     ];
 
-    var pageLength = 20;
     var searchValue = "";
     var order = [];
 
     if ($.fn.DataTable.isDataTable('#chef-table')) {
-        pageLength = $("#pane-chefs #chef-table_length select").val();
-        searchValue = $("#pane-chefs .search-box input").val();
+        searchValue = $(".pane-chefs .search-box input").val();
         order = getTableOrder($('#chef-table').DataTable(), chefColumns.length);
         $('#chef-table').DataTable().MakeCellsEditable("destroy");
         $('#chef-table').DataTable().destroy();
@@ -1933,16 +2015,14 @@ function reInitChefTable(data) {
         columns: chefColumns,
         language: {
             search: "查找:",
-            lengthMenu: "一页显示 _MENU_ 个",
             zeroRecords: "没有找到",
-            info: "第 _PAGE_ 页 共 _PAGES_ 页 _TOTAL_ 个厨师",
-            infoEmpty: "没有数据",
-            infoFiltered: "(从 _MAX_ 个厨师中过滤)"
+            info: "_TOTAL_个",
+            infoEmpty: "0",
+            infoFiltered: "/ _MAX_"
         },
         pagingType: "numbers",
-        lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "所有"]],
-        pageLength: pageLength,
-        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'i><'col-sm-4'<'search-box'>>>" +
+        pageLength: Number($("#select-setting-page-length").val()),
+        dom: "<'table-top clearfix'<'left'i><'right'<'search-box'>>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12'p>>",
         deferRender: true,
@@ -1995,14 +2075,16 @@ function reInitChefTable(data) {
                     }
                     var wrapper = $('#chef-table').closest(".DTFC_ScrollWrapper");
                     var scroll = wrapper.find(".dataTables_scrollBody");
-                    return data ? "<div class='child-inner' style='max-width:" + scroll.width()
-                        + "px;margin-left:" + (scroll.scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width()) + "px'>" + data + "</div>" : false;
+                    var mleft = scroll.scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width();
+                    var mWidth = scroll.width() - wrapper.find(".DTFC_LeftWrapper").width() - 20;
+                    return data ? "<div class='child-inner' style='max-width:" + mWidth
+                        + "px;margin-left:" + mleft + "px'>" + data + "</div>" : false;
                 }
             }
         }
     });
 
-    $("#pane-chefs div.search-box").html('<label>查找:<input type="search" value="' + searchValue + '" class="form-control input-sm monitor-none" placeholder="名字 技能 来源"></label>');
+    $(".pane-chefs div.search-box").html('<input type="search" value="' + searchValue + '" class="form-control input-sm monitor-none" placeholder="查找 名字 技能 来源">');
 
     var gotOptions = getGotOptions();
     var equipsOptions = getEquipsOptions(data.equips, data.skills);
@@ -2058,13 +2140,13 @@ function reInitChefTable(data) {
         }
     });
 
-    $('#pane-chefs .search-box input').keyup(function () {
+    $('.pane-chefs .search-box input').keyup(function () {
         chefTable.draw();
         changeInputStyle(this);
     });
 
     initTableResponsiveDisplayEvent(chefTable);
-    initTableScrollEvent("#pane-chefs");
+    initTableScrollEvent(".pane-chefs");
 }
 
 function initEquipTable(data) {
@@ -2110,16 +2192,14 @@ function initEquipTable(data) {
         columns: equipColumns,
         language: {
             search: "查找:",
-            lengthMenu: "一页显示 _MENU_ 个",
             zeroRecords: "没有找到",
-            info: "第 _PAGE_ 页 共 _PAGES_ 页 _TOTAL_ 个厨具",
-            infoEmpty: "没有数据",
-            infoFiltered: "(从 _MAX_ 个厨具中过滤)"
+            info: "_TOTAL_个",
+            infoEmpty: "0",
+            infoFiltered: "/ _MAX_"
         },
         pagingType: "numbers",
-        lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "所有"]],
-        pageLength: 20,
-        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'i><'col-sm-4'<'search-box'>>>" +
+        pageLength: Number($("#select-setting-page-length").val()),
+        dom: "<'table-top clearfix'<'left'i><'right'<'search-box'>>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12'p>>",
         deferRender: true,
@@ -2146,14 +2226,16 @@ function initEquipTable(data) {
                     }
                     var wrapper = $('#equip-table').closest(".DTFC_ScrollWrapper");
                     var scroll = wrapper.find(".dataTables_scrollBody");
-                    return data ? "<div class='child-inner' style='max-width:" + scroll.width()
-                        + "px;margin-left:" + (scroll.scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width()) + "px'>" + data + "</div>" : false;
+                    var mleft = scroll.scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width();
+                    var mWidth = scroll.width() - wrapper.find(".DTFC_LeftWrapper").width() - 20;
+                    return data ? "<div class='child-inner' style='max-width:" + mWidth
+                        + "px;margin-left:" + mleft + "px'>" + data + "</div>" : false;
                 }
             }
         }
     });
 
-    $("#pane-equips div.search-box").html('<label>查找:<input type="search" class="form-control input-sm monitor-none" placeholder="名字 技能 来源"></label>');
+    $(".pane-equips div.search-box").html('<input type="search" class="form-control input-sm monitor-none" placeholder="查找 名字 技能 来源">');
 
     $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
         if (settings.nTable != document.getElementById('equip-table')) {
@@ -2248,7 +2330,7 @@ function initEquipTable(data) {
             return true;
         }
 
-        var value = $.trim($("#pane-equips .search-box input").val());
+        var value = $.trim($(".pane-equips .search-box input").val());
         if (commaSeparatedMatch(rowData.name, value)) {
             return true;
         } else if (commaSeparatedMatch(rowData.skillDisp, value)) {
@@ -2317,7 +2399,7 @@ function initEquipTable(data) {
         equipTable.draw();
     });
 
-    $('#pane-equips .search-box input').keyup(function () {
+    $('.pane-equips .search-box input').keyup(function () {
         equipTable.draw();
         changeInputStyle(this);
     });
@@ -2328,13 +2410,13 @@ function initEquipTable(data) {
         $("#chk-equip-filter-negative-skill").prop("checked", false);
         $("#chk-equip-filter-all-skill").prop("checked", false);
         $("#chk-equip-no-origin").prop("checked", true);
-        $("#pane-equips .search-box input").val("");
+        $(".pane-equips .search-box input").val("");
         checkMonitorStyle();
         equipTable.draw();
     });
 
     initTableResponsiveDisplayEvent(equipTable);
-    initTableScrollEvent("#pane-equips");
+    initTableScrollEvent(".pane-equips");
 
     initEquipShow();
 }
@@ -2428,11 +2510,10 @@ function initDecorationTable(data) {
         columns: decorationColumns,
         language: {
             search: "查找:",
-            lengthMenu: "一页显示 _MENU_ 个",
             zeroRecords: "没有找到",
-            info: "第 _PAGE_ 页 共 _PAGES_ 页 _TOTAL_ 个装饰",
-            infoEmpty: "没有数据",
-            infoFiltered: "(从 _MAX_ 个装饰中过滤)",
+            info: "_TOTAL_个",
+            infoEmpty: "0",
+            infoFiltered: "/ _MAX_",
             select: {
                 rows: {
                     _: "选择了 %d 个装饰",
@@ -2442,9 +2523,8 @@ function initDecorationTable(data) {
             }
         },
         pagingType: "numbers",
-        lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "所有"]],
-        pageLength: 20,
-        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'i><'col-sm-4'<'search-box'>>>" +
+        pageLength: Number($("#select-setting-page-length").val()),
+        dom: "<'table-top clearfix'<'left'i><'right'<'search-box'>>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12'p>>",
         select: {
@@ -2476,14 +2556,16 @@ function initDecorationTable(data) {
                     }
                     var wrapper = $('#decoration-table').closest(".DTFC_ScrollWrapper");
                     var scroll = wrapper.find(".dataTables_scrollBody");
-                    return data ? "<div class='child-inner' style='max-width:" + scroll.width()
-                        + "px;margin-left:" + (scroll.scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width()) + "px'>" + data + "</div>" : false;
+                    var mleft = scroll.scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width();
+                    var mWidth = scroll.width() - wrapper.find(".DTFC_LeftWrapper").width() - 20;
+                    return data ? "<div class='child-inner' style='max-width:" + mWidth
+                        + "px;margin-left:" + mleft + "px'>" + data + "</div>" : false;
                 }
             }
         }
     });
 
-    $("#pane-decorations div.search-box").html('<label>查找:<input type="search" class="form-control input-sm monitor-none" placeholder="名字 套装 来源"></label>');
+    $(".pane-decorations div.search-box").html('<input type="search" class="form-control input-sm monitor-none" placeholder="查找 名字 套装 来源">');
 
     $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
         if (settings.nTable != document.getElementById('decoration-table')) {
@@ -2516,7 +2598,7 @@ function initDecorationTable(data) {
             return true;
         }
 
-        var value = $.trim($("#pane-decorations .search-box input").val());
+        var value = $.trim($(".pane-decorations .search-box input").val());
         if (commaSeparatedMatch(rowData.name, value)) {
             return true;
         } else if (commaSeparatedMatch(rowData.suit, value)) {
@@ -2549,7 +2631,7 @@ function initDecorationTable(data) {
         decorationTable.draw();
     });
 
-    $('#pane-decorations .search-box input').keyup(function () {
+    $('.pane-decorations .search-box input').keyup(function () {
         decorationTable.draw();
         changeInputStyle(this);
     });
@@ -2594,7 +2676,7 @@ function initDecorationTable(data) {
     });
 
     initTableResponsiveDisplayEvent(decorationTable);
-    initTableScrollEvent("#pane-decorations");
+    initTableScrollEvent(".pane-decorations");
 
     initDecorationShow();
 }
@@ -2728,7 +2810,7 @@ function reInitMaterialTable(data) {
         }
     });
 
-    initTableScrollEvent("#pane-materials");
+    initTableScrollEvent(".pane-materials");
 
     materialTable.draw();
 }
@@ -2769,16 +2851,14 @@ function initQuestTable(data) {
         columns: questColumns,
         language: {
             search: "查找:",
-            lengthMenu: "一页显示 _MENU_ 个",
             zeroRecords: "没有找到",
-            info: "第 _PAGE_ 页 共 _PAGES_ 页 _TOTAL_ 个任务",
-            infoEmpty: "没有数据",
-            infoFiltered: "(从 _MAX_ 个任务中过滤)"
+            info: "_TOTAL_个",
+            infoEmpty: "0",
+            infoFiltered: "/ _MAX_"
         },
         pagingType: "numbers",
-        lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "所有"]],
-        pageLength: 20,
-        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'i><'col-sm-4'<'search-box'>>>" +
+        pageLength: Number($("#select-setting-page-length").val()),
+        dom: "<'table-top clearfix'<'left'i><'right'<'search-box'>>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12'p>>",
         deferRender: true,
@@ -2789,14 +2869,14 @@ function initQuestTable(data) {
         }
     });
 
-    $("#pane-quest div.search-box").html('<label>查找:<input type="search" class="form-control input-sm monitor-none" placeholder="编号 任务 奖励"></label>');
+    $(".pane-quest div.search-box").html('<input type="search" class="form-control input-sm monitor-none" placeholder="查找 编号 任务 奖励">');
 
     $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
         if (settings.nTable != document.getElementById('quest-table')) {
             return true;
         }
 
-        var value = $.trim($("#pane-quest .search-box input").val());
+        var value = $.trim($(".pane-quest .search-box input").val());
         if (commaSeparatedMatch(rowData.questIdDisp.toString(), value)) {
             return true;
         } else if (commaSeparatedMatch(rowData.goal, value)) {
@@ -2808,7 +2888,7 @@ function initQuestTable(data) {
         }
     });
 
-    $('#pane-quest .search-box input').keyup(function () {
+    $('.pane-quest .search-box input').keyup(function () {
         questTable.draw();
         changeInputStyle(this);
     });
@@ -2819,7 +2899,7 @@ function initQuestTable(data) {
         initQuestShow(questTable);
     });
 
-    initTableScrollEvent("#pane-quest");
+    initTableScrollEvent(".pane-quest");
 
     initQuestShow(questTable);
 }
@@ -3168,6 +3248,7 @@ function generateSettingExportData() {
     exportData["auto"] = $("#chk-setting-auto-update").prop("checked");
     exportData["final"] = $("#chk-setting-show-final").prop("checked");
     exportData["mark"] = $("#chk-setting-done-mark").prop("checked");
+    exportData["pagelen"] = Number($("#select-setting-page-length").val());
     return exportData;
 }
 
@@ -3208,6 +3289,11 @@ function updateSetting(person) {
                 $('#chk-setting-done-mark').bootstrapToggle('off');
             }
         }
+        if (Number($("#select-setting-page-length").val()) != person.setting.pagelen) {
+            if (person.setting.pagelen) {
+                $("#select-setting-page-length").selectpicker('val', person.setting.pagelen);
+            }
+        }
     }
 }
 
@@ -3219,7 +3305,7 @@ function initCalTables(data) {
     initCalRules(data);
 
     if (private) {
-        $("#pane-cal").addClass("admin");
+        $(".pane-cal").addClass("admin");
 
         initCalChefsTable(data);
         initCalEquipsTable(data);
@@ -4553,11 +4639,10 @@ function initCalChefsTable(data) {
         columns: calChefsColumns,
         language: {
             search: "查找:",
-            lengthMenu: "一页显示 _MENU_ 个",
             zeroRecords: "没有找到",
-            info: "共 _MAX_ 个厨师",
-            infoEmpty: "没有数据",
-            infoFiltered: "",
+            info: "_TOTAL_个",
+            infoEmpty: "0",
+            infoFiltered: "/ _MAX_",
             select: {
                 rows: {
                     _: "选择了 %d 个厨师",
@@ -4567,9 +4652,8 @@ function initCalChefsTable(data) {
             }
         },
         pagingType: "numbers",
-        lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "所有"]],
-        pageLength: 20,
-        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'i><'col-sm-4'<'search-box'>>>" +
+        pageLength: Number($("#select-setting-page-length").val()),
+        dom: "<'table-top clearfix'<'left'i><'right'<'search-box'>>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12'p>>",
         select: {
@@ -4615,7 +4699,7 @@ function initCalChefsTable(data) {
         }
     });
 
-    $("#pane-cal-chefs div.search-box").html('<label>查找:<input type="search" class="form-control input-sm monitor-none" placeholder="名字 性别"></label>');
+    $("#pane-cal-chefs div.search-box").html('<input type="search" class="form-control input-sm monitor-none" placeholder="查找 名字 性别">');
 
     $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
         if (settings.nTable != document.getElementById('cal-chefs-table')) {
@@ -4726,11 +4810,10 @@ function initCalEquipsTable(data) {
         columns: calEquipsColumns,
         language: {
             search: "查找:",
-            lengthMenu: "一页显示 _MENU_ 个",
             zeroRecords: "没有找到",
-            info: "共 _MAX_ 个厨具",
-            infoEmpty: "没有数据",
-            infoFiltered: "",
+            info: "_TOTAL_个",
+            infoEmpty: "0",
+            infoFiltered: "/ _MAX_",
             select: {
                 rows: {
                     _: "选择了 %d 个厨具",
@@ -4740,9 +4823,8 @@ function initCalEquipsTable(data) {
             }
         },
         pagingType: "numbers",
-        lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "所有"]],
-        pageLength: 20,
-        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'i><'col-sm-4'<'search-box'>>>" +
+        pageLength: Number($("#select-setting-page-length").val()),
+        dom: "<'table-top clearfix'<'left'i><'right'<'search-box'>>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12'p>>",
         select: {
@@ -4776,7 +4858,7 @@ function initCalEquipsTable(data) {
         }
     });
 
-    $("#pane-cal-equips div.search-box").html('<label>查找:<input type="search" class="form-control input-sm monitor-none" placeholder="名字 技能 来源"></label>');
+    $("#pane-cal-equips div.search-box").html('<input type="search" class="form-control input-sm monitor-none" placeholder="查找 名字 技能 来源">');
 
     $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
         if (settings.nTable != document.getElementById('cal-equips-table')) {
@@ -4876,11 +4958,10 @@ function initCalMaterialsTable(data) {
         columns: calMaterialsColumns,
         language: {
             search: "查找:",
-            lengthMenu: "一页显示 _MENU_ 个",
             zeroRecords: "没有找到",
-            info: "共 _MAX_ 个食材",
-            infoEmpty: "没有数据",
-            infoFiltered: "",
+            info: "_TOTAL_个",
+            infoEmpty: "0",
+            infoFiltered: "/ _MAX_",
             select: {
                 rows: {
                     _: "选择了 %d 个食材",
@@ -4890,9 +4971,8 @@ function initCalMaterialsTable(data) {
             }
         },
         pagingType: "numbers",
-        lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "所有"]],
-        pageLength: 20,
-        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'i><'col-sm-4'<'search-box'>>>" +
+        pageLength: Number($("#select-setting-page-length").val()),
+        dom: "<'table-top clearfix'<'left'i><'right'<'search-box'>>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12'p>>",
         select: {
@@ -4926,7 +5006,7 @@ function initCalMaterialsTable(data) {
         }
     });
 
-    $("#pane-cal-materials div.search-box").html('<label>查找:<input type="search" class="form-control input-sm monitor-none" placeholder="名字 来源"></label>');
+    $("#pane-cal-materials div.search-box").html('<input type="search" class="form-control input-sm monitor-none" placeholder="查找 名字 来源">');
 
     $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
         if (settings.nTable != document.getElementById('cal-materials-table')) {
@@ -5326,11 +5406,10 @@ function initCalResultTableCommon(mode, panel) {
         columns: calResultsColumns,
         language: {
             search: "查找:",
-            lengthMenu: "一页显示 _MENU_ 条",
             zeroRecords: "没有找到",
-            info: "共 _TOTAL_ 条",
-            infoEmpty: "没有数据",
-            infoFiltered: "(从 _MAX_ 条中过滤)",
+            info: "_TOTAL_个",
+            infoEmpty: "0",
+            infoFiltered: "/ _MAX_",
             select: {
                 rows: {
                     _: "选择了 %d 个菜谱",
@@ -5341,11 +5420,10 @@ function initCalResultTableCommon(mode, panel) {
         },
         paging: paging,
         pagingType: "numbers",
-        lengthMenu: [[5, 10, 20, 50, 100, -1], [5, 10, 20, 50, 100, "所有"]],
-        pageLength: 20,
+        pageLength: Number($("#select-setting-page-length").val()),
         dom: "<'row'<'col-sm-12'<'selected-sum'>>>" +
             "<'row'<'col-sm-12'<'selected-sum-2'>>>" +
-            "<'row'<'col-sm-4'l><'col-sm-4 text-center'i><'col-sm-4'<'search-box'>>>" +
+            "<'table-top clearfix'<'left'i><'right'<'search-box'>>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12'p>>",
         select: {
@@ -5360,7 +5438,7 @@ function initCalResultTableCommon(mode, panel) {
     });
 
     if (mode == "recipes") {
-        panel.find("div.search-box").html('<label>查找:<input type="search" class="form-control input-sm monitor-none" placeholder="菜名 材料"></label>');
+        panel.find("div.search-box").html('<input type="search" class="form-control input-sm monitor-none" placeholder="查找 菜名 材料">');
         panel.find('.search-box input').keyup(function () {
             table.draw();
             changeInputStyle(this);
@@ -6798,7 +6876,7 @@ function initVersionTip(person) {
 
             $(this).on('closed.bs.alert', function () {
                 updateLocalData(key, value);
-                updateScrollHeight();
+                updateScrollHeight(true);
             })
         }
     });

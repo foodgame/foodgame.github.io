@@ -69,19 +69,7 @@ label.btn input[type="checkbox"]:checked+.fa {
     width: 95px;
 }
 
-.search-box {
-    text-align: right;
-}
-
-.search-box label {
-    font-weight: 400;
-    white-space: nowrap;
-    text-align: left;
-}
-
 .search-box input.form-control {
-    margin-left: .5em;
-    display: inline-block;
     width: 150px;
 }
 
@@ -197,25 +185,27 @@ label.btn input[type="checkbox"]:checked+.fa {
     padding-top: 5px;
 }
 
-#pane-cal .tab-content {
-    padding-top: 0px;
-}
-
-#pane-cal .nav-tabs {
+.pane-cal .tabs-left>.nav-tabs {
     display: none;
 }
 
-#pane-cal.admin .tab-content {
+.pane-cal .tab-content {
+    padding-top: 0px;
     padding-left: 10px;
     padding-right: 10px;
 }
 
-#pane-cal.admin .nav-tabs {
-    display: table-cell;
+.pane-cal #pane-cal-recipes-results .select-info {
+    display: none;
 }
 
-#pane-info {
-    padding-left: 15px;
+.pane-cal.admin #pane-cal-recipes-results .select-info {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.pane-cal.admin .nav-tabs {
+    display: table-cell;
 }
 
 .table-hover tbody tr.selected:hover td {
@@ -249,14 +239,17 @@ table.dataTable tbody>tr>.selected {
     padding-left: 2px;
 }
 
-.box .input-group {
+.box .input-group,
+.header-wrapper .input-group {
     display: inline-table;
     vertical-align: middle;
 }
 
 .box .input-group .form-control,
 .box .input-group .input-group-addon,
-.box .input-group .input-group-btn {
+.box .input-group .input-group-btn,
+.header-wrapper .input-group .input-group-addon,
+.header-wrapper .input-group .input-group-btn {
     width: auto;
 }
 
@@ -414,7 +407,11 @@ table.dataTable tbody>tr>.selected {
 
 .main-nav {
     position: relative;
-    padding-right: 50px;
+    margin-right: 40px;
+}
+
+#menu-modal .main-nav {
+    margin-right: 10px;
 }
 
 #setting-btn {
@@ -430,6 +427,12 @@ table.dataTable tbody>tr>.selected {
 .modal-header .modal-title {
     color: #337ab7;
     font-size: 16px;
+}
+
+#menu-modal .close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }
 
 .main-function .tooltip-inner {
@@ -497,19 +500,20 @@ table.history-table tr td.history-dt {
 
 .alert-version {
     padding: 8px 30px 8px 20px;
+    margin-bottom: 5px;
     text-align: center;
 }
 
-#pane-materials th {
+.pane-materials th {
     text-align: center;
     border-bottom-width: 1px;
 }
 
-#pane-materials td {
+.pane-materials td {
     text-align: center;
 }
 
-#pane-materials tbody tr:last-child {
+.pane-materials tbody tr:last-child {
     background: #eee;
     font-weight: bold;
     color: #337ab7;
@@ -544,6 +548,10 @@ table.history-table tr td.history-dt {
     text-align: center;
 }
 
+#menu-modal .warning-info {
+    min-height: initial;
+}
+
 .quest-warning {
     border-radius: .15em;
     padding: 6px 8px 4px;
@@ -566,6 +574,8 @@ table.history-table tr td.history-dt {
 
 .form-control {
     height: 35px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .form-control.input-sm {
@@ -584,18 +594,18 @@ table.history-table tr td.history-dt {
     display: flex;
     display: -webkit-flex;
     flex-wrap: wrap;
+    white-space: normal;
 }
 
 .child-inner .child-key {
     display: inline-block;
     font-weight: bold;
     vertical-align: top;
-    padding: 5px 2px 5px 5px;
 }
 
 .child-inner .child-value {
     display: inline-block;
-    padding: 5px 2px;
+    padding-right: 5px;
 }
 
 .input-group-last>.btn {
@@ -660,10 +670,6 @@ table.dataTable thead>tr>td.sorting {
     }
 }
 
-.alert {
-    margin-bottom: 5px;
-}
-
 .rank-done {
     color: #999;
 }
@@ -696,6 +702,14 @@ td.rarity {
     border: 1px solid #ddd;
 }
 
+.dataTables_scrollBody {
+    overflow-y: scroll !important;
+}
+
+.pane-materials .dataTables_scrollBody {
+    overflow-y: auto !important;
+}
+
 .dataTables_scrollBody .table {
     border-left: 0px !important;
     border-right: 0px !important;
@@ -708,4 +722,88 @@ td.rarity {
 
 .DTFC_LeftWrapper table.dataTable {
     margin-top: 0 !important;
+}
+
+.table-top {
+    margin-bottom: 2px;
+}
+
+.table-top .left {
+    float: left;
+}
+
+.table-top .right {
+    float: right;
+}
+
+div.dataTables_wrapper .table-top div.dataTables_info {
+    padding-top: 0;
+    line-height: 30px;
+}
+
+.toggle.btn {
+    min-width: initial;
+    min-height: initial;
+}
+
+.toggle.btn.btn-sm {
+    min-width: 50px;
+    min-height: 30px;
+}
+
+.pane-footer {
+    height: 40px;
+}
+
+@media (max-width: 767px) {
+    body {
+        font-size: 12px;
+    }
+
+    .nav-tabs>li>a {
+        padding: 8px;
+    }
+
+    .form-control {
+        font-size: 12px;
+        height: 30px;
+    }
+
+    .btn {
+        height: 30px !important;
+        font-size: 12px;
+    }
+
+    .input-group-addon {
+        font-size: 12px;
+    }
+
+    .bootstrap-select.show-tick .dropdown-menu li a span.text {
+        max-width: 200px;
+    }
+
+    #mobile-menu-btn {
+        position: absolute;
+        top: 5px;
+        left: 0;
+        z-index: 5;
+    }
+
+    #setting-btn {
+        position: absolute;
+        top: 5px;
+        z-index: 5;
+    }
+
+    .table-top {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .pane-materials,
+    .pane-export-import,
+    .pane-cal,
+    .pane-info {
+        padding-top: 35px;
+    }
 }

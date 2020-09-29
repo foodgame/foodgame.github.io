@@ -1308,7 +1308,8 @@ function reInitRecipeTable(data) {
                 recipe.rankGiftDisp = rankGiftInfo.rankGiftDisp;
 
                 row.data(recipe);
-                recipeTable.draw();
+                recipeTable.draw(false);
+                $(".pane-recipes .DTFC_LeftBodyLiner").scrollTop($(".pane-recipes .dataTables_scrollBody").scrollTop());
             }
 
             if (cell.index().column == 28 && cell.data() != oldValue) {   // ex
@@ -2127,7 +2128,8 @@ function reInitChefTable(data) {
                 chef.equip = equip;
                 chef.equipDisp = equipDisp;
                 row.data(chef);
-                chefTable.draw();
+                chefTable.draw(false);
+                $(".pane-chefs .DTFC_LeftBodyLiner").scrollTop($(".pane-chefs .dataTables_scrollBody").scrollTop());
             }
             if ((cell.index().column == 18 || cell.index().column == 21) && cell.data() != oldValue) {   // equipName, ultimate
                 if ($("#chk-setting-auto-update").prop("checked")) {
@@ -5932,6 +5934,8 @@ function updateRecipeChefTable(data) {
         updateChefTableData(data);
         $('#recipe-table').DataTable().draw(false);
         $('#chef-table').DataTable().draw(false);
+        $(".pane-recipes .DTFC_LeftBodyLiner").scrollTop($(".pane-recipes .dataTables_scrollBody").scrollTop());
+        $(".pane-chefs .DTFC_LeftBodyLiner").scrollTop($(".pane-chefs .dataTables_scrollBody").scrollTop());
         $('.loading').addClass("hidden");
     }, 0);
 

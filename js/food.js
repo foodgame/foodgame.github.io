@@ -5117,7 +5117,6 @@ function initCalResultsTable(data) {
                     } else {
                         panel.find(".selected-sum").html("");
                     }
-                    console.log(event.data.menu);
                     $("#cal-optimal-results-table").DataTable().clear().rows.add(event.data.menu).draw();
                     panel.find(".cal-results-wrapper").removeClass("hidden");
                 } else if (event.data.done) {
@@ -6954,19 +6953,8 @@ $.fn.dataTable.Api.register('MakeCellsEditable()', function (settings) {
                         });
 
                         setTimeout(function () {
-                            $(cell).find("select").selectpicker('toggle').selectpicker('show');
+                            $(cell).find("select").selectpicker('show').selectpicker('toggle');
                         }, 0);
-
-                        if (input.settings.clear) {
-                            $("<div class='bs-actionsbox'><div class='btn-group btn-group-sm btn-block'><button type='button' class='btn btn-default btn-bs-clear'>清空</button></div></div>")
-                                .insertAfter($(cell).find(".bs-searchbox"));
-
-                            $(cell).find(".btn-bs-clear").click(function () {
-                                $(cell).find("select").selectpicker('val', '');
-                                $(cell).find("select").selectpicker('hide');
-                                $(this).updateEditableCell(this, settings);
-                            });
-                        }
                     }
                 }
             }
@@ -6998,7 +6986,12 @@ function getInputHtml(currentRowIndex, currentColumnIndex, settings, oldValue) {
                 searchable = "data-live-search='true'";
             }
 
-            input.html = "<select " + searchable + " data-width='fit' data-dropdown-align-right='auto' data-live-search-placeholder='查找' data-none-results-text='没有找到' data-none-selected-text=''>";
+            var actionsBox = " ";
+            if (inputSetting.clear) {
+                actionsBox = " data-actions-box='true' data-deselect-all-text='清空'";
+            }
+
+            input.html = "<select " + searchable + actionsBox + " data-width='fit' data-dropdown-align-right='auto' data-live-search-placeholder='查找' data-none-results-text='没有找到' data-none-selected-text=''>";
 
             var options;
             if (inputSetting.optionsp) {

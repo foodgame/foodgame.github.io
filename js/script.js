@@ -33539,11 +33539,11 @@ if (typeof jQuery === 'undefined') {
                         '</div>';
                 }
 
-                if (this.multiple && this.options.actionsBox) {
+                if (this.options.actionsBox) {
                     actionsbox =
                         '<div class="bs-actionsbox">' +
                         '<div class="btn-group btn-group-sm btn-block">';
-                    if (!this.options.actionsBoxOnlyClear) {
+                    if (this.multiple && !this.options.actionsBoxOnlyClear) {
                         actionsbox += '<button type="button" class="actions-btn bs-select-all btn ' + classNames.BUTTONCLASS + '">' +
                             this.options.selectAllText +
                             '</button>';
@@ -34336,7 +34336,7 @@ if (typeof jQuery === 'undefined') {
                     text = elementTemplates.span.cloneNode(false),
                     header = this.options.header && this.$menu.find('.' + classNames.POPOVERHEADER).length > 0 ? this.$menu.find('.' + classNames.POPOVERHEADER)[0].cloneNode(true) : null,
                     search = this.options.liveSearch ? elementTemplates.div.cloneNode(false) : null,
-                    actions = this.options.actionsBox && this.multiple && this.$menu.find('.bs-actionsbox').length > 0 ? this.$menu.find('.bs-actionsbox')[0].cloneNode(true) : null,
+                    actions = this.options.actionsBox && this.$menu.find('.bs-actionsbox').length > 0 ? this.$menu.find('.bs-actionsbox')[0].cloneNode(true) : null,
                     doneButton = this.options.doneButton && this.multiple && this.$menu.find('.bs-donebutton').length > 0 ? this.$menu.find('.bs-donebutton')[0].cloneNode(true) : null,
                     firstOption = this.$element.find('option')[0];
 
@@ -35065,7 +35065,12 @@ if (typeof jQuery === 'undefined') {
                     if ($(this).hasClass('bs-select-all')) {
                         that.selectAll();
                     } else {
-                        that.deselectAll();
+                        if (that.multiple) {
+                            that.deselectAll();
+                        } else {
+                            that.val('');
+                            that.toggle();
+                        }
                     }
                 });
 

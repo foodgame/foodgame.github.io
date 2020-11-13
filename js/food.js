@@ -520,12 +520,13 @@ function initRecipeTable(data) {
         }
     });
 
+    var recipeSearchInput = $(".pane-recipes .search-box input");
     $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
         if (settings.nTable != document.getElementById('recipe-table')) {
             return true;
         }
 
-        var value = $.trim($(".pane-recipes .search-box input").val());
+        var value = $.trim(recipeSearchInput.val());
         if (commaSeparatedMatch(rowData.name, value)) {
             return true;
         } else if (commaSeparatedMatch(rowData.materialsVal, value)) {
@@ -1723,12 +1724,13 @@ function initChefTable(data) {
         }
     });
 
+    var chefSearchInput = $(".pane-chefs .search-box input");
     $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
         if (settings.nTable != document.getElementById('chef-table')) {
             return true;
         }
 
-        var value = $.trim($(".pane-chefs .search-box input").val());
+        var value = $.trim(chefSearchInput.val());
         if (commaSeparatedMatch(rowData.name, value)) {
             return true;
         } else if (commaSeparatedMatch(rowData.specialSkillDisp, value)) {
@@ -2327,12 +2329,13 @@ function initEquipTable(data) {
         }
     });
 
+    var equipSearchInput = $(".pane-equips .search-box input");
     $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
         if (settings.nTable != document.getElementById('equip-table')) {
             return true;
         }
 
-        var value = $.trim($(".pane-equips .search-box input").val());
+        var value = $.trim(equipSearchInput.val());
         if (commaSeparatedMatch(rowData.name, value)) {
             return true;
         } else if (commaSeparatedMatch(rowData.skillDisp, value)) {
@@ -2595,12 +2598,13 @@ function initDecorationTable(data) {
         }
     });
 
+    var decorationSearchInput = $(".pane-decorations .search-box input");
     $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
         if (settings.nTable != document.getElementById('decoration-table')) {
             return true;
         }
 
-        var value = $.trim($(".pane-decorations .search-box input").val());
+        var value = $.trim(decorationSearchInput.val());
         if (commaSeparatedMatch(rowData.name, value)) {
             return true;
         } else if (commaSeparatedMatch(rowData.suit, value)) {
@@ -2873,12 +2877,13 @@ function initQuestTable(data) {
 
     $(".pane-quest div.search-box").html('<input type="search" class="form-control input-sm monitor-none" placeholder="查找 编号 任务 奖励">');
 
+    var questSearchInput = $(".pane-quest .search-box input");
     $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
         if (settings.nTable != document.getElementById('quest-table')) {
             return true;
         }
 
-        var value = $.trim($(".pane-quest .search-box input").val());
+        var value = $.trim(questSearchInput.val());
         if (commaSeparatedMatch(rowData.questIdDisp.toString(), value)) {
             return true;
         } else if (commaSeparatedMatch(rowData.goal, value)) {

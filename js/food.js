@@ -56,7 +56,7 @@ function init(json) {
     }
 }
 
-var private = false, currentRule;
+var private = false, currentRule, isMobile = false;
 function initFunction() {
     var a = getParameterByName('a');
     if (a && lcode(a) == "cb8f8a72f7e4924a75cb75a4a59c0b8d61e70c0cb84f84edf7ede4c8") {
@@ -72,6 +72,21 @@ function initFunction() {
 }
 
 function initTables(data, person) {
+
+    if ($(window).width() <= 768) {
+        $('#chk-setting-desktop').bootstrapToggle('off');
+        isMobile = true;
+    }
+
+    if (person) {
+        if (person.desktop) {
+            $('#chk-setting-desktop').bootstrapToggle('on');
+            isMobile = false;
+        } else if (person.desktop == false) {
+            $('#chk-setting-desktop').bootstrapToggle('off');
+            isMobile = true;
+        }
+    }
 
     updateMenu(person);
 
@@ -118,15 +133,21 @@ function initTables(data, person) {
     });
 
     $('.main-nav a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        $('.dataTables_scrollBody:visible table.dataTable').DataTable().draw(false);
-        if ($(this).attr("data-init") != "true") {
-            updateScrollHeight(true);
+        if (isMobile) {
+            $('.dataTables_scrollBody:visible table.dataTable').DataTable().draw(false);
+            if ($(this).attr("data-init") != "true") {
+                updateScrollHeight();
+            }
+        } else {
+            reInitFixedHeader();
         }
     });
 
-    $('.dataTables_scrollBody table.dataTable').on('page.dt', function () {
-        $(this).closest('.dataTables_scrollBody').scrollTop(0);
-    });
+    if (isMobile) {
+        $('.dataTables_scrollBody table.dataTable').on('page.dt', function () {
+            $(this).closest('.dataTables_scrollBody').scrollTop(0);
+        });
+    }
 
     $('.bootstrap-select').hover(
         function () {
@@ -158,36 +179,34 @@ function initTables(data, person) {
     $('.loading').addClass("hidden");
     $('.main-function').removeClass("hidden");
 
-    $('#recipe-table').DataTable().draw(false);
-
-    if ($(window).width() <= 768) {
-        $('#chk-setting-desktop').bootstrapToggle('off');
+    if (isMobile) {
+        $('#recipe-table').DataTable().draw(false);
+    } else {
+        reInitFixedHeader();
     }
+
     initLayout();
 
-    window.onresize = function () {
-        if ($('#chk-setting-desktop').prop("checked")) {
-            $('.main-nav a[data-toggle="tab"]').attr("data-init", "false");
-            updateScrollHeight(true, true);
-        }
-    };
 }
 
-function updateScrollHeight(height, redraw) {
-    if (height) {
-        var item = $('.dataTables_scrollBody:visible');
-        var otherHeight = $('body').height() - item.height();
-        var tableHeight = ($(window).height() - otherHeight - 5) + "px";
-        var style = "height";
-        if (item.closest(".pane-materials").length > 0) {
-            style = "max-height";
-        }
-        if (item.css(style) != tableHeight) {
-            item.css(style, tableHeight);
-            redraw = true;
-        }
+function reInitFixedHeader() {
+    $('#recipe-table').DataTable().fixedHeader.adjust();
+    $('#chef-table').DataTable().fixedHeader.adjust();
+    $('#equip-table').DataTable().fixedHeader.adjust();
+    $('#decoration-table').DataTable().fixedHeader.adjust();
+    $('#quest-table').DataTable().fixedHeader.adjust();
+}
+
+function updateScrollHeight() {
+    var item = $('.dataTables_scrollBody:visible');
+    var otherHeight = $('body').height() - item.height();
+    var tableHeight = ($(window).height() - otherHeight - 5) + "px";
+    var style = "height";
+    if (item.closest(".pane-materials").length > 0) {
+        style = "max-height";
     }
-    if (redraw) {
+    if (item.css(style) != tableHeight) {
+        item.css(style, tableHeight);
         item.find('table.dataTable').DataTable().columns.adjust().draw(false);
         $('.main-nav li.active a[data-toggle="tab"]').attr("data-init", "true");
     }
@@ -218,6 +237,18 @@ function initTableScrollEvent(pane) {
         }
         wrapper.find(".child-inner").css("margin-left", $(this).scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width() + "px");
     });
+}
+
+function getResponsiveStyle(table) {
+    var style = "";
+    if (isMobile) {
+        var wrapper = table.closest(".DTFC_ScrollWrapper");
+        var scroll = wrapper.find(".dataTables_scrollBody");
+        var mleft = scroll.scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width();
+        var mWidth = scroll.width() - wrapper.find(".DTFC_LeftWrapper").width() - 20;
+        style = " style='max-width:" + mWidth + "px;margin-left:" + mleft + "px'";
+    }
+    return style;
 }
 
 function initTooltip() {
@@ -258,7 +289,8 @@ function updateTooltip() {
 
 function initSetting(data) {
     $('#chk-setting-desktop').change(function () {
-        initLayout();
+        updateLocalData("desktop", $('#chk-setting-desktop').prop("checked"));
+        window.location.reload();
     });
 
     $('#chk-setting-show-help').change(function () {
@@ -307,9 +339,10 @@ function initSetting(data) {
     });
 
     $('#select-setting-page-length').on('changed.bs.select', function () {
+        if (isMobile) {
+            $('.main-nav a[data-toggle="tab"]').attr("data-init", "false");
+        }
         var length = $(this).val();
-        $('.main-nav a[data-toggle="tab"]').attr("data-init", "false");
-
         $('#recipe-table').DataTable().page.len(length).draw();
         $('#chef-table').DataTable().page.len(length).draw();
         $('#equip-table').DataTable().page.len(length).draw();
@@ -327,16 +360,16 @@ function initSetting(data) {
 }
 
 function initLayout() {
-    if ($('#chk-setting-desktop').prop("checked")) {
-        $('#top-menu').appendTo("#desktop-menu");
-        $('#mobile-menu-btn').addClass("hidden");
-        document.getElementById("viewport").setAttribute("content", "");
-    } else {
+    if (isMobile) {
         $('#top-menu').appendTo("#menu-modal .modal-body");
         $('#mobile-menu-btn').removeClass("hidden");
         document.getElementById("viewport").setAttribute("content", "width=device-width");
+        updateScrollHeight();
+    } else {
+        $('#top-menu').appendTo("#desktop-menu");
+        $('#mobile-menu-btn').addClass("hidden");
+        document.getElementById("viewport").setAttribute("content", "");
     }
-    updateScrollHeight(true, true);
 }
 
 function initRecipeTable(data) {
@@ -950,7 +983,7 @@ function updateRecipeQuest(data, forceReinit) {
                     if (data.quests[i].type != "修炼任务") {
                         text += data.quests[i].questIdDisp + ". ";
                     }
-                    text += data.quests[i].goal + " ";
+                    text += data.quests[i].goal + "<br>";
 
                     for (var j in data.quests[i].conditions) {
                         if (data.quests[i].conditions[j].newGuest) {
@@ -1016,7 +1049,6 @@ function updateRecipeQuest(data, forceReinit) {
     }
 
     $('#recipe-table').DataTable().order(order).draw();
-    updateScrollHeight($('#chk-setting-desktop').prop("checked"), false);
 }
 
 function reInitRecipeTable(data) {
@@ -1210,6 +1242,17 @@ function reInitRecipeTable(data) {
         $('#recipe-table thead tr').append("<th></th>");
     }
 
+    var fixedHeader = true;
+    var scrollX = false;
+    var fixedColumns = false;
+    if (isMobile) {
+        fixedHeader = false;
+        scrollX = true;
+        fixedColumns = {
+            leftColumns: 3
+        };
+    }
+
     var recipeTable = $('#recipe-table').DataTable({
         data: data.recipes,
         columns: recipeColumns,
@@ -1228,10 +1271,9 @@ function reInitRecipeTable(data) {
         deferRender: true,
         order: order,
         autoWidth: false,
-        scrollX: true,
-        fixedColumns: {
-            leftColumns: 3
-        },
+        fixedHeader: fixedHeader,
+        scrollX: scrollX,
+        fixedColumns: fixedColumns,
         responsive: {
             details: {
                 type: 'column',
@@ -1262,12 +1304,8 @@ function reInitRecipeTable(data) {
                             }
                         }
                     }
-                    var wrapper = $('#recipe-table').closest(".DTFC_ScrollWrapper");
-                    var scroll = wrapper.find(".dataTables_scrollBody");
-                    var mleft = scroll.scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width();
-                    var mWidth = scroll.width() - wrapper.find(".DTFC_LeftWrapper").width() - 20;
-                    return data ? "<div class='child-inner' style='max-width:" + mWidth
-                        + "px;margin-left:" + mleft + "px'>" + data + "</div>" : false;
+
+                    return data ? "<div class='child-inner'" + getResponsiveStyle($('#recipe-table')) + ">" + data + "</div>" : false;
                 }
             }
         }
@@ -1310,7 +1348,10 @@ function reInitRecipeTable(data) {
 
                 row.data(recipe);
                 recipeTable.draw(false);
-                $(".pane-recipes .DTFC_LeftBodyLiner").scrollTop($(".pane-recipes .dataTables_scrollBody").scrollTop());
+
+                if (isMobile) {
+                    $(".pane-recipes .DTFC_LeftBodyLiner").scrollTop($(".pane-recipes .dataTables_scrollBody").scrollTop());
+                }
             }
 
             if (cell.index().column == 28 && cell.data() != oldValue) {   // ex
@@ -1330,8 +1371,11 @@ function reInitRecipeTable(data) {
         changeInputStyle(this);
     });
 
-    initTableResponsiveDisplayEvent(recipeTable);
-    initTableScrollEvent(".pane-recipes");
+    if (isMobile) {
+        initTableResponsiveDisplayEvent(recipeTable);
+        initTableScrollEvent(".pane-recipes");
+    }
+
 }
 
 function updateRecipeTableData(data) {
@@ -1355,7 +1399,9 @@ function updateRecipeTableData(data) {
         data.recipeAddColNumMax = data.recipeAddColNum;
         reInitRecipeTable(data);
         initRecipeShow();
-        updateScrollHeight(true);
+        if (isMobile) {
+            updateScrollHeight();
+        }
     }
 
     for (var i = 0; i < data.recipeAddColNumMax; i++) {
@@ -1436,7 +1482,7 @@ function updateRecipeTableData(data) {
     $('#recipe-table').DataTable().clear().rows.add(data.recipes);
     $('#recipe-table').DataTable().responsive.rebuild();
     $('#recipe-table').DataTable().responsive.recalc();
-    $('#recipe-table').DataTable().columns.adjust();
+    // $('#recipe-table').DataTable().columns.adjust();
 }
 
 function updateRecipesChefsData(data) {
@@ -1525,7 +1571,9 @@ function updateChefTableData(data) {
         data.chefAddColNumMax = data.chefAddColNum;
         reInitChefTable(data);
         initChefShow();
-        updateScrollHeight(true);
+        if (isMobile) {
+            updateScrollHeight();
+        }
     }
 
     for (var i = 0; i < data.chefAddColNumMax; i++) {
@@ -1584,7 +1632,7 @@ function updateChefTableData(data) {
     $('#chef-table').DataTable().clear().rows.add(data.chefs);
     $('#chef-table').DataTable().responsive.rebuild();
     $('#chef-table').DataTable().responsive.recalc();
-    $('#chef-table').DataTable().columns.adjust();
+    // $('#chef-table').DataTable().columns.adjust();
 }
 
 function updateChefsRecipesData(data) {
@@ -2013,6 +2061,17 @@ function reInitChefTable(data) {
         $('#chef-table thead tr').append("<th></th>");
     }
 
+    var fixedHeader = true;
+    var scrollX = false;
+    var fixedColumns = false;
+    if (isMobile) {
+        fixedHeader = false;
+        scrollX = true;
+        fixedColumns = {
+            leftColumns: 3
+        };
+    }
+
     var chefTable = $('#chef-table').DataTable({
         data: data.chefs,
         columns: chefColumns,
@@ -2031,10 +2090,9 @@ function reInitChefTable(data) {
         deferRender: true,
         order: order,
         autoWidth: false,
-        scrollX: true,
-        fixedColumns: {
-            leftColumns: 3
-        },
+        fixedHeader: fixedHeader,
+        scrollX: scrollX,
+        fixedColumns: fixedColumns,
         responsive: {
             details: {
                 type: 'column',
@@ -2076,12 +2134,8 @@ function reInitChefTable(data) {
                             }
                         }
                     }
-                    var wrapper = $('#chef-table').closest(".DTFC_ScrollWrapper");
-                    var scroll = wrapper.find(".dataTables_scrollBody");
-                    var mleft = scroll.scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width();
-                    var mWidth = scroll.width() - wrapper.find(".DTFC_LeftWrapper").width() - 20;
-                    return data ? "<div class='child-inner' style='max-width:" + mWidth
-                        + "px;margin-left:" + mleft + "px'>" + data + "</div>" : false;
+
+                    return data ? "<div class='child-inner'" + getResponsiveStyle($('#chef-table')) + ">" + data + "</div>" : false;
                 }
             }
         }
@@ -2131,7 +2185,9 @@ function reInitChefTable(data) {
                 chef.equipDisp = equipDisp;
                 row.data(chef);
                 chefTable.draw(false);
-                $(".pane-chefs .DTFC_LeftBodyLiner").scrollTop($(".pane-chefs .dataTables_scrollBody").scrollTop());
+                if (isMobile) {
+                    $(".pane-chefs .DTFC_LeftBodyLiner").scrollTop($(".pane-chefs .dataTables_scrollBody").scrollTop());
+                }
             }
             if ((cell.index().column == 18 || cell.index().column == 21) && cell.data() != oldValue) {   // equipName, ultimate
                 if ($("#chk-setting-auto-update").prop("checked")) {
@@ -2149,8 +2205,10 @@ function reInitChefTable(data) {
         changeInputStyle(this);
     });
 
-    initTableResponsiveDisplayEvent(chefTable);
-    initTableScrollEvent(".pane-chefs");
+    if (isMobile) {
+        initTableResponsiveDisplayEvent(chefTable);
+        initTableScrollEvent(".pane-chefs");
+    }
 }
 
 function initEquipTable(data) {
@@ -2191,6 +2249,17 @@ function initEquipTable(data) {
         }
     ];
 
+    var fixedHeader = true;
+    var scrollX = false;
+    var fixedColumns = false;
+    if (isMobile) {
+        fixedHeader = false;
+        scrollX = true;
+        fixedColumns = {
+            leftColumns: 3
+        };
+    }
+
     var equipTable = $('#equip-table').DataTable({
         data: data.equips,
         columns: equipColumns,
@@ -2208,10 +2277,9 @@ function initEquipTable(data) {
             "<'row'<'col-sm-12'p>>",
         deferRender: true,
         autoWidth: false,
-        scrollX: true,
-        fixedColumns: {
-            leftColumns: 3
-        },
+        fixedHeader: fixedHeader,
+        scrollX: scrollX,
+        fixedColumns: fixedColumns,
         responsive: {
             details: {
                 type: 'column',
@@ -2228,12 +2296,8 @@ function initEquipTable(data) {
                                 + "</div>";
                         }
                     }
-                    var wrapper = $('#equip-table').closest(".DTFC_ScrollWrapper");
-                    var scroll = wrapper.find(".dataTables_scrollBody");
-                    var mleft = scroll.scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width();
-                    var mWidth = scroll.width() - wrapper.find(".DTFC_LeftWrapper").width() - 20;
-                    return data ? "<div class='child-inner' style='max-width:" + mWidth
-                        + "px;margin-left:" + mleft + "px'>" + data + "</div>" : false;
+
+                    return data ? "<div class='child-inner'" + getResponsiveStyle($('#equip-table')) + ">" + data + "</div>" : false;
                 }
             }
         }
@@ -2420,8 +2484,10 @@ function initEquipTable(data) {
         equipTable.draw();
     });
 
-    initTableResponsiveDisplayEvent(equipTable);
-    initTableScrollEvent(".pane-equips");
+    if (isMobile) {
+        initTableResponsiveDisplayEvent(equipTable);
+        initTableScrollEvent(".pane-equips");
+    }
 
     initEquipShow();
 }
@@ -2510,6 +2576,17 @@ function initDecorationTable(data) {
         }
     ];
 
+    var fixedHeader = true;
+    var scrollX = false;
+    var fixedColumns = false;
+    if (isMobile) {
+        fixedHeader = false;
+        scrollX = true;
+        fixedColumns = {
+            leftColumns: 4
+        };
+    }
+
     var decorationTable = $('#decoration-table').DataTable({
         data: data.decorations,
         columns: decorationColumns,
@@ -2539,10 +2616,9 @@ function initDecorationTable(data) {
         order: [[0, "desc"], [10, "desc"]],  //avg eff
         deferRender: false, // for select
         autoWidth: false,
-        scrollX: true,
-        fixedColumns: {
-            leftColumns: 4
-        },
+        fixedHeader: fixedHeader,
+        scrollX: scrollX,
+        fixedColumns: fixedColumns,
         responsive: {
             details: {
                 type: 'column',
@@ -2559,12 +2635,8 @@ function initDecorationTable(data) {
                                 + "</div>";
                         }
                     }
-                    var wrapper = $('#decoration-table').closest(".DTFC_ScrollWrapper");
-                    var scroll = wrapper.find(".dataTables_scrollBody");
-                    var mleft = scroll.scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width();
-                    var mWidth = scroll.width() - wrapper.find(".DTFC_LeftWrapper").width() - 20;
-                    return data ? "<div class='child-inner' style='max-width:" + mWidth
-                        + "px;margin-left:" + mleft + "px'>" + data + "</div>" : false;
+
+                    return data ? "<div class='child-inner'" + getResponsiveStyle($('#decoration-table')) + ">" + data + "</div>" : false;
                 }
             }
         }
@@ -2681,8 +2753,10 @@ function initDecorationTable(data) {
         updateDecorationSum(data);
     });
 
-    initTableResponsiveDisplayEvent(decorationTable);
-    initTableScrollEvent(".pane-decorations");
+    if (isMobile) {
+        initTableResponsiveDisplayEvent(decorationTable);
+        initTableScrollEvent(".pane-decorations");
+    }
 
     initDecorationShow();
 }
@@ -2801,6 +2875,15 @@ function reInitMaterialTable(data) {
 
     var materialsData = getMaterialsData(data, map);
 
+    var scrollX = false;
+    var fixedColumns = false;
+    if (isMobile) {
+        scrollX = true;
+        fixedColumns = {
+            leftColumns: 1
+        };
+    }
+
     var materialTable = $('#material-table').DataTable({
         data: materialsData,
         columns: materialColumns,
@@ -2810,13 +2893,13 @@ function reInitMaterialTable(data) {
         info: false,
         deferRender: true,
         autoWidth: false,
-        scrollX: true,
-        fixedColumns: {
-            leftColumns: 1
-        }
+        scrollX: scrollX,
+        fixedColumns: fixedColumns
     });
 
-    initTableScrollEvent(".pane-materials");
+    if (isMobile) {
+        initTableScrollEvent(".pane-materials");
+    }
 
     materialTable.draw();
 }
@@ -2852,6 +2935,17 @@ function initQuestTable(data) {
 
     var questsData = getQuestsData(data.quests, $('#select-quest-type').val());
 
+    var fixedHeader = true;
+    var scrollX = false;
+    var fixedColumns = false;
+    if (isMobile) {
+        fixedHeader = false;
+        scrollX = true;
+        fixedColumns = {
+            leftColumns: 1
+        };
+    }
+
     var questTable = $('#quest-table').DataTable({
         data: questsData,
         columns: questColumns,
@@ -2869,10 +2963,9 @@ function initQuestTable(data) {
             "<'row'<'col-sm-12'p>>",
         deferRender: true,
         autoWidth: false,
-        scrollX: true,
-        fixedColumns: {
-            leftColumns: 1
-        }
+        fixedHeader: fixedHeader,
+        scrollX: scrollX,
+        fixedColumns: fixedColumns
     });
 
     $(".pane-quest div.search-box").html('<input type="search" class="form-control input-sm monitor-none" placeholder="查找 编号 任务 奖励">');
@@ -2906,7 +2999,9 @@ function initQuestTable(data) {
         initQuestShow(questTable);
     });
 
-    initTableScrollEvent(".pane-quest");
+    if (isMobile) {
+        initTableScrollEvent(".pane-quest");
+    }
 
     initQuestShow(questTable);
 }
@@ -5938,8 +6033,10 @@ function updateRecipeChefTable(data) {
         updateChefTableData(data);
         $('#recipe-table').DataTable().draw(false);
         $('#chef-table').DataTable().draw(false);
-        $(".pane-recipes .DTFC_LeftBodyLiner").scrollTop($(".pane-recipes .dataTables_scrollBody").scrollTop());
-        $(".pane-chefs .DTFC_LeftBodyLiner").scrollTop($(".pane-chefs .dataTables_scrollBody").scrollTop());
+        if (isMobile) {
+            $(".pane-recipes .DTFC_LeftBodyLiner").scrollTop($(".pane-recipes .dataTables_scrollBody").scrollTop());
+            $(".pane-chefs .DTFC_LeftBodyLiner").scrollTop($(".pane-chefs .dataTables_scrollBody").scrollTop());
+        }
         $('.loading').addClass("hidden");
     }, 0);
 
@@ -5979,11 +6076,13 @@ function getUpdateData(data) {
     updateRecipesChefsData(data);
     updateChefsRecipesData(data);
 
-    if (!$('#recipe-table').is(':visible')) {
-        $('.main-nav a[data-id="1"]').attr("data-init", "false");
-    }
-    if (!$('#chef-table').is(':visible')) {
-        $('.main-nav a[data-id="2"]').attr("data-init", "false");
+    if (isMobile) {
+        if (!$('#recipe-table').is(':visible')) {
+            $('.main-nav a[data-id="1"]').attr("data-init", "false");
+        }
+        if (!$('#chef-table').is(':visible')) {
+            $('.main-nav a[data-id="2"]').attr("data-init", "false");
+        }
     }
 
     return data;
@@ -6884,7 +6983,9 @@ function initVersionTip(person) {
 
             $(this).on('closed.bs.alert', function () {
                 updateLocalData(key, value);
-                updateScrollHeight(true);
+                if (isMobile) {
+                    updateScrollHeight();
+                }
             })
         }
     });

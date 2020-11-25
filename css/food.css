@@ -543,13 +543,8 @@ table.history-table tr td.history-dt {
 }
 
 .warning-info {
-    min-height: 30px;
     line-height: 20px;
     text-align: center;
-}
-
-#menu-modal .warning-info {
-    min-height: initial;
 }
 
 .quest-warning {
@@ -806,4 +801,12 @@ div.dataTables_wrapper .table-top div.dataTables_info {
     .pane-info {
         padding-top: 35px;
     }
+}
+
+table.dataTable.fixedHeader-floating {
+    margin-top: 0 !important;
+}
+
+table.dataTable.fixedHeader-floating th.select-checkbox {
+    width: auto !important;
 }

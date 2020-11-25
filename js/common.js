@@ -28,7 +28,11 @@ function getRankInfo(recipe, chef) {
     var rankVal = 0;
 
     if (times != Number.MAX_VALUE) {
-        if (times >= 4) {
+        if (times >= 5) {
+            rankAddition = 100;
+            rankDisp = "传";
+            rankVal = 5;
+        } else if (times >= 4) {
             rankAddition = 50;
             rankDisp = "神";
             rankVal = 4;
@@ -113,6 +117,30 @@ function getRecipeSkillAddition(effects, recipe, rule) {
             }
         } else if (type == "UseSteam") {
             if (recipe.steam > 0) {
+                hasSkill = true;
+            }
+        } else if (type == "UseSweet") {
+            if (recipe.condiment == "甜") {
+                hasSkill = true;
+            }
+        } else if (type == "UseSour") {
+            if (recipe.condiment == "酸") {
+                hasSkill = true;
+            }
+        } else if (type == "UseSpicy") {
+            if (recipe.condiment == "辣") {
+                hasSkill = true;
+            }
+        } else if (type == "UseSalty") {
+            if (recipe.condiment == "咸") {
+                hasSkill = true;
+            }
+        } else if (type == "UseBitter") {
+            if (recipe.condiment == "苦") {
+                hasSkill = true;
+            }
+        } else if (type == "UseTasty") {
+            if (recipe.condiment == "鲜") {
                 hasSkill = true;
             }
         } else if (type == "Gold_Gain") {
@@ -372,6 +400,13 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartial
     var vegAddition = 0;
     var fishAddition = 0;
 
+    var sweetAddition = new Addition();
+    var sourAddition = new Addition();
+    var spicyAddition = new Addition();
+    var saltyAddition = new Addition();
+    var bitterAddition = new Addition();
+    var tastyAddition = new Addition();
+
     var effects = globalUltimateEffect;
 
     chef["selfUltimateEffect"] = [];
@@ -439,6 +474,18 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartial
             vegAddition += effects[i].value;
         } else if (type == "Fish") {
             fishAddition += effects[i].value;
+        } else if (type == "Sweet") {
+            setAddition(sweetAddition, effects[i]);
+        } else if (type == "Sour") {
+            setAddition(sourAddition, effects[i]);
+        } else if (type == "Spicy") {
+            setAddition(spicyAddition, effects[i]);
+        } else if (type == "Salty") {
+            setAddition(saltyAddition, effects[i]);
+        } else if (type == "Bitter") {
+            setAddition(bitterAddition, effects[i]);
+        } else if (type == "Tasty") {
+            setAddition(tastyAddition, effects[i]);
         }
     }
 
@@ -465,6 +512,20 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartial
     chef["fryDisp"] = getAtrributeDisp(chef.fryVal, chef.fry, showFinal);
     chef["bakeDisp"] = getAtrributeDisp(chef.bakeVal, chef.bake, showFinal);
     chef["steamDisp"] = getAtrributeDisp(chef.steamVal, chef.steam, showFinal);
+
+    chef["sweetVal"] = Math.ceil(calAddition(chef.sweet, sweetAddition));
+    chef["sourVal"] = Math.ceil(calAddition(chef.sour, sourAddition));
+    chef["spicyVal"] = Math.ceil(calAddition(chef.spicy, spicyAddition));
+    chef["saltyVal"] = Math.ceil(calAddition(chef.salty, saltyAddition));
+    chef["bitterVal"] = Math.ceil(calAddition(chef.bitter, bitterAddition));
+    chef["tastyVal"] = Math.ceil(calAddition(chef.tasty, tastyAddition));
+
+    chef["sweetDisp"] = getAtrributeDisp(chef.sweetVal, chef.sweet, showFinal);
+    chef["sourDisp"] = getAtrributeDisp(chef.sourVal, chef.sour, showFinal);
+    chef["spicyDisp"] = getAtrributeDisp(chef.spicyVal, chef.spicy, showFinal);
+    chef["saltyDisp"] = getAtrributeDisp(chef.saltyVal, chef.salty, showFinal);
+    chef["bitterDisp"] = getAtrributeDisp(chef.bitterVal, chef.bitter, showFinal);
+    chef["tastyDisp"] = getAtrributeDisp(chef.tastyVal, chef.tasty, showFinal);
 
     chef["disp"] = chef.name + "<br><small>";
     var count = 0;

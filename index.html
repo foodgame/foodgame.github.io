@@ -8,10 +8,10 @@
     <link rel="shortcut icon" href="favicon.ico?v=1" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="css/style.min.css?v=6" />
     <script type="text/javascript" src="js/script.min.js?v=16"></script>
-    <script type="text/javascript" src="js/common.min.js?v=34"></script>
+    <script type="text/javascript" src="js/common.min.js?v=35"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=44" />
-    <script type="text/javascript" src="js/food.min.js?v=157"></script>
-    <link rel="stylesheet" type="text/css" href="css/image.css?v=60" />
+    <script type="text/javascript" src="js/food.js?v=157"></script>
+    <link rel="stylesheet" type="text/css" href="css/image.css?v=61" />
     <script>
         $(function () {
             $.ajax({
@@ -19,7 +19,7 @@
                 success: function (json) {
                     init(json);
                 },
-                url: 'data/data.min.json?v=12'
+                url: 'data/data.min.json?v=13'
             });
         });
     </script>
@@ -37,7 +37,7 @@
         <button type="button" class="close" data-dismiss="alert"><span>&times;关闭</span></button>
     </div>
     <div class="alert alert-info alert-dismissible alert-version hidden" data-id="alert1" data-version="3"
-        data-show="true">
+        data-show="false">
         <button type="button" class="close" data-dismiss="alert"><span>&times;关闭</span></button>
         更新内容：简单优化了一下手机版布局
     </div>
@@ -95,24 +95,25 @@
                                     <option value='1'>图</option>
                                     <option value='3' selected>星</option>
                                     <option value='4'>技法</option>
-                                    <option value='10' selected>材料</option>
-                                    <option value='11' selected>单价</option>
-                                    <option value='12'>熟练加价</option>
-                                    <option value='14' selected>单时间</option>
-                                    <option value='15' selected>一组</option>
-                                    <option value='16'>总价</option>
-                                    <option value='17' selected>总时间</option>
-                                    <option value='18' selected>金币效率</option>
-                                    <option value='19'>总耗材效率</option>
-                                    <option value='20'>来源</option>
-                                    <option value='21'>解锁</option>
-                                    <option value='22'>合成</option>
-                                    <option value='24' selected>贵客</option>
-                                    <option value='25' data-subtext="第一次菜品升阶 (升优-升特-升神) 必来的贵客">升阶贵客</option>
-                                    <option value='26' data-subtext="第一次做神级菜品时贵客送的符文">神级符文</option>
-                                    <option value='27' data-subtext="个人数据, 该列点击可编辑, 用来记录你当前做到的品阶">品阶</option>
-                                    <option value='28' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已经熟练该菜谱">已熟练</option>
-                                    <option value='29' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已拥有该菜谱">已有</option>
+                                    <option value='10'>调料</option>
+                                    <option value='11' selected>材料</option>
+                                    <option value='12' selected>单价</option>
+                                    <option value='13'>熟练加价</option>
+                                    <option value='15' selected>单时间</option>
+                                    <option value='16' selected>一组</option>
+                                    <option value='17'>总价</option>
+                                    <option value='18' selected>总时间</option>
+                                    <option value='19' selected>金币效率</option>
+                                    <option value='20'>总耗材效率</option>
+                                    <option value='21'>来源</option>
+                                    <option value='22'>解锁</option>
+                                    <option value='23'>合成</option>
+                                    <option value='25' selected>贵客</option>
+                                    <option value='26' data-subtext="第一次菜品升阶 (升优-升特-升神) 必来的贵客">升阶贵客</option>
+                                    <option value='27' data-subtext="第一次做神级菜品时贵客送的符文">神级符文</option>
+                                    <option value='28' data-subtext="个人数据, 该列点击可编辑, 用来记录你当前做到的品阶">品阶</option>
+                                    <option value='29' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已经熟练该菜谱">已熟练</option>
+                                    <option value='30' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已拥有该菜谱">已有</option>
                                 </select>
                             </div>
                             <div class="inline-wrapper" data-toggle="tooltip" title="是否使用熟练加成">
@@ -134,6 +135,7 @@
                                     data-toggle="tooltip" title="选择后所有厨师会得到额外加成">
                                     <select id="chk-chef-partial-ultimate" multiple class="monitor-none"
                                         data-width="170px" data-dropdown-align-right='auto'
+                                        data-live-search="true" data-live-search-placeholder="查找" data-none-results-text="没有找到"
                                         data-none-selected-text="额外使用上场类技能" data-selected-text-format="count>2"
                                         data-count-selected-text="{0} 额外上场类技能" data-actions-box="true"
                                         data-actions-box-only-clear="true" data-deselect-all-text="清空"></select>
@@ -356,12 +358,13 @@
                                     <option value='10' selected>技能</option>
                                     <option value='11' selected>采集</option>
                                     <option value='15'>性别</option>
-                                    <option value='16'>来源</option>
-                                    <option value='18' data-subtext="个人数据, 该列点击可编辑, 用来记录你该厨师佩戴的厨具">厨具</option>
-                                    <option value='19'>修炼任务</option>
-                                    <option value='20' selected>修炼技能</option>
-                                    <option value='21' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已修炼该厨师">已修炼</option>
-                                    <option value='22' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已拥有该厨师">已有</option>
+                                    <option value='16'>调料</option>
+                                    <option value='22'>来源</option>
+                                    <option value='24' data-subtext="个人数据, 该列点击可编辑, 用来记录你该厨师佩戴的厨具">厨具</option>
+                                    <option value='25'>修炼任务</option>
+                                    <option value='26' selected>修炼技能</option>
+                                    <option value='27' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已修炼该厨师">已修炼</option>
+                                    <option value='28' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已拥有该厨师">已有</option>
                                 </select>
                             </div>
                             <div class="inline-wrapper" data-toggle="tooltip" title="是否使用厨具技能加成">
@@ -477,6 +480,7 @@
                             <div class="input-group">
                                 <div class="inline-wrapper input-group-first" data-toggle="tooltip" title="选择类型,过滤厨具">
                                     <select id="chk-equip-skill" multiple class="monitor-all" data-width="150px"
+                                        data-live-search="true" data-live-search-placeholder="查找" data-none-results-text="没有找到"
                                         data-dropdown-align-right='auto' data-none-selected-text="选择类型"
                                         data-selected-text-format="count" data-actions-box="true"
                                         data-select-all-text="全选" data-deselect-all-text="清空">
@@ -507,6 +511,18 @@
                                         <option value="Vegetable" selected>蔬菜采集</option>
                                         <option value="Fish" selected>水产采集</option>
                                         <option value="Meat,Creation,Vegetable,Fish" selected>全采集</option>
+                                        <option value="Sweet" selected>甜技法</option>
+                                        <option value="Sour" selected>酸技法</option>
+                                        <option value="Spicy" selected>辣技法</option>
+                                        <option value="Salty" selected>咸技法</option>
+                                        <option value="Bitter" selected>苦技法</option>
+                                        <option value="Tasty" selected>鲜技法</option>
+                                        <option value="UseSweet" selected>甜类售价</option>
+                                        <option value="UseSour" selected>酸类售价</option>
+                                        <option value="UseSpicy" selected>辣类售价</option>
+                                        <option value="UseSalty" selected>咸类售价</option>
+                                        <option value="UseBitter" selected>苦类售价</option>
+                                        <option value="UseTasty" selected>鲜类售价</option>
                                     </select>
                                 </div>
                                 <span class="input-group-btn input-group-last">
@@ -628,6 +644,7 @@
                                 <th>炸</th>
                                 <th>烤</th>
                                 <th>蒸</th>
+                                <th>调料</th>
                                 <th>材料</th>
                                 <th>单价</th>
                                 <th>熟练加价</th>
@@ -676,6 +693,12 @@
                                 <th>菜</th>
                                 <th>鱼</th>
                                 <th>性别</th>
+                                <th>甜</th>
+                                <th>酸</th>
+                                <th>辣</th>
+                                <th>咸</th>
+                                <th>苦</th>
+                                <th>鲜</th>
                                 <th>来源</th>
                                 <th>类别</th>
                                 <th>厨具</th>

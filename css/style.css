@@ -9629,6 +9629,7 @@ div.DTFC_Blocker {
 table.fixedHeader-floating {
     position: fixed !important;
     background-color: white;
+    margin-top: 0 !important;
 }
 
 table.fixedHeader-floating.no-footer {

@@ -802,11 +802,3 @@ div.dataTables_wrapper .table-top div.dataTables_info {
         padding-top: 35px;
     }
 }
-
-table.dataTable.fixedHeader-floating {
-    margin-top: 0 !important;
-}
-
-table.dataTable.fixedHeader-floating th.select-checkbox {
-    width: auto !important;
-}

@@ -38759,7 +38759,7 @@ $.extend( FixedHeader.prototype, {
 			}
 
 			itemDom.floating = $( dt.table().node().cloneNode( false ) )
-				.css( 'table-layout', 'fixed' )
+				// .css( 'table-layout', 'fixed' )
 				.attr( 'aria-hidden', 'true' )
 				.removeAttr( 'id' )
 				.append( itemElement )
@@ -38825,7 +38825,7 @@ $.extend( FixedHeader.prototype, {
 	_unsize: function ( item ) {
 		var el = this.dom[ item ].floating;
 
-		if ( el && (item === 'footer' || (item === 'header' && ! this.s.autoWidth)) ) {
+		if ( el && (item === 'footer' || (item === 'header' && this.s.autoWidth)) ) {
 			$('th, td', el).css( {
 				width: '',
 				minWidth: ''

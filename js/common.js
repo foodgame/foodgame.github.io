@@ -120,27 +120,27 @@ function getRecipeSkillAddition(effects, recipe, rule) {
                 hasSkill = true;
             }
         } else if (type == "UseSweet") {
-            if (recipe.condiment == "甜") {
+            if (recipe.condiment == "Sweet") {
                 hasSkill = true;
             }
         } else if (type == "UseSour") {
-            if (recipe.condiment == "酸") {
+            if (recipe.condiment == "Sour") {
                 hasSkill = true;
             }
         } else if (type == "UseSpicy") {
-            if (recipe.condiment == "辣") {
+            if (recipe.condiment == "Spicy") {
                 hasSkill = true;
             }
         } else if (type == "UseSalty") {
-            if (recipe.condiment == "咸") {
+            if (recipe.condiment == "Salty") {
                 hasSkill = true;
             }
         } else if (type == "UseBitter") {
-            if (recipe.condiment == "苦") {
+            if (recipe.condiment == "Bitter") {
                 hasSkill = true;
             }
         } else if (type == "UseTasty") {
-            if (recipe.condiment == "鲜") {
+            if (recipe.condiment == "Tasty") {
                 hasSkill = true;
             }
         } else if (type == "Gold_Gain") {

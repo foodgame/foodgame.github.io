@@ -775,6 +775,7 @@ div.dataTables_wrapper .table-top div.dataTables_info {
         font-size: 12px;
     }
 
+    .bootstrap-select .dropdown-menu li a span.text,
     .bootstrap-select.show-tick .dropdown-menu li a span.text {
         max-width: 200px;
     }

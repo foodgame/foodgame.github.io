@@ -451,12 +451,14 @@ td.td-recipe-icon {
 
 td.td-equip-icon {
     width: 35px;
-    height: 35px;
 }
 
 td.td-decoration-icon {
     width: 64px;
-    height: 64px;
+}
+
+td.td-condiment-icon {
+    width: 35px;
 }
 
 table.history-table tr td {

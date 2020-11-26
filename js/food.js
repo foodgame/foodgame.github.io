@@ -102,6 +102,8 @@ function initTables(data, person) {
 
     initMaterialTable(data);
 
+    initCondimentTable(data);
+
     initQuestTable(data);
 
     initImportExport(data);
@@ -195,6 +197,7 @@ function reInitFixedHeader() {
     $('#equip-table').DataTable().fixedHeader.adjust();
     $('#decoration-table').DataTable().fixedHeader.adjust();
     $('#quest-table').DataTable().fixedHeader.adjust();
+    $('#condiment-table').DataTable().fixedHeader.adjust();
 }
 
 function updateScrollHeight() {
@@ -306,6 +309,7 @@ function initSetting(data) {
         initChefShow();
         initEquipShow();
         initDecorationShow();
+        initCondimentShow();
         if (private) {
             initCalChefsShow($('#cal-chefs-table').DataTable());
             initCalEquipsShow($('#cal-equips-table').DataTable());
@@ -348,6 +352,7 @@ function initSetting(data) {
         $('#equip-table').DataTable().page.len(length).draw();
         $('#decoration-table').DataTable().page.len(length).draw();
         $('#quest-table').DataTable().page.len(length).draw();
+        $('#condiment-table').DataTable().page.len(length).draw();
         if (private) {
             $('#cal-chefs-table').DataTable().page.len(length).draw();
             $('#cal-equips-table').DataTable().page.len(length).draw();
@@ -381,6 +386,11 @@ function initRecipeTable(data) {
             return true;
         }
 
+        var checks = $("#chk-recipe-rarity").val();
+        if (checks.length == 0) {
+            return true;
+        }
+
         if ($('#chk-recipe-rarity option[value="' + rowData.rarity + '"]').is(':selected')) {
             return true;
         } else {
@@ -395,7 +405,7 @@ function initRecipeTable(data) {
 
         var checks = $("#chk-recipe-skill").val();
         if (checks.length == 0) {
-            return false;
+            return true;
         }
 
         var multiple = $('#chk-recipe-multiple-skill').prop("checked");
@@ -425,7 +435,7 @@ function initRecipeTable(data) {
 
         var checks = $("#chk-recipe-category").val();
         if (checks.length == 0) {
-            return false;
+            return true;
         }
 
         var multiple = $('#chk-recipe-multiple-category').prop("checked");
@@ -847,27 +857,11 @@ function initRecipeTable(data) {
         updateMenuLocalData();
     });
 
-    $('#chk-recipe-rarity').selectpicker({
-        countSelectedText: function (num, total) {
-            if (num < total) {
-                return num + "/" + total + " 星";
-            } else {
-                return "全星";
-            }
-        }
-    }).on('changed.bs.select', function () {
+    $('#chk-recipe-rarity').on('changed.bs.select', function () {
         $('#recipe-table').DataTable().draw();
     });
 
-    $('#chk-recipe-skill').selectpicker({
-        countSelectedText: function (num, total) {
-            if (num < total) {
-                return num + "/" + total + " 技法";
-            } else {
-                return "全技法";
-            }
-        }
-    }).on('changed.bs.select', function () {
+    $('#chk-recipe-skill').on('changed.bs.select', function () {
         $('#recipe-table').DataTable().draw();
     });
 
@@ -875,15 +869,7 @@ function initRecipeTable(data) {
         $('#recipe-table').DataTable().draw();
     });
 
-    $('#chk-recipe-category').selectpicker({
-        countSelectedText: function (num, total) {
-            if (num < total) {
-                return num + "/" + total + " 类型";
-            } else {
-                return "全类型";
-            }
-        }
-    }).on('changed.bs.select', function () {
+    $('#chk-recipe-category').on('changed.bs.select', function () {
         $('#recipe-table').DataTable().draw();
     });
 
@@ -912,10 +898,10 @@ function initRecipeTable(data) {
     });
 
     $('#btn-recipe-reset').click(function () {
-        $('#chk-recipe-rarity').selectpicker("selectAll");
-        $("#chk-recipe-skill").selectpicker("selectAll");
+        $('#chk-recipe-rarity').selectpicker("deselectAll");
+        $("#chk-recipe-skill").selectpicker("deselectAll");
         $("#chk-recipe-multiple-skill").prop("checked", false);
-        $("#chk-recipe-category").selectpicker("selectAll");
+        $("#chk-recipe-category").selectpicker("deselectAll");
         $("#chk-recipe-multiple-category").prop("checked", false);
         $("#chk-recipe-combo").prop("checked", false);
         $("#chk-recipe-ex-no").prop("checked", false);
@@ -1707,6 +1693,11 @@ function initChefTable(data) {
             return true;
         }
 
+        var checks = $("#chk-chef-rarity").val();
+        if (checks.length == 0) {
+            return true;
+        }
+
         if ($('#chk-chef-rarity option[value="' + rowData.rarity + '"]').is(':selected')) {
             return true;
         } else {
@@ -1716,6 +1707,11 @@ function initChefTable(data) {
 
     $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
         if (settings.nTable != document.getElementById('chef-table')) {
+            return true;
+        }
+
+        var checks = $("#chk-chef-gender").val();
+        if (checks.length == 0) {
             return true;
         }
 
@@ -1754,6 +1750,24 @@ function initChefTable(data) {
                         return true;
                     }
                 }
+            }
+        }
+        return false;
+    });
+
+    $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
+        if (settings.nTable != document.getElementById('chef-table')) {
+            return true;
+        }
+
+        var checks = $("#chk-chef-condiment").val();
+        if (checks.length == 0) {
+            return true;
+        }
+
+        for (var i in checks) {
+            if (rowData[checks[i] + "Val"] > 0) {
+                return true;
             }
         }
         return false;
@@ -1829,15 +1843,7 @@ function initChefTable(data) {
         updateMenuLocalData();
     });
 
-    $('#chk-chef-rarity').selectpicker({
-        countSelectedText: function (num, total) {
-            if (num < total) {
-                return num + "/" + total + " 星";
-            } else {
-                return "全星";
-            }
-        }
-    }).on('changed.bs.select', function () {
+    $('#chk-chef-rarity').on('changed.bs.select', function () {
         $('#chef-table').DataTable().draw();
     });
 
@@ -1850,6 +1856,10 @@ function initChefTable(data) {
     });
 
     $('#chk-chef-category-equip').click(function () {
+        $('#chef-table').DataTable().draw();
+    });
+
+    $('#chk-chef-condiment').on('changed.bs.select', function () {
         $('#chef-table').DataTable().draw();
     });
 
@@ -1887,9 +1897,10 @@ function initChefTable(data) {
     });
 
     $('#btn-chef-reset').click(function () {
-        $('#chk-chef-rarity').selectpicker("selectAll");
-        $("#chk-chef-gender").selectpicker("selectAll");
+        $('#chk-chef-rarity').selectpicker("deselectAll");
+        $("#chk-chef-gender").selectpicker("deselectAll");
         $('#chk-chef-category').selectpicker("deselectAll");
+        $('#chk-chef-condiment').selectpicker("deselectAll");
         $("#chk-chef-got").prop("checked", false);
         $("#chk-chef-no-origin").prop("checked", true);
         $('#chk-chef-show-recipe').selectpicker("deselectAll");
@@ -2382,8 +2393,12 @@ function initEquipTable(data) {
             return true;
         }
 
-        var effects = rowData.effect;
         var checks = $("#chk-equip-skill").val();
+        if (checks.length == 0) {
+            return true;
+        }
+
+        var effects = rowData.effect;
         var multiple = $('#chk-equip-multiple-skill').prop("checked");
 
         var negative = false;
@@ -2488,15 +2503,7 @@ function initEquipTable(data) {
         updateMenuLocalData();
     });
 
-    $('#chk-equip-skill').selectpicker({
-        countSelectedText: function (num, total) {
-            if (num < total) {
-                return num + "/" + total + " 类型";
-            } else {
-                return "全类型";
-            }
-        }
-    }).on('changed.bs.select', function () {
+    $('#chk-equip-skill').on('changed.bs.select', function () {
         var oneType = "";
         if ($(this).val().length == 1) {
             oneType = $(this).val()[0];
@@ -2546,7 +2553,7 @@ function initEquipTable(data) {
     });
 
     $('#btn-equip-reset').click(function () {
-        $('#chk-equip-skill').selectpicker("selectAll");
+        $('#chk-equip-skill').selectpicker("deselectAll");
         $("#chk-equip-multiple-skill").prop("checked", false);
         $("#chk-equip-filter-negative-skill").prop("checked", false);
         $("#chk-equip-filter-all-skill").prop("checked", false);
@@ -2580,7 +2587,7 @@ function initDecorationTable(data) {
         },
         {
             "data": "icon",
-            "className": "td-equip-icon",
+            "className": "td-decoration-icon",
             "orderable": false,
             "searchable": false
         },
@@ -2721,6 +2728,11 @@ function initDecorationTable(data) {
             return true;
         }
 
+        var checks = $("#chk-decoration-position").val();
+        if (checks.length == 0) {
+            return true;
+        }
+
         var position = rowData.position;
         if ($('#chk-decoration-position option[value="' + position + '"]').is(':selected')) {
             return true;
@@ -2765,15 +2777,7 @@ function initDecorationTable(data) {
         updateMenuLocalData();
     });
 
-    $('#chk-decoration-position').selectpicker({
-        countSelectedText: function (num, total) {
-            if (num < total) {
-                return num + "/" + total + " 位置";
-            } else {
-                return "全位置";
-            }
-        }
-    }).on('changed.bs.select', function () {
+    $('#chk-decoration-position').on('changed.bs.select', function () {
         decorationTable.draw();
     });
 
@@ -2803,6 +2807,7 @@ function initDecorationTable(data) {
     });
 
     $('#btn-decoration-deselect-all').click(function () {
+        $('#chk-decoration-position').selectpicker("deselectAll");
         $("#select-decoration-suit").selectpicker('val', '');
         decorationTable.rows().deselect();
     });
@@ -2974,6 +2979,243 @@ function reInitMaterialTable(data) {
     }
 
     materialTable.draw();
+}
+
+function initCondimentTable(data) {
+    var condimentColumns = [
+        {
+            "data": "condimentId",
+            "width": "1px"
+        },
+        {
+            "data": "icon",
+            "className": "td-condiment-icon",
+            "orderable": false,
+            "searchable": false
+        },
+        {
+            "data": "name",
+            "width": "80px",
+            "className": "all fixedcolumn"
+        },
+        {
+            "data": {
+                "_": "rarity",
+                "display": "rarityDisp"
+            },
+            "className": "rarity",
+            "width": "35px",
+            "orderSequence": ["desc", "asc"]
+        },
+        {
+            "data": {
+                "_": "skillDisp",
+                "sort": "skillSort"
+            },
+            "type": "num"
+        },
+        {
+            "data": "origin"
+        }
+    ];
+
+    var fixedHeader = true;
+    var scrollX = false;
+    var fixedColumns = false;
+    if (isMobile) {
+        fixedHeader = false;
+        scrollX = true;
+        fixedColumns = {
+            leftColumns: 3
+        };
+    }
+
+    var condimentTable = $('#condiment-table').DataTable({
+        data: data.condiments,
+        columns: condimentColumns,
+        language: {
+            search: "查找:",
+            zeroRecords: "没有找到",
+            info: "_TOTAL_个",
+            infoEmpty: "0",
+            infoFiltered: "/ _MAX_"
+        },
+        pagingType: "numbers",
+        pageLength: Number($("#select-setting-page-length").val()),
+        dom: "<'table-top clearfix'<'left'i><'right'<'search-box'>>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-12'p>>",
+        deferRender: true,
+        autoWidth: false,
+        fixedHeader: fixedHeader,
+        scrollX: scrollX,
+        fixedColumns: fixedColumns,
+        responsive: {
+            details: {
+                type: 'column',
+                target: 'td:not(.nodetails)',
+                renderer: function (api, rowIdx, columns) {
+                    var data = "";
+                    for (var i in columns) {
+                        if (columns[i].hidden) {
+                            data += "<div class='col-lg-3 col-sm-6 col-xs-12'>"
+                                + "<span class='child-key'>" + columns[i].title + (i == 0 || i == 1 ? "" : "：") + "</span>"
+                                + "<span class='child-value'>"
+                                + columns[i].data
+                                + "</span>"
+                                + "</div>";
+                        }
+                    }
+
+                    return data ? "<div class='child-inner'" + getResponsiveStyle($('#condiment-table')) + ">" + data + "</div>" : false;
+                }
+            }
+        }
+    });
+
+    $(".pane-condiments div.search-box").html('<input type="search" class="form-control input-sm monitor-none" placeholder="查找 名字 技能 来源">');
+
+    $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
+        if (settings.nTable != document.getElementById('condiment-table')) {
+            return true;
+        }
+
+        var checks = $("#chk-condiment-origin").val();
+        if (checks.length == 0) {
+            return true;
+        }
+
+        for (var i in checks) {
+            if (checks[i] == rowData.origin) {
+                return true;
+            }
+        }
+
+        return false;
+    });
+
+    $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
+        if (settings.nTable != document.getElementById('condiment-table')) {
+            return true;
+        }
+
+        var checks = $("#chk-condiment-skill").val();
+        if (checks.length == 0) {
+            return true;
+        }
+
+        var multiple = $('#chk-condiment-multiple-skill').prop("checked");
+        var effects = rowData.effect;
+
+        for (var i in checks) {
+            var allPass = true;
+            var values = checks[i].split(',');
+            for (var j in values) {
+                var exist = false;
+                for (var k in effects) {
+                    if (effects[k].type == values[j]) {
+                        exist = true;
+                        break;
+                    }
+                }
+                if (!exist) {
+                    if (multiple) {
+                        return false;
+                    }
+                    allPass = false;
+                    break;
+                }
+            }
+            if (!multiple && allPass) {
+                return true;
+            }
+        }
+        if (multiple) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
+    var condimentSearchInput = $(".pane-condiments .search-box input");
+    $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
+        if (settings.nTable != document.getElementById('condiment-table')) {
+            return true;
+        }
+
+        var value = $.trim(condimentSearchInput.val());
+        if (commaSeparatedMatch(rowData.name, value)) {
+            return true;
+        } else if (commaSeparatedMatch(rowData.skillDisp, value)) {
+            return true;
+        } else if (commaSeparatedMatch(rowData.origin, value)) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
+    $('#chk-condiment-show').on('changed.bs.select', function () {
+        initCondimentShow();
+        updateMenuLocalData();
+    });
+
+    $('#chk-condiment-origin').on('changed.bs.select', function () {
+        condimentTable.draw();
+    });
+
+    $('#chk-condiment-skill').on('changed.bs.select', function () {
+        var oneType = "";
+        if ($(this).val().length == 1) {
+            oneType = $(this).val()[0];
+            condimentTable.order([4, 'desc']);  // skill
+        }
+
+        condimentTable.rows().every(function (rowIdx, tableLoop, rowLoop) {
+            var rowData = this.data();
+            if (oneType == "") {
+                rowData.skillSort = 0;
+            } else {
+                for (var i in rowData.effect) {
+                    if (rowData.effect[i].type == oneType
+                        || oneType.indexOf(",") > 0 && oneType.split(',')[0] == rowData.effect[i].type) {
+                        rowData.skillSort = rowData.effect[i].value;
+                        if (rowData.effect[i].cal == "Percent") {
+                            rowData.skillSort *= 10000;
+                            break;
+                        }
+                    }
+                }
+            }
+            this.data(rowData);
+        });
+        condimentTable.draw();
+    });
+
+    $('#chk-condiment-multiple-skill').click(function () {
+        condimentTable.draw();
+    });
+
+    $('.pane-condiments .search-box input').keyup(function () {
+        condimentTable.draw();
+        changeInputStyle(this);
+    });
+
+    $('#btn-condiment-reset').click(function () {
+        $('#chk-condiment-origin').selectpicker("deselectAll");
+        $('#chk-condiment-skill').selectpicker("deselectAll");
+        $("#chk-condiment-multiple-skill").prop("checked", false);
+        $(".pane-condiments .search-box input").val("");
+        checkMonitorStyle();
+        condimentTable.draw();
+    });
+
+    if (isMobile) {
+        initTableResponsiveDisplayEvent(condimentTable);
+        initTableScrollEvent(".pane-condiments");
+    }
+
+    initCondimentShow();
 }
 
 function initQuestTable(data) {
@@ -3245,6 +3487,8 @@ function importData(data, input) {
     initRecipeShow();
     initChefShow();
     initEquipShow();
+    initDecorationShow();
+    initCondimentShow();
 
     return true;
 }
@@ -3405,6 +3649,7 @@ function generateMenuExportData() {
     exportData["chef"] = $("#chk-chef-show").val();
     exportData["equip"] = $("#chk-equip-show").val();
     exportData["decoration"] = $("#chk-decoration-show").val();
+    exportData["condiment"] = $("#chk-condiment-show").val();
     return exportData;
 }
 
@@ -3414,6 +3659,7 @@ function updateMenu(person) {
         $("#chk-chef-show").selectpicker('val', person.menu.chef);
         $("#chk-equip-show").selectpicker('val', person.menu.equip);
         $("#chk-decoration-show").selectpicker('val', person.menu.decoration);
+        $("#chk-condiment-show").selectpicker('val', person.menu.condiment);
     }
 }
 
@@ -5757,6 +6003,19 @@ function generateData(json, json2, person) {
     }
     retData["materials"] = materialsData;
 
+    var condimentsData = [];
+    for (var i in json.condiments) {
+        var condiment = json.condiments[i];
+        condiment["rarityDisp"] = getRarityDisp(json.condiments[i].rarity);
+        var skillInfo = getSkillInfo(json.skills, json.condiments[i].skill);
+        condiment["skillDisp"] = skillInfo.skillDisp;
+        condiment["skillSort"] = 0;
+        condiment["effect"] = skillInfo.skillEffect;
+        condiment["icon"] = "<div class='icon-condiment condiment_" + json.condiments[i].condimentId + "'></div>";
+        condimentsData.push(condiment);
+    }
+    retData["condiments"] = condimentsData;
+
     var equipsData = [];
     for (var i in json.equips) {
 
@@ -6808,14 +7067,6 @@ function getMaxLimit(data, rarity) {
 }
 
 function monitorStyle() {
-    $('select.monitor-all').on('changed.bs.select', function () {
-        if ($(this).val().length == $(this).find("option").length) {
-            $(this).selectpicker('setStyle', 'btn-info', 'remove');
-        } else {
-            $(this).selectpicker('setStyle', 'btn-info', 'add');
-        }
-    });
-
     $('select.monitor-none').on('changed.bs.select', function () {
         changeSelectStyle(this);
     });
@@ -6945,6 +7196,18 @@ function initEquipShow() {
     equipTable.responsive.rebuild();
     equipTable.responsive.recalc();
     equipTable.columns.adjust().draw(false);
+}
+
+function initCondimentShow() {
+    var condimentTable = $('#condiment-table').DataTable();
+
+    $("#chk-condiment-show option").each(function () {
+        changeTableHeaderClass(condimentTable, Number($(this).val()), this.selected);
+    });
+
+    condimentTable.responsive.rebuild();
+    condimentTable.responsive.recalc();
+    condimentTable.columns.adjust().draw(false);
 }
 
 function initDecorationShow() {

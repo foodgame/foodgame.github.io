@@ -2503,7 +2503,7 @@ function initEquipTable(data) {
         updateMenuLocalData();
     });
 
-    $('#chk-equip-skill').on('changed.bs.select', function () {
+    $('#chk-equip-skill').selectpicker().on('changed.bs.select', function () {
         var oneType = "";
         if ($(this).val().length == 1) {
             oneType = $(this).val()[0];
@@ -3164,7 +3164,7 @@ function initCondimentTable(data) {
         condimentTable.draw();
     });
 
-    $('#chk-condiment-skill').on('changed.bs.select', function () {
+    $('#chk-condiment-skill').selectpicker().on('changed.bs.select', function () {
         var oneType = "";
         if ($(this).val().length == 1) {
             oneType = $(this).val()[0];

@@ -366,7 +366,9 @@ table.dataTable tbody>tr>.selected {
 #cal-self-select-table .cal-td-chef-name,
 #cal-self-select-table .cal-td-recipe-name,
 #cal-self-select-table .cal-td-equip-name,
-#cal-self-select-table .cal-td-quantity {
+#cal-self-select-table .cal-td-quantity,
+#cal-self-select-table .cal-td-condiment-name,
+#cal-self-select-table .cal-td-recipe-condiment {
     background-color: rgba(0, 0, 0, 0.05);
 }
 
@@ -374,6 +376,14 @@ table.dataTable tbody>tr>.selected {
 #cal-self-select-table .cal-td-recipe-name,
 #cal-self-select-table .cal-td-equip-name {
     width: 125px;
+}
+
+#cal-self-select-table .cal-td-condiment-name {
+    width: 110px;
+}
+
+#cal-self-select-table .cal-td-recipe-condiment {
+    width: 50px;
 }
 
 #input-export-import {

@@ -214,7 +214,7 @@ function getRecipeQuantity(recipe, materials, rule) {
     return quantity;
 }
 
-function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, rule, decoration) {
+function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, rule, decoration, condiment) {
 
     var resultData = {};
 
@@ -223,8 +223,9 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
     var equipSkillAddition = 0;
     var decorationAddition = 0;
     var bonusAddition = 0;
+    var condimentSkillAddition = 0;
 
-    resultData["disp"] = recipe.name;
+    resultData["disp"] = recipe.name + " <small>" + recipe.condimentDisp + "</small>";
 
     if (chef) {
         var rankData = getRankInfo(recipe, chef);
@@ -256,6 +257,11 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
         }
         resultData["equipSkillAdditionDisp"] = getPercentDisp(equipSkillAddition);
 
+        if (condiment) {
+            resultData["useCondiment"] = "加料";
+            condimentSkillAddition = getRecipeSkillAddition(condiment.effect, recipe, rule);
+        }
+
         bonusAddition = bonusAddition + Number(chef.addition);
     }
 
@@ -273,7 +279,7 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
         bonusAddition = bonusAddition + materialsAddition;
     }
 
-    var priceAddition = (rankAddition + chefSkillAddition + equipSkillAddition + decorationAddition + recipe.ultimateAddition) / 100;
+    var priceAddition = (rankAddition + chefSkillAddition + equipSkillAddition + condimentSkillAddition + decorationAddition + recipe.ultimateAddition) / 100;
 
     resultData["data"] = recipe;
     resultData["quantity"] = quantity;
@@ -379,6 +385,22 @@ function getEquipInfo(equipName, equips) {
                 info["name"] = equips[j].name;
                 info["effect"] = equips[j].effect;
                 info["disp"] = equips[j].name + "<br><small>" + equips[j].skillDisp + "</small>";
+                break;
+            }
+        }
+    }
+    return info;
+}
+
+function getCondimentInfo(condimentId, condiments) {
+    var info = null;
+    if (condimentId) {
+        for (var j in condiments) {
+            if (condimentId == condiments[j].condimentId) {
+                info = {};
+                info["condimentId"] = condiments[j].condimentId;
+                info["effect"] = condiments[j].effect;
+                info["disp"] = condiments[j].name + getRarityDisp(condiments[j].rarity) + "<br><small>" + condiments[j].skillDisp + "</small>";
                 break;
             }
         }

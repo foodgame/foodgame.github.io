@@ -33428,7 +33428,11 @@ if (typeof jQuery === 'undefined') {
 
                 if (this.options.liveSearch) {
                     this.liveSearchListener();
-                    this.focusedParent = this.$searchbox[0];
+                    if (isMobile) {
+                        this.focusedParent = this.$menuInner[0];
+                    } else {
+                        this.focusedParent = this.$searchbox[0];
+                    }
                 } else {
                     this.focusedParent = this.$menuInner[0];
                 }
@@ -34861,7 +34865,7 @@ if (typeof jQuery === 'undefined') {
                 });
 
                 function setFocus() {
-                    if (that.options.liveSearch) {
+                    if (that.options.liveSearch && !isMobile) {
                         that.$searchbox.trigger('focus');
                     } else {
                         that.$menuInner.trigger('focus');
@@ -35006,7 +35010,7 @@ if (typeof jQuery === 'undefined') {
 
                         if (!that.multiple || (that.multiple && that.options.maxOptions === 1)) {
                             that.$button.trigger('focus');
-                        } else if (that.options.liveSearch) {
+                        } else if (that.options.liveSearch && !isMobile) {
                             that.$searchbox.trigger('focus');
                         }
 
@@ -35053,7 +35057,7 @@ if (typeof jQuery === 'undefined') {
                 });
 
                 this.$menu.on('click', '.actions-btn', function (e) {
-                    if (that.options.liveSearch) {
+                    if (that.options.liveSearch && !isMobile) {
                         that.$searchbox.trigger('focus');
                     } else {
                         that.$button.trigger('focus');

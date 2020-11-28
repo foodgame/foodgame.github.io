@@ -261,6 +261,7 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
             resultData["useCondiment"] = "加料";
             condimentSkillAddition = getRecipeSkillAddition(condiment.effect, recipe, rule);
         }
+        resultData["condimentSkillAdditionDisp"] = getPercentDisp(condimentSkillAddition);
 
         bonusAddition = bonusAddition + Number(chef.addition);
     }
@@ -397,11 +398,7 @@ function getCondimentInfo(condimentId, condiments) {
     if (condimentId) {
         for (var j in condiments) {
             if (condimentId == condiments[j].condimentId) {
-                info = {};
-                info["condimentId"] = condiments[j].condimentId;
-                info["effect"] = condiments[j].effect;
-                info["disp"] = condiments[j].name + getRarityDisp(condiments[j].rarity) + "<br><small>" + condiments[j].skillDisp + "</small>";
-                break;
+                return condiments[j];
             }
         }
     }
@@ -608,6 +605,14 @@ function getAtrributeDisp(final, origin, showFinal) {
         disp += add;
     }
     return disp;
+}
+
+function getRarityDisp(rarity) {
+    var rarityDisp = "";
+    for (var j = 0; j < rarity; j++) {
+        rarityDisp += "&#x2605;";
+    }
+    return rarityDisp;
 }
 
 function isNumeric(n) {

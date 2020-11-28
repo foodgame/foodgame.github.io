@@ -8,9 +8,9 @@
     <link rel="shortcut icon" href="favicon.ico?v=1" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="css/style.min.css?v=6" />
     <script type="text/javascript" src="js/script.min.js?v=17"></script>
-    <script type="text/javascript" src="js/common.min.js?v=37"></script>
+    <script type="text/javascript" src="js/common.min.js?v=38"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=47" />
-    <script type="text/javascript" src="js/food.min.js?v=160"></script>
+    <script type="text/javascript" src="js/food.min.js?v=161"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=63" />
     <script>
         $(function () {
@@ -1332,9 +1332,9 @@
                                     有厨具可换厨具
                                 </label>
                                 <label class="btn btn-default">
-                                    <input type="checkbox" id="chk-cal-results-fix-equips">
+                                    <input type="checkbox" id="chk-cal-results-use-condiment">
                                     <i class="fa fa-check glyphicon glyphicon-ok"></i>
-                                    30%厨具
+                                    调料
                                 </label>
                                 <div class="input-group">
                                     <div class="input-group-addon">最低分</div>
@@ -1428,6 +1428,12 @@
                                     </label>
                                     <label class="btn btn-default">
                                         <input type="checkbox"
+                                            class="chk-cal-results-show-chef-condiment-addition chk-cal-results-show">
+                                        <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                                        调料加成
+                                    </label>
+                                    <label class="btn btn-default">
+                                        <input type="checkbox"
                                             class="chk-cal-results-show-bonus-addition chk-cal-results-show">
                                         <i class="fa fa-check glyphicon glyphicon-ok"></i>
                                         规则加成
@@ -1518,6 +1524,7 @@
                                                 <th>品阶加成</th>
                                                 <th>技能加成</th>
                                                 <th>厨具加成</th>
+                                                <th>调料加成</th>
                                                 <th>规则加成</th>
                                                 <th>修炼加成</th>
                                                 <th>装饰加成</th>

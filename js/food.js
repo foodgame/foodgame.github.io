@@ -463,6 +463,24 @@ function initRecipeTable(data) {
             return true;
         }
 
+        var checks = $("#chk-recipe-condiment").val();
+        if (checks.length == 0) {
+            return true;
+        }
+
+        for (var i in checks) {
+            if (rowData.condiment == checks[i]) {
+                return true;
+            }
+        }
+        return false;
+    });
+
+    $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
+        if (settings.nTable != document.getElementById('recipe-table')) {
+            return true;
+        }
+
         var min = Number($('#input-recipe-price').val());
         if (rowData.oPrice >= min) {
             return true;
@@ -877,6 +895,10 @@ function initRecipeTable(data) {
         $('#recipe-table').DataTable().draw();
     });
 
+    $('#chk-recipe-condiment').on('changed.bs.select', function () {
+        $('#recipe-table').DataTable().draw();
+    });
+
     $('#input-recipe-price').keyup(function () {
         $('#recipe-table').DataTable().draw();
     });
@@ -903,6 +925,7 @@ function initRecipeTable(data) {
         $("#chk-recipe-multiple-skill").prop("checked", false);
         $("#chk-recipe-category").selectpicker("deselectAll");
         $("#chk-recipe-multiple-category").prop("checked", false);
+        $('#chk-recipe-condiment').selectpicker("deselectAll");
         $("#chk-recipe-combo").prop("checked", false);
         $("#chk-recipe-ex-no").prop("checked", false);
         $("#chk-recipe-got").prop("checked", false);

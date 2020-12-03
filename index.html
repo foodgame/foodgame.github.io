@@ -10,7 +10,7 @@
     <script type="text/javascript" src="js/script.min.js?v=17"></script>
     <script type="text/javascript" src="js/common.min.js?v=38"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=47" />
-    <script type="text/javascript" src="js/food.min.js?v=161"></script>
+    <script type="text/javascript" src="js/food.min.js?v=162"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=63" />
     <script>
         $(function () {
@@ -19,7 +19,7 @@
                 success: function (json) {
                     init(json);
                 },
-                url: 'data/data.min.json?v=15'
+                url: 'data/data.min.json?v=16'
             });
         });
     </script>
@@ -202,6 +202,20 @@
                                         同时
                                     </label>
                                 </span>
+                            </div>
+                            <div class="inline-wrapper" data-toggle="tooltip" title="选择调料,过滤菜谱">
+                                <select id="chk-recipe-condiment" multiple class="selectpicker monitor-none"
+                                    data-width="100px" data-dropdown-align-right='auto' data-none-selected-text="选择调料"
+                                    data-selected-text-format="count>3" data-count-selected-text="{0} 调料"
+                                    data-actions-box="true" data-actions-box-only-clear="true"
+                                    data-deselect-all-text="清空">
+                                    <option value="Sweet">甜</option>
+                                    <option value="Sour">酸</option>
+                                    <option value="Spicy">辣</option>
+                                    <option value="Salty">咸</option>
+                                    <option value="Bitter">苦</option>
+                                    <option value="Tasty">鲜</option>
+                                </select>
                             </div>
                             <input type="text" id="input-recipe-price" placeholder="单价大于"
                                 class="form-control monitor-none" data-toggle="tooltip" title="填入单价,过滤菜谱">

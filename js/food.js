@@ -5610,6 +5610,7 @@ function initCalResultsTable(data) {
             var noEquips = $('#chk-cal-results-no-equips').prop("checked");
             var addEquips = $('#chk-cal-results-add-equips').prop("checked");
             var changeEquips = $('#chk-cal-results-change-equips').prop("checked");
+            var filterEquipCondiment = $('#chk-cal-results-filter-equip-condiment').prop("checked");
             var useCondiment = $('#chk-cal-results-use-condiment').prop("checked");
             var minScore = Number($('#input-cal-min-score').val());
             var thread = Number($('#input-cal-thread').val());
@@ -5627,6 +5628,7 @@ function initCalResultsTable(data) {
                 "noEquips": noEquips,
                 "addEquips": addEquips,
                 "changeEquips": changeEquips,
+                "filterEquipCondiment": filterEquipCondiment,
                 "useCondiment": useCondiment,
                 "minScore": minScore,
                 "thread": thread

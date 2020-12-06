@@ -2108,7 +2108,7 @@ function reInitChefTable(data) {
         },
         {
             "data": {
-                "_": "equipName",
+                "_": "equipId",
                 "display": "equipDisp"
             },
             "className": "nodetails"
@@ -2253,10 +2253,10 @@ function reInitChefTable(data) {
     var equipsOptions = getEquipsOptions(data.equips, data.skills);
 
     chefTable.MakeCellsEditable({
-        "columns": [24, 27, 28],  // equipName, ultimate, got
+        "columns": [24, 27, 28],  // equipId, ultimate, got
         "inputTypes": [
             {
-                "column": 24,   // equipName
+                "column": 24,   // equipId
                 "type": "list",
                 "search": true,
                 "clear": true,
@@ -2274,15 +2274,15 @@ function reInitChefTable(data) {
             }
         ],
         "onUpdate": function (table, row, cell, oldValue) {
-            if (cell.index().column == 24) {     // equipName
+            if (cell.index().column == 24) {     // equipId
                 var chef = row.data();
                 var equip = null;
                 var equipDisp = "";
-                if (chef.equipName) {
+                if (chef.equipId) {
                     for (var j in data.equips) {
-                        if (chef.equipName == data.equips[j].name) {
+                        if (chef.equipId == data.equips[j].equipId) {
                             equip = data.equips[j];
-                            equipDisp = data.equips[j].name + "<br>" + data.equips[j].skillDisp;
+                            equipDisp = data.equips[j].disp;
                             break;
                         }
                     }
@@ -2295,7 +2295,7 @@ function reInitChefTable(data) {
                     $(".pane-chefs .DTFC_LeftBodyLiner").scrollTop($(".pane-chefs .dataTables_scrollBody").scrollTop());
                 }
             }
-            if ((cell.index().column == 24 || cell.index().column == 27) && cell.data() != oldValue) {   // equipName, ultimate
+            if ((cell.index().column == 24 || cell.index().column == 27) && cell.data() != oldValue) {   // equipId, ultimate
                 if ($("#chk-setting-auto-update").prop("checked")) {
                     updateRecipeChefTable(data);
                 } else {
@@ -3441,13 +3441,15 @@ function importData(data, input) {
                     for (var k in data.equips) {
                         if (person.chefs[j].equip == data.equips[k].equipId) {
                             data.chefs[i].equip = data.equips[k];
-                            data.chefs[i].equipName = data.equips[k].name;
-                            data.chefs[i].equipDisp = data.equips[k].name + "<br>" + data.equips[k].skillDisp;
+                            data.chefs[i].equipId = data.equips[k].equipId;
+                            data.chefs[i].equipDisp = data.equips[k].disp;
                             break;
                         }
                     }
                 } else {
                     data.chefs[i].equip = null;
+                    data.chefs[i].equipId = "";
+                    data.chefs[i].equipDisp = "";
                 }
                 break;
             }
@@ -3887,7 +3889,7 @@ function initCalRules(data) {
         var custom = table.data().toArray();
         for (var i in custom) {
             custom[i].chef.name = "";
-            custom[i].equip.name = "";
+            custom[i].equip.equipId = "";
             custom[i].recipe.data.name = "";
         }
         calCustomResults(currentRule, data);
@@ -4564,12 +4566,12 @@ function initCalCustomOptions(rule, data) {
 
             if ($(cell.node()).hasClass("cal-td-chef-name")) {
                 var chefName = cell.data();
-                var equipName = "";
+                var equipId = "";
                 if ($("#chk-cal-use-equip").prop("checked")) {
                     if (chefName) {
                         for (var j in rule.chefs) {
                             if (rule.chefs[j].name == chefName) {
-                                equipName = rule.chefs[j].equipName;
+                                equipId = rule.chefs[j].equipId;
                                 break;
                             }
                         }
@@ -4578,12 +4580,12 @@ function initCalCustomOptions(rule, data) {
                 for (var k = 0; k < 3; k++) {
                     table.data()[3 * group + k].chef.name = chefName;
                     if ($("#chk-cal-use-equip").prop("checked")) {
-                        table.data()[3 * group + k].equip.name = equipName;
+                        table.data()[3 * group + k].equip.equipId = equipId;
                     }
                 }
             } else if ($(cell.node()).hasClass("cal-td-equip-name")) {
                 for (var k = 0; k < 3; k++) {
-                    table.data()[3 * group + k].equip.name = cell.data();
+                    table.data()[3 * group + k].equip.equipId = cell.data();
                 }
             } else if ($(cell.node()).hasClass("cal-td-condiment-name")) {
                 for (var k = 0; k < 3; k++) {
@@ -4625,16 +4627,16 @@ function calCustomResults(rule, data) {
             }
         }
 
-        var equipInfo = getEquipInfo(custom[i].equip.name, rule.equips);
+        var equipInfo = getEquipInfo(custom[i].equip.equipId, rule.equips);
         if (equipInfo) {
-            custom[i].equip = equipInfo;
+            custom[i].equip = JSON.parse(JSON.stringify(equipInfo));
         } else {
             custom[i].equip = {};
         }
 
         var condimentInfo = getCondimentInfo(custom[i].condiment.condimentId, data.condiments);
         if (condimentInfo) {
-            custom[i].condiment = condimentInfo;
+            custom[i].condiment = JSON.parse(JSON.stringify(condimentInfo));
         } else {
             custom[i].condiment = {};
         }
@@ -5104,7 +5106,10 @@ function initCalChefsTable(data) {
             "width": "38px"
         },
         {
-            "data": "equipName",
+            "data": {
+                "_": "equipId",
+                "display": "equipDisp"
+            },
             "className": "cal-td-select-equip nodetails all",
             "width": "101px"
         }
@@ -5205,7 +5210,27 @@ function initCalChefsTable(data) {
                 "clear": true,
                 "options": options
             }
-        ]
+        ],
+        "onUpdate": function (table, row, cell, oldValue) {
+            if (cell.index().column == 15) {     // equipId
+                var chef = row.data();
+                var equip = null;
+                var equipDisp = "";
+                if (chef.equipId) {
+                    for (var j in data.equips) {
+                        if (chef.equipId == data.equips[j].equipId) {
+                            equip = data.equips[j];
+                            equipDisp = data.equips[j].disp;
+                            break;
+                        }
+                    }
+                }
+                chef.equip = equip;
+                chef.equipDisp = equipDisp;
+                row.data(chef);
+                calChefsTable.draw(false);
+            }
+        }
     });
 
     $('#chk-cal-chefs-show').on('changed.bs.select', function () {
@@ -6106,6 +6131,7 @@ function generateData(json, json2, person) {
         equip["skillDisp"] = skillInfo.skillDisp;
         equip["skillSort"] = 0;
         equip["effect"] = skillInfo.skillEffect;
+        equip["disp"] = json.equips[i].name + "<br><small>" + skillInfo.skillDisp + "</small>";
 
         if (json.equips[i].hide) {
             equip["icon"] = "<div class='icon-equip2 equip_" + json.equips[i].equipId + "'></div>";
@@ -6255,7 +6281,7 @@ function generateData(json, json2, person) {
         chefData["got"] = "";
         chefData["ultimate"] = "";
         chefData["equip"] = null;
-        chefData["equipName"] = "";
+        chefData["equipId"] = "";
         chefData["equipDisp"] = "";
 
         if (person) {
@@ -6271,8 +6297,8 @@ function generateData(json, json2, person) {
                         for (var k in equipsData) {
                             if (person.chefs[j].equip == equipsData[k].equipId) {
                                 chefData["equip"] = equipsData[k];
-                                chefData["equipName"] = equipsData[k].name;
-                                chefData["equipDisp"] = equipsData[k].name + "<br><small>" + equipsData[k].skillDisp + "</small>";
+                                chefData["equipId"] = equipsData[k].equipId;
+                                chefData["equipDisp"] = equipsData[k].disp;
                                 break;
                             }
                         }
@@ -7052,7 +7078,7 @@ function getEquipsOptions(equips, skills) {
         option["display"] = equips[i].name;
         option["subtext"] = skillDisp;
         option["tokens"] = equips[i].name + skillDisp;
-        option["value"] = equips[i].name;
+        option["value"] = equips[i].equipId;
         list.push(option);
     }
     return list;

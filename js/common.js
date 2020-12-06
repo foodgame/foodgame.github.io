@@ -377,16 +377,12 @@ function secondsToTime(sec) {
     return ret;
 }
 
-function getEquipInfo(equipName, equips) {
+function getEquipInfo(equipId, equips) {
     var info = null;
-    if (equipName) {
+    if (equipId) {
         for (var j in equips) {
-            if (equipName == equips[j].name) {
-                info = {};
-                info["name"] = equips[j].name;
-                info["effect"] = equips[j].effect;
-                info["disp"] = equips[j].name + "<br><small>" + equips[j].skillDisp + "</small>";
-                break;
+            if (equipId == equips[j].equipId) {
+                return equips[j];
             }
         }
     }

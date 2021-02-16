@@ -1585,7 +1585,7 @@ function getSkillDiff(chef, recipe, rank) {
 }
 
 function updateChefTableData(data) {
-    var chkSkillDiff = $('#chk-chef-show-skill-diff').prop("checked");
+    var chkSkillDiff = Number($('#chk-chef-show-skill-diff').val());
     var chkRecipes = $('#chk-chef-show-recipe').val();
 
     data.chefAddColNum = chkRecipes.length * (2 + (chkSkillDiff ? 1 : 0));
@@ -1632,7 +1632,7 @@ function updateChefTableData(data) {
                 $($('#chef-table').DataTable().column(data.chefColNum + chefAddColCount).header()).text(data.recipes[j].name).removeClass("never").addClass("all");
                 chefAddColCount++;
                 if (chkSkillDiff) {
-                    $($('#chef-table').DataTable().column(data.chefColNum + chefAddColCount).header()).text("神差值").removeClass("never").addClass("all");
+                    $($('#chef-table').DataTable().column(data.chefColNum + chefAddColCount).header()).text(chkSkillDiff == 4 ? "神差值" : "传差值").removeClass("never").addClass("all");
                     chefAddColCount++;
                 }
                 $($('#chef-table').DataTable().column(data.chefColNum + chefAddColCount).header()).text("效率").removeClass("never").addClass("all");
@@ -1659,7 +1659,7 @@ function updateChefTableData(data) {
 
 function updateChefsRecipesData(data) {
     var useEquip = $("#chk-chef-apply-equips").prop("checked");
-    var chkSkillDiff = $('#chk-chef-show-skill-diff').prop("checked");
+    var chkSkillDiff = Number($('#chk-chef-show-skill-diff').val());
     var chkRecipes = $('#chk-chef-show-recipe').val();
     if (chkRecipes.length > 0) {
         for (var i in data.chefs) {
@@ -1678,7 +1678,7 @@ function updateChefsRecipesData(data) {
                         resultData["efficiency"] = resultInfo.chefEff || "";
 
                         if (chkSkillDiff) {
-                            var skillDiff = getSkillDiff(data.chefs[i], data.recipes[j], 4);
+                            var skillDiff = getSkillDiff(data.chefs[i], data.recipes[j], chkSkillDiff);
                             resultData["skillDiffDisp"] = skillDiff.disp;
                             resultData["skillDiffVal"] = skillDiff.value;
                         }
@@ -1853,7 +1853,7 @@ function initChefTable(data) {
         // }
     });
 
-    $('#chk-chef-show-skill-diff').click(function () {
+    $('#chk-chef-show-skill-diff').on('changed.bs.select', function () {
         if ($('#chk-chef-show-recipe').val().length) {
             updateChefsRecipesData(data);
             updateChefTableData(data);
@@ -5702,7 +5702,7 @@ function initCalResultTableCommon(mode, panel) {
         },
         {
             "data": {
-                "_": "equip.name",
+                "_": "equip.equipId",
                 "display": "equip.disp"
             },
             "className": "cal-td-equip-name",

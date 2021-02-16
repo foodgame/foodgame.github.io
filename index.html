@@ -10,7 +10,7 @@
     <script type="text/javascript" src="js/script.min.js?v=17"></script>
     <script type="text/javascript" src="js/common.min.js?v=39"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=47" />
-    <script type="text/javascript" src="js/food.min.js?v=163"></script>
+    <script type="text/javascript" src="js/food.min.js?v=164"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=66" />
     <script>
         $(function () {
@@ -485,13 +485,13 @@
                                         data-none-results-text="没有找到" data-actions-box="true"
                                         data-actions-box-only-clear="true" data-deselect-all-text="清空"></select>
                                 </div>
-                                <span class="input-group-btn input-group-last">
-                                    <label class="btn btn-default" data-toggle="tooltip" title="显示厨师做神级菜的能力差">
-                                        <input type="checkbox" id="chk-chef-show-skill-diff">
-                                        <i class="fa fa-check glyphicon glyphicon-ok"></i>
-                                        神级能力差
-                                    </label>
-                                </span>
+                                <div class="inline-wrapper input-group-last">
+                                    <select id="chk-chef-show-skill-diff" class="selectpicker" data-width="125px" data-dropdown-align-right='auto'>
+                                        <option value="0">不显示能力差</option>
+                                        <option value="4">神级能力差</option>
+                                        <option value="5">传级能力差</option>
+                                    </select>
+                                </div>
                             </div>
                             <a id="btn-chef-reset" class="btn btn-default" data-toggle="tooltip" title="清空所有选择">
                                 清空所有

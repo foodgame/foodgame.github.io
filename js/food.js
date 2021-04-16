@@ -1632,7 +1632,7 @@ function updateChefTableData(data) {
                 $($('#chef-table').DataTable().column(data.chefColNum + chefAddColCount).header()).text(data.recipes[j].name).removeClass("never").addClass("all");
                 chefAddColCount++;
                 if (chkSkillDiff) {
-                    $($('#chef-table').DataTable().column(data.chefColNum + chefAddColCount).header()).text(chkSkillDiff == 4 ? "神差值" : "传差值").removeClass("never").addClass("all");
+                    $($('#chef-table').DataTable().column(data.chefColNum + chefAddColCount).header()).text(getSkillDiffText(chkSkillDiff)).removeClass("never").addClass("all");
                     chefAddColCount++;
                 }
                 $($('#chef-table').DataTable().column(data.chefColNum + chefAddColCount).header()).text("效率").removeClass("never").addClass("all");
@@ -1655,6 +1655,19 @@ function updateChefTableData(data) {
     $('#chef-table').DataTable().responsive.rebuild();
     $('#chef-table').DataTable().responsive.recalc();
     // $('#chef-table').DataTable().columns.adjust();
+}
+
+function getSkillDiffText(chkSkillDiff) {
+    if (chkSkillDiff == 5) {
+        return "传差值"
+    } else if (chkSkillDiff == 4) {
+        return "神差值"
+    } else if (chkSkillDiff == 3) {
+        return "特差值"
+    } else if (chkSkillDiff == 2) {
+        return "优差值"
+    }
+    return "";
 }
 
 function updateChefsRecipesData(data) {

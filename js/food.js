@@ -3959,6 +3959,9 @@ function loadUltimate(data, usePerson) {
         } else if (globalUltimate[i].type == "MaxEquipLimit" && globalUltimate[i].rarity == 5) {
             $("#input-cal-ultimate-5-limit").val(globalUltimate[i].value);
             continue;
+        } else if (globalUltimate[i].type == "UseAll" && globalUltimate[i].rarity == 1) {
+            $("#input-cal-ultimate-1-price").val(globalUltimate[i].value);
+            continue;
         } else if (globalUltimate[i].type == "UseAll" && globalUltimate[i].rarity == 2) {
             $("#input-cal-ultimate-2-price").val(globalUltimate[i].value);
             continue;
@@ -4212,6 +4215,17 @@ function setCalConfigData(rule, data) {
         ultimateItem["condition"] = "Global";
         ultimateItem["cal"] = "Abs";
         ultimateItem["rarity"] = 5;
+        globalUltimate.push(ultimateItem);
+    }
+
+    var price1 = Number($("#input-cal-ultimate-1-price").val());
+    if (price1) {
+        var ultimateItem = {};
+        ultimateItem["type"] = "UseAll";
+        ultimateItem["value"] = price1;
+        ultimateItem["condition"] = "Global";
+        ultimateItem["cal"] = "Percent";
+        ultimateItem["rarity"] = 1;
         globalUltimate.push(ultimateItem);
     }
 

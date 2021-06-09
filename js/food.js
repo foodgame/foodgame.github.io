@@ -482,7 +482,7 @@ function initRecipeTable(data) {
         }
 
         var min = Number($('#input-recipe-price').val());
-        if (rowData.oPrice >= min) {
+        if (rowData.price >= min) {
             return true;
         } else {
             return false;
@@ -715,7 +715,7 @@ function initRecipeTable(data) {
                         }
                     }
                     if (oneQuest[i].price) {
-                        if (rowData.oPrice < oneQuest[i].price) {
+                        if (rowData.price < oneQuest[i].price) {
                             pass = false;
                         }
                     }

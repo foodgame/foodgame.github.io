@@ -56,7 +56,7 @@ function init(json) {
     }
 }
 
-var private = false, currentRule, isMobile = false;
+var private = false, currentRule, isMobile = false, expendBtn = true;
 function initFunction() {
     var a = getParameterByName('a');
     if (a && lcode(a) == "cb8f8a72f7e4924a75cb75a4a59c0b8d61e70c0cb84f84edf7ede4c8") {
@@ -87,6 +87,16 @@ function initTables(data, person) {
             isMobile = true;
         }
     }
+
+    updateSetting(person);
+
+    if (isMobile) {
+        $(".mobile-setting").hide();
+        // overwrite updateSetting
+        expendBtn = false;
+    }
+
+    initSetting(data);
 
     updateMenu(person);
 
@@ -122,10 +132,6 @@ function initTables(data, person) {
 
     initTooltip();
 
-    initSetting(data);
-
-    updateSetting(person);
-
     $('.main-nav a[data-id="1"], .main-nav a[data-id="2"]').on('show.bs.tab', function (e) {
         if ($(e.target).attr("data-id") == "1") {
             $("#select-partial-ultimate").appendTo("#select-partial-ultimate-recipe");
@@ -151,24 +157,27 @@ function initTables(data, person) {
         });
     }
 
-    $('.bootstrap-select').hover(
+    var bsTimeout;
+    $('.select-wrapper').hover(
         function () {
-            $('.bootstrap-select').removeClass("hover-item");
-            var element = $(this);
-            element.addClass("hover-item");
-            setTimeout(function () {
-                if (!element.hasClass("open") && element.hasClass("hover-item")) {
-                    element.find("select").selectpicker('toggle');
-                }
-            }, 10);
+            if (!bsTimeout) {
+                var element = $(this).find('.bootstrap-select');
+                bsTimeout = setTimeout(function () {
+                    if (!element.hasClass("open")) {
+                        bsTimeout = null;
+                        element.find("select").selectpicker('toggle');
+                    }
+                }, 200);
+            }
         }, function () {
-            var element = $(this);
-            element.removeClass("hover-item");
-            setTimeout(function () {
-                if (element.hasClass("open")) {
-                    element.find("select").selectpicker('toggle');
-                }
-            }, 10);
+            if (bsTimeout) {
+                window.clearTimeout(bsTimeout);
+                bsTimeout = null;
+            } 
+            var element = $(this).find('.bootstrap-select');
+            if (element.hasClass("open")) {
+                element.find("select").selectpicker('toggle');
+            }
         }
     );
 
@@ -181,9 +190,7 @@ function initTables(data, person) {
     $('.loading').addClass("hidden");
     $('.main-function').removeClass("hidden");
 
-    if (isMobile) {
-        $('#recipe-table').DataTable().draw(false);
-    } else {
+    if (!isMobile) {
         reInitFixedHeader();
     }
 
@@ -217,39 +224,39 @@ function updateScrollHeight() {
 
 function initTableResponsiveDisplayEvent(table) {
     table.on('responsive-display', function (e, datatable, row, showHide, update) {
-        datatable.fixedColumns().relayout();
-        var wrapper = $(this).closest(".DTFC_ScrollWrapper");
-        var scroll = wrapper.find(".dataTables_scrollBody");
         if (showHide) {
             var nextTr = $(row.node()).next("tr");
-            if (nextTr.offset().top - scroll.offset().top + nextTr.outerHeight() >= scroll.height()) {
-                scroll.scrollTop(nextTr.offset().top - scroll.offset().top + nextTr.outerHeight() - scroll.height() + 1 + scroll.scrollTop());
+            if (nextTr.length) {
+                if (isMobile) {
+                    var scroll = $(this).closest(".dataTables_scrollBody");
+                    var nextTrHeight = nextTr.offset().top - scroll.offset().top + nextTr.outerHeight() - scroll.height();
+                    if (nextTrHeight >= 0) {
+                        scroll.scrollTop(nextTrHeight + scroll.scrollTop() + 10);
+                    }
+                } else {
+                    var nextTrHeight = nextTr.offset().top + nextTr.outerHeight() - $(window).height();
+                    if (nextTrHeight >= $(window).scrollTop()) {
+                        $(window).scrollTop(nextTrHeight + 10);
+                    }
+                }
             }
         }
-        wrapper.find(".DTFC_LeftBodyLiner").scrollTop(scroll.scrollTop());
     });
 }
 
 function initTableScrollEvent(pane) {
-    $(pane).find(".dataTables_scrollBody").on("scroll", function (e) {
-        var wrapper = $(this).closest(".DTFC_ScrollWrapper");
-        if (wrapper.find(".dataTables_scrollHeadInner th.fixedcolumn").offset().left - $(this).offset().left < 0) {
-            wrapper.find(".DTFC_LeftWrapper").css("display", "block");
-        } else {
-            wrapper.find(".DTFC_LeftWrapper").css("display", "none");
-        }
-        wrapper.find(".child-inner").css("margin-left", $(this).scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width() + "px");
-    });
+    if (isMobile) {
+        $(pane).find(".dataTables_scrollBody").on("scroll", function (e) {
+            $(this).find(".child-inner").css("margin-left", $(this).scrollLeft() + "px");
+        });
+    }
 }
 
 function getResponsiveStyle(table) {
     var style = "";
     if (isMobile) {
-        var wrapper = table.closest(".DTFC_ScrollWrapper");
-        var scroll = wrapper.find(".dataTables_scrollBody");
-        var mleft = scroll.scrollLeft() + wrapper.find(".DTFC_LeftWrapper").width();
-        var mWidth = scroll.width() - wrapper.find(".DTFC_LeftWrapper").width() - 20;
-        style = " style='max-width:" + mWidth + "px;margin-left:" + mleft + "px'";
+        var scroll = table.closest(".dataTables_scroll").find(".dataTables_scrollBody");
+        style = " style='max-width:" + (scroll.width() - 20) + "px;margin-left:" + scroll.scrollLeft() + "px'";
     }
     return style;
 }
@@ -301,21 +308,9 @@ function initSetting(data) {
         updateSettingLocalData();
     });
 
-    $('#chk-setting-expand').change(function () {
-        if (!$(this).prop("checked")) {
-            $("tr.child").remove();
-        }
-        initRecipeShow();
-        initChefShow();
-        initEquipShow();
-        initDecorationShow();
-        initCondimentShow();
-        if (private) {
-            initCalChefsShow($('#cal-chefs-table').DataTable());
-            initCalEquipsShow($('#cal-equips-table').DataTable());
-            initCalMaterialsShow($('#cal-materials-table').DataTable());
-        }
+    $('#chk-setting-expand-btn').change(function () {
         updateSettingLocalData();
+        window.location.reload();
     });
 
     $('#chk-setting-auto-update').change(function () {
@@ -746,7 +741,7 @@ function initRecipeTable(data) {
     $('#chk-recipe-show-material').selectpicker().on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
         updateRecipeTableData(data);
         if ($(this).val().length) {
-            $('#recipe-table').DataTable().order([31, 'desc']); // first material eff
+            $('#recipe-table').DataTable().order([32, 'desc']); // first material eff
         }
         $('#recipe-table').DataTable().draw();
         // if (isSelected) {
@@ -813,7 +808,7 @@ function initRecipeTable(data) {
         // if (isSelected) {
         //     $(this).selectpicker('toggle');
         // }
-        $('#recipe-table').DataTable().order([15, 'asc']).draw();   // time
+        $('#recipe-table').DataTable().order([16, 'asc']).draw();   // time
     });
 
     $('#chk-recipe-rank-guest').click(function () {
@@ -832,7 +827,7 @@ function initRecipeTable(data) {
     });
 
     $('#chk-recipe-antique').selectpicker().on('changed.bs.select', function () {
-        $('#recipe-table').DataTable().order([14, 'asc']).draw();
+        $('#recipe-table').DataTable().order([16, 'asc']).draw();   // time
     });
 
     $('#chk-recipe-rank-antique').click(function () {
@@ -1016,19 +1011,19 @@ function updateRecipeQuest(data, forceReinit) {
                             if (data.quests[i].conditions[j].rank == 4) {
                                 diffOrder = true;
                             } else {
-                                order = [15, 'asc'];  // time
+                                order = [16, 'asc'];  // time
                             }
                         }
 
                         if (data.quests[i].conditions[j].materialId && data.quests[i].conditions[j].materialEff) {
                             questMaterials.push(data.quests[i].conditions[j].materialId);
-                            order = [31, 'desc'];   // first material eff
+                            order = [32, 'desc'];   // first material eff
                         } else if (data.quests[i].conditions[j].materialEff) {
-                            order = [20, 'desc'];   // allMaterialsEff
+                            order = [21, 'desc'];   // allMaterialsEff
                         } else if (data.quests[i].conditions[j].goldEff) {
-                            order = [19, 'desc'];  // efficiency
+                            order = [20, 'desc'];  // efficiency
                         } else {
-                            order = [15, 'asc'];  // time
+                            order = [16, 'asc'];  // time
                         }
                     }
 
@@ -1054,7 +1049,7 @@ function updateRecipeQuest(data, forceReinit) {
     }
 
     if (diffOrder) {
-        order = [[data.recipeColNum + data.recipeAddColNum - 2, 'asc'], [15, 'asc']];   // skill diff, time
+        order = [[data.recipeColNum + data.recipeAddColNum - 2, 'asc'], [16, 'asc']];   // skill diff, time
     }
 
     $('#recipe-table').DataTable().order(order).draw();
@@ -1062,6 +1057,15 @@ function updateRecipeQuest(data, forceReinit) {
 
 function reInitRecipeTable(data) {
     var recipeColumns = [
+        {
+            "data": undefined,
+            "defaultContent": "<span class='glyphicon'></span>",
+            "className": "td-expend",
+            "orderable": false,
+            "searchable": false,
+            "visible": expendBtn,
+            "width": "1px"
+        },
         {
             "data": "galleryId",
             "width": "1px"
@@ -1075,7 +1079,7 @@ function reInitRecipeTable(data) {
         {
             "data": "name",
             "width": "86px",
-            "className": "all fixedcolumn"
+            "className": "all"
         },
         {
             "data": {
@@ -1269,8 +1273,14 @@ function reInitRecipeTable(data) {
         fixedHeader = false;
         scrollX = true;
         fixedColumns = {
-            leftColumns: 3
+            left: [3]
         };
+
+    }
+
+    var target = 'td:not(.nodetails)';
+    if (expendBtn) {
+        target = '.td-expend';
     }
 
     var recipeTable = $('#recipe-table').DataTable({
@@ -1297,16 +1307,18 @@ function reInitRecipeTable(data) {
         responsive: {
             details: {
                 type: 'column',
-                target: 'td:not(.nodetails)',
+                target: target,
                 renderer: function (api, rowIdx, columns) {
                     var data = "";
                     for (var i in columns) {
                         if (columns[i].hidden) {
-                            if (i > 4 && i <= 9) {
+                            if (i == 0) {
                                 continue;
-                            } else if (i == 4) {
-                                data += "<div class='col-lg-3 col-sm-6 col-xs-12'>";
-                                for (var j = 4; j <= 9; j++) {
+                            } else if (i > 5 && i <= 10) {
+                                continue;
+                            } else if (i == 5) {
+                                data += "<div class='col-lg-3 col-xs-6'>";
+                                for (var j = 5; j <= 10; j++) {
                                     if (columns[j].data) {
                                         data += "<span class='child-key'>" + columns[j].title + "</span>"
                                             + "<span class='child-value'>" + columns[j].data + "</span>"
@@ -1315,10 +1327,10 @@ function reInitRecipeTable(data) {
                                 data += "</div>";
                             }
                             else {
-                                data += "<div class='col-lg-3 col-sm-6 col-xs-12'>"
-                                    + "<span class='child-key'>" + columns[i].title + (i == 0 || i == 1 ? "" : "：") + "</span>"
+                                data += "<div class='col-lg-3 col-xs-6'>"
+                                    + "<span class='child-key'>" + columns[i].title + (i < 3 ? "" : "：") + "</span>"
                                     + "<span class='child-value'>"
-                                    + (columns[i].data ? columns[i].data : i == 27 ? "无" : i == 28 || i == 29 ? "否" : "")
+                                    + (columns[i].data ? columns[i].data : i == 28 ? "无" : i == 29 || i == 30 ? "否" : "")
                                     + "</span>"
                                     + "</div>";
                             }
@@ -1336,26 +1348,26 @@ function reInitRecipeTable(data) {
     var rankOptions = getRankOptions();
     var gotOptions = getGotOptions();
     recipeTable.MakeCellsEditable({
-        "columns": [28, 29, 30],  // rank, ex, got
+        "columns": [29, 30, 31],  // rank, ex, got
         "inputTypes": [
             {
-                "column": 28,   // rank
+                "column": 29,   // rank
                 "type": "list",
                 "options": rankOptions
             },
             {
-                "column": 29,   // ex
+                "column": 30,   // ex
                 "type": "list",
                 "options": gotOptions
             },
             {
-                "column": 30,   // got
+                "column": 31,   // got
                 "type": "list",
                 "options": gotOptions
             }
         ],
         "onUpdate": function (table, row, cell, oldValue) {
-            if (cell.index().column == 28) {// rank
+            if (cell.index().column == 29) {// rank
                 var recipe = row.data();
 
                 recipe.rankSort = getRankSortValue(recipe.rank);
@@ -1370,13 +1382,9 @@ function reInitRecipeTable(data) {
 
                 row.data(recipe);
                 recipeTable.draw(false);
-
-                if (isMobile) {
-                    $(".pane-recipes .DTFC_LeftBodyLiner").scrollTop($(".pane-recipes .dataTables_scrollBody").scrollTop());
-                }
             }
 
-            if (cell.index().column == 29 && cell.data() != oldValue) {   // ex
+            if (cell.index().column == 30 && cell.data() != oldValue) {   // ex
                 if ($("#chk-setting-auto-update").prop("checked")) {
                     updateRecipeChefTable(data);
                 } else {
@@ -1393,11 +1401,8 @@ function reInitRecipeTable(data) {
         changeInputStyle(this);
     });
 
-    if (isMobile) {
-        initTableResponsiveDisplayEvent(recipeTable);
-        initTableScrollEvent(".pane-recipes");
-    }
-
+    initTableResponsiveDisplayEvent(recipeTable);
+    initTableScrollEvent(".pane-recipes");
 }
 
 function updateRecipeTableData(data) {
@@ -1952,6 +1957,15 @@ function initChefTable(data) {
 function reInitChefTable(data) {
     var chefColumns = [
         {
+            "data": undefined,
+            "defaultContent": "<span class='glyphicon'></span>",
+            "className": "td-expend",
+            "orderable": false,
+            "searchable": false,
+            "visible": expendBtn,
+            "width": "1px"
+        },
+        {
             "data": "galleryId",
             "width": "1px"
         },
@@ -2176,8 +2190,13 @@ function reInitChefTable(data) {
         fixedHeader = false;
         scrollX = true;
         fixedColumns = {
-            leftColumns: 3
+            left: [0, 3]
         };
+    }
+
+    var target = 'td:not(.nodetails)';
+    if (expendBtn) {
+        target = '.td-expend';
     }
 
     var chefTable = $('#chef-table').DataTable({
@@ -2204,38 +2223,40 @@ function reInitChefTable(data) {
         responsive: {
             details: {
                 type: 'column',
-                target: 'td:not(.nodetails)',
+                target: target,
                 renderer: function (api, rowIdx, columns) {
                     var data = "";
                     for (var i in columns) {
                         if (columns[i].hidden) {
-                            if (i > 4 && i <= 9) {
+                            if (i == 0) {
                                 continue;
-                            } else if (i == 4) {
-                                data += "<div class='col-lg-3 col-sm-6 col-xs-12'>";
-                                for (var j = 4; j <= 9; j++) {
+                            } else if (i > 5 && i <= 10) {
+                                continue;
+                            } else if (i == 5) {
+                                data += "<div class='col-lg-3 col-xs-6'>";
+                                for (var j = 5; j <= 10; j++) {
                                     if (columns[j].data) {
                                         data += "<span class='child-key'>" + columns[j].title + "</span>"
                                             + "<span class='child-value'>" + columns[j].data + "</span>"
                                     }
                                 }
                                 data += "</div>";
-                            } else if (i > 11 && i <= 14) {
+                            } else if (i > 12 && i <= 15) {
                                 continue;
-                            } else if (i == 11) {
-                                data += "<div class='col-lg-3 col-sm-6 col-xs-12'><span class='child-key'>采集：</span>";
-                                for (var j = 11; j <= 14; j++) {
+                            } else if (i == 12) {
+                                data += "<div class='col-lg-3 col-xs-6'><span class='child-key'>采集：</span>";
+                                for (var j = 12; j <= 15; j++) {
                                     if (columns[j].data) {
                                         data += "<span class='child-key'>" + columns[j].title + "</span>"
                                             + "<span class='child-value'>" + columns[j].data + "</span>"
                                     }
                                 }
                                 data += "</div>";
-                            } else if (i > 16 && i <= 21) {
+                            } else if (i > 17 && i <= 22) {
                                 continue;
-                            } else if (i == 16) {
-                                data += "<div class='col-lg-3 col-sm-6 col-xs-12'><span class='child-key'>调料：</span>";
-                                for (var j = 16; j <= 21; j++) {
+                            } else if (i == 17) {
+                                data += "<div class='col-lg-3 col-xs-6'><span class='child-key'>调料：</span>";
+                                for (var j = 17; j <= 22; j++) {
                                     if (columns[j].data) {
                                         data += "<span class='child-key'>" + columns[j].title + "</span>"
                                             + "<span class='child-value'>" + columns[j].data + "</span>"
@@ -2244,10 +2265,10 @@ function reInitChefTable(data) {
                                 data += "</div>";
                             }
                             else {
-                                data += "<div class='col-lg-3 col-sm-6 col-xs-12'>"
-                                    + "<span class='child-key'>" + columns[i].title + (i == 0 || i == 1 ? "" : "：") + "</span>"
+                                data += "<div class='col-lg-3 col-xs-6'>"
+                                    + "<span class='child-key'>" + columns[i].title + (i < 3 ? "" : "：") + "</span>"
                                     + "<span class='child-value'>"
-                                    + (columns[i].data ? columns[i].data : i == 18 ? "无" : i == 21 || i == 22 ? "否" : "")
+                                    + (columns[i].data ? columns[i].data : i == 19 ? "无" : i == 22 || i == 23 ? "否" : "")
                                     + "</span>"
                                     + "</div>";
                             }
@@ -2266,28 +2287,28 @@ function reInitChefTable(data) {
     var equipsOptions = getEquipsOptions(data.equips, data.skills);
 
     chefTable.MakeCellsEditable({
-        "columns": [24, 27, 28],  // equipId, ultimate, got
+        "columns": [25, 28, 29],  // equipId, ultimate, got
         "inputTypes": [
             {
-                "column": 24,   // equipId
+                "column": 25,   // equipId
                 "type": "list",
                 "search": true,
                 "clear": true,
                 "options": equipsOptions
             },
             {
-                "column": 27,   // ultimate
+                "column": 28,   // ultimate
                 "type": "list",
                 "options": gotOptions
             },
             {
-                "column": 28,   // got
+                "column": 29,   // got
                 "type": "list",
                 "options": gotOptions
             }
         ],
         "onUpdate": function (table, row, cell, oldValue) {
-            if (cell.index().column == 24) {     // equipId
+            if (cell.index().column == 25) {     // equipId
                 var chef = row.data();
                 var equip = null;
                 var equipDisp = "";
@@ -2304,11 +2325,8 @@ function reInitChefTable(data) {
                 chef.equipDisp = equipDisp;
                 row.data(chef);
                 chefTable.draw(false);
-                if (isMobile) {
-                    $(".pane-chefs .DTFC_LeftBodyLiner").scrollTop($(".pane-chefs .dataTables_scrollBody").scrollTop());
-                }
             }
-            if ((cell.index().column == 24 || cell.index().column == 27) && cell.data() != oldValue) {   // equipId, ultimate
+            if ((cell.index().column == 25 || cell.index().column == 28) && cell.data() != oldValue) {   // equipId, ultimate
                 if ($("#chk-setting-auto-update").prop("checked")) {
                     updateRecipeChefTable(data);
                 } else {
@@ -2324,14 +2342,21 @@ function reInitChefTable(data) {
         changeInputStyle(this);
     });
 
-    if (isMobile) {
-        initTableResponsiveDisplayEvent(chefTable);
-        initTableScrollEvent(".pane-chefs");
-    }
+    initTableResponsiveDisplayEvent(chefTable);
+    initTableScrollEvent(".pane-chefs");
 }
 
 function initEquipTable(data) {
     var equipColumns = [
+        {
+            "data": undefined,
+            "defaultContent": "<span class='glyphicon'></span>",
+            "className": "td-expend",
+            "orderable": false,
+            "searchable": false,
+            "visible": expendBtn,
+            "width": "1px"
+        },
         {
             "data": "galleryId",
             "width": "1px"
@@ -2375,8 +2400,13 @@ function initEquipTable(data) {
         fixedHeader = false;
         scrollX = true;
         fixedColumns = {
-            leftColumns: 3
+            left: [0, 3]
         };
+    }
+
+    var target = 'td:not(.nodetails)';
+    if (expendBtn) {
+        target = '.td-expend';
     }
 
     var equipTable = $('#equip-table').DataTable({
@@ -2395,6 +2425,7 @@ function initEquipTable(data) {
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12'p>>",
         deferRender: true,
+        order: [],
         autoWidth: false,
         fixedHeader: fixedHeader,
         scrollX: scrollX,
@@ -2402,17 +2433,21 @@ function initEquipTable(data) {
         responsive: {
             details: {
                 type: 'column',
-                target: 'td:not(.nodetails)',
+                target: target,
                 renderer: function (api, rowIdx, columns) {
                     var data = "";
                     for (var i in columns) {
                         if (columns[i].hidden) {
-                            data += "<div class='col-lg-3 col-sm-6 col-xs-12'>"
-                                + "<span class='child-key'>" + columns[i].title + (i == 0 || i == 1 ? "" : "：") + "</span>"
-                                + "<span class='child-value'>"
-                                + columns[i].data
-                                + "</span>"
-                                + "</div>";
+                            if (i == 0) {
+                                continue;
+                            } else {
+                                data += "<div class='col-lg-3 col-xs-6'>"
+                                    + "<span class='child-key'>" + columns[i].title + (i < 3 ? "" : "：") + "</span>"
+                                    + "<span class='child-value'>"
+                                    + columns[i].data
+                                    + "</span>"
+                                    + "</div>";
+                            }
                         }
                     }
 
@@ -2543,7 +2578,7 @@ function initEquipTable(data) {
         var oneType = "";
         if ($(this).val().length == 1) {
             oneType = $(this).val()[0];
-            equipTable.order([4, 'desc']);  // skill
+            equipTable.order([5, 'desc']);  // skill
         }
 
         equipTable.rows().every(function (rowIdx, tableLoop, rowLoop) {
@@ -2599,10 +2634,8 @@ function initEquipTable(data) {
         equipTable.draw();
     });
 
-    if (isMobile) {
-        initTableResponsiveDisplayEvent(equipTable);
-        initTableScrollEvent(".pane-equips");
-    }
+    initTableResponsiveDisplayEvent(equipTable);
+    initTableScrollEvent(".pane-equips");
 
     initEquipShow();
 }
@@ -2616,6 +2649,15 @@ function initDecorationTable(data) {
             "orderDataType": "dom-selected",
             "orderSequence": ["desc", "asc"],
             "width": "30px"
+        },
+        {
+            "data": undefined,
+            "defaultContent": "<span class='glyphicon'></span>",
+            "className": "td-expend",
+            "orderable": false,
+            "searchable": false,
+            "visible": expendBtn,
+            "width": "1px"
         },
         {
             "data": "id",
@@ -2698,8 +2740,13 @@ function initDecorationTable(data) {
         fixedHeader = false;
         scrollX = true;
         fixedColumns = {
-            leftColumns: 4
+            left: [0, 4]
         };
+    }
+
+    var target = 'td:not(.nodetails)';
+    if (expendBtn) {
+        target = '.td-expend';
     }
 
     var decorationTable = $('#decoration-table').DataTable({
@@ -2728,7 +2775,7 @@ function initDecorationTable(data) {
             style: 'multi',
             selector: 'td.select-checkbox'
         },
-        order: [[0, "desc"], [10, "desc"]],  //avg eff
+        order: [[0, "desc"], [11, "desc"]],  //avg eff
         deferRender: false, // for select
         autoWidth: false,
         fixedHeader: fixedHeader,
@@ -2737,17 +2784,21 @@ function initDecorationTable(data) {
         responsive: {
             details: {
                 type: 'column',
-                target: 'td:not(.nodetails)',
+                target: target,
                 renderer: function (api, rowIdx, columns) {
                     var data = "";
                     for (var i in columns) {
                         if (columns[i].hidden) {
-                            data += "<div class='col-lg-3 col-sm-6 col-xs-12'>"
-                                + "<span class='child-key'>" + columns[i].title + (i == 1 || i == 2 ? "" : "：") + "</span>"
-                                + "<span class='child-value'>"
-                                + columns[i].data
-                                + "</span>"
-                                + "</div>";
+                            if (i < 2) {
+                                continue;
+                            } else {
+                                data += "<div class='col-lg-3 col-xs-6'>"
+                                    + "<span class='child-key'>" + columns[i].title + (i < 4 ? "" : "：") + "</span>"
+                                    + "<span class='child-value'>"
+                                    + columns[i].data
+                                    + "</span>"
+                                    + "</div>";
+                            }
                         }
                     }
 
@@ -2866,10 +2917,8 @@ function initDecorationTable(data) {
         updateDecorationSum(data);
     });
 
-    if (isMobile) {
-        initTableResponsiveDisplayEvent(decorationTable);
-        initTableScrollEvent(".pane-decorations");
-    }
+    initTableResponsiveDisplayEvent(decorationTable);
+    initTableScrollEvent(".pane-decorations");
 
     initDecorationShow();
 }
@@ -2993,7 +3042,7 @@ function reInitMaterialTable(data) {
     if (isMobile) {
         scrollX = true;
         fixedColumns = {
-            leftColumns: 1
+            left: [0]
         };
     }
 
@@ -3010,15 +3059,22 @@ function reInitMaterialTable(data) {
         fixedColumns: fixedColumns
     });
 
-    if (isMobile) {
-        initTableScrollEvent(".pane-materials");
-    }
+    initTableScrollEvent(".pane-materials");
 
     materialTable.draw();
 }
 
 function initCondimentTable(data) {
     var condimentColumns = [
+        {
+            "data": undefined,
+            "defaultContent": "<span class='glyphicon'></span>",
+            "className": "td-expend",
+            "orderable": false,
+            "searchable": false,
+            "visible": expendBtn,
+            "width": "1px"
+        },
         {
             "data": "condimentId",
             "width": "1px"
@@ -3062,8 +3118,13 @@ function initCondimentTable(data) {
         fixedHeader = false;
         scrollX = true;
         fixedColumns = {
-            leftColumns: 3
+            left: [0, 3]
         };
+    }
+
+    var target = 'td:not(.nodetails)';
+    if (expendBtn) {
+        target = '.td-expend';
     }
 
     var condimentTable = $('#condiment-table').DataTable({
@@ -3082,6 +3143,7 @@ function initCondimentTable(data) {
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12'p>>",
         deferRender: true,
+        order: [],
         autoWidth: false,
         fixedHeader: fixedHeader,
         scrollX: scrollX,
@@ -3089,17 +3151,21 @@ function initCondimentTable(data) {
         responsive: {
             details: {
                 type: 'column',
-                target: 'td:not(.nodetails)',
+                target: target,
                 renderer: function (api, rowIdx, columns) {
                     var data = "";
                     for (var i in columns) {
                         if (columns[i].hidden) {
-                            data += "<div class='col-lg-3 col-sm-6 col-xs-12'>"
-                                + "<span class='child-key'>" + columns[i].title + (i == 0 || i == 1 ? "" : "：") + "</span>"
-                                + "<span class='child-value'>"
-                                + columns[i].data
-                                + "</span>"
-                                + "</div>";
+                            if (i == 0) {
+                                continue;
+                            } else {
+                                data += "<div class='col-lg-3 col-xs-6'>"
+                                    + "<span class='child-key'>" + columns[i].title + (i < 3 ? "" : "：") + "</span>"
+                                    + "<span class='child-value'>"
+                                    + columns[i].data
+                                    + "</span>"
+                                    + "</div>";
+                            }
                         }
                     }
 
@@ -3204,7 +3270,7 @@ function initCondimentTable(data) {
         var oneType = "";
         if ($(this).val().length == 1) {
             oneType = $(this).val()[0];
-            condimentTable.order([4, 'desc']);  // skill
+            condimentTable.order([5, 'desc']);  // skill
         }
 
         condimentTable.rows().every(function (rowIdx, tableLoop, rowLoop) {
@@ -3246,10 +3312,8 @@ function initCondimentTable(data) {
         condimentTable.draw();
     });
 
-    if (isMobile) {
-        initTableResponsiveDisplayEvent(condimentTable);
-        initTableScrollEvent(".pane-condiments");
-    }
+    initTableResponsiveDisplayEvent(condimentTable);
+    initTableScrollEvent(".pane-condiments");
 
     initCondimentShow();
 }
@@ -3292,7 +3356,7 @@ function initQuestTable(data) {
         fixedHeader = false;
         scrollX = true;
         fixedColumns = {
-            leftColumns: 1
+            leftColumns: [0]
         };
     }
 
@@ -3312,6 +3376,7 @@ function initQuestTable(data) {
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-12'p>>",
         deferRender: true,
+        order: [],
         autoWidth: false,
         fixedHeader: fixedHeader,
         scrollX: scrollX,
@@ -3349,9 +3414,7 @@ function initQuestTable(data) {
         initQuestShow(questTable);
     });
 
-    if (isMobile) {
-        initTableScrollEvent(".pane-quest");
-    }
+    initTableScrollEvent(".pane-quest");
 
     initQuestShow(questTable);
 }
@@ -3682,7 +3745,7 @@ function generateChefsExportData() {
 
 function generateMenuExportData() {
     var exportData = {};
-    exportData["version"] = 2;
+    exportData["version"] = 3;
     exportData["recipe"] = $("#chk-recipe-show").val();
     exportData["chef"] = $("#chk-chef-show").val();
     exportData["equip"] = $("#chk-equip-show").val();
@@ -3692,7 +3755,15 @@ function generateMenuExportData() {
 }
 
 function updateMenu(person) {
-    if (person && person.menu && person.menu.version == 2) {
+    if (person && person.menu) {
+        if (person.menu.version == 2) {
+            updateMenu2to3(person.menu.recipe, "0");
+            updateMenu2to3(person.menu.chef, "0");
+            updateMenu2to3(person.menu.equip, "0");
+            updateMenu2to3(person.menu.decoration, "1");
+            updateMenu2to3(person.menu.condiment, "0");
+        }
+
         $("#chk-recipe-show").selectpicker('val', person.menu.recipe)
         $("#chk-chef-show").selectpicker('val', person.menu.chef);
         $("#chk-equip-show").selectpicker('val', person.menu.equip);
@@ -3701,10 +3772,17 @@ function updateMenu(person) {
     }
 }
 
+function updateMenu2to3(list, add) {
+    for (var i in list) {
+        list[i] = (Number(list[i]) + 1).toString();
+    }
+    list.push(add);
+}
+
 function generateSettingExportData() {
     var exportData = {};
     exportData["help"] = $("#chk-setting-show-help").prop("checked");
-    exportData["expand"] = $("#chk-setting-expand").prop("checked");
+    exportData["expandbtn"] = $("#chk-setting-expand-btn").prop("checked");
     exportData["auto"] = $("#chk-setting-auto-update").prop("checked");
     exportData["final"] = $("#chk-setting-show-final").prop("checked");
     exportData["mark"] = $("#chk-setting-done-mark").prop("checked");
@@ -3721,11 +3799,12 @@ function updateSetting(person) {
                 $('#chk-setting-show-help').bootstrapToggle('off');
             }
         }
-        if ($('#chk-setting-expand').prop("checked") != person.setting.expand) {
-            if (person.setting.expand) {
-                $('#chk-setting-expand').bootstrapToggle('on');
+        if ($('#chk-setting-expand-btn').prop("checked") != person.setting.expandbtn) {
+            if (person.setting.expandbtn) {
+                $('#chk-setting-expand-btn').bootstrapToggle('on');
             } else {
-                $('#chk-setting-expand').bootstrapToggle('off');
+                $('#chk-setting-expand-btn').bootstrapToggle('off');
+                expendBtn = false;
             }
         }
         if ($('#chk-setting-auto-update').prop("checked") != person.setting.auto) {
@@ -5047,6 +5126,15 @@ function initCalChefsTable(data) {
             "width": "30px"
         },
         {
+            "data": undefined,
+            "defaultContent": "<span class='glyphicon'></span>",
+            "className": "td-expend",
+            "orderable": false,
+            "searchable": false,
+            "visible": expendBtn,
+            "width": "1px"
+        },
+        {
             "data": "galleryId",
             "width": "1px"
         },
@@ -5142,6 +5230,11 @@ function initCalChefsTable(data) {
         }
     ];
 
+    var target = 'td:not(.nodetails)';
+    if (expendBtn) {
+        target = '.td-expend';
+    }
+
     var calChefsTable = $('#cal-chefs-table').DataTable({
         data: [],
         columns: calChefsColumns,
@@ -5175,16 +5268,18 @@ function initCalChefsTable(data) {
         responsive: {
             details: {
                 type: 'column',
-                target: 'td:not(.nodetails)',
+                target: target,
                 renderer: function (api, rowIdx, columns) {
                     var data = "";
                     for (var i in columns) {
                         if (columns[i].hidden) {
-                            if (i > 4 && i <= 9) {
+                            if (i < 2) {
                                 continue;
-                            } else if (i == 4) {
-                                data += "<div class='col-lg-3 col-sm-6 col-xs-12'>";
-                                for (var j = 4; j <= 9; j++) {
+                            } else if (i > 5 && i <= 10) {
+                                continue;
+                            } else if (i == 5) {
+                                data += "<div class='col-lg-3 col-xs-6'>";
+                                for (var j = 5; j <= 10; j++) {
                                     if (columns[j].data) {
                                         data += "<span class='child-key'>" + columns[j].title + "</span>"
                                             + "<span class='child-value'>" + columns[j].data + "</span>"
@@ -5192,8 +5287,8 @@ function initCalChefsTable(data) {
                                 }
                                 data += "</div>";
                             } else {
-                                data += "<div class='col-lg-3 col-sm-6 col-xs-12'>"
-                                    + "<span class='child-key'>" + columns[i].title + (i == 1 ? "" : "：") + "</span>"
+                                data += "<div class='col-lg-3 col-xs-6'>"
+                                    + "<span class='child-key'>" + columns[i].title + (i < 3 ? "" : "：") + "</span>"
                                     + "<span class='child-value'>"
                                     + columns[i].data
                                     + "</span>"
@@ -5228,10 +5323,10 @@ function initCalChefsTable(data) {
 
     var options = getEquipsOptions(data.equips, data.skills);
     calChefsTable.MakeCellsEditable({
-        "columns": [14, 15],  // addition, equip
+        "columns": [15, 16],  // addition, equip
         "inputTypes": [
             {
-                "column": 15,   // equip
+                "column": 16,   // equip
                 "type": "list",
                 "search": true,
                 "clear": true,
@@ -5239,7 +5334,7 @@ function initCalChefsTable(data) {
             }
         ],
         "onUpdate": function (table, row, cell, oldValue) {
-            if (cell.index().column == 15) {     // equipId
+            if (cell.index().column == 16) {     // equipId
                 var chef = row.data();
                 var equip = null;
                 var equipDisp = "";
@@ -5308,6 +5403,15 @@ function initCalEquipsTable(data) {
             "width": "30px"
         },
         {
+            "data": undefined,
+            "defaultContent": "<span class='glyphicon'></span>",
+            "className": "td-expend",
+            "orderable": false,
+            "searchable": false,
+            "visible": expendBtn,
+            "width": "1px"
+        },
+        {
             "data": "galleryId",
             "width": "1px"
         },
@@ -5332,6 +5436,11 @@ function initCalEquipsTable(data) {
             "data": "origin"
         }
     ];
+
+    var target = 'td:not(.nodetails)';
+    if (expendBtn) {
+        target = '.td-expend';
+    }
 
     var calEquipsTable = $('#cal-equips-table').DataTable({
         data: [],
@@ -5359,7 +5468,7 @@ function initCalEquipsTable(data) {
             style: 'multi',
             selector: 'td.select-checkbox'
         },
-        order: [[4, "desc"]],  //origin
+        order: [[5, "desc"]],  //origin
         autoWidth: false,
         createdRow: function (row, data, index) {
             $(row).addClass('rarity-' + data.rarity);
@@ -5367,17 +5476,21 @@ function initCalEquipsTable(data) {
         responsive: {
             details: {
                 type: 'column',
-                target: 'td:not(.nodetails)',
+                target: target,
                 renderer: function (api, rowIdx, columns) {
                     var data = "";
                     for (var i in columns) {
                         if (columns[i].hidden) {
-                            data += "<div class='col-lg-3 col-sm-6 col-xs-12'>"
-                                + "<span class='child-key'>" + columns[i].title + (i == 1 ? "" : "：") + "</span>"
-                                + "<span class='child-value'>"
-                                + columns[i].data
-                                + "</span>"
-                                + "</div>";
+                            if (i < 2) {
+                                continue;
+                            } else {
+                                data += "<div class='col-lg-3 col-xs-6'>"
+                                    + "<span class='child-key'>" + columns[i].title + (i < 3 ? "" : "：") + "</span>"
+                                    + "<span class='child-value'>"
+                                    + columns[i].data
+                                    + "</span>"
+                                    + "</div>";
+                            }
                         }
                     }
                     return data ? "<div class='child-inner'>" + data + "</div>" : false;
@@ -5457,6 +5570,15 @@ function initCalMaterialsTable(data) {
             "width": "30px"
         },
         {
+            "data": undefined,
+            "defaultContent": "<span class='glyphicon'></span>",
+            "className": "td-expend",
+            "orderable": false,
+            "searchable": false,
+            "visible": expendBtn,
+            "width": "1px"
+        },
+        {
             "data": "materialId",
             "width": "1px"
         },
@@ -5480,6 +5602,11 @@ function initCalMaterialsTable(data) {
             "width": "50px"
         }
     ];
+
+    var target = 'td:not(.nodetails)';
+    if (expendBtn) {
+        target = '.td-expend';
+    }
 
     var calMaterialsTable = $('#cal-materials-table').DataTable({
         data: [],
@@ -5507,7 +5634,7 @@ function initCalMaterialsTable(data) {
             style: 'multi',
             selector: 'td.select-checkbox'
         },
-        order: [[3, "desc"]],  //origin
+        order: [[4, "desc"]],  //origin
         autoWidth: false,
         createdRow: function (row, data, index) {
             $(row).addClass('origin-' + data.originVal);
@@ -5515,17 +5642,21 @@ function initCalMaterialsTable(data) {
         responsive: {
             details: {
                 type: 'column',
-                target: 'td:not(.nodetails)',
+                target: target,
                 renderer: function (api, rowIdx, columns) {
                     var data = "";
                     for (var i in columns) {
                         if (columns[i].hidden) {
-                            data += "<div class='col-lg-3 col-sm-6 col-xs-12'>"
-                                + "<span class='child-key'>" + columns[i].title + (i == 1 ? "" : "：") + "</span>"
-                                + "<span class='child-value'>"
-                                + columns[i].data
-                                + "</span>"
-                                + "</div>";
+                            if (i < 2) {
+                                continue;
+                            } else {
+                                data += "<div class='col-lg-3 col-xs-6'>"
+                                    + "<span class='child-key'>" + columns[i].title + (i < 3 ? "" : "：") + "</span>"
+                                    + "<span class='child-value'>"
+                                    + columns[i].data
+                                    + "</span>"
+                                    + "</div>";
+                            }
                         }
                     }
                     return data ? "<div class='child-inner'>" + data + "</div>" : false;
@@ -5552,7 +5683,7 @@ function initCalMaterialsTable(data) {
     });
 
     calMaterialsTable.MakeCellsEditable({
-        "columns": [4, 5]  // addition, quantity
+        "columns": [5, 6]  // addition, quantity
     });
 
     $('#chk-cal-materials-show').on('changed.bs.select', function () {
@@ -6500,10 +6631,6 @@ function updateRecipeChefTable(data) {
         updateChefTableData(data);
         $('#recipe-table').DataTable().draw(false);
         $('#chef-table').DataTable().draw(false);
-        if (isMobile) {
-            $(".pane-recipes .DTFC_LeftBodyLiner").scrollTop($(".pane-recipes .dataTables_scrollBody").scrollTop());
-            $(".pane-chefs .DTFC_LeftBodyLiner").scrollTop($(".pane-chefs .dataTables_scrollBody").scrollTop());
-        }
         $('.loading').addClass("hidden");
     }, 0);
 
@@ -7292,11 +7419,20 @@ function changeTableHeaderClass(table, column, check) {
     if (check) {
         $(table.column(column).header()).removeClass("none never").addClass("all");
     } else {
-        if ($('#chk-setting-expand').prop("checked")) {
-            $(table.column(column).header()).removeClass("all never").addClass("none");
-        } else {
-            $(table.column(column).header()).removeClass("all none").addClass("never");
-        }
+        $(table.column(column).header()).removeClass("all never").addClass("none");
+    }
+}
+
+function resetExpendColumn(table, select) {
+    var selectVal = $(select).val();
+    var options = select + " option";
+    var expendVal = $(options + ":first").val();
+    var index = selectVal.indexOf(expendVal);
+    if (index >= 0) {
+        selectVal.splice(index, 1);
+    }
+    if (selectVal.length == $(options).length - 1) {
+        changeTableHeaderClass(table, Number(expendVal), false);
     }
 }
 
@@ -7307,10 +7443,12 @@ function initRecipeShow() {
         changeTableHeaderClass(recipeTable, Number($(this).val()), this.selected);
     });
 
-    var chkSkill = $('#chk-recipe-show option[value=4]').is(':selected');   // skill
-    for (var i = 5; i <= 9; i++) {
+    var chkSkill = $('#chk-recipe-show option[value=5]').is(':selected');   // skill
+    for (var i = 6; i <= 10; i++) {
         changeTableHeaderClass(recipeTable, i, chkSkill);
     }
+
+    resetExpendColumn(recipeTable, "#chk-recipe-show");
 
     recipeTable.responsive.rebuild();
     recipeTable.responsive.recalc();
@@ -7324,20 +7462,22 @@ function initChefShow() {
         changeTableHeaderClass(chefTable, Number($(this).val()), this.selected);
     });
 
-    var chkSkill = $('#chk-chef-show option[value=4]').is(':selected');     // skill
-    for (var i = 5; i <= 9; i++) {
+    var chkSkill = $('#chk-chef-show option[value=5]').is(':selected');     // skill
+    for (var i = 6; i <= 10; i++) {
         changeTableHeaderClass(chefTable, i, chkSkill);
     }
 
-    var chkExplore = $('#chk-chef-show option[value=11]').is(':selected');  // explore
-    for (var i = 12; i <= 14; i++) {
+    var chkExplore = $('#chk-chef-show option[value=12]').is(':selected');  // explore
+    for (var i = 13; i <= 15; i++) {
         changeTableHeaderClass(chefTable, i, chkExplore);
     }
 
-    var chkExplore = $('#chk-chef-show option[value=16]').is(':selected');  // condiment
-    for (var i = 17; i <= 21; i++) {
+    var chkExplore = $('#chk-chef-show option[value=17]').is(':selected');  // condiment
+    for (var i = 18; i <= 22; i++) {
         changeTableHeaderClass(chefTable, i, chkExplore);
     }
+
+    resetExpendColumn(chefTable, "#chk-chef-show");
 
     chefTable.responsive.rebuild();
     chefTable.responsive.recalc();
@@ -7351,6 +7491,8 @@ function initEquipShow() {
         changeTableHeaderClass(equipTable, Number($(this).val()), this.selected);
     });
 
+    resetExpendColumn(equipTable, "#chk-equip-show");
+
     equipTable.responsive.rebuild();
     equipTable.responsive.recalc();
     equipTable.columns.adjust().draw(false);
@@ -7363,6 +7505,8 @@ function initCondimentShow() {
         changeTableHeaderClass(condimentTable, Number($(this).val()), this.selected);
     });
 
+    resetExpendColumn(condimentTable, "#chk-condiment-show");
+
     condimentTable.responsive.rebuild();
     condimentTable.responsive.recalc();
     condimentTable.columns.adjust().draw(false);
@@ -7374,6 +7518,8 @@ function initDecorationShow() {
     $("#chk-decoration-show option").each(function () {
         changeTableHeaderClass(decorationTable, Number($(this).val()), this.selected);
     });
+
+    resetExpendColumn(decorationTable, "#chk-decoration-show");
 
     decorationTable.responsive.rebuild();
     decorationTable.responsive.recalc();
@@ -7391,10 +7537,12 @@ function initCalChefsShow(calChefsTable) {
         changeTableHeaderClass(calChefsTable, Number($(this).val()), this.selected);
     });
 
-    var chkSkill = $('#chk-cal-chefs-show option[value=4]').is(':selected');
-    for (var i = 5; i <= 9; i++) {
+    var chkSkill = $('#chk-cal-chefs-show option[value=5]').is(':selected');
+    for (var i = 6; i <= 10; i++) {
         changeTableHeaderClass(calChefsTable, i, chkSkill);
     }
+
+    resetExpendColumn(calChefsTable, "#chk-cal-chefs-show");
 
     calChefsTable.responsive.rebuild();
     calChefsTable.responsive.recalc();
@@ -7407,6 +7555,8 @@ function initCalEquipsShow(calEquipsTable) {
         changeTableHeaderClass(calEquipsTable, Number($(this).val()), this.selected);
     });
 
+    resetExpendColumn(calEquipsTable, "#chk-cal-equips-show");
+
     calEquipsTable.responsive.rebuild();
     calEquipsTable.responsive.recalc();
     calEquipsTable.columns.adjust().draw(false);
@@ -7417,6 +7567,8 @@ function initCalMaterialsShow(calMaterialsTable) {
     $("#chk-cal-materials-show option").each(function () {
         changeTableHeaderClass(calMaterialsTable, Number($(this).val()), this.selected);
     });
+
+    resetExpendColumn(calMaterialsTable, "#chk-cal-materials-show");
 
     calMaterialsTable.responsive.rebuild();
     calMaterialsTable.responsive.recalc();

@@ -6,12 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" id="viewport" content="width=device-width">
     <link rel="shortcut icon" href="favicon.ico?v=1" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="css/style.min.css?v=6" />
-    <script type="text/javascript" src="js/script.min.js?v=17"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.min.css?v=7" />
+    <script type="text/javascript" src="js/script.min.js?v=18"></script>
     <script type="text/javascript" src="js/common.min.js?v=39"></script>
-    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=47" />
-    <script type="text/javascript" src="js/food.min.js?v=167"></script>
-    <link rel="stylesheet" type="text/css" href="css/image.css?v=78" />
+    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=48" />
+    <script type="text/javascript" src="js/food.min.js?v=168"></script>
+    <link rel="stylesheet" type="text/css" href="css/image.css?v=79" />
     <script>
         $(function () {
             $.ajax({
@@ -19,7 +19,7 @@
                 success: function (json) {
                     init(json);
                 },
-                url: 'data/data.min.json?v=37'
+                url: 'data/data.min.json?v=38'
             });
         });
     </script>
@@ -90,33 +90,34 @@
                 <div class="tab-content">
                     <div class="tab-pane pane-recipes active">
                         <div class="header-wrapper">
-                            <div class="inline-wrapper" data-toggle="tooltip" title="单击一条数据会显示所有非固定列内容">
+                            <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="单击一条数据会显示所有非固定列内容">
                                 <select id="chk-recipe-show" class="selectpicker" multiple data-width="fit"
                                     data-dropdown-align-right='auto' data-none-selected-text="固定显示列"
                                     data-selected-text-format="static">
-                                    <option value='0'>编号</option>
-                                    <option value='1'>图</option>
-                                    <option value='3' selected>星</option>
-                                    <option value='4'>技法</option>
-                                    <option value='10'>调料</option>
-                                    <option value='11' selected>材料</option>
-                                    <option value='12' selected>单价</option>
-                                    <option value='13'>熟练加价</option>
-                                    <option value='15' selected>单时间</option>
-                                    <option value='16' selected>一组</option>
-                                    <option value='17'>总价</option>
-                                    <option value='18' selected>总时间</option>
-                                    <option value='19' selected>金币效率</option>
-                                    <option value='20'>总耗材效率</option>
-                                    <option value='21'>来源</option>
-                                    <option value='22'>解锁</option>
-                                    <option value='23'>合成</option>
-                                    <option value='25' selected>贵客</option>
-                                    <option value='26' data-subtext="第一次菜品升阶 (升优-升特-升神) 必来的贵客">升阶贵客</option>
-                                    <option value='27' data-subtext="第一次做神级菜品时贵客送的符文">神级符文</option>
-                                    <option value='28' data-subtext="个人数据, 该列点击可编辑, 用来记录你当前做到的品阶">品阶</option>
-                                    <option value='29' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已经熟练该菜谱">已熟练</option>
-                                    <option value='30' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已拥有该菜谱">已有</option>
+                                    <option value='0' selected>展开按钮</option>
+                                    <option value='1'>编号</option>
+                                    <option value='2'>图</option>
+                                    <option value='4' selected>星</option>
+                                    <option value='5'>技法</option>
+                                    <option value='11'>调料</option>
+                                    <option value='12' selected>材料</option>
+                                    <option value='13' selected>单价</option>
+                                    <option value='14'>熟练加价</option>
+                                    <option value='16' selected>单时间</option>
+                                    <option value='17' selected>一组</option>
+                                    <option value='18'>总价</option>
+                                    <option value='19' selected>总时间</option>
+                                    <option value='20' selected>金币效率</option>
+                                    <option value='21'>总耗材效率</option>
+                                    <option value='22'>来源</option>
+                                    <option value='23'>解锁</option>
+                                    <option value='24'>合成</option>
+                                    <option value='26' selected>贵客</option>
+                                    <option value='27' data-subtext="第一次菜品升阶 (升优-升特-升神) 必来的贵客">升阶贵客</option>
+                                    <option value='28' data-subtext="第一次做神级菜品时贵客送的符文">神级符文</option>
+                                    <option value='29' data-subtext="个人数据, 该列点击可编辑, 用来记录你当前做到的品阶">品阶</option>
+                                    <option value='30' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已经熟练该菜谱">已熟练</option>
+                                    <option value='31' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已拥有该菜谱">已有</option>
                                 </select>
                             </div>
                             <div class="inline-wrapper" data-toggle="tooltip" title="是否使用熟练加成">
@@ -134,8 +135,9 @@
                                 </a>
                             </div>
                             <div id="select-partial-ultimate-recipe" class="inline-wrapper">
-                                <div id="select-partial-ultimate" class="inline-wrapper chef-apply-ultimate"
-                                    data-toggle="tooltip" title="选择后所有厨师会得到额外加成">
+                                <div id="select-partial-ultimate"
+                                    class="inline-wrapper select-wrapper chef-apply-ultimate" data-toggle="tooltip"
+                                    title="选择后所有厨师会得到额外加成">
                                     <select id="chk-chef-partial-ultimate" multiple class="monitor-none"
                                         data-width="170px" data-dropdown-align-right='auto' data-live-search="true"
                                         data-live-search-placeholder="查找" data-none-results-text="没有找到"
@@ -146,7 +148,7 @@
                             </div>
                         </div>
                         <div class="header-wrapper form-inline">
-                            <div class="inline-wrapper" data-toggle="tooltip" title="选择星级,过滤菜谱">
+                            <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="选择星级,过滤菜谱">
                                 <select id="chk-recipe-rarity" multiple class="selectpicker monitor-none"
                                     data-width="120px" data-dropdown-align-right='auto' data-none-selected-text="选择星级"
                                     data-selected-text-format="count>3" data-count-selected-text="{0} 星级"
@@ -160,7 +162,8 @@
                                 </select>
                             </div>
                             <div class="input-group">
-                                <div class="inline-wrapper input-group-first" data-toggle="tooltip" title="选择技法,过滤菜谱">
+                                <div class="inline-wrapper select-wrapper input-group-first" data-toggle="tooltip"
+                                    title="选择技法,过滤菜谱">
                                     <select id="chk-recipe-skill" multiple class="selectpicker monitor-none"
                                         data-width="120px" data-dropdown-align-right='auto'
                                         data-none-selected-text="选择技法" data-selected-text-format="count>4"
@@ -183,7 +186,8 @@
                                 </span>
                             </div>
                             <div class="input-group">
-                                <div class="inline-wrapper input-group-first" data-toggle="tooltip" title="选择类型,过滤菜谱">
+                                <div class="inline-wrapper select-wrapper input-group-first" data-toggle="tooltip"
+                                    title="选择类型,过滤菜谱">
                                     <select id="chk-recipe-category" multiple class="selectpicker monitor-none"
                                         data-width="120px" data-dropdown-align-right='auto'
                                         data-none-selected-text="选择类型" data-selected-text-format="count>2"
@@ -203,7 +207,7 @@
                                     </label>
                                 </span>
                             </div>
-                            <div class="inline-wrapper" data-toggle="tooltip" title="选择调料,过滤菜谱">
+                            <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="选择调料,过滤菜谱">
                                 <select id="chk-recipe-condiment" multiple class="selectpicker monitor-none"
                                     data-width="100px" data-dropdown-align-right='auto' data-none-selected-text="选择调料"
                                     data-selected-text-format="count>3" data-count-selected-text="{0} 调料"
@@ -240,7 +244,7 @@
                                 未出
                             </label>
                             <div class="input-group">
-                                <div class="inline-wrapper input-group-first" data-toggle="tooltip"
+                                <div class="inline-wrapper select-wrapper input-group-first" data-toggle="tooltip"
                                     title="显示食材的消耗效率, 并过滤菜谱">
                                     <select id="chk-recipe-show-material" multiple class="monitor-none"
                                         data-live-search="true" data-live-search-placeholder="查找" data-width="135px"
@@ -258,7 +262,8 @@
                                 </span>
                             </div>
                             <div class="input-group">
-                                <div class="inline-wrapper input-group-first" data-toggle="tooltip" title="选择贵客,过滤菜谱">
+                                <div class="inline-wrapper select-wrapper input-group-first" data-toggle="tooltip"
+                                    title="选择贵客,过滤菜谱">
                                     <select id="chk-recipe-guest" multiple class="monitor-none" data-live-search="true"
                                         data-live-search-placeholder="查找" data-width="120px"
                                         data-dropdown-align-right='auto' data-none-selected-text="选择贵客"
@@ -283,7 +288,8 @@
                                 </span>
                             </div>
                             <div class="input-group">
-                                <div class="inline-wrapper input-group-first" data-toggle="tooltip" title="选择符文,过滤菜谱">
+                                <div class="inline-wrapper select-wrapper input-group-first" data-toggle="tooltip"
+                                    title="选择符文,过滤菜谱">
                                     <select id="chk-recipe-antique" multiple class="monitor-none"
                                         data-live-search="true" data-live-search-placeholder="查找" data-width="110px"
                                         data-dropdown-align-right='auto' data-none-selected-text="选择符文"
@@ -327,7 +333,7 @@
                                 </span>
                             </div>
                             <div class="input-group">
-                                <div class="inline-wrapper input-group-first" data-toggle="tooltip"
+                                <div class="inline-wrapper select-wrapper input-group-first" data-toggle="tooltip"
                                     title="显示厨师可做的品阶以及效率">
                                     <select id="chk-recipe-show-chef" multiple class="monitor-none" data-width="130px"
                                         data-live-search="true" data-live-search-style="commaSplitContains"
@@ -337,7 +343,7 @@
                                         data-actions-box="true" data-actions-box-only-clear="true"
                                         data-deselect-all-text="清空"></select>
                                 </div>
-                                <span class="input-group-btn input-group-last" data-toggle="tooltip"
+                                <span class="input-group-btn input-group-last select-wrapper" data-toggle="tooltip"
                                     title="过滤修炼菜谱 一个厨师时有效">
                                     <select id="select-recipe-chef-quest" class="selectpicker monitor-none"
                                         data-width="125px" data-dropdown-align-right='auto'
@@ -346,7 +352,7 @@
                                     </select>
                                 </span>
                             </div>
-                            <div class="inline-wrapper" data-toggle="tooltip" title="选择任务, 过滤菜谱">
+                            <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="选择任务, 过滤菜谱">
                                 <select id="select-recipe-quest" multiple class="monitor-none" data-live-search="true"
                                     data-live-search-placeholder="查找" data-width="120px"
                                     data-dropdown-align-right='auto' data-none-selected-text="选择任务"
@@ -367,24 +373,25 @@
                     </div>
                     <div class="tab-pane pane-chefs">
                         <div class="header-wrapper">
-                            <div class="inline-wrapper" data-toggle="tooltip" title="单击一条数据会显示所有非固定列内容">
+                            <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="单击一条数据会显示所有非固定列内容">
                                 <select id="chk-chef-show" class="selectpicker" multiple data-width="fit"
                                     data-dropdown-align-right='auto' data-none-selected-text="固定显示列"
                                     data-selected-text-format="static">
-                                    <option value='0'>编号</option>
-                                    <option value='1'>图</option>
-                                    <option value='3' selected>星</option>
-                                    <option value='4' selected>技法</option>
-                                    <option value='10' selected>技能</option>
-                                    <option value='11' selected>采集</option>
-                                    <option value='15'>性别</option>
-                                    <option value='16'>调料</option>
-                                    <option value='22'>来源</option>
-                                    <option value='24' data-subtext="个人数据, 该列点击可编辑, 用来记录你该厨师佩戴的厨具">厨具</option>
-                                    <option value='25'>修炼任务</option>
-                                    <option value='26' selected>修炼技能</option>
-                                    <option value='27' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已修炼该厨师">已修炼</option>
-                                    <option value='28' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已拥有该厨师">已有</option>
+                                    <option value='0' selected>展开按钮</option>
+                                    <option value='1'>编号</option>
+                                    <option value='2'>图</option>
+                                    <option value='4' selected>星</option>
+                                    <option value='5' selected>技法</option>
+                                    <option value='11' selected>技能</option>
+                                    <option value='12' selected>采集</option>
+                                    <option value='16'>性别</option>
+                                    <option value='17'>调料</option>
+                                    <option value='23'>来源</option>
+                                    <option value='25' data-subtext="个人数据, 该列点击可编辑, 用来记录你该厨师佩戴的厨具">厨具</option>
+                                    <option value='26'>修炼任务</option>
+                                    <option value='27' selected>修炼技能</option>
+                                    <option value='28' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已修炼该厨师">已修炼</option>
+                                    <option value='29' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已拥有该厨师">已有</option>
                                 </select>
                             </div>
                             <div class="inline-wrapper" data-toggle="tooltip" title="是否使用厨具技能加成">
@@ -408,7 +415,7 @@
                             <div id="select-partial-ultimate-chef" class="inline-wrapper"></div>
                         </div>
                         <div class="header-wrapper form-inline">
-                            <div class="inline-wrapper" data-toggle="tooltip" title="选择星级,过滤厨师">
+                            <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="选择星级,过滤厨师">
                                 <select id="chk-chef-rarity" multiple class="selectpicker monitor-none"
                                     data-width="120px" data-dropdown-align-right='auto' data-none-selected-text="选择星级"
                                     data-selected-text-format="count>3" data-count-selected-text="{0} 星级"
@@ -421,7 +428,7 @@
                                     <option value="5">5星</option>
                                 </select>
                             </div>
-                            <div class="inline-wrapper" data-toggle="tooltip" title="选择性别,过滤厨师">
+                            <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="选择性别,过滤厨师">
                                 <select id="chk-chef-gender" multiple class="selectpicker monitor-none"
                                     data-width="110px" data-dropdown-align-right='auto' data-none-selected-text="选择性别"
                                     data-actions-box="true" data-actions-box-only-clear="true"
@@ -431,7 +438,7 @@
                                 </select>
                             </div>
                             <div class="input-group">
-                                <div class="inline-wrapper" data-toggle="tooltip" title="选择类型,过滤厨师">
+                                <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="选择类型,过滤厨师">
                                     <select id="chk-chef-category" multiple class="selectpicker monitor-none"
                                         data-width="120px" data-dropdown-align-right='auto'
                                         data-none-selected-text="选择类型" data-selected-text-format="count"
@@ -450,7 +457,7 @@
                                     </label>
                                 </span>
                             </div>
-                            <div class="inline-wrapper" data-toggle="tooltip" title="选择调料,过滤厨师">
+                            <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="选择调料,过滤厨师">
                                 <select id="chk-chef-condiment" multiple class="selectpicker monitor-none"
                                     data-width="100px" data-dropdown-align-right='auto' data-none-selected-text="选择调料"
                                     data-selected-text-format="count>3" data-count-selected-text="{0} 调料"
@@ -475,7 +482,7 @@
                                 未出
                             </label>
                             <div class="input-group">
-                                <div class="inline-wrapper input-group-first" data-toggle="tooltip"
+                                <div class="inline-wrapper select-wrapper input-group-first" data-toggle="tooltip"
                                     title="显示厨师可做的品阶以及效率">
                                     <select id="chk-chef-show-recipe" multiple class="monitor-none"
                                         data-live-search="true" data-live-search-style="commaSplitContains"
@@ -485,8 +492,9 @@
                                         data-none-results-text="没有找到" data-actions-box="true"
                                         data-actions-box-only-clear="true" data-deselect-all-text="清空"></select>
                                 </div>
-                                <div class="inline-wrapper input-group-last">
-                                    <select id="chk-chef-show-skill-diff" class="selectpicker" data-width="125px" data-dropdown-align-right='auto'>
+                                <div class="inline-wrapper select-wrapper input-group-last">
+                                    <select id="chk-chef-show-skill-diff" class="selectpicker" data-width="125px"
+                                        data-dropdown-align-right='auto'>
                                         <option value="0">不显示能力差</option>
                                         <option value="5">传级能力差</option>
                                         <option value="4">神级能力差</option>
@@ -502,19 +510,21 @@
                     </div>
                     <div class="tab-pane pane-equips">
                         <div class="header-wrapper form-inline">
-                            <div class="inline-wrapper" data-toggle="tooltip" title="单击一条数据会显示所有非固定列内容">
+                            <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="单击一条数据会显示所有非固定列内容">
                                 <select id="chk-equip-show" class="selectpicker" multiple data-width="fit"
                                     data-dropdown-align-right='auto' data-none-selected-text="固定显示列"
                                     data-selected-text-format="static">
-                                    <option value='0'>编号</option>
-                                    <option value='1'>图</option>
-                                    <option value='3' selected>星</option>
-                                    <option value='4' selected>技能</option>
-                                    <option value='5' selected>来源</option>
+                                    <option value='0' selected>展开按钮</option>
+                                    <option value='1'>编号</option>
+                                    <option value='2'>图</option>
+                                    <option value='4' selected>星</option>
+                                    <option value='5' selected>技能</option>
+                                    <option value='6' selected>来源</option>
                                 </select>
                             </div>
                             <div class="input-group">
-                                <div class="inline-wrapper input-group-first" data-toggle="tooltip" title="选择类型,过滤厨具">
+                                <div class="inline-wrapper select-wrapper input-group-first" data-toggle="tooltip"
+                                    title="选择类型,过滤厨具">
                                     <select id="chk-equip-skill" multiple class="monitor-none" data-width="150px"
                                         data-live-search="true" data-live-search-placeholder="查找"
                                         data-none-results-text="没有找到" data-dropdown-align-right='auto'
@@ -592,26 +602,27 @@
                     </div>
                     <div class="tab-pane pane-decorations">
                         <div class="header-wrapper">
-                            <div class="inline-wrapper" data-toggle="tooltip" title="单击一条数据会显示所有非固定列内容">
+                            <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="单击一条数据会显示所有非固定列内容">
                                 <select id="chk-decoration-show" class="selectpicker" multiple data-width="fit"
                                     data-dropdown-align-right='auto' data-none-selected-text="固定显示列"
                                     data-selected-text-format="static">
-                                    <option value='1'>编号</option>
-                                    <option value='2'>图</option>
-                                    <option value='4' selected>收入加成</option>
-                                    <option value='5' selected>最小玉璧</option>
-                                    <option value='6' selected>最大玉璧</option>
-                                    <option value='7' selected>冷却时间</option>
-                                    <option value='8'>最小玉璧/天</option>
-                                    <option value='9'>最大玉璧/天</option>
-                                    <option value='10' selected>平均玉璧/天</option>
-                                    <option value='11'>位置</option>
-                                    <option value='12' selected>套装</option>
-                                    <option value='13' selected>套装加成</option>
-                                    <option value='14'>来源</option>
+                                    <option value='1' selected>展开按钮</option>
+                                    <option value='2'>编号</option>
+                                    <option value='3'>图</option>
+                                    <option value='5' selected>收入加成</option>
+                                    <option value='6' selected>最小玉璧</option>
+                                    <option value='7' selected>最大玉璧</option>
+                                    <option value='8' selected>冷却时间</option>
+                                    <option value='9'>最小玉璧/天</option>
+                                    <option value='10'>最大玉璧/天</option>
+                                    <option value='11' selected>平均玉璧/天</option>
+                                    <option value='12'>位置</option>
+                                    <option value='13' selected>套装</option>
+                                    <option value='14' selected>套装加成</option>
+                                    <option value='15'>来源</option>
                                 </select>
                             </div>
-                            <div class="inline-wrapper" data-toggle="tooltip" title="选择类型,过滤装饰">
+                            <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="选择类型,过滤装饰">
                                 <select id="chk-decoration-position" multiple class="selectpicker monitor-none"
                                     data-width="110px" data-dropdown-align-right='auto' data-none-selected-text="选择位置"
                                     data-selected-text-format="count" data-count-selected-text="{0} 位置"
@@ -635,8 +646,11 @@
                                     <option value="3包间">3包间</option>
                                 </select>
                             </div>
-                            <select id="select-decoration-suit" data-width="125px" data-dropdown-align-right='auto'
-                                data-none-selected-text='选择套装'></select>
+                            <div class="select-wrapper">
+                                <select id="select-decoration-suit" data-live-search='true' data-width="125px"
+                                    data-dropdown-align-right='auto' data-live-search-placeholder='查找'
+                                    data-none-results-text='没有找到' data-none-selected-text='选择套装'></select>
+                            </div>
                             <a id="btn-decoration-deselect-all" class="btn btn-default">
                                 清空选择
                             </a>
@@ -651,18 +665,20 @@
                     <div class="tab-pane pane-materials"></div>
                     <div class="tab-pane pane-condiments">
                         <div class="header-wrapper form-inline">
-                            <div class="inline-wrapper" data-toggle="tooltip" title="单击一条数据会显示所有非固定列内容">
+                            <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="单击一条数据会显示所有非固定列内容">
                                 <select id="chk-condiment-show" class="selectpicker" multiple data-width="fit"
                                     data-dropdown-align-right='auto' data-none-selected-text="固定显示列"
                                     data-selected-text-format="static">
-                                    <option value='0'>编号</option>
-                                    <option value='1'>图</option>
-                                    <option value='3' selected>星</option>
-                                    <option value='4' selected>技能</option>
-                                    <option value='5' selected>来源</option>
+                                    <option value='0' selected>展开按钮</option>
+                                    <option value='1'>编号</option>
+                                    <option value='2'>图</option>
+                                    <option value='4' selected>星</option>
+                                    <option value='5' selected>技能</option>
+                                    <option value='6' selected>来源</option>
                                 </select>
                             </div>
-                            <div class="inline-wrapper input-group-first" data-toggle="tooltip" title="选择来源,过滤调料">
+                            <div class="inline-wrapper select-wrapper input-group-first" data-toggle="tooltip"
+                                title="选择来源,过滤调料">
                                 <select id="chk-condiment-origin" multiple class="selectpicker monitor-none"
                                     data-width="120px" data-dropdown-align-right='auto' data-none-selected-text="选择来源"
                                     data-selected-text-format="count" data-count-selected-text="{0} 来源"
@@ -677,7 +693,8 @@
                                 </select>
                             </div>
                             <div class="input-group">
-                                <div class="inline-wrapper input-group-first" data-toggle="tooltip" title="选择类型,过滤调料">
+                                <div class="inline-wrapper select-wrapper input-group-first" data-toggle="tooltip"
+                                    title="选择类型,过滤调料">
                                     <select id="chk-condiment-skill" multiple class="monitor-none" data-width="135px"
                                         data-live-search="true" data-live-search-placeholder="查找"
                                         data-none-results-text="没有找到" data-dropdown-align-right='auto'
@@ -712,7 +729,7 @@
                         </div>
                     </div>
                     <div class="tab-pane pane-quest">
-                        <div class="header-wrapper form-inline">
+                        <div class="header-wrapper select-wrapper form-inline">
                             <select id="select-quest-type" data-width="auto" data-dropdown-align-right='auto'>
                                 <option value='主线任务'>主线任务</option>
                                 <option value='支线任务'>支线任务</option>
@@ -734,6 +751,7 @@
                     <table id="recipe-table-header" class="hidden">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>No.</th>
                                 <th></th>
                                 <th>菜名</th>
@@ -777,6 +795,7 @@
                     <table id="chef-table-header" class="hidden">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>No.</th>
                                 <th></th>
                                 <th>名字</th>
@@ -816,6 +835,7 @@
                     <table id="equip-table" class="table table-hover table-bordered" width="100%">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>No.</th>
                                 <th></th>
                                 <th>名字</th>
@@ -832,6 +852,7 @@
                     <table id="decoration-table" class="table table-hover table-bordered" width="100%">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th></th>
                                 <th>No.</th>
                                 <th></th>
@@ -855,7 +876,9 @@
             <div class="tab-pane pane-materials">
                 <!-- <div class="alert alert-info"></div> -->
                 <div class="header-wrapper form-inline">
-                    <select id="select-material-origin" data-width="80px" data-dropdown-align-right='auto'></select>
+                    <div class="select-wrapper">
+                        <select id="select-material-origin" data-width="80px" data-dropdown-align-right='auto'></select>
+                    </div>
                     <label class="btn btn-default" data-toggle="tooltip" title="是否使用季节加成">
                         <input type="checkbox" id="chk-material-season" class="monitor-none">
                         <i class="fa fa-check glyphicon glyphicon-ok"></i>
@@ -886,6 +909,7 @@
                     <table id="condiment-table" class="table table-hover table-bordered" width="100%">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>No.</th>
                                 <th></th>
                                 <th>名字</th>
@@ -963,21 +987,25 @@
                     <div class="tab-content">
                         <div id="pane-cal-rules" class="tab-pane active">
                             <div class="header-wrapper form-inline">
-                                <select id="select-cal-rule" data-live-search='true' data-width="235px"
-                                    data-dropdown-align-right='auto' data-live-search-placeholder='查找'
-                                    data-none-results-text='没有找到' data-none-selected-text='选择规则'></select>
+                                <div class="select-wrapper">
+                                    <select id="select-cal-rule" data-live-search='true' data-width="235px"
+                                        data-dropdown-align-right='auto' data-live-search-placeholder='查找'
+                                        data-none-results-text='没有找到' data-none-selected-text='选择规则'></select>
+                                </div>
                                 <button id="btn-cal-rule-load" class="btn btn-danger" type="button">
                                     加载
                                 </button>
                                 <div class="cal-menu inline-wrapper form-inline hidden">
                                     <div class="input-group">
                                         <div class="input-group-addon">排序</div>
-                                        <select id="select-cal-order" class="selectpicker" data-width="170px"
-                                            data-dropdown-align-right='auto'>
-                                            <option value='分数'>分数 一次性金币任务</option>
-                                            <option value='时间'>时间 一次性时间任务</option>
-                                            <option value='效率'>效率 金币/时间</option>
-                                        </select>
+                                        <div class="select-wrapper">
+                                            <select id="select-cal-order" class="selectpicker" data-width="170px"
+                                                data-dropdown-align-right='auto'>
+                                                <option value='分数'>分数 一次性金币任务</option>
+                                                <option value='时间'>时间 一次性时间任务</option>
+                                                <option value='效率'>效率 金币/时间</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="input-group">
                                         <div class="input-group-addon">装饰加成</div>
@@ -1091,22 +1119,28 @@
                                         <input type="text" class="form-control" id="input-cal-ultimate-5-price">
                                         <div class="input-group-addon">%</div>
                                     </div>
-                                    <select id="chk-cal-partial-ultimate" multiple data-live-search="false"
-                                        data-width="180px" data-dropdown-align-right='auto'
-                                        data-none-selected-text="上场类技能已修炼 0" data-selected-text-format="count>0"
-                                        data-count-selected-text="上场类技能已修炼 {0}" data-actions-box="true"
-                                        data-select-all-text="全选" data-deselect-all-text="清空"></select>
-                                    <select id="chk-cal-self-ultimate" multiple data-live-search="false"
-                                        data-width="180px" data-dropdown-align-right='auto'
-                                        data-none-selected-text="个人类技能已修炼 0" data-selected-text-format="count>0"
-                                        data-count-selected-text="个人类技能已修炼 {0}" data-actions-box="true"
-                                        data-select-all-text="全选" data-deselect-all-text="清空"></select>
-                                    <select id="chk-cal-ex" multiple data-live-search="true"
-                                        data-live-search-placeholder="查找" data-width="150px"
-                                        data-dropdown-align-right='auto' data-none-selected-text="菜谱已熟练 0"
-                                        data-selected-text-format="count>0" data-count-selected-text="菜谱已熟练 {0}"
-                                        data-actions-box="true" data-select-all-text="全选"
-                                        data-deselect-all-text="清空"></select>
+                                    <div class="select-wrapper">
+                                        <select id="chk-cal-partial-ultimate" multiple data-live-search="false"
+                                            data-width="180px" data-dropdown-align-right='auto'
+                                            data-none-selected-text="上场类技能已修炼 0" data-selected-text-format="count>0"
+                                            data-count-selected-text="上场类技能已修炼 {0}" data-actions-box="true"
+                                            data-select-all-text="全选" data-deselect-all-text="清空"></select>
+                                    </div>
+                                    <div class="select-wrapper">
+                                        <select id="chk-cal-self-ultimate" multiple data-live-search="false"
+                                            data-width="180px" data-dropdown-align-right='auto'
+                                            data-none-selected-text="个人类技能已修炼 0" data-selected-text-format="count>0"
+                                            data-count-selected-text="个人类技能已修炼 {0}" data-actions-box="true"
+                                            data-select-all-text="全选" data-deselect-all-text="清空"></select>
+                                    </div>
+                                    <div class="select-wrapper">
+                                        <select id="chk-cal-ex" multiple data-live-search="true"
+                                            data-live-search-placeholder="查找" data-width="150px"
+                                            data-dropdown-align-right='auto' data-none-selected-text="菜谱已熟练 0"
+                                            data-selected-text-format="count>0" data-count-selected-text="菜谱已熟练 {0}"
+                                            data-actions-box="true" data-select-all-text="全选"
+                                            data-deselect-all-text="清空"></select>
+                                    </div>
                                     <button id="btn-cal-load-ultimate" class="btn btn-default" type="button"
                                         data-toggle="tooltip" title="读取厨师图鉴中的个人已修炼数据">
                                         读取已修炼
@@ -1131,17 +1165,20 @@
                         </div>
                         <div id="pane-cal-chefs" class="tab-pane">
                             <div class="header-wrapper">
-                                <select id="chk-cal-chefs-show" class="selectpicker" multiple data-width="fit"
-                                    data-dropdown-align-right='auto' data-none-selected-text="固定显示列"
-                                    data-selected-text-format="static">
-                                    <option value='1'>编号</option>
-                                    <option value='3' selected>星</option>
-                                    <option value='4'>技法</option>
-                                    <option value='10' selected>技能</option>
-                                    <option value='11' selected>性别</option>
-                                    <option value='12'>来源</option>
-                                    <option value='13' selected>类别</option>
-                                </select>
+                                <div class="select-wrapper">
+                                    <select id="chk-cal-chefs-show" class="selectpicker" multiple data-width="fit"
+                                        data-dropdown-align-right='auto' data-none-selected-text="固定显示列"
+                                        data-selected-text-format="static">
+                                        <option value='1' selected>展开按钮</option>
+                                        <option value='2'>编号</option>
+                                        <option value='4' selected>星</option>
+                                        <option value='5'>技法</option>
+                                        <option value='11' selected>技能</option>
+                                        <option value='12' selected>性别</option>
+                                        <option value='13'>来源</option>
+                                        <option value='14' selected>类别</option>
+                                    </select>
+                                </div>
                                 <a id="btn-cal-chefs-select-all" class="btn btn-default">
                                     选择全部厨师
                                 </a>
@@ -1184,6 +1221,7 @@
                                     <thead>
                                         <tr>
                                             <th></th>
+                                            <th></th>
                                             <th>No.</th>
                                             <th>名字</th>
                                             <th>星</th>
@@ -1206,14 +1244,17 @@
                         </div>
                         <div id="pane-cal-equips" class="tab-pane">
                             <div class="header-wrapper">
-                                <select id="chk-cal-equips-show" class="selectpicker" multiple data-width="fit"
-                                    data-dropdown-align-right='auto' data-none-selected-text="固定显示列"
-                                    data-selected-text-format="static">
-                                    <option value='1'>编号</option>
-                                    <option value='3' selected>星</option>
-                                    <option value='4' selected>技能</option>
-                                    <option value='5' selected>来源</option>
-                                </select>
+                                <div class="select-wrapper">
+                                    <select id="chk-cal-equips-show" class="selectpicker" multiple data-width="fit"
+                                        data-dropdown-align-right='auto' data-none-selected-text="固定显示列"
+                                        data-selected-text-format="static">
+                                        <option value='1' selected>展开按钮</option>
+                                        <option value='2'>编号</option>
+                                        <option value='4' selected>星</option>
+                                        <option value='5' selected>技能</option>
+                                        <option value='6' selected>来源</option>
+                                    </select>
+                                </div>
                                 <a id="btn-cal-equips-select-all" class="btn btn-default">
                                     选择全部厨具
                                 </a>
@@ -1246,6 +1287,7 @@
                                     <thead>
                                         <tr>
                                             <th></th>
+                                            <th></th>
                                             <th>No.</th>
                                             <th>名字</th>
                                             <th>星</th>
@@ -1258,12 +1300,15 @@
                         </div>
                         <div id="pane-cal-materials" class="tab-pane">
                             <div class="header-wrapper">
-                                <select id="chk-cal-materials-show" class="selectpicker" multiple data-width="fit"
-                                    data-dropdown-align-right='auto' data-none-selected-text="固定显示列"
-                                    data-selected-text-format="static">
-                                    <option value='1'>编号</option>
-                                    <option value='3' selected>来源</option>
-                                </select>
+                                <div class="select-wrapper">
+                                    <select id="chk-cal-materials-show" class="selectpicker" multiple data-width="fit"
+                                        data-dropdown-align-right='auto' data-none-selected-text="固定显示列"
+                                        data-selected-text-format="static">
+                                        <option value='1' selected>展开按钮</option>
+                                        <option value='2'>编号</option>
+                                        <option value='4' selected>来源</option>
+                                    </select>
+                                </div>
                                 <a id="btn-cal-materials-select-all" class="btn btn-default">
                                     选择全部食材
                                 </a>
@@ -1318,6 +1363,7 @@
                                     <thead>
                                         <tr>
                                             <th></th>
+                                            <th></th>
                                             <th>No.</th>
                                             <th>名字</th>
                                             <th>来源</th>
@@ -1330,13 +1376,15 @@
                         </div>
                         <div id="pane-cal-optimal-results" class="tab-pane pane-cal-results">
                             <div class="header-wrapper form-inline">
-                                <select id="select-cal-type" class="selectpicker" data-width="100px"
-                                    data-dropdown-align-right='auto'>
-                                    <option value='mode1'>正常模式</option>
-                                    <option value='mode2'>选菜模式</option>
-                                    <option value='mode3'>脚本模式</option>
-                                    <option value='guest'>贵客模式</option>
-                                </select>
+                                <div class="select-wrapper">
+                                    <select id="select-cal-type" class="selectpicker" data-width="100px"
+                                        data-dropdown-align-right='auto'>
+                                        <option value='mode1'>正常模式</option>
+                                        <option value='mode2'>选菜模式</option>
+                                        <option value='mode3'>脚本模式</option>
+                                        <option value='guest'>贵客模式</option>
+                                    </select>
+                                </div>
                                 <label class="btn btn-default">
                                     <input type="checkbox" id="chk-cal-results-no-equips">
                                     <i class="fa fa-check glyphicon glyphicon-ok"></i>
@@ -1651,11 +1699,11 @@
                             鼠标指向按钮时显示帮助信息
                         </span>
                     </p>
-                    <p>
-                        <input type="checkbox" id="chk-setting-expand" data-toggle="toggle" data-on="可展开" data-off="不展开"
-                            data-onstyle="default" data-size="small" data-width="65px" checked>
+                    <p class="mobile-setting">
+                        <input type="checkbox" id="chk-setting-expand-btn" data-toggle="toggle" data-on="按钮格"
+                            data-off="任意格" data-onstyle="default" data-size="small" data-width="65px" checked>
                         <span class="setting-tip">
-                            点击一条记录展开显示所有非固定列内容
+                            点击显示所有非固定列内容
                         </span>
                     </p>
                     <p>
@@ -1680,6 +1728,7 @@
                         </span>
                     </p>
                     <p>
+                    <div class="select-wrapper">
                         <select id="select-setting-page-length" class="selectpicker" data-style="btn btn-default btn-sm"
                             data-width="70px" data-dropdown-align-right='auto'>
                             <option value='5'>5</option>
@@ -1689,9 +1738,10 @@
                             <option value='100'>100</option>
                             <option value='-1'>所有</option>
                         </select>
-                        <span class="setting-tip">
-                            一页显示多少个
-                        </span>
+                    </div>
+                    <span class="setting-tip">
+                        一页显示多少个
+                    </span>
                     </p>
                 </div>
             </div>

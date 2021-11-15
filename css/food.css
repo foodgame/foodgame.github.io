@@ -3,6 +3,20 @@ body {
     margin: 5px 15px 0 15px;
 }
 
+input:not(.arrow)::-webkit-outer-spin-button,
+input:not(.arrow)::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number]:not(.arrow) {
+    -moz-appearance: textfield;
+}
+
+.dropdown-backdrop {
+    display: none;
+}
+
 .nav-tabs>li>a {
     padding: 8px 15px;
 }
@@ -152,9 +166,18 @@ label.btn input[type="checkbox"]:checked+.fa {
     top: 2px;
 }
 
-.pane-cal-results {
+.pane-cal-sub .header-wrapper {
+    margin-top: 10px;
+}
+
+#pane-cal-optimal-results.pane-cal-sub .header-wrapper,
+#pane-cal-settings.pane-cal-sub .header-wrapper {
+    margin-top: 0;
+}
+
+#pane-cal-optimal-results {
     position: relative;
-    min-height: 85vh;
+    min-height: 60vh;
 }
 
 .cal-results-progress {
@@ -187,27 +210,25 @@ label.btn input[type="checkbox"]:checked+.fa {
     padding-top: 5px;
 }
 
-.pane-cal .tabs-left>.nav-tabs {
+.pane-cal .nav-tabs {
     display: none;
 }
 
-.pane-cal .tab-content {
-    padding-top: 0px;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.pane-cal #pane-cal-recipes-results .select-info {
+.pane-cal #pane-cal-recipes .select-info {
     display: none;
 }
 
-.pane-cal.admin #pane-cal-recipes-results .select-info {
+.pane-cal.admin #pane-cal-recipes .select-info {
     display: inline-block;
     margin-left: 5px;
 }
 
-.pane-cal.admin .nav-tabs {
-    display: table-cell;
+.admin-only {
+    display: none;
+}
+
+.pane-cal.admin .admin-only {
+    display: inline-block;
 }
 
 .table-hover tbody tr.selected:hover td {
@@ -232,13 +253,8 @@ table.dataTable tbody>tr>.selected {
 .selected-sum {
     color: #337ab7;
     font-weight: bold;
-    font-size: 20px;
-}
-
-.selected-sum-2 {
-    height: 12px;
-    font-size: 12px;
-    padding-left: 2px;
+    font-size: 16px;
+    text-align: center;
 }
 
 .box .input-group,
@@ -255,56 +271,9 @@ table.dataTable tbody>tr>.selected {
     width: auto;
 }
 
-.tabs-left {
-    display: table;
-    width: 100%;
-}
-
-.tabs-left>.nav-tabs {
-    display: table-cell;
-    width: 90px;
-    border-bottom: 0;
-    border-right: 1px solid #ddd;
-}
-
-.tabs-left>.nav-tabs>li {
-    float: none;
-    text-align: center;
-}
-
-.tabs-left>.nav-tabs>li>a {
-    margin-bottom: 3px;
-    margin-right: -1px;
-    border-radius: 4px 0 0 4px;
-}
-
-.tabs-left>.nav-tabs>li>a:hover,
-.tabs-left>.nav-tabs>li>a:focus {
-    border-color: #eeeeee #dddddd #eeeeee #eeeeee;
-}
-
-.tabs-left>.nav-tabs .active>a,
-.tabs-left>.nav-tabs .active>a:hover,
-.tabs-left>.nav-tabs .active>a:focus {
-    border-color: #ddd transparent #ddd #ddd;
-    border-right-color: #ffffff;
-}
-
-.tabs-left>.tab-content {
-    display: table-cell;
-}
-
 .form-control.input-addition {
     width: 60px;
     text-align: center;
-}
-
-.cal-td-input-addition .form-control {
-    width: 60px;
-}
-
-.cal-td-input-quantity .form-control {
-    width: 60px;
 }
 
 .bootstrap-select>select.mobile-device:focus+.dropdown-toggle,
@@ -335,7 +304,7 @@ table.dataTable tbody>tr>.selected {
 }
 
 .bootstrap-select .dropdown-menu li a.selected {
-    background-color: #ddd;
+    background-color: #aaa;
 }
 
 .bootstrap-select .dropdown-menu input.form-control {
@@ -353,48 +322,252 @@ table.dataTable tbody>tr>.selected {
     color: #fff;
 }
 
+.table-select-picker .bs-donebutton,
+.selected-item-wrapper .select-picker .bs-donebutton {
+    display: none;
+}
+
 .bs-actionsbox .btn-group button:only-child {
     width: 100%;
 }
 
-#cal-self-select-table td {
+.btn-group .btn.active {
+    background-color: #337ab7;
+    color: #fff;
+}
+
+.selected-item-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 1130px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+.selected-item {
+    display: flex;
+    flex-direction: row;
+    font-size: 13px;
+    margin: 4px 0;
+}
+
+.selected-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    position: relative;
+    text-align: center;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+    box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+    border-radius: 4px;
+    margin: 0 2px;
+    padding: 0 1px;
+}
+
+.selected-box:first-child {
+    margin-right: 2px;
+}
+
+.selected-box:last-child {
+    margin-left: 2px;
+}
+
+.chef-box,
+.equip-box,
+.condiment-box {
+    width: 115px;
+    height: 120px;
+}
+
+.recipe-box {
+    width: 250px;
+    height: 120px;
+}
+
+.chef-box .content .name,
+.equip-box .content .name,
+.condiment-box .content .name {
+    font-weight: bold;
+    color: #337ab7;
+}
+
+.recipe-box .recipe-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 1;
+    background-color: inherit;
+    border-radius: 4px;
+}
+
+.recipe-box .recipe-box-1 {
+    width: 50%;
+    height: 120px;
+}
+
+.recipe-box.no-details .recipe-box-1 {
+    width: 100%;
+}
+
+.recipe-box .recipe-name,
+.recipe-box .recipe-condiment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.recipe-box .recipe-name {
+    font-weight: bold;
+    color: #337ab7;
+    height: 25px;
+}
+
+.recipe-box .recipe-result {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 50px;
+    font-size: 11px;
+}
+
+.recipe-box .recipe-result .score {
+    font-size: 12px;
+}
+
+.recipe-box .red {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+.recipe-box .recipe-box-2 {
+    width: 50%;
+    height: 120px;
+    font-size: 12px;
+    text-align: left;
+}
+
+.recipe-box.no-details .recipe-box-2 {
+    display: none;
+}
+
+.recipe-box .recipe-box-2 .skill {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.recipe-box .recipe-box-2 .skill span {
+    padding-right: 10px;
+}
+
+.recipe-box .recipe-box-2 .material span {
+    white-space: nowrap;
+    width: 50%;
+    display: inline-block;
+}
+
+.recipe-box .recipe-box-2 .rank {
+    margin-left: -30px;
+    text-align: center;
+}
+
+.recipe-box .recipe-box-2 .add span {
+    white-space: nowrap;
+    width: 50%;
+    display: inline-block;
+}
+
+.recipe-box .recipe-quantity {
+    height: 25px;
+    cursor: pointer;
+}
+
+.recipe-box .recipe-quantity .form-control {
+    width: 40px;
+    font-size: 13px;
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    border: none;
+    text-align: right;
+    line-height: 25px;
+    height: 25px;
+    font-weight: bold;
+    color: #337ab7;
+}
+
+.recipe-box .recipe-quantity .available,
+.recipe-box .recipe-quantity .max {
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+.recipe-box .recipe-quantity .available {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+.recipe-box .recipe-condiment .toggle-handle {
+    display: none;
+}
+
+.recipe-box .recipe-condiment {
     height: 20px;
 }
 
-#cal-self-select-table .cal-td-quantity .form-control {
-    width: 60px;
+.recipe-box .recipe-condiment .btn {
+    height: 20px !important;
 }
 
-#cal-self-select-table .cal-td-chef-name,
-#cal-self-select-table .cal-td-recipe-name,
-#cal-self-select-table .cal-td-equip-name,
-#cal-self-select-table .cal-td-quantity,
-#cal-self-select-table .cal-td-condiment-name,
-#cal-self-select-table .cal-td-recipe-condiment {
-    background-color: rgba(0, 0, 0, 0.05);
+.recipe-box .recipe-condiment .btn-default {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    border: none;
+    line-height: 20px !important;
+    font-size: 13px;
+    font-weight: bold;
+    color: #337ab7;
 }
 
-#cal-self-select-table .cal-td-chef-name,
-#cal-self-select-table .cal-td-recipe-name,
-#cal-self-select-table .cal-td-equip-name {
-    width: 125px;
+.selected-item .select-picker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
 }
 
-#cal-self-select-table .cal-td-condiment-name {
-    width: 110px;
+.selected-item .select-picker .bootstrap-select>.dropdown-toggle {
+    display: none;
 }
 
-#cal-self-select-table .cal-td-recipe-condiment {
-    width: 50px;
+.editing {
+    background-color: #5bc0de !important;
+}
+
+.table-select-picker {
+    position: fixed;
+    z-index: 100;
+}
+
+.table-select-picker .bootstrap-select>.dropdown-toggle {
+    display: none;
 }
 
 #input-export-import {
     width: 100% !important;
     min-height: 50vh;
-}
-
-#pane-cal-recipes-results {
-    margin-top: 10px;
 }
 
 #input-cal-decoration {
@@ -411,6 +584,10 @@ table.dataTable tbody>tr>.selected {
 
 #cal-ultimate .input-group .form-control {
     width: 55px;
+}
+
+#btn-cal-set-custom {
+    float: right;
 }
 
 .main-function {
@@ -573,12 +750,32 @@ table.history-table tr td.history-dt {
     background-color: #5bc0de;
 }
 
-.option-warning {
-    color: #ff5353 !important;
+.dropdown-item .text .name {
+    font-weight: bold;
+    color: #555;
 }
 
-.option-sub-warning .text-muted {
-    color: #ff5353 !important;
+.dropdown-item .text .subtext,
+.dropdown-item .text .score,
+.dropdown-item .text .available,
+.dropdown-item .text .skill {
+    font-size: 11px;
+    color: #777;
+    padding-left: 5px;
+}
+
+.dropdown-item .text .available {
+    color: #55aaff;
+}
+
+li.disabled .dropdown-item .text span {
+    font-weight: normal !important;
+    color: #ccc !important;
+}
+
+.warning-skill.dropdown-item .text .name,
+.warning-skill.dropdown-item .text .skill {
+    color: #ff6666;
 }
 
 .form-control {
@@ -696,7 +893,8 @@ div.dataTables_scrollBody {
     border-left: none !important;
 }
 
-table.dataTable.table-bordered.dtfc-has-left {
+table.dataTable.table-bordered.dtfc-has-left,
+div.dataTables_scroll.dtfc-has-left table.table-bordered {
     border-left: 1px solid #ddd;
 }
 
@@ -799,6 +997,15 @@ table.dataTable tr.selected th.select-checkbox:after {
         max-width: 200px;
     }
 
+    .selected-item-wrapper .bootstrap-select .dropdown-menu li a span.text {
+        max-width: 300px;
+    }
+
+    .table-select-picker .bs-donebutton,
+    .selected-item-wrapper .select-picker .bs-donebutton {
+        display: block;
+    }
+
     #mobile-menu-btn {
         position: absolute;
         top: 5px;
@@ -819,8 +1026,10 @@ table.dataTable tr.selected th.select-checkbox:after {
 
     .pane-materials,
     .pane-export-import,
-    .pane-cal,
-    .pane-info {
+    .pane-info,
+    #pane-cal-settings,
+    #pane-cal-rules,
+    #pane-cal-optimal-results {
         padding-top: 35px;
     }
 
@@ -835,5 +1044,84 @@ table.dataTable tr.selected th.select-checkbox:after {
 
     ::-webkit-scrollbar-thumb {
         background: #ccc
+    }
+}
+
+@media (max-width: 1169px) {
+    .selected-sum {
+        font-size: 13px;
+    }
+
+    .selected-item-wrapper {
+        flex-direction: row;
+        max-width: 600px;
+    }
+
+    .selected-item {
+        flex-direction: column;
+        margin: 0;
+        width: 33%;
+        min-width: 110px;
+    }
+
+    .selected-box {
+        margin-top: 4px;
+    }
+
+    .chef-box,
+    .equip-box,
+    .condiment-box {
+        width: auto;
+    }
+
+    .chef-box {
+        height: 80px;
+    }
+
+    .equip-box {
+        height: 80px;
+    }
+
+    .condiment-box {
+        height: 60px;
+    }
+
+    .recipe-box {
+        width: auto;
+        height: 230px;
+        flex-direction: column;
+    }
+
+    .recipe-box.no-details {
+        height: 120px;
+    }
+
+    .recipe-box .recipe-box-1,
+    .recipe-box .recipe-box-2 {
+        width: 100%;
+    }
+
+    .recipe-box .recipe-box-2 {
+        font-size: 11px;
+    }
+
+    .recipe-box .recipe-box-2 .rank {
+        margin-left: 0;
+    }
+
+    .recipe-box .recipe-box-2 .material {
+        max-width: 110px;
+        margin: auto;
+    }
+
+    .recipe-box .recipe-box-2 .add {
+        max-width: 110px;
+        margin: auto;
+    }
+
+    .selected-item .select-picker {
+        position: fixed;
+        left: 10px;
+        top: 35px;
     }
 }

@@ -214,7 +214,7 @@ function getRecipeQuantity(recipe, materials, rule) {
     return quantity;
 }
 
-function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, rule, decoration, condiment) {
+function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, rule, decoration, condiment, forCal) {
 
     var resultData = {};
 
@@ -225,14 +225,12 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
     var bonusAddition = 0;
     var condimentSkillAddition = 0;
 
-    resultData["disp"] = recipe.name + " <small>" + recipe.condimentDisp + "</small>";
-
-    if (chef) {
+    if (chef && chef.chefId) {
         var rankData = getRankInfo(recipe, chef);
         resultData["rankVal"] = rankData.rankVal;
         resultData["rankDisp"] = rankData.rankDisp;
 
-        if (rankData.rankVal == 0) {
+        if (!forCal && rankData.rankVal == 0) {
             return resultData;
         }
 
@@ -257,14 +255,14 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
         }
         resultData["equipSkillAdditionDisp"] = getPercentDisp(equipSkillAddition);
 
-        if (condiment) {
-            resultData["useCondiment"] = "加料";
-            condimentSkillAddition = getRecipeSkillAddition(condiment.effect, recipe, rule);
-        }
-        resultData["condimentSkillAdditionDisp"] = getPercentDisp(condimentSkillAddition);
-
         bonusAddition = bonusAddition + Number(chef.addition);
     }
+
+    if (condiment) {
+        resultData["useCondiment"] = true;
+        condimentSkillAddition = getRecipeSkillAddition(condiment.effect, recipe, rule);
+    }
+    resultData["condimentSkillAdditionDisp"] = getPercentDisp(condimentSkillAddition);
 
     if (!rule || !rule.hasOwnProperty("DisableDecorationEffect") || rule.DisableDecorationEffect == false) {
         if (decoration) {
@@ -289,7 +287,6 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
     resultData["bonusAdditionDisp"] = getPercentDisp(+(bonusAddition * 100).toFixed(2));
     resultData["totalPrice"] = recipe.price * quantity;
     resultData["realPrice"] = Math.ceil(+(recipe.price * (1 + priceAddition)).toFixed(2));
-    resultData["totalRealPrice"] = resultData.realPrice * quantity;
     var score = Math.ceil(+(recipe.price * (1 + priceAddition + bonusAddition)).toFixed(2));
     resultData["bonusScore"] = score - resultData.realPrice;
     resultData["totalBonusScore"] = resultData.bonusScore * quantity;
@@ -542,7 +539,7 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartial
     chef["bitterDisp"] = getAtrributeDisp(chef.bitterVal, chef.bitter, showFinal);
     chef["tastyDisp"] = getAtrributeDisp(chef.tastyVal, chef.tasty, showFinal);
 
-    chef["disp"] = chef.name + "<br><small>";
+    chef["disp"] = "<span class='name'>" + chef.name + "</span><br><small>";
     var count = 0;
     if (chef.stirfryDisp) {
         chef.disp += "炒" + chef.stirfryDisp + " ";

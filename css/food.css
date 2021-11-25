@@ -538,6 +538,9 @@ table.dataTable tbody>tr>.selected {
     line-height: 20px !important;
     font-size: 13px;
     font-weight: bold;
+}
+
+.recipe-box .recipe-condiment .btn-default.toggle-on {
     color: #337ab7;
 }
 
@@ -586,8 +589,12 @@ table.dataTable tbody>tr>.selected {
     width: 55px;
 }
 
-#btn-cal-set-custom {
-    float: right;
+.optimal-result table tr.active {
+    text-align: center;
+}
+
+.btn-cal-set-custom {
+    margin-left: 20px;
 }
 
 .main-function {

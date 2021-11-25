@@ -3972,7 +3972,7 @@ function initCalRules(data) {
         options += "<option value='" + data.rules[i].Id + "'>" + data.rules[i].Title + "</option>";
     }
     $("#select-cal-rule").append(options).selectpicker().change(function () {
-        $("#btn-cal-rule-load").removeClass("btn-default").addClass("btn-danger");
+        $("#btn-cal-rule-load").addClass("btn-danger");
     });
 
     $("#input-cal-decoration").val(data.decorationEffect || "");
@@ -4002,7 +4002,7 @@ function initCalRules(data) {
             $('.loading').addClass("hidden");
             $(".cal-menu").removeClass("hidden");
             showCalSubPane();
-            $("#btn-cal-rule-load").prop("disabled", false).removeClass("btn-danger").addClass("btn-default");
+            $("#btn-cal-rule-load").prop("disabled", false).removeClass("btn-danger");
 
         }, 0);
 
@@ -6204,6 +6204,7 @@ function initCalCustomTable(data) {
                 return;
             }
 
+            panel.find(".optimal-result").html("");
             panel.find(".btn-cal-results-cal.start").prop("disabled", true);
             panel.find(".btn-cal-results-cal.stop").prop("disabled", false);
             panel.find(".cal-results-progress .progress-bar").css("width", "0%");
@@ -6217,34 +6218,37 @@ function initCalCustomTable(data) {
                     panel.find(".cal-results-progress .progress-bar").css("width", event.data.progress.value + "%");
                     panel.find(".cal-results-progress .progress-bar span").text(event.data.progress.display);
                 } else if (event.data.menu) {
-                    optimalMenu = event.data.menu.menu
+                    optimalMenu = event.data.menu;
+
                     var result = "<table class='table table-condensed'>";
                     result += "<tr><td>厨师</td><td>厨具</td><td>调料</td><td>菜谱</td></tr>";
-                    for (var i in optimalMenu) {
-                        result += "<tr>";
-                        result += "<td>" + optimalMenu[i].chef.name + "</td>";
-                        result += "<td>" + (optimalMenu[i].equip.name ? optimalMenu[i].equip.name : "") + "</td>";
-                        result += "<td>" + (optimalMenu[i].condiment.name ? optimalMenu[i].condiment.name : "") + "</td>";
-                        result += "<td>";
-                        for (var j in optimalMenu[i].recipes) {
-                            result += optimalMenu[i].recipes[j].data.name + "*" + optimalMenu[i].recipes[j].quantity + "<br>";
+
+                    for (var m in optimalMenu) {
+                        var menu = optimalMenu[m].menu;
+                        for (var i in menu) {
+                            result += "<tr>";
+                            result += "<td>" + menu[i].chef.name + "</td>";
+                            result += "<td>" + (menu[i].equip.name ? menu[i].equip.name : "") + "</td>";
+                            result += "<td>" + (menu[i].condiment.name ? menu[i].condiment.name : "") + "</td>";
+                            result += "<td>";
+                            for (var j in menu[i].recipes) {
+                                result += menu[i].recipes[j].data.name + "[" + menu[i].recipes[j].data.condimentDisp + "]" + "*" + menu[i].recipes[j].quantity + " ";
+                            }
+                            result += "</td>";
+                            result += "</tr>";
                         }
-                        result += "</td>";
-                        result += "</tr>";
+                        result += "<tr class='active'><td colspan='4'>";
+                        result += "分数: " + optimalMenu[m].score;
+                        result += "<button data-id='" + m + "' class='btn btn-default btn-sm btn-cal-set-custom' type='button'>选择当前菜谱</button></td><tr>";
+                        result += "</td></tr>";
                     }
-                    result += "<tr><td colspan='4'>";
-                    result += "分数: " + event.data.menu.score;
-                    result += "<button id='btn-cal-set-custom' class='btn btn-default btn-sm' type='button'>选择当前菜谱</button></td><tr>";
-                    result += "</td></tr>";
+
                     result += "</table>";
 
                     panel.find(".optimal-result").html(result);
-                    $('#btn-cal-set-custom').click(function () {
-                        if (!currentRule) {
-                            alert("请加载规则");
-                            return;
-                        }
-                        var result = JSON.parse(JSON.stringify(optimalMenu));
+                    $('.btn-cal-set-custom').click(function () {
+                        var index = Number($(this).attr("data-id"));
+                        var result = JSON.parse(JSON.stringify(optimalMenu[index].menu));
                         initCustomData();
                         for (var i in result) {
                             customData[i].chef = result[i].chef;

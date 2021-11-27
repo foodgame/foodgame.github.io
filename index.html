@@ -7,10 +7,10 @@
     <meta name="viewport" id="viewport" content="width=device-width">
     <link rel="shortcut icon" href="favicon.ico?v=1" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="css/style.min.css?v=7" />
-    <script type="text/javascript" src="js/script.min.js?v=19"></script>
+    <script type="text/javascript" src="js/script.min.js?v=20"></script>
     <script type="text/javascript" src="js/common.min.js?v=40"></script>
-    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=50" />
-    <script type="text/javascript" src="js/food.min.js?v=170"></script>
+    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=51" />
+    <script type="text/javascript" src="js/food.min.js?v=171"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=80" />
     <script>
         $(function () {
@@ -471,6 +471,11 @@
                                     <option value="tasty">鲜</option>
                                 </select>
                             </div>
+                            <label class="btn btn-default" data-toggle="tooltip" title="只显示未修炼的厨师">
+                                <input type="checkbox" id="chk-chef-ultimate-no" class="monitor-none">
+                                <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                                未修炼
+                            </label>
                             <label class="btn btn-default" data-toggle="tooltip" title="只显示你已有的厨师">
                                 <input type="checkbox" id="chk-chef-got" class="monitor-none">
                                 <i class="fa fa-check glyphicon glyphicon-ok"></i>
@@ -1226,7 +1231,7 @@
                     <div class="header-wrapper">
                         <div class="input-group">
                             <div class="input-group-addon">排序</div>
-                            <div class="select-wrapper">
+                            <div class="select-wrapper input-group-last">
                                 <select id="select-cal-order" class="selectpicker" data-width="170px"
                                     data-dropdown-align-right='auto'>
                                     <option value='分数'>分数 一次性金币任务</option>
@@ -1565,6 +1570,21 @@
                         <button class="btn btn-default btn-cal-results-cal stop" type="button" disabled>
                             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;停止计算
                         </button>
+                    </div>
+                    <div class="header-wrapper">
+                        <div class="select-wrapper">
+                            <select id="select-cal-save" class="selectpicker" data-width="auto"
+                                data-dropdown-align-right='auto' data-none-selected-text="选择保存">
+                                <option></option>
+                            </select>
+                        </div>
+                        <a id="btn-cal-save-clear" class="btn btn-default">清空保存</a>
+                        <div id="cal-save-result" class="input-group hidden">
+                            <input type="text" class="form-control" id="input-cal-save-name" placeholder="名字">
+                            <span class="input-group-btn">
+                                <a id="btn-cal-save" class="btn btn-default">保存结果</a>
+                            </span>
+                        </div>
                     </div>
                     <div class="cal-results-progress hidden">
                         <div class="progress">

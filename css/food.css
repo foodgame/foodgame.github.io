@@ -967,6 +967,15 @@ table.dataTable tr.selected th.select-checkbox:after {
     margin-top: -11px;
 }
 
+/* bootbox */
+.bootbox.modal .modal-footer {
+    border-top: none;
+}
+
+.bootbox.modal .bootbox-body {
+    margin-top: 20px;
+}
+
 /* collapse btn */
 .td-expend .glyphicon:before {
     content: "\002b";

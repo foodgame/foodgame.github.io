@@ -4781,28 +4781,17 @@ function setCustomRecipe(chefIndex, recipeIndex, recipeId) {
     if (recipeId) {
         for (var i in currentRule.menus) {
             if (currentRule.menus[i].recipe.data.recipeId == recipeId) {
-
-                var max = currentRule.menus[i].recipe.max;
                 var available = currentRule.menus[i].recipe.available;
 
                 var recipe = {};
                 recipe["data"] = currentRule.menus[i].recipe.data;
-                recipe["max"] = max;
                 recipe["quantity"] = available;
                 customData[chefIndex].recipes[recipeIndex] = recipe;
-
-                updateCustomRecipeQuantityInput(chefIndex, recipeIndex, available, max);
 
                 break;
             }
         }
     }
-}
-
-function updateCustomRecipeQuantityInput(chefIndex, recipeIndex, quantity, max) {
-    var recipeBox = $(".selected-item:eq(" + chefIndex + ") .recipe-box:eq(" + recipeIndex + ")");
-    recipeBox.find(".recipe-quantity input").attr('max', max).val(quantity);
-    recipeBox.find(".recipe-quantity .max").html(max);
 }
 
 function updateCustomRecipeCondiment(chefIndex, recipeIndex, useCondiment) {
@@ -4840,6 +4829,14 @@ function calCustomResults(data) {
     for (var i in customData) {
         for (var j in customData[i].recipes) {
             if (customData[i].recipes[j].data) {
+                for (var m in currentRule.menus) {
+                    if (currentRule.menus[m].recipe.data.recipeId == customData[i].recipes[j].data.recipeId) {
+                        customData[i].recipes[j]["data"] = currentRule.menus[m].recipe.data;
+                        customData[i].recipes[j]["max"] = currentRule.menus[m].recipe.max;
+                        break;
+                    }
+                }
+
                 var useCondiment = $(".selected-item:eq(" + i + ") .recipe-box:eq(" + j + ") .recipe-condiment input").prop("checked");
                 var resultData = getRecipeResult(customData[i].chef, customData[i].equip, customData[i].recipes[j].data, customData[i].recipes[j].quantity, customData[i].recipes[j].max,
                     currentRule.materials, currentRule, currentRule.decorationEffect, useCondiment ? customData[i].condiment : null, true);
@@ -4868,8 +4865,11 @@ function calCustomResults(data) {
                     available = maxAvailable;
                 }
                 customData[i].recipes[j]["available"] = available;
+                var recipeBox = $(".selected-item:eq(" + i + ") .recipe-box:eq(" + j + ") .recipe-quantity");
+                recipeBox.find("input").attr('max', customData[i].recipes[j].max).val(customData[i].recipes[j].quantity);
+                recipeBox.find(".max").html(customData[i].recipes[j].max);
                 if (currentRule.hasOwnProperty("MaterialsNum")) {
-                    $(".selected-item:eq(" + i + ") .recipe-box:eq(" + j + ") .recipe-quantity .available").html(available > 0 ? "(" + available + ")" : "");
+                    recipeBox.find(".available").html(available > 0 ? "(" + available + ")" : "");
                 }
             }
         }
@@ -6406,7 +6406,6 @@ function showCalOptimalResult(optimalMenu, data) {
             customData[i].condiment = result[i].condiment;
             for (var j in result[i].recipes) {
                 customData[i].recipes[j] = result[i].recipes[j];
-                updateCustomRecipeQuantityInput(i, j, customData[i].recipes[j].quantity, customData[i].recipes[j].max);
                 updateCustomRecipeCondiment(i, j, customData[i].recipes[j].useCondiment);
             }
         }

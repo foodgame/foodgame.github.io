@@ -4895,14 +4895,7 @@ function calCustomResults(data) {
         }
         $(".selected-item:eq(" + i + ") .equip-box .content").html(equipContent);
 
-        var condimentContent = "";
-        if (customData[i].condiment.condimentId) {
-            condimentContent = customData[i].condiment.calDisp;
-        } else {
-            condimentContent = "+ 调料";
-        }
-        $(".selected-item:eq(" + i + ") .condiment-box .content").html(condimentContent);
-
+        var condimentNum = 0;
         for (var j in customData[i].recipes) {
             var recipeBox = $(".selected-item:eq(" + i + ") .recipe-box:eq(" + j + ")");
             if (customData[i].recipes[j].data) {
@@ -4936,10 +4929,26 @@ function calCustomResults(data) {
                 recipeBox.find(".recipe-box-2").html(content);
 
                 recipeBox.find(".recipe-placeholder").addClass("hidden");
+
+                if (recipeData.useCondiment) {
+                    condimentNum += recipeData.data.rarity * recipeData.quantity;
+                }
             } else {
                 recipeBox.find(".recipe-placeholder").html("+ 菜谱").removeClass("hidden");;
             }
         }
+
+        var condimentContent = "";
+        if (customData[i].condiment.condimentId) {
+            condimentContent = customData[i].condiment.calDisp;
+            if (condimentNum) {
+                var index = condimentContent.indexOf("</small>");
+                condimentContent = condimentContent.substring(0, index) + "*" + condimentNum + condimentContent.substring(index, condimentContent.length);
+            }
+        } else {
+            condimentContent = "+ 调料";
+        }
+        $(".selected-item:eq(" + i + ") .condiment-box .content").html(condimentContent);
     }
 
     var summary = "原售价：" + price;

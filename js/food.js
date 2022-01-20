@@ -723,6 +723,11 @@ function initRecipeTable(data) {
                             pass = false;
                         }
                     }
+                    if (oneQuest[i].condiment) {
+                        if (rowData.condiment != oneQuest[i].condiment) {
+                            pass = false;
+                        }
+                    }
                     if (pass) {
                         onePass = true;
                         break;
@@ -745,7 +750,7 @@ function initRecipeTable(data) {
     $('#chk-recipe-show-material').selectpicker().on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
         updateRecipeTableData(data);
         if ($(this).val().length) {
-            $('#recipe-table').DataTable().order([32, 'desc']); // first material eff
+            $('#recipe-table').DataTable().order([33, 'desc']); // first material eff
         }
         $('#recipe-table').DataTable().draw();
         // if (isSelected) {
@@ -1021,9 +1026,11 @@ function updateRecipeQuest(data, forceReinit) {
 
                         if (data.quests[i].conditions[j].materialId && data.quests[i].conditions[j].materialEff) {
                             questMaterials.push(data.quests[i].conditions[j].materialId);
-                            order = [32, 'desc'];   // first material eff
+                            order = [33, 'desc'];   // first material eff
                         } else if (data.quests[i].conditions[j].materialEff) {
                             order = [21, 'desc'];   // allMaterialsEff
+                        } else if (data.quests[i].conditions[j].condimentEff) {
+                            order = [22, 'desc'];   // condimentEff
                         } else if (data.quests[i].conditions[j].goldEff) {
                             order = [20, 'desc'];  // efficiency
                         } else {
@@ -1190,6 +1197,10 @@ function reInitRecipeTable(data) {
             "orderSequence": ["desc", "asc"]
         },
         {
+            "data": "condimentEff",
+            "orderSequence": ["desc", "asc"]
+        },
+        {
             "data": "origin"
         },
         {
@@ -1334,7 +1345,7 @@ function reInitRecipeTable(data) {
                                 data += "<div class='col-lg-3 col-xs-6'>"
                                     + "<span class='child-key'>" + columns[i].title + (i < 3 ? "" : "：") + "</span>"
                                     + "<span class='child-value'>"
-                                    + (columns[i].data ? columns[i].data : i == 28 ? "无" : i == 29 || i == 30 ? "否" : "")
+                                    + (columns[i].data ? columns[i].data : i == 30 ? "无" : i == 31 || i == 32 ? "否" : "")     // rank, ex, got
                                     + "</span>"
                                     + "</div>";
                             }
@@ -1352,26 +1363,26 @@ function reInitRecipeTable(data) {
     var rankOptions = getRankOptions();
     var gotOptions = getGotOptions();
     recipeTable.MakeCellsEditable({
-        "columns": [29, 30, 31],  // rank, ex, got
+        "columns": [30, 31, 32],  // rank, ex, got
         "inputTypes": [
             {
-                "column": 29,   // rank
+                "column": 30,   // rank
                 "type": "list",
                 "options": rankOptions
             },
             {
-                "column": 30,   // ex
+                "column": 31,   // ex
                 "type": "list",
                 "options": gotOptions
             },
             {
-                "column": 31,   // got
+                "column": 32,   // got
                 "type": "list",
                 "options": gotOptions
             }
         ],
         "onUpdate": function (table, row, cell, oldValue) {
-            if (cell.index().column == 29) {// rank
+            if (cell.index().column == 30) {// rank
                 var recipe = row.data();
 
                 recipe.rankSort = getRankSortValue(recipe.rank);
@@ -1388,7 +1399,7 @@ function reInitRecipeTable(data) {
                 recipeTable.draw(false);
             }
 
-            if (cell.index().column == 30 && cell.data() != oldValue) {   // ex
+            if (cell.index().column == 31 && cell.data() != oldValue) {   // ex
                 if ($("#chk-setting-auto-update").prop("checked")) {
                     updateRecipeChefTable(data);
                 } else {
@@ -3850,7 +3861,7 @@ function generateChefsExportData() {
 
 function generateMenuExportData() {
     var exportData = {};
-    exportData["version"] = 3;
+    exportData["version"] = 4;
     exportData["recipe"] = $("#chk-recipe-show").val();
     exportData["chef"] = $("#chk-chef-show").val();
     exportData["equip"] = $("#chk-equip-show").val();
@@ -3869,6 +3880,10 @@ function updateMenu(person) {
             updateMenu2to3(person.menu.condiment, "0");
         }
 
+        if (person.menu.version < 4) {
+            updateMenu3to4(person.menu.recipe);
+        }
+
         $("#chk-recipe-show").selectpicker('val', person.menu.recipe)
         $("#chk-chef-show").selectpicker('val', person.menu.chef);
         $("#chk-equip-show").selectpicker('val', person.menu.equip);
@@ -3882,6 +3897,14 @@ function updateMenu2to3(list, add) {
         list[i] = (Number(list[i]) + 1).toString();
     }
     list.push(add);
+}
+
+function updateMenu3to4(list) {
+    for (var i in list) {
+        if (Number(list[i]) > 21) {
+            list[i] = (Number(list[i]) + 1).toString();
+        }
+    }
 }
 
 function generateSettingExportData() {
@@ -7095,10 +7118,13 @@ function generateData(json, json2, person) {
         recipeData["fish"] = materialsInfo.fish;
 
         var materialsEff = 0;
+        var condimentEff = 0;
         if (json.recipes[i].time > 0) {
             materialsEff = materialsInfo.materialsCount * 3600 / json.recipes[i].time;
+            condimentEff = json.recipes[i].rarity * 3600 / json.recipes[i].time;
         }
         recipeData["allMaterialsEff"] = materialsEff ? Math.floor(materialsEff) : "";
+        recipeData["condimentEff"] = condimentEff ? Math.floor(condimentEff) : "";
 
         var combo = "";
         for (var m in json.combos) {

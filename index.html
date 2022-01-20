@@ -10,8 +10,8 @@
     <script type="text/javascript" src="js/script.min.js?v=20"></script>
     <script type="text/javascript" src="js/common.min.js?v=40"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=51" />
-    <script type="text/javascript" src="js/food.min.js?v=173"></script>
-    <link rel="stylesheet" type="text/css" href="css/image.css?v=81" />
+    <script type="text/javascript" src="js/food.min.js?v=174"></script>
+    <link rel="stylesheet" type="text/css" href="css/image.css?v=82" />
     <script>
         $(function () {
             $.ajax({
@@ -19,7 +19,7 @@
                 success: function (json) {
                     init(json);
                 },
-                url: 'data/data.min.json?v=43'
+                url: 'data/data.min.json?v=44'
             });
         });
     </script>
@@ -108,16 +108,17 @@
                                     <option value='18'>总价</option>
                                     <option value='19' selected>总时间</option>
                                     <option value='20' selected>金币效率</option>
-                                    <option value='21'>总耗材效率</option>
-                                    <option value='22'>来源</option>
-                                    <option value='23'>解锁</option>
-                                    <option value='24'>合成</option>
-                                    <option value='26' selected>贵客</option>
-                                    <option value='27' data-subtext="第一次菜品升阶 (升优-升特-升神) 必来的贵客">升阶贵客</option>
-                                    <option value='28' data-subtext="第一次做神级菜品时贵客送的符文">神级符文</option>
-                                    <option value='29' data-subtext="个人数据, 该列点击可编辑, 用来记录你当前做到的品阶">品阶</option>
-                                    <option value='30' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已经熟练该菜谱">已熟练</option>
-                                    <option value='31' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已拥有该菜谱">已有</option>
+                                    <option value='21'>耗材料效率</option>
+                                    <option value='22'>耗调料效率</option>
+                                    <option value='23'>来源</option>
+                                    <option value='24'>解锁</option>
+                                    <option value='25'>合成</option>
+                                    <option value='27' selected>贵客</option>
+                                    <option value='28' data-subtext="第一次菜品升阶 (升优-升特-升神) 必来的贵客">升阶贵客</option>
+                                    <option value='29' data-subtext="第一次做神级菜品时贵客送的符文">神级符文</option>
+                                    <option value='30' data-subtext="个人数据, 该列点击可编辑, 用来记录你当前做到的品阶">品阶</option>
+                                    <option value='31' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已经熟练该菜谱">已熟练</option>
+                                    <option value='32' data-subtext="个人数据, 该列点击可编辑, 用来记录你是否已拥有该菜谱">已有</option>
                                 </select>
                             </div>
                             <div class="inline-wrapper" data-toggle="tooltip" title="是否使用熟练加成">
@@ -1032,7 +1033,8 @@
                                 <th>总价</th>
                                 <th>总时间</th>
                                 <th>金币/h</th>
-                                <th>耗材/h</th>
+                                <th>耗材料/h</th>
+                                <th>耗调料/h</th>
                                 <th>来源</th>
                                 <th>可解锁</th>
                                 <th>可合成</th>

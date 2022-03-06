@@ -10,8 +10,8 @@
     <script type="text/javascript" src="js/script.min.js?v=20"></script>
     <script type="text/javascript" src="js/common.min.js?v=40"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=52" />
-    <script type="text/javascript" src="js/food.min.js?v=174"></script>
-    <link rel="stylesheet" type="text/css" href="css/image.css?v=86" />
+    <script type="text/javascript" src="js/food.min.js?v=175"></script>
+    <link rel="stylesheet" type="text/css" href="css/image.css?v=87" />
     <script>
         $(function () {
             $.ajax({
@@ -19,7 +19,7 @@
                 success: function (json) {
                     init(json);
                 },
-                url: 'data/data.min.json?v=51'
+                url: 'data/data.min.json?v=52'
             });
         });
     </script>
@@ -337,12 +337,11 @@
                                 <div class="inline-wrapper select-wrapper input-group-first" data-toggle="tooltip"
                                     title="显示厨师可做的品阶以及效率">
                                     <select id="chk-recipe-show-chef" multiple class="monitor-none" data-width="130px"
-                                        data-live-search="true" data-live-search-style="commaSplitContains"
-                                        data-live-search-placeholder="查找" data-dropdown-align-right='auto'
-                                        data-none-selected-text="选择厨师" data-selected-text-format="count"
-                                        data-count-selected-text="{0} 厨师" data-none-results-text="没有找到"
-                                        data-actions-box="true" data-actions-box-only-clear="true"
-                                        data-deselect-all-text="清空"></select>
+                                        data-live-search="true" data-live-search-placeholder="查找"
+                                        data-dropdown-align-right='auto' data-none-selected-text="选择厨师"
+                                        data-selected-text-format="count" data-count-selected-text="{0} 厨师"
+                                        data-none-results-text="没有找到" data-actions-box="true"
+                                        data-actions-box-only-clear="true" data-deselect-all-text="清空"></select>
                                 </div>
                                 <span class="input-group-btn input-group-last select-wrapper" data-toggle="tooltip"
                                     title="过滤修炼菜谱 一个厨师时有效">
@@ -491,8 +490,7 @@
                                 <div class="inline-wrapper select-wrapper input-group-first" data-toggle="tooltip"
                                     title="显示厨师可做的品阶以及效率">
                                     <select id="chk-chef-show-recipe" multiple class="monitor-none"
-                                        data-live-search="true" data-live-search-style="commaSplitContains"
-                                        data-live-search-placeholder="查找" data-width="150px"
+                                        data-live-search="true" data-live-search-placeholder="查找" data-width="150px"
                                         data-dropdown-align-right='auto' data-none-selected-text="选择菜谱"
                                         data-selected-text-format="count" data-count-selected-text="{0} 菜谱"
                                         data-none-results-text="没有找到" data-actions-box="true"
@@ -736,7 +734,8 @@
                     </div>
                     <div class="tab-pane pane-quest">
                         <div class="header-wrapper select-wrapper">
-                            <select id="select-quest-type" data-width="auto" data-dropdown-align-right='auto'>
+                            <select id="select-quest-type" data-live-search="true" data-live-search-placeholder="查找"
+                                data-width="170px" data-dropdown-align-right='auto' data-none-results-text="没有找到">
                                 <option value='主线任务'>主线任务</option>
                                 <option value='支线任务'>支线任务</option>
                             </select>
@@ -1368,7 +1367,7 @@
                                 <div class="chef-box selected-box">
                                     <div class="content"></div>
                                     <div class="select-picker">
-                                        <select class='selectpicker select-picker-chef' data-width="fit"
+                                        <select class='selectpicker select-picker-chef' data-width="auto"
                                             data-live-search="true" data-live-search-placeholder="查找"
                                             data-dropdown-align-right='auto' data-none-results-text="没有找到"
                                             data-actions-box="true" data-deselect-all-text="清空" data-done-button="true"
@@ -1378,7 +1377,7 @@
                                 <div class="equip-box selected-box">
                                     <div class="content"></div>
                                     <div class="select-picker">
-                                        <select class='selectpicker select-picker-equip' data-width="fit"
+                                        <select class='selectpicker select-picker-equip' data-width="auto"
                                             data-live-search="true" data-live-search-placeholder="查找"
                                             data-dropdown-align-right='auto' data-none-results-text="没有找到"
                                             data-actions-box="true" data-deselect-all-text="清空" data-done-button="true"
@@ -1388,7 +1387,7 @@
                                 <div class="condiment-box selected-box">
                                     <div class="content"></div>
                                     <div class="select-picker">
-                                        <select class='selectpicker select-picker-condiment' data-width="fit"
+                                        <select class='selectpicker select-picker-condiment' data-width="auto"
                                             data-live-search="true" data-live-search-placeholder="查找"
                                             data-dropdown-align-right='auto' data-none-results-text="没有找到"
                                             data-actions-box="true" data-deselect-all-text="清空" data-done-button="true"
@@ -1410,7 +1409,7 @@
                                         </div>
                                         <div class="recipe-result"></div>
                                         <div class="select-picker">
-                                            <select class='selectpicker select-picker-recipe' data-width="fit"
+                                            <select class='selectpicker select-picker-recipe' data-width="auto"
                                                 data-live-search="true" data-live-search-placeholder="查找"
                                                 data-dropdown-align-right='auto' data-none-results-text="没有找到"
                                                 data-actions-box="true" data-deselect-all-text="清空"

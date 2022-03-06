@@ -74,6 +74,8 @@ function initFunction() {
 
 function initTables(data, person) {
 
+    $.fn.selectpicker.Constructor.DEFAULTS.liveSearchStyle = "commaSplitContains";
+
     if ($(window).width() <= 768) {
         $('#chk-setting-desktop').bootstrapToggle('off');
         isMobile = true;
@@ -855,12 +857,12 @@ function initRecipeTable(data) {
     });
 
     for (var i in data.activities) {
-        $('#select-recipe-quest').prepend("<optgroup label='" + data.activities[i].name + "'></optgroup>");
+        $('#select-recipe-quest').append("<optgroup label='" + data.activities[i].name + "'></optgroup>");
     }
 
     for (var j in data.quests) {
         if (data.quests[j].hasOwnProperty("conditions")) {
-            var option = "<option value='" + data.quests[j].questId + "'>" + data.quests[j].questIdDisp + ". " + data.quests[j].goal + "</option>";
+            var option = "<option value='" + data.quests[j].questId + "' data-tokens='" + data.quests[j].type + "'>" + data.quests[j].questIdDisp + ". " + data.quests[j].goal + "</option>";
             if (data.quests[j].type != "修炼任务") {
                 $("#select-recipe-quest optgroup[label='" + data.quests[j].type + "']").append(option);
             }

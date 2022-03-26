@@ -549,7 +549,6 @@ table.dataTable tbody>tr>.selected {
     position: absolute;
     left: 0;
     top: 0;
-    z-index: 2;
     max-width: 100%;
 }
 

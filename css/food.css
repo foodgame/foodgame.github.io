@@ -550,6 +550,7 @@ table.dataTable tbody>tr>.selected {
     left: 0;
     top: 0;
     z-index: 2;
+    max-width: 100%;
 }
 
 .selected-item .select-picker .bootstrap-select>.dropdown-toggle {

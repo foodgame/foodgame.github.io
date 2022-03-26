@@ -552,6 +552,10 @@ table.dataTable tbody>tr>.selected {
     max-width: 100%;
 }
 
+.selected-item .select-picker .bootstrap-select {
+    max-width: 100%;
+}
+
 .selected-item .select-picker .bootstrap-select>.dropdown-toggle {
     display: none;
 }

@@ -1140,5 +1140,6 @@ table.dataTable tr.selected th.select-checkbox:after {
         position: fixed;
         left: 10px;
         top: 35px;
+        z-index: 2;
     }
 }

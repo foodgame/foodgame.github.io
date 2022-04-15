@@ -590,7 +590,7 @@ table.dataTable tbody>tr>.selected {
     width: 50px;
 }
 
-#cal-ultimate .input-group .form-control {
+.cal-settings .input-group .form-control {
     width: 55px;
 }
 

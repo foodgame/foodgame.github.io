@@ -284,9 +284,9 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
         bonusAddition = bonusAddition + materialsAddition;
     }
 
-    var recipePrice = recipe.price;
+    var recipeScorefactor = 1;
     if (rule && rule.hasOwnProperty("recipeScorefactor")) {
-        recipePrice = recipePrice * rule.recipeScorefactor;
+        recipeScorefactor = rule.recipeScorefactor;
     }
 
     var priceAddition = (rankAddition + chefSkillAddition + equipSkillAddition + condimentSkillAddition + decorationAddition + recipe.ultimateAddition) / 100;
@@ -296,13 +296,13 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
     resultData["max"] = maxQuantity;
     resultData["limit"] = quantity;
     resultData["bonusAdditionDisp"] = getPercentDisp(+(bonusAddition * 100).toFixed(2));
-    resultData["totalPrice"] = Math.ceil(+(recipePrice * quantity).toFixed(2));
-    resultData["realPrice"] = Math.ceil(+(recipePrice * (1 + priceAddition)).toFixed(2));
-    var score = Math.ceil(+(recipePrice * (1 + priceAddition + bonusAddition)).toFixed(2));
+    resultData["totalPrice"] = recipe.price * quantity;
+    resultData["realPrice"] = Math.ceil(+(recipe.price * (1 + priceAddition)).toFixed(2));
+    var score = Math.ceil(+(recipe.price * (1 + priceAddition + bonusAddition)).toFixed(2));
     resultData["bonusScore"] = score - resultData.realPrice;
     resultData["totalBonusScore"] = resultData.bonusScore * quantity;
     resultData["score"] = score;
-    resultData["totalScore"] = score * quantity;
+    resultData["totalScore"] = Math.ceil(+(score * quantity * (1 + recipe.activityAddition / 100) * recipeScorefactor).toFixed(2));
     resultData["totalTime"] = recipe.time * quantity;
     resultData["totalTimeDisp"] = secondsToTime(resultData.totalTime);
 
@@ -409,7 +409,7 @@ function getCondimentInfo(condimentId, condiments) {
     return info;
 }
 
-function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartialUltimateData, otherPartialUltimateData, selfUltimateEffect, showFinal) {
+function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartialUltimateData, otherPartialUltimateData, selfUltimateEffect, activityUltimateEffect, showFinal) {
 
     var stirfryAddition = new Addition();
     var boilAddition = new Addition();
@@ -467,6 +467,10 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartial
             }
             effects = effects.concat(otherPartialUltimateData[i].effect);
         }
+    }
+
+    if (activityUltimateEffect) {
+        effects = effects.concat(activityUltimateEffect);
     }
 
     for (var i in effects) {

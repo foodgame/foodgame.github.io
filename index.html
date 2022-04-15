@@ -8,10 +8,10 @@
     <link rel="shortcut icon" href="favicon.ico?v=1" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="css/style.min.css?v=7" />
     <script type="text/javascript" src="js/script.min.js?v=20"></script>
-    <script type="text/javascript" src="js/common.min.js?v=40"></script>
+    <script type="text/javascript" src="js/common.min.js?v=41"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=57" />
-    <script type="text/javascript" src="js/food.min.js?v=175"></script>
-    <link rel="stylesheet" type="text/css" href="css/image.css?v=89" />
+    <script type="text/javascript" src="js/food.min.js?v=176"></script>
+    <link rel="stylesheet" type="text/css" href="css/image.css?v=90" />
     <script>
         $(function () {
             $.ajax({
@@ -19,7 +19,7 @@
                 success: function (json) {
                     init(json);
                 },
-                url: 'data/data.min.json?v=55'
+                url: 'data/data.min.json?v=56'
             });
         });
     </script>
@@ -1138,7 +1138,7 @@
                 <!-- <div class="alert alert-info"></div> -->
                 <div class="header-wrapper">
                     <div class="select-wrapper">
-                        <select id="select-material-origin" data-width="80px" data-dropdown-align-right='auto'></select>
+                        <select id="select-material-origin" data-width="auto" data-dropdown-align-right='auto'></select>
                     </div>
                     <label class="btn btn-default" data-toggle="tooltip" title="是否使用季节加成">
                         <input type="checkbox" id="chk-material-season" class="monitor-none">
@@ -1322,6 +1322,91 @@
                             <div class="input-group">
                                 <div class="input-group-addon">5星菜谱售价</div>
                                 <input type="number" class="form-control" id="input-cal-ultimate-5-price">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            <div class="input-group hidden">
+                                <div class="input-group-addon">炒售价</div>
+                                <input type="number" class="form-control" id="input-cal-ultimate-stirfry-price">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-addon">切售价</div>
+                                <input type="number" class="form-control" id="input-cal-ultimate-knife-price">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-addon">煮售价</div>
+                                <input type="number" class="form-control" id="input-cal-ultimate-boil-price">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            <div class="input-group hidden">
+                                <div class="input-group-addon">炸售价</div>
+                                <input type="number" class="form-control" id="input-cal-ultimate-fry-price">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            <div class="input-group hidden">
+                                <div class="input-group-addon">烤售价</div>
+                                <input type="number" class="form-control" id="input-cal-ultimate-bake-price">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-addon">蒸售价</div>
+                                <input type="number" class="form-control" id="input-cal-ultimate-steam-price">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            <div class="input-group hidden">
+                                <div class="input-group-addon">甜售价</div>
+                                <input type="number" class="form-control" id="input-cal-ultimate-sweet-price">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            <div class="input-group hidden">
+                                <div class="input-group-addon">酸售价</div>
+                                <input type="number" class="form-control" id="input-cal-ultimate-sour-price">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            <div class="input-group hidden">
+                                <div class="input-group-addon">辣售价</div>
+                                <input type="number" class="form-control" id="input-cal-ultimate-spicy-price">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            <div class="input-group hidden">
+                                <div class="input-group-addon">咸售价</div>
+                                <input type="number" class="form-control" id="input-cal-ultimate-salty-price">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            <div class="input-group hidden">
+                                <div class="input-group-addon">苦售价</div>
+                                <input type="number" class="form-control" id="input-cal-ultimate-bitter-price">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-addon">鲜售价</div>
+                                <input type="number" class="form-control" id="input-cal-ultimate-tasty-price">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-addon">全售价</div>
+                                <input type="number" class="form-control" id="input-cal-ultimate-gold-price">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-addon">菜类售价</div>
+                                <input type="number" class="form-control" id="input-cal-ultimate-vegetable-price">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            <div class="input-group hidden">
+                                <div class="input-group-addon">肉类售价</div>
+                                <input type="number" class="form-control" id="input-cal-ultimate-meat-price">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            <div class="input-group hidden">
+                                <div class="input-group-addon">面类售价</div>
+                                <input type="number" class="form-control" id="input-cal-ultimate-creation-price">
+                                <div class="input-group-addon">%</div>
+                            </div>
+                            <div class="input-group hidden">
+                                <div class="input-group-addon">水产售价</div>
+                                <input type="number" class="form-control" id="input-cal-ultimate-fish-price">
                                 <div class="input-group-addon">%</div>
                             </div>
                             <div class="select-wrapper">

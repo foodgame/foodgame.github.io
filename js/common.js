@@ -63,7 +63,11 @@ function getRecipeSkillAddition(effects, recipe, rule) {
     for (var k in effects) {
         var type = effects[k].type;
         var hasSkill = false;
-        if (type == "UseFish") {
+        if (type == "UseAll") {
+            if (recipe.rarity == effects[k].rarity) {
+                hasSkill = true;
+            }
+        } else if (type == "UseFish") {
             for (var m in recipe.materials) {
                 if (recipe.materials[m].origin == "池塘") {
                     hasSkill = true;
@@ -258,9 +262,11 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
         bonusAddition = bonusAddition + Number(chef.addition);
     }
 
-    if (condiment) {
-        resultData["useCondiment"] = true;
-        condimentSkillAddition = getRecipeSkillAddition(condiment.effect, recipe, rule);
+    if (!rule || !rule.hasOwnProperty("DisableCondimentEffect") || rule.DisableCondimentEffect == false) {
+        if (condiment) {
+            resultData["useCondiment"] = true;
+            condimentSkillAddition = getRecipeSkillAddition(condiment.effect, recipe, rule);
+        }
     }
     resultData["condimentSkillAdditionDisp"] = getPercentDisp(condimentSkillAddition);
 
@@ -278,6 +284,11 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
         bonusAddition = bonusAddition + materialsAddition;
     }
 
+    var recipePrice = recipe.price;
+    if (rule && rule.hasOwnProperty("recipeScorefactor")) {
+        recipePrice = recipePrice * rule.recipeScorefactor;
+    }
+
     var priceAddition = (rankAddition + chefSkillAddition + equipSkillAddition + condimentSkillAddition + decorationAddition + recipe.ultimateAddition) / 100;
 
     resultData["data"] = recipe;
@@ -285,9 +296,9 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
     resultData["max"] = maxQuantity;
     resultData["limit"] = quantity;
     resultData["bonusAdditionDisp"] = getPercentDisp(+(bonusAddition * 100).toFixed(2));
-    resultData["totalPrice"] = recipe.price * quantity;
-    resultData["realPrice"] = Math.ceil(+(recipe.price * (1 + priceAddition)).toFixed(2));
-    var score = Math.ceil(+(recipe.price * (1 + priceAddition + bonusAddition)).toFixed(2));
+    resultData["totalPrice"] = Math.ceil(+(recipePrice * quantity).toFixed(2));
+    resultData["realPrice"] = Math.ceil(+(recipePrice * (1 + priceAddition)).toFixed(2));
+    var score = Math.ceil(+(recipePrice * (1 + priceAddition + bonusAddition)).toFixed(2));
     resultData["bonusScore"] = score - resultData.realPrice;
     resultData["totalBonusScore"] = resultData.bonusScore * quantity;
     resultData["score"] = score;

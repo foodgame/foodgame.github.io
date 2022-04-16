@@ -5287,7 +5287,7 @@ function calCustomResults(data) {
     }
 
     var summary = "原售价：" + price;
-    if (currentRule.hasRuleAddition) {
+    if (currentRule.hasRuleAddition && !currentRule.hasOwnProperty("recipeScorefactor")) {
         summary += " 规则分：" + bonus;
     }
     summary += " 总得分：" + score;

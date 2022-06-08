@@ -409,7 +409,7 @@ function getCondimentInfo(condimentId, condiments) {
     return info;
 }
 
-function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartialUltimateData, otherPartialUltimateData, selfUltimateEffect, activityUltimateEffect, showFinal) {
+function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartialUltimateData, otherPartialUltimateData, selfUltimateEffect, activityUltimateEffect, showFinal, rule) {
 
     var stirfryAddition = new Addition();
     var boilAddition = new Addition();
@@ -430,42 +430,49 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartial
     var bitterAddition = new Addition();
     var tastyAddition = new Addition();
 
-    var effects = globalUltimateEffect;
+    var effects = [];
 
     chef["selfUltimateEffect"] = [];
 
-    if (selfUltimateEffect) {
-        for (var i in selfUltimateEffect) {
-            if (chef.chefId == selfUltimateEffect[i].chefId) {
-                chef.selfUltimateEffect = selfUltimateEffect[i].effect;
-                effects = effects.concat(selfUltimateEffect[i].effect);
-                break;
+    if (!rule || !rule.hasOwnProperty("DisableChefSkillEffect") || rule.DisableChefSkillEffect == false) {
+        effects = effects.concat(chef.specialSkillEffect);
+        effects = effects.concat(globalUltimateEffect);
+
+        if (selfUltimateEffect) {
+            for (var i in selfUltimateEffect) {
+                if (chef.chefId == selfUltimateEffect[i].chefId) {
+                    chef.selfUltimateEffect = selfUltimateEffect[i].effect;
+                    effects = effects.concat(selfUltimateEffect[i].effect);
+                    break;
+                }
+            }
+        }
+
+        var selfPartialAdded = false;
+        if (selfPartialUltimateData) {
+            for (var i in selfPartialUltimateData) {
+                if (chef.chefId == selfPartialUltimateData[i].chefId) {
+                    effects = effects.concat(selfPartialUltimateData[i].effect);
+                    selfPartialAdded = true;
+                    break;
+                }
+            }
+        }
+
+        if (otherPartialUltimateData) {
+            for (var i in otherPartialUltimateData) {
+                if (chef.chefId == otherPartialUltimateData[i].chefId && selfPartialAdded) {
+                    continue;
+                }
+                effects = effects.concat(otherPartialUltimateData[i].effect);
             }
         }
     }
 
-    if (useEquip && equip && equip.effect) {
-        var equipEffect = updateEquipmentEffect(equip.effect, chef.selfUltimateEffect);
-        effects = effects.concat(equipEffect);
-    }
-
-    var selfPartialAdded = false;
-    if (selfPartialUltimateData) {
-        for (var i in selfPartialUltimateData) {
-            if (chef.chefId == selfPartialUltimateData[i].chefId) {
-                effects = effects.concat(selfPartialUltimateData[i].effect);
-                selfPartialAdded = true;
-                break;
-            }
-        }
-    }
-
-    if (otherPartialUltimateData) {
-        for (var i in otherPartialUltimateData) {
-            if (chef.chefId == otherPartialUltimateData[i].chefId && selfPartialAdded) {
-                continue;
-            }
-            effects = effects.concat(otherPartialUltimateData[i].effect);
+    if (!rule || !rule.hasOwnProperty("DisableEquipSkillEffect") || rule.DisableEquipSkillEffect == false) {
+        if (useEquip && equip && equip.effect) {
+            var equipEffect = updateEquipmentEffect(equip.effect, chef.selfUltimateEffect);
+            effects = effects.concat(equipEffect);
         }
     }
 

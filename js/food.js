@@ -4148,6 +4148,7 @@ function loadCalRule(data) {
         loadRule(data, currentRule);
         setCalConfigData(currentRule, data);
 
+        $("#pane-cal-recipes").attr("data-cal", "false");
         $('.loading').addClass("hidden");
         $(".cal-menu").removeClass("hidden");
         showCalSubPane();
@@ -4545,7 +4546,7 @@ function setCalConfigData(rule, data) {
 
     for (var i in rule.menus) {
         var useEx = exRecipeIds.indexOf(rule.menus[i].recipe.data.recipeId) >= 0;
-        setDataForRecipe(rule.menus[i].recipe.data, globalUltimate, useEx, activityUltimateData, true);
+        setDataForRecipe(rule.menus[i].recipe.data, globalUltimate, useEx, activityUltimateData, true, rule);
 
         var quantity = getRecipeQuantity(rule.menus[i].recipe.data, rule.materials, rule);
 
@@ -4557,7 +4558,7 @@ function setCalConfigData(rule, data) {
     }
 
     for (var i in rule.chefs) {
-        setDataForChef(rule.chefs[i], null, false, globalUltimate, selfPartialUltimateData, null, selfUltimateData, activityUltimateData, true);
+        setDataForChef(rule.chefs[i], null, false, globalUltimate, selfPartialUltimateData, null, selfUltimateData, activityUltimateData, true, rule);
     }
 }
 
@@ -5136,7 +5137,7 @@ function calCustomResults(data) {
 
     for (var i in customData) {
         if (customData[i].chef.chefId) {
-            setDataForChef(customData[i].chef, customData[i].equip, true, currentRule.calGlobalUltimateData, partialUltimateData, partialUltimateData, currentRule.calSelfUltimateData, currentRule.calActivityUltimateData, true);
+            setDataForChef(customData[i].chef, customData[i].equip, true, currentRule.calGlobalUltimateData, partialUltimateData, partialUltimateData, currentRule.calSelfUltimateData, currentRule.calActivityUltimateData, true, currentRule);
         }
     }
 
@@ -5386,7 +5387,7 @@ function getCustomChefsOptions(index, data) {
                 equip = customData[index].equip;
             }
 
-            setDataForChef(chefs[i], equip, true, currentRule.calGlobalUltimateData, partialUltimateData, partialUltimateData, currentRule.calSelfUltimateData, currentRule.calActivityUltimateData, true);
+            setDataForChef(chefs[i], equip, true, currentRule.calGlobalUltimateData, partialUltimateData, partialUltimateData, currentRule.calSelfUltimateData, currentRule.calActivityUltimateData, true, currentRule);
 
             var chef = JSON.parse(JSON.stringify(chefs[i]));
             for (var j in customData[index].recipes) {
@@ -5475,7 +5476,7 @@ function getCustomEquipsOptions(index, equips, data) {
         option["tokens"] = equips[i].name + skillDisp;
 
         if (oChef.chefId && hasRecipe) {
-            setDataForChef(oChef, equips[i], true, currentRule.calGlobalUltimateData, partialUltimateData, partialUltimateData, currentRule.calSelfUltimateData, currentRule.calActivityUltimateData, true);
+            setDataForChef(oChef, equips[i], true, currentRule.calGlobalUltimateData, partialUltimateData, partialUltimateData, currentRule.calSelfUltimateData, currentRule.calActivityUltimateData, true, currentRule);
 
             var chef = JSON.parse(JSON.stringify(oChef));
             for (var j in customData[index].recipes) {
@@ -7250,7 +7251,7 @@ function generateData(json, json2, person) {
     }
     retData["quests"] = questsData;
 
-    var showFinal = $("#chk-setting-show-final").prop("checked");
+    var showFinal = person && person.setting && person.setting.final;
 
     var useEquip = $("#chk-chef-apply-equips").prop("checked");
     var useUltimate = $("#chk-chef-apply-ultimate").prop("checked");
@@ -7340,7 +7341,7 @@ function generateData(json, json2, person) {
             }
         }
 
-        setDataForChef(chefData, chefData.equip, useEquip, ultimateData.global, ultimateData.partial, null, ultimateData.self, null, showFinal);
+        setDataForChef(chefData, chefData.equip, useEquip, ultimateData.global, ultimateData.partial, null, ultimateData.self, null, showFinal, null);
 
         chefsData.push(chefData);
     }
@@ -7417,7 +7418,7 @@ function generateData(json, json2, person) {
 
         recipeData["oPrice"] = json.recipes[i].price;
         var useEx = ifUseEx(recipeData);
-        setDataForRecipe(recipeData, ultimateData.global, useEx, null, showFinal);
+        setDataForRecipe(recipeData, ultimateData.global, useEx, null, showFinal, null);
 
         recipeData["efficiency"] = Math.floor(json.recipes[i].price * 3600 / json.recipes[i].time);
 
@@ -7536,12 +7537,12 @@ function getUpdateData(data) {
     var otherPartialUltimateData = getPartialUltimateData(data.chefs, data.partialSkill, useUltimate, partialChefIds);
 
     for (var i in data.chefs) {
-        setDataForChef(data.chefs[i], data.chefs[i].equip, useEquip, ultimateData.global, ultimateData.partial, otherPartialUltimateData, ultimateData.self, null, showFinal);
+        setDataForChef(data.chefs[i], data.chefs[i].equip, useEquip, ultimateData.global, ultimateData.partial, otherPartialUltimateData, ultimateData.self, null, showFinal, null);
     }
 
     for (var i in data.recipes) {
         var useEx = ifUseEx(data.recipes[i]);
-        setDataForRecipe(data.recipes[i], ultimateData.global, useEx, null, showFinal);
+        setDataForRecipe(data.recipes[i], ultimateData.global, useEx, null, showFinal, null);
     }
 
     updateRecipesChefsData(data);
@@ -7958,13 +7959,18 @@ function setExOptions(recipes) {
     }
 }
 
-function setDataForRecipe(recipeData, ultimateData, useEx, activityData, showFinal) {
+function setDataForRecipe(recipeData, ultimateData, useEx, activityData, showFinal, rule) {
     recipeData["limitVal"] = recipeData.limit;
+    recipeData["ultimateAddition"] = 0;
 
-    for (var i in ultimateData) {
-        if (ultimateData[i].type == "MaxEquipLimit" && ultimateData[i].rarity == recipeData.rarity) {
-            recipeData.limitVal += ultimateData[i].value;
+    if (!rule || !rule.hasOwnProperty("DisableChefSkillEffect") || rule.DisableChefSkillEffect == false) {
+        for (var i in ultimateData) {
+            if (ultimateData[i].type == "MaxEquipLimit" && ultimateData[i].rarity == recipeData.rarity) {
+                recipeData.limitVal += ultimateData[i].value;
+            }
         }
+
+        recipeData.ultimateAddition = getRecipeSkillAddition(ultimateData, recipeData, null);
     }
 
     for (var i in activityData) {
@@ -7974,8 +7980,6 @@ function setDataForRecipe(recipeData, ultimateData, useEx, activityData, showFin
     }
 
     recipeData["limitDisp"] = getAtrributeDisp(recipeData.limitVal, recipeData.limit, showFinal);
-
-    recipeData["ultimateAddition"] = getRecipeSkillAddition(ultimateData, recipeData, null);
 
     recipeData["ultimateAdditionDisp"] = getPercentDisp(recipeData.ultimateAddition);
 

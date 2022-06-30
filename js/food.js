@@ -1,8 +1,8 @@
-$(function () {
-    if (window.location.href.indexOf("github") > 0) {
-        $('.loading-text').append("<h3>您访问的是github网站，如您是国内用户，建议使用gitee网站<a href='https://foodgame.gitee.io'>https://foodgame.gitee.io</a></h3>");
-    }
-});
+// $(function () {
+//     if (window.location.href.indexOf("github") > 0) {
+//         $('.loading-text').append("<h3>您访问的是github网站，如您是国内用户，建议使用gitee网站<a href='https://foodgame.gitee.io'>https://foodgame.gitee.io</a></h3>");
+//     }
+// });
 
 function commaSeparatedMatch(data, value) {
     if (value.length === 0) return true;

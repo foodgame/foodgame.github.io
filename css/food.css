@@ -381,12 +381,12 @@ table.dataTable tbody>tr>.selected {
 .equip-box,
 .condiment-box {
     width: 115px;
-    height: 120px;
+    height: 140px;
 }
 
 .recipe-box {
     width: 250px;
-    height: 120px;
+    height: 140px;
 }
 
 .chef-box .content .name,
@@ -413,7 +413,7 @@ table.dataTable tbody>tr>.selected {
 
 .recipe-box .recipe-box-1 {
     width: 50%;
-    height: 120px;
+    height: 140px;
 }
 
 .recipe-box.no-details .recipe-box-1 {
@@ -431,7 +431,7 @@ table.dataTable tbody>tr>.selected {
 .recipe-box .recipe-name {
     font-weight: bold;
     color: #337ab7;
-    height: 25px;
+    height: 30px;
 }
 
 .recipe-box .recipe-result {
@@ -454,7 +454,7 @@ table.dataTable tbody>tr>.selected {
 
 .recipe-box .recipe-box-2 {
     width: 50%;
-    height: 120px;
+    height: 140px;
     font-size: 12px;
     text-align: left;
 }
@@ -490,7 +490,7 @@ table.dataTable tbody>tr>.selected {
 }
 
 .recipe-box .recipe-quantity {
-    height: 25px;
+    height: 30px;
     cursor: pointer;
 }
 
@@ -524,11 +524,11 @@ table.dataTable tbody>tr>.selected {
 }
 
 .recipe-box .recipe-condiment {
-    height: 20px;
+    height: 30px;
 }
 
 .recipe-box .recipe-condiment .btn {
-    height: 20px !important;
+    height: 30px !important;
 }
 
 .recipe-box .recipe-condiment .btn-default {
@@ -536,7 +536,7 @@ table.dataTable tbody>tr>.selected {
     box-shadow: none;
     padding: 0;
     border: none;
-    line-height: 20px !important;
+    line-height: 30px !important;
     font-size: 13px;
     font-weight: bold;
 }
@@ -769,6 +769,8 @@ table.history-table tr td.history-dt {
 
 .dropdown-item .text .subtext,
 .dropdown-item .text .score,
+.dropdown-item .text .total,
+.dropdown-item .text .skilltext,
 .dropdown-item .text .available,
 .dropdown-item .text .skill {
     font-size: 11px;
@@ -778,6 +780,14 @@ table.history-table tr td.history-dt {
 
 .dropdown-item .text .available {
     color: #55aaff;
+}
+
+.dropdown-item .text .total {
+    font-style: italic;
+}
+
+.dropdown-item .text .skilltext span {
+    padding-left: 2px;
 }
 
 li.disabled .dropdown-item .text span {
@@ -1109,12 +1119,12 @@ table.dataTable tr.selected th.select-checkbox:after {
 
     .recipe-box {
         width: auto;
-        height: 230px;
+        height: 270px;
         flex-direction: column;
     }
 
     .recipe-box.no-details {
-        height: 120px;
+        height: 140px;
     }
 
     .recipe-box .recipe-box-1,

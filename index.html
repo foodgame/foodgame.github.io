@@ -8,10 +8,10 @@
     <link rel="shortcut icon" href="favicon.ico?v=1" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="css/style.min.css?v=7" />
     <script type="text/javascript" src="js/script.min.js?v=20"></script>
-    <script type="text/javascript" src="js/common.min.js?v=43"></script>
-    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=58" />
-    <script type="text/javascript" src="js/food.min.js?v=180"></script>
-    <link rel="stylesheet" type="text/css" href="css/image.css?v=96" />
+    <script type="text/javascript" src="js/common.min.js?v=44"></script>
+    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=59" />
+    <script type="text/javascript" src="js/food.min.js?v=181"></script>
+    <link rel="stylesheet" type="text/css" href="css/image.css?v=97" />
     <script>
         $(function () {
             $.ajax({
@@ -19,7 +19,7 @@
                 success: function (json) {
                     init(json);
                 },
-                url: 'data/data.min.json?v=64'
+                url: 'data/data.min.json?v=65'
             });
         });
     </script>
@@ -1360,138 +1360,148 @@
                                 清空修炼
                             </button>
                         </div>
-                        <div id="cal-activity" class="cal-settings hidden">
+                        <div id="cal-activity" class="cal-settings">
                             <h4>
                                 <span class="label label-info">奇珍加成</span>
                             </h4>
-                            <div class="input-group">
-                                <div class="input-group-addon">切售价</div>
-                                <input type="number" class="form-control" id="input-cal-activity-knife-price">
-                                <div class="input-group-addon">%</div>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">炒售价</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-stirfry-price">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">烤售价</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-bake-price">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">蒸售价</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-steam-price">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">煮售价</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-boil-price">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">炸售价</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-fry-price">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">切售价</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-knife-price">
+                                    <div class="input-group-addon">%</div>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">煮售价</div>
-                                <input type="number" class="form-control" id="input-cal-activity-boil-price">
-                                <div class="input-group-addon">%</div>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">酸售价</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-sour-price">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">甜售价</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-sweet-price">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">苦售价</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-bitter-price">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">辣售价</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-spicy-price">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">咸售价</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-salty-price">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">鲜售价</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-tasty-price">
+                                    <div class="input-group-addon">%</div>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">蒸售价</div>
-                                <input type="number" class="form-control" id="input-cal-activity-steam-price">
-                                <div class="input-group-addon">%</div>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">菜类售价</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-vegetable-price">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">面类售价</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-creation-price">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">鱼类售价</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-fish-price">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">肉类售价</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-meat-price">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">总售价</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-gold-price">
+                                    <div class="input-group-addon">%</div>
+                                </div>
                             </div>
-                            <!-- <div class="input-group">
-                                <div class="input-group-addon">炒售价</div>
-                                <input type="number" class="form-control" id="input-cal-activity-stirfry-price">
-                                <div class="input-group-addon">%</div>
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">炒技法</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-stirfry">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">烤技法</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-bake">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">蒸技法</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-steam">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">煮技法</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-boil">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">炸技法</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-fry">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">切技法</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-knife">
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">炸售价</div>
-                                <input type="number" class="form-control" id="input-cal-activity-fry-price">
-                                <div class="input-group-addon">%</div>
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">烤售价</div>
-                                <input type="number" class="form-control" id="input-cal-activity-bake-price">
-                                <div class="input-group-addon">%</div>
-                            </div> -->
-                            <!-- <div class="input-group">
-                                <div class="input-group-addon">甜售价</div>
-                                <input type="number" class="form-control" id="input-cal-activity-sweet-price">
-                                <div class="input-group-addon">%</div>
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">酸售价</div>
-                                <input type="number" class="form-control" id="input-cal-activity-sour-price">
-                                <div class="input-group-addon">%</div>
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">辣售价</div>
-                                <input type="number" class="form-control" id="input-cal-activity-spicy-price">
-                                <div class="input-group-addon">%</div>
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">咸售价</div>
-                                <input type="number" class="form-control" id="input-cal-activity-salty-price">
-                                <div class="input-group-addon">%</div>
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">苦售价</div>
-                                <input type="number" class="form-control" id="input-cal-activity-bitter-price">
-                                <div class="input-group-addon">%</div>
-                            </div> -->
-                            <div class="input-group">
-                                <div class="input-group-addon">鲜售价</div>
-                                <input type="number" class="form-control" id="input-cal-activity-tasty-price">
-                                <div class="input-group-addon">%</div>
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">总售价</div>
-                                <input type="number" class="form-control" id="input-cal-activity-gold-price">
-                                <div class="input-group-addon">%</div>
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">菜类售价</div>
-                                <input type="number" class="form-control" id="input-cal-activity-vegetable-price">
-                                <div class="input-group-addon">%</div>
-                            </div>
-                            <!-- <div class="input-group">
-                                <div class="input-group-addon">肉类售价</div>
-                                <input type="number" class="form-control" id="input-cal-activity-meat-price">
-                                <div class="input-group-addon">%</div>
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">面类售价</div>
-                                <input type="number" class="form-control" id="input-cal-activity-creation-price">
-                                <div class="input-group-addon">%</div>
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">水产售价</div>
-                                <input type="number" class="form-control" id="input-cal-activity-fish-price">
-                                <div class="input-group-addon">%</div>
-                            </div> -->
-                            <div class="input-group">
-                                <div class="input-group-addon">切技法</div>
-                                <input type="number" class="form-control" id="input-cal-activity-knife">
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">煮技法</div>
-                                <input type="number" class="form-control" id="input-cal-activity-boil">
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">蒸技法</div>
-                                <input type="number" class="form-control" id="input-cal-activity-steam">
-                            </div>
-                            <!-- <div class="input-group">
-                                <div class="input-group-addon">炒技法</div>
-                                <input type="number" class="form-control" id="input-cal-activity-stirfry">
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">炸技法</div>
-                                <input type="number" class="form-control" id="input-cal-activity-fry">
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">烤技法</div>
-                                <input type="number" class="form-control" id="input-cal-activity-bake">
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">1星菜谱上限</div>
-                                <input type="number" class="form-control" id="input-cal-activity-1-limit">
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">2星菜谱上限</div>
-                                <input type="number" class="form-control" id="input-cal-activity-2-limit">
-                            </div> -->
-                            <div class="input-group">
-                                <div class="input-group-addon">3星菜谱上限</div>
-                                <input type="number" class="form-control" id="input-cal-activity-3-limit">
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">4星菜谱上限</div>
-                                <input type="number" class="form-control" id="input-cal-activity-4-limit">
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-addon">5星菜谱上限</div>
-                                <input type="number" class="form-control" id="input-cal-activity-5-limit">
+                            <div>
+                                <!-- <div class="input-group">
+                                    <div class="input-group-addon">1星菜谱上限</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-1-limit">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">2星菜谱上限</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-2-limit">
+                                </div> -->
+                                <div class="input-group">
+                                    <div class="input-group-addon">3星菜谱上限</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-3-limit">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">4星菜谱上限</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-4-limit">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-addon">5星菜谱上限</div>
+                                    <input type="number" class="form-control" id="input-cal-activity-5-limit">
+                                </div>
                             </div>
                         </div>
                     </div>

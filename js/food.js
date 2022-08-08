@@ -5640,6 +5640,8 @@ function getCustomCondimentsOptions(index, condiments, data) {
         option["tokens"] = condiments[i].name + skillDisp;
 
         if (useCondiment) {
+            newData[index].condiment = condiments[i];
+
             var score = 0;
             for (var n in newData) {
                 for (var m in newData[n].recipes) {
@@ -5647,7 +5649,7 @@ function getCustomCondimentsOptions(index, condiments, data) {
                         var resultData = getRecipeResult(newData[n].chef, newData[n].equip, newData[n].recipes[m].data,
                             newData[n].recipes[m].quantity, newData[n].recipes[m].max, currentRule.materials,
                             currentRule, currentRule.decorationEffect,
-                            newData[n].recipes[m].useCondiment ? condiments[i] : null,
+                            newData[n].recipes[m].useCondiment ? newData[n].condiment : null,
                             true, newData[n].recipes, partialUltimateData);
                         score += resultData.totalScore;
                     }

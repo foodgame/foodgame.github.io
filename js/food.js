@@ -103,6 +103,8 @@ function initTables(data, person) {
 
     updateMenu(person);
 
+    updateActivity(person);
+
     setPartialUltimateOptions(data.chefs, data.partialSkill);
 
     initRecipeTable(data);
@@ -3699,6 +3701,8 @@ function importData(data, input) {
         $("#input-cal-decoration").val(person.decorationEffect || "");
     }
 
+    updateActivity(person);
+
     try {
         localStorage.setItem('data', generateExportData());
     } catch (e) { }
@@ -3806,6 +3810,10 @@ function updateDecorationLocalData() {
     } catch (e) { }
 }
 
+function updateActivityLocalData() {
+    updateLocalData("activity", generateActivityExportData());
+}
+
 function updateLocalData(key, value) {
     var person;
     try {
@@ -3831,7 +3839,7 @@ function generateExportData() {
     person["menu"] = generateMenuExportData();
     person["setting"] = generateSettingExportData();
     person["decorationEffect"] = Number($("#input-cal-decoration").val());
-
+    person["activity"] = generateActivityExportData();
     return JSON.stringify(person);
 }
 
@@ -3970,6 +3978,74 @@ function updateSetting(person) {
     }
 }
 
+
+function generateActivityExportData() {
+    var exportData = {};
+    exportData["stirfryPrice"] = $("#input-cal-activity-stirfry-price").val();
+    exportData["bakePrice"] = $("#input-cal-activity-bake-price").val();
+    exportData["steamPrice"] = $("#input-cal-activity-steam-price").val();
+    exportData["boilPrice"] = $("#input-cal-activity-boil-price").val();
+    exportData["fryPrice"] = $("#input-cal-activity-fry-price").val();
+    exportData["knifePrice"] = $("#input-cal-activity-knife-price").val();
+    exportData["sourPrice"] = $("#input-cal-activity-sour-price").val();
+    exportData["sweetPrice"] = $("#input-cal-activity-sweet-price").val();
+    exportData["bitterPrice"] = $("#input-cal-activity-bitter-price").val();
+    exportData["spicyPrice"] = $("#input-cal-activity-spicy-price").val();
+    exportData["saltyPrice"] = $("#input-cal-activity-salty-price").val();
+    exportData["tastyPrice"] = $("#input-cal-activity-tasty-price").val();
+    exportData["vegetablePrice"] = $("#input-cal-activity-vegetable-price").val();
+    exportData["creationPrice"] = $("#input-cal-activity-creation-price").val();
+    exportData["fishPrice"] = $("#input-cal-activity-fish-price").val();
+    exportData["meatPrice"] = $("#input-cal-activity-meat-price").val();
+    exportData["goldPrice"] = $("#input-cal-activity-gold-price").val();
+    exportData["stirfry"] = $("#input-cal-activity-stirfry").val();
+    exportData["bake"] = $("#input-cal-activity-bake").val();
+    exportData["steam"] = $("#input-cal-activity-steam").val();
+    exportData["boil"] = $("#input-cal-activity-boil").val();
+    exportData["fry"] = $("#input-cal-activity-fry").val();
+    exportData["knife"] = $("#input-cal-activity-knife").val();
+    exportData["limit1"] = $("#input-cal-activity-1-limit").val();
+    exportData["limit2"] = $("#input-cal-activity-2-limit").val();
+    exportData["limit3"] = $("#input-cal-activity-3-limit").val();
+    exportData["limit4"] = $("#input-cal-activity-4-limit").val();
+    exportData["limit5"] = $("#input-cal-activity-5-limit").val();
+    return exportData;
+}
+
+function updateActivity(person) {
+    var activity = person.activity;
+    if (activity) {
+        $("#input-cal-activity-stirfry-price").val(activity.stirfryPrice);
+        $("#input-cal-activity-bake-price").val(activity.bakePrice);
+        $("#input-cal-activity-steam-price").val(activity.steamPrice);
+        $("#input-cal-activity-boil-price").val(activity.boilPrice);
+        $("#input-cal-activity-fry-price").val(activity.fryPrice);
+        $("#input-cal-activity-knife-price").val(activity.knifePrice);
+        $("#input-cal-activity-sour-price").val(activity.sourPrice);
+        $("#input-cal-activity-sweet-price").val(activity.sweetPrice);
+        $("#input-cal-activity-bitter-price").val(activity.bitterPrice);
+        $("#input-cal-activity-spicy-price").val(activity.spicyPrice);
+        $("#input-cal-activity-salty-price").val(activity.saltyPrice);
+        $("#input-cal-activity-tasty-price").val(activity.tastyPrice);
+        $("#input-cal-activity-vegetable-price").val(activity.vegetablePrice);
+        $("#input-cal-activity-creation-price").val(activity.creationPrice);
+        $("#input-cal-activity-fish-price").val(activity.fishPrice);
+        $("#input-cal-activity-meat-price").val(activity.meatPrice);
+        $("#input-cal-activity-gold-price").val(activity.goldPrice);
+        $("#input-cal-activity-stirfry").val(activity.stirfry);
+        $("#input-cal-activity-bake").val(activity.bake);
+        $("#input-cal-activity-steam").val(activity.steam);
+        $("#input-cal-activity-boil").val(activity.boil);
+        $("#input-cal-activity-fry").val(activity.fry);
+        $("#input-cal-activity-knife").val(activity.knife);
+        $("#input-cal-activity-1-limit").val(activity.limit1);
+        $("#input-cal-activity-2-limit").val(activity.limit2);
+        $("#input-cal-activity-3-limit").val(activity.limit3);
+        $("#input-cal-activity-4-limit").val(activity.limit4);
+        $("#input-cal-activity-5-limit").val(activity.limit5);
+    }
+}
+
 function initCalTables(data) {
 
     setSelfUltimateOptions(data.chefs, data.skills);
@@ -4097,6 +4173,18 @@ function initCalRules(data) {
         $('#chk-cal-partial-ultimate').selectpicker('deselectAll');
         $('#chk-cal-self-ultimate').selectpicker('deselectAll');
         $('#chk-cal-ex').selectpicker('deselectAll');
+        setCalConfigData(currentRule, data);
+        calCustomResults(data);
+        $("#pane-cal-recipes").attr("data-cal", "false");
+    });
+
+    $("#cal-activity input").on('input', function () {
+        updateActivityLocalData();
+    });
+
+    $("#btn-cal-clear-activity").click(function () {
+        $("#cal-activity input").val("");
+        updateActivityLocalData();
         setCalConfigData(currentRule, data);
         calCustomResults(data);
         $("#pane-cal-recipes").attr("data-cal", "false");
@@ -4536,7 +4624,7 @@ function setCalConfigData(rule, data) {
     }
     var selfUltimateData = getSelfUltimateData(data.chefs, data.skills, true, selfChefIds);
 
-    var activityUltimateData = getActivityConfigData();
+    var activityUltimateData = getActivityConfigData(rule);
 
     rule["calGlobalUltimateData"] = globalUltimate;
     rule["calPartialChefIds"] = partialChefIds;
@@ -4567,292 +4655,294 @@ function setCalConfigData(rule, data) {
     }
 }
 
-function getActivityConfigData() {
+function getActivityConfigData(rule) {
     var activityUltimate = [];
 
-    var stirfry = Number($("#input-cal-activity-stirfry").val());
-    if (stirfry) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "Stirfry";
-        ultimateItem["value"] = stirfry;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Abs";
-        activityUltimate.push(ultimateItem);
-    }
+    if (rule.IsActivity) {
+        var stirfry = Number($("#input-cal-activity-stirfry").val());
+        if (stirfry) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "Stirfry";
+            ultimateItem["value"] = stirfry;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Abs";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var boil = Number($("#input-cal-activity-boil").val());
-    if (boil) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "Boil";
-        ultimateItem["value"] = boil;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Abs";
-        activityUltimate.push(ultimateItem);
-    }
+        var boil = Number($("#input-cal-activity-boil").val());
+        if (boil) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "Boil";
+            ultimateItem["value"] = boil;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Abs";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var knife = Number($("#input-cal-activity-knife").val());
-    if (knife) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "Knife";
-        ultimateItem["value"] = knife;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Abs";
-        activityUltimate.push(ultimateItem);
-    }
+        var knife = Number($("#input-cal-activity-knife").val());
+        if (knife) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "Knife";
+            ultimateItem["value"] = knife;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Abs";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var fry = Number($("#input-cal-activity-fry").val());
-    if (fry) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "Fry";
-        ultimateItem["value"] = fry;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Abs";
-        activityUltimate.push(ultimateItem);
-    }
+        var fry = Number($("#input-cal-activity-fry").val());
+        if (fry) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "Fry";
+            ultimateItem["value"] = fry;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Abs";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var bake = Number($("#input-cal-activity-bake").val());
-    if (bake) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "Bake";
-        ultimateItem["value"] = bake;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Abs";
-        activityUltimate.push(ultimateItem);
-    }
+        var bake = Number($("#input-cal-activity-bake").val());
+        if (bake) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "Bake";
+            ultimateItem["value"] = bake;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Abs";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var steam = Number($("#input-cal-activity-steam").val());
-    if (steam) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "Steam";
-        ultimateItem["value"] = steam;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Abs";
-        activityUltimate.push(ultimateItem);
-    }
+        var steam = Number($("#input-cal-activity-steam").val());
+        if (steam) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "Steam";
+            ultimateItem["value"] = steam;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Abs";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var limit1 = Number($("#input-cal-activity-1-limit").val());
-    if (limit1) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "MaxEquipLimit";
-        ultimateItem["value"] = limit1;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Abs";
-        ultimateItem["rarity"] = 1;
-        activityUltimate.push(ultimateItem);
-    }
+        var limit1 = Number($("#input-cal-activity-1-limit").val());
+        if (limit1) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "MaxEquipLimit";
+            ultimateItem["value"] = limit1;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Abs";
+            ultimateItem["rarity"] = 1;
+            activityUltimate.push(ultimateItem);
+        }
 
-    var limit2 = Number($("#input-cal-activity-2-limit").val());
-    if (limit2) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "MaxEquipLimit";
-        ultimateItem["value"] = limit2;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Abs";
-        ultimateItem["rarity"] = 2;
-        activityUltimate.push(ultimateItem);
-    }
+        var limit2 = Number($("#input-cal-activity-2-limit").val());
+        if (limit2) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "MaxEquipLimit";
+            ultimateItem["value"] = limit2;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Abs";
+            ultimateItem["rarity"] = 2;
+            activityUltimate.push(ultimateItem);
+        }
 
-    var limit3 = Number($("#input-cal-activity-3-limit").val());
-    if (limit3) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "MaxEquipLimit";
-        ultimateItem["value"] = limit3;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Abs";
-        ultimateItem["rarity"] = 3;
-        activityUltimate.push(ultimateItem);
-    }
+        var limit3 = Number($("#input-cal-activity-3-limit").val());
+        if (limit3) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "MaxEquipLimit";
+            ultimateItem["value"] = limit3;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Abs";
+            ultimateItem["rarity"] = 3;
+            activityUltimate.push(ultimateItem);
+        }
 
-    var limit4 = Number($("#input-cal-activity-4-limit").val());
-    if (limit4) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "MaxEquipLimit";
-        ultimateItem["value"] = limit4;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Abs";
-        ultimateItem["rarity"] = 4;
-        activityUltimate.push(ultimateItem);
-    }
+        var limit4 = Number($("#input-cal-activity-4-limit").val());
+        if (limit4) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "MaxEquipLimit";
+            ultimateItem["value"] = limit4;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Abs";
+            ultimateItem["rarity"] = 4;
+            activityUltimate.push(ultimateItem);
+        }
 
-    var limit5 = Number($("#input-cal-activity-5-limit").val());
-    if (limit5) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "MaxEquipLimit";
-        ultimateItem["value"] = limit5;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Abs";
-        ultimateItem["rarity"] = 5;
-        activityUltimate.push(ultimateItem);
-    }
+        var limit5 = Number($("#input-cal-activity-5-limit").val());
+        if (limit5) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "MaxEquipLimit";
+            ultimateItem["value"] = limit5;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Abs";
+            ultimateItem["rarity"] = 5;
+            activityUltimate.push(ultimateItem);
+        }
 
-    var stirfryPrice = Number($("#input-cal-activity-stirfry-price").val());
-    if (stirfryPrice) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "UseStirfry";
-        ultimateItem["value"] = stirfryPrice;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Percent";
-        activityUltimate.push(ultimateItem);
-    }
+        var stirfryPrice = Number($("#input-cal-activity-stirfry-price").val());
+        if (stirfryPrice) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "UseStirfry";
+            ultimateItem["value"] = stirfryPrice;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Percent";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var boilPrice = Number($("#input-cal-activity-boil-price").val());
-    if (boilPrice) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "UseBoil";
-        ultimateItem["value"] = boilPrice;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Percent";
-        activityUltimate.push(ultimateItem);
-    }
+        var boilPrice = Number($("#input-cal-activity-boil-price").val());
+        if (boilPrice) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "UseBoil";
+            ultimateItem["value"] = boilPrice;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Percent";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var knifePrice = Number($("#input-cal-activity-knife-price").val());
-    if (knifePrice) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "UseKnife";
-        ultimateItem["value"] = knifePrice;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Percent";
-        activityUltimate.push(ultimateItem);
-    }
+        var knifePrice = Number($("#input-cal-activity-knife-price").val());
+        if (knifePrice) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "UseKnife";
+            ultimateItem["value"] = knifePrice;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Percent";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var fryPrice = Number($("#input-cal-activity-fry-price").val());
-    if (fryPrice) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "UseFry";
-        ultimateItem["value"] = fryPrice;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Percent";
-        activityUltimate.push(ultimateItem);
-    }
+        var fryPrice = Number($("#input-cal-activity-fry-price").val());
+        if (fryPrice) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "UseFry";
+            ultimateItem["value"] = fryPrice;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Percent";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var bakePrice = Number($("#input-cal-activity-bake-price").val());
-    if (bakePrice) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "UseBake";
-        ultimateItem["value"] = bakePrice;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Percent";
-        activityUltimate.push(ultimateItem);
-    }
+        var bakePrice = Number($("#input-cal-activity-bake-price").val());
+        if (bakePrice) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "UseBake";
+            ultimateItem["value"] = bakePrice;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Percent";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var steamPrice = Number($("#input-cal-activity-steam-price").val());
-    if (steamPrice) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "UseSteam";
-        ultimateItem["value"] = steamPrice;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Percent";
-        activityUltimate.push(ultimateItem);
-    }
+        var steamPrice = Number($("#input-cal-activity-steam-price").val());
+        if (steamPrice) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "UseSteam";
+            ultimateItem["value"] = steamPrice;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Percent";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var vegetablePrice = Number($("#input-cal-activity-vegetable-price").val());
-    if (vegetablePrice) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "UseVegetable";
-        ultimateItem["value"] = vegetablePrice;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Percent";
-        activityUltimate.push(ultimateItem);
-    }
+        var vegetablePrice = Number($("#input-cal-activity-vegetable-price").val());
+        if (vegetablePrice) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "UseVegetable";
+            ultimateItem["value"] = vegetablePrice;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Percent";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var meatPrice = Number($("#input-cal-activity-meat-price").val());
-    if (meatPrice) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "UseMeat";
-        ultimateItem["value"] = meatPrice;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Percent";
-        activityUltimate.push(ultimateItem);
-    }
+        var meatPrice = Number($("#input-cal-activity-meat-price").val());
+        if (meatPrice) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "UseMeat";
+            ultimateItem["value"] = meatPrice;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Percent";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var creationPrice = Number($("#input-cal-activity-creation-price").val());
-    if (creationPrice) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "UseCreation";
-        ultimateItem["value"] = creationPrice;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Percent";
-        activityUltimate.push(ultimateItem);
-    }
+        var creationPrice = Number($("#input-cal-activity-creation-price").val());
+        if (creationPrice) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "UseCreation";
+            ultimateItem["value"] = creationPrice;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Percent";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var fishPrice = Number($("#input-cal-activity-fish-price").val());
-    if (fishPrice) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "UseFish";
-        ultimateItem["value"] = fishPrice;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Percent";
-        activityUltimate.push(ultimateItem);
-    }
+        var fishPrice = Number($("#input-cal-activity-fish-price").val());
+        if (fishPrice) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "UseFish";
+            ultimateItem["value"] = fishPrice;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Percent";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var sweetPrice = Number($("#input-cal-activity-sweet-price").val());
-    if (sweetPrice) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "UseSweet";
-        ultimateItem["value"] = sweetPrice;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Percent";
-        activityUltimate.push(ultimateItem);
-    }
+        var sweetPrice = Number($("#input-cal-activity-sweet-price").val());
+        if (sweetPrice) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "UseSweet";
+            ultimateItem["value"] = sweetPrice;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Percent";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var sourPrice = Number($("#input-cal-activity-sour-price").val());
-    if (sourPrice) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "UseSour";
-        ultimateItem["value"] = sourPrice;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Percent";
-        activityUltimate.push(ultimateItem);
-    }
+        var sourPrice = Number($("#input-cal-activity-sour-price").val());
+        if (sourPrice) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "UseSour";
+            ultimateItem["value"] = sourPrice;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Percent";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var spicyPrice = Number($("#input-cal-activity-spicy-price").val());
-    if (spicyPrice) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "UseSpicy";
-        ultimateItem["value"] = spicyPrice;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Percent";
-        activityUltimate.push(ultimateItem);
-    }
+        var spicyPrice = Number($("#input-cal-activity-spicy-price").val());
+        if (spicyPrice) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "UseSpicy";
+            ultimateItem["value"] = spicyPrice;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Percent";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var saltyPrice = Number($("#input-cal-activity-salty-price").val());
-    if (saltyPrice) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "UseSalty";
-        ultimateItem["value"] = saltyPrice;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Percent";
-        activityUltimate.push(ultimateItem);
-    }
+        var saltyPrice = Number($("#input-cal-activity-salty-price").val());
+        if (saltyPrice) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "UseSalty";
+            ultimateItem["value"] = saltyPrice;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Percent";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var bitterPrice = Number($("#input-cal-activity-bitter-price").val());
-    if (bitterPrice) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "UseBitter";
-        ultimateItem["value"] = bitterPrice;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Percent";
-        activityUltimate.push(ultimateItem);
-    }
+        var bitterPrice = Number($("#input-cal-activity-bitter-price").val());
+        if (bitterPrice) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "UseBitter";
+            ultimateItem["value"] = bitterPrice;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Percent";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var tastyPrice = Number($("#input-cal-activity-tasty-price").val());
-    if (tastyPrice) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "UseTasty";
-        ultimateItem["value"] = tastyPrice;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Percent";
-        activityUltimate.push(ultimateItem);
-    }
+        var tastyPrice = Number($("#input-cal-activity-tasty-price").val());
+        if (tastyPrice) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "UseTasty";
+            ultimateItem["value"] = tastyPrice;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Percent";
+            activityUltimate.push(ultimateItem);
+        }
 
-    var goldPrice = Number($("#input-cal-activity-gold-price").val());
-    if (goldPrice) {
-        var ultimateItem = {};
-        ultimateItem["type"] = "Gold_Gain";
-        ultimateItem["value"] = goldPrice;
-        ultimateItem["condition"] = "Global";
-        ultimateItem["cal"] = "Percent";
-        activityUltimate.push(ultimateItem);
+        var goldPrice = Number($("#input-cal-activity-gold-price").val());
+        if (goldPrice) {
+            var ultimateItem = {};
+            ultimateItem["type"] = "Gold_Gain";
+            ultimateItem["value"] = goldPrice;
+            ultimateItem["condition"] = "Global";
+            ultimateItem["cal"] = "Percent";
+            activityUltimate.push(ultimateItem);
+        }
     }
 
     return activityUltimate;
@@ -4863,6 +4953,12 @@ function loadRule(data, rule) {
         $("#input-cal-decoration").prop("disabled", true);
     } else {
         $("#input-cal-decoration").prop("disabled", false);
+    }
+
+    if (rule.IsActivity) {
+        $("#cal-activity").show();
+    } else {
+        $("#cal-activity").hide();
     }
 
     var allRecipes = JSON.parse(JSON.stringify(data.recipes));

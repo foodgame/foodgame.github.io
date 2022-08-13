@@ -427,7 +427,7 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
     resultData["max"] = maxQuantity;
     resultData["limit"] = quantity;
     resultData["bonusAdditionDisp"] = getPercentDisp(+(bonusAddition * 100).toFixed(2));
-    resultData["totalPrice"] = basicPrice * quantity;
+    resultData["totalPrice"] = recipe.price * quantity;
     resultData["realPrice"] = Math.ceil(+(basicPrice * (1 + priceAddition)).toFixed(2));
     var score = Math.ceil(+(basicPrice * (1 + priceAddition + bonusAddition)).toFixed(2));
     resultData["bonusScore"] = score - resultData.realPrice;

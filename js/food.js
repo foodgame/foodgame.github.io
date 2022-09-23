@@ -4013,7 +4013,7 @@ function generateActivityExportData() {
 }
 
 function updateActivity(person) {
-    var activity = person.activity;
+    var activity = person && person.activity;
     if (activity) {
         $("#input-cal-activity-stirfry-price").val(activity.stirfryPrice);
         $("#input-cal-activity-bake-price").val(activity.bakePrice);

@@ -10,8 +10,8 @@
     <script type="text/javascript" src="js/script.min.js?v=20"></script>
     <script type="text/javascript" src="js/common.min.js?v=45"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=59" />
-    <script type="text/javascript" src="js/food.min.js?v=184"></script>
-    <link rel="stylesheet" type="text/css" href="css/image.css?v=106" />
+    <script type="text/javascript" src="js/food.min.js?v=185"></script>
+    <link rel="stylesheet" type="text/css" href="css/image.css?v=107" />
     <script>
         $(function () {
             $.ajax({
@@ -19,7 +19,7 @@
                 success: function (json) {
                     init(json);
                 },
-                url: 'data/data.min.json?v=76'
+                url: 'data/data.min.json?v=77'
             });
         });
     </script>
@@ -360,7 +360,8 @@
                                     data-none-results-text="没有找到" data-actions-box="true"
                                     data-actions-box-only-clear="true" data-deselect-all-text="清空">
                                     <optgroup label="主线任务"></optgroup>
-                                    <optgroup label="支线任务"></optgroup>
+                                    <optgroup label="旧支线任务"></optgroup>
+                                    <optgroup label="新支线任务"></optgroup>
                                 </select>
                             </div>
                             <a id="btn-recipe-reset" class="btn btn-default" data-toggle="tooltip" title="清空所有选择">
@@ -737,7 +738,8 @@
                             <select id="select-quest-type" data-live-search="true" data-live-search-placeholder="查找"
                                 data-width="170px" data-dropdown-align-right='auto' data-none-results-text="没有找到">
                                 <option value='主线任务'>主线任务</option>
-                                <option value='支线任务'>支线任务</option>
+                                <option value='旧支线任务'>旧支线任务</option>
+                                <option value='新支线任务' data-subtext="100/230">新支线任务</option>
                             </select>
                         </div>
                     </div>
@@ -779,6 +781,18 @@
                             </div>
                             <div class="pane-cal-rules pane-cal-sub hidden">
                                 <div class="header-wrapper">
+                                    <button id="btn-cal-clear-custom" class="btn btn-default" type="button">
+                                        清空自选
+                                    </button>
+                                    <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="菜单显示内容">
+                                        <select id="chk-cal-recipe-show" class="selectpicker" multiple data-width="fit" data-dropdown-align-right='auto'
+                                            data-none-selected-text="菜单内容" data-selected-text-format="static">
+                                            <option value='rarity'>星</option>
+                                            <option value='skill' selected>技法</option>
+                                            <option value='condiment' selected>调料</option>
+                                            <option value='material' selected>材料</option>
+                                        </select>
+                                    </div>
                                     <label class="btn btn-default" data-toggle="tooltip" title="显示菜谱详细信息">
                                         <input type="checkbox" id="chk-cal-details" checked>
                                         <i class="fa fa-check glyphicon glyphicon-ok"></i>
@@ -790,12 +804,63 @@
                                         已配厨具
                                     </label>
                                     <label class="btn btn-default" data-toggle="tooltip" title="只显示你已有的菜谱和厨师">
-                                        <input type="checkbox" id="chk-cal-got">
+                                        <input type="checkbox" id="chk-cal-got" class="monitor-none">
                                         <i class="fa fa-check glyphicon glyphicon-ok"></i>
                                         已有
                                     </label>
-                                    <button id="btn-cal-clear-custom" class="btn btn-default" type="button">
-                                        清空自选
+                                    <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="选择星级,过滤菜谱">
+                                        <select id="chk-cal-recipe-rarity" multiple class="selectpicker monitor-none"
+                                            data-width="120px" data-dropdown-align-right='auto' data-none-selected-text="菜谱星级"
+                                            data-selected-text-format="count>3" data-count-selected-text="{0} 星级"
+                                            data-actions-box="true" data-actions-box-only-clear="true"
+                                            data-deselect-all-text="清空">
+                                            <option value="1">1星</option>
+                                            <option value="2">2星</option>
+                                            <option value="3">3星</option>
+                                            <option value="4">4星</option>
+                                            <option value="5">5星</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="inline-wrapper select-wrapper input-group-first" data-toggle="tooltip"
+                                            title="选择技法,过滤菜谱">
+                                            <select id="chk-cal-recipe-skill" multiple class="selectpicker monitor-none"
+                                                data-width="120px" data-dropdown-align-right='auto'
+                                                data-none-selected-text="选择技法" data-selected-text-format="count>4"
+                                                data-count-selected-text="{0} 技法" data-actions-box="true"
+                                                data-actions-box-only-clear="true" data-deselect-all-text="清空">
+                                                <option value="stirfry">炒</option>
+                                                <option value="boil">煮</option>
+                                                <option value="knife">切</option>
+                                                <option value="fry">炸</option>
+                                                <option value="bake">烤</option>
+                                                <option value="steam">蒸</option>
+                                            </select>
+                                        </div>
+                                        <span class="input-group-btn input-group-last">
+                                            <label class="btn btn-default">
+                                                <input type="checkbox" id="chk-cal-recipe-multiple-skill" class="monitor-none">
+                                                <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                                                同时
+                                            </label>
+                                        </span>
+                                    </div>
+                                    <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="选择调料,过滤菜谱">
+                                        <select id="chk-cal-recipe-condiment" multiple class="selectpicker monitor-none"
+                                            data-width="100px" data-dropdown-align-right='auto' data-none-selected-text="选择调料"
+                                            data-selected-text-format="count>3" data-count-selected-text="{0} 调料"
+                                            data-actions-box="true" data-actions-box-only-clear="true"
+                                            data-deselect-all-text="清空">
+                                            <option value="Sweet">甜</option>
+                                            <option value="Sour">酸</option>
+                                            <option value="Spicy">辣</option>
+                                            <option value="Salty">咸</option>
+                                            <option value="Bitter">苦</option>
+                                            <option value="Tasty">鲜</option>
+                                        </select>
+                                    </div>
+                                    <button id="btn-cal-reset-custom" class="btn btn-default" type="button">
+                                        清空过滤
                                     </button>
                                 </div>
                             </div>

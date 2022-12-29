@@ -4194,6 +4194,22 @@ function initCalRules(data) {
         $('#cal-recipes-table').DataTable().draw();
     });
 
+    $('#chk-cal-recipe-rarity').on('changed.bs.select', function () {
+        $('#cal-recipes-table').DataTable().draw();
+    });
+
+    $('#chk-cal-recipe-skill').on('changed.bs.select', function () {
+        $('#cal-recipes-table').DataTable().draw();
+    });
+
+    $('#chk-cal-recipe-multiple-skill').click(function () {
+        $('#cal-recipes-table').DataTable().draw();
+    });
+
+    $('#chk-cal-recipe-condiment').on('changed.bs.select', function () {
+        $('#cal-recipes-table').DataTable().draw();
+    });
+
     $('#select-cal-order').change(function () {
         sortRecipesResult();
     });
@@ -4217,6 +4233,16 @@ function initCalRules(data) {
         if (currentRule.hasOwnProperty("MaterialsNum")) {
             $("#pane-cal-recipes").attr("data-cal", "false");
         }
+    });
+
+    $('#btn-cal-reset-custom').click(function () {
+        $("#chk-cal-got").prop("checked", false);
+        $('#chk-cal-recipe-rarity').selectpicker("deselectAll");
+        $("#chk-cal-recipe-skill").selectpicker("deselectAll");
+        $("#chk-cal-recipe-multiple-skill").prop("checked", false);
+        $('#chk-cal-recipe-condiment').selectpicker("deselectAll");
+        checkMonitorStyle();
+        $('#cal-recipes-table').DataTable().draw();
     });
 }
 
@@ -5782,8 +5808,8 @@ function getCustomCondimentsOptions(index, condiments, data) {
 
 function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
     var order = $("#select-cal-order").val();
-    var chkGot = $('#chk-cal-got').prop("checked");
     var useCondiment = $(".selected-item:eq(" + chefIndex + ") .recipe-box:eq(" + recipeIndex + ") .recipe-condiment input").prop("checked");
+    var show = $("#chk-cal-recipe-show").val();
 
     var newData = JSON.parse(JSON.stringify(customData));
 
@@ -5795,14 +5821,11 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
         }
     }
     var partialUltimateData = getPartialUltimateData(data.chefs, data.partialSkill, true, partialChefIds);
-
     var options = [];
-    for (var j in currentRule.menus) {
+    var menus = $('#cal-recipes-table').DataTable().rows({ search: 'applied' }).data().toArray();
+    for (var j in menus) {
 
-        var recipe = currentRule.menus[j].recipe;
-        if (chkGot && !recipe.data.got) {
-            continue;
-        }
+        var recipe = menus[j].recipe;
 
         var option = {};
         option["display"] = recipe.data.name;
@@ -5852,6 +5875,16 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
             }
         }
 
+        for (var m in customData) {
+            for (var n in customData[m].recipes) {
+                if (customData[m].recipes[n].data && customData[m].recipes[n].data.recipeId == recipe.data.recipeId) {
+                    option["disabled"] = true;
+                    score = 0;
+                    break;
+                }
+            }
+        }
+
         option["class"] = "";
         if (sDiff != "") {
             option["content"] += "<span class='skill'>" + sDiff + "</span>";
@@ -5881,17 +5914,17 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
             }
         }
 
-        option["content"] += "<span class='skilltext'>" + getSkillDisp(recipe.data) + "</span>"
-            + "<span class='subtext'>" + recipe.data.condimentDisp + "</span>"
-            + "<span class='subtext'>" + recipe.data.materialsDisp.replace(/\*/g, "") + "</span>";
-
-        for (var m in customData) {
-            for (var n in customData[m].recipes) {
-                if (customData[m].recipes[n].data && customData[m].recipes[n].data.recipeId == recipe.data.recipeId) {
-                    option["disabled"] = true;
-                    break;
-                }
-            }
+        if (show.indexOf("rarity") >= 0) {
+            option["content"] += "<span class='subtext'>" + recipe.data.rarityDisp + "</span>";
+        }
+        if (show.indexOf("skill") >= 0) {
+            option["content"] += "<span class='skilltext'>" + recipe.data.skillDisp + "</span>";
+        }
+        if (show.indexOf("condiment") >= 0) {
+            option["content"] += "<span class='subtext'>" + recipe.data.condimentDisp + "</span>";
+        }
+        if (show.indexOf("material") >= 0) {
+            option["content"] += "<span class='subtext'>" + recipe.data.materialsDisp.replace(/\*/g, "") + "</span>";
         }
 
         if (customData[chefIndex].recipes[recipeIndex].data
@@ -7277,12 +7310,77 @@ function initCalRecipesTable() {
         }
     });
 
+    $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
+        if (settings.nTable != document.getElementById('cal-recipes-table')) {
+            return true;
+        }
+
+        var checks = $("#chk-cal-recipe-rarity").val();
+        if (checks.length == 0) {
+            return true;
+        }
+
+        if ($('#chk-cal-recipe-rarity option[value="' + rowData.recipe.data.rarity + '"]').is(':selected')) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
+    $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
+        if (settings.nTable != document.getElementById('cal-recipes-table')) {
+            return true;
+        }
+
+        var checks = $("#chk-cal-recipe-skill").val();
+        if (checks.length == 0) {
+            return true;
+        }
+
+        var multiple = $('#chk-cal-recipe-multiple-skill').prop("checked");
+
+        for (var i in checks) {
+            if (rowData.recipe.data["" + checks[i] + ""] > 0) {
+                if (!multiple) {
+                    return true;
+                }
+            } else {
+                if (multiple) {
+                    return false;
+                }
+            }
+        }
+        if (multiple) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
+    $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
+        if (settings.nTable != document.getElementById('cal-recipes-table')) {
+            return true;
+        }
+
+        var checks = $("#chk-cal-recipe-condiment").val();
+        if (checks.length == 0) {
+            return true;
+        }
+
+        for (var i in checks) {
+            if (rowData.recipe.data.condiment == checks[i]) {
+                return true;
+            }
+        }
+        return false;
+    });
+
     $('#btn-cal-recipes-select-all').click(function () {
-        table.rows().select();
+        table.rows({ search: 'applied' }).select();
     });
 
     $('#btn-cal-recipes-deselect-all').click(function () {
-        table.rows().deselect();
+        table.rows({ search: 'applied' }).deselect();
     });
 
     $('#chk-cal-recipes-show').on('changed.bs.select', function () {
@@ -8607,7 +8705,7 @@ function initDecorationShow() {
 }
 
 function initQuestShow(questTable) {
-    questTable.column(1).visible($('#select-quest-type').val() == "支线任务", false);
+    questTable.column(1).visible($('#select-quest-type').val() == "旧支线任务", false);
     questTable.columns.adjust().draw(false);
 }
 

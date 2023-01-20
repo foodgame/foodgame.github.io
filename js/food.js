@@ -1546,7 +1546,7 @@ function updateRecipesChefsData(data) {
                         }
                         var resultInfo = getRecipeResult(data.chefs[j], equip, data.recipes[i],
                             data.recipes[i].limit, data.recipes[i].limit, data.materials,
-                            null, 0, null, false, buildRecipeMenu(data.recipes[i]), null);
+                            null, 0, null, false, buildRecipeMenu(data.recipes[i]), null, null);
 
                         var resultData = {};
                         resultData["rankVal"] = resultInfo.rankVal;
@@ -1785,7 +1785,7 @@ function updateChefsRecipesData(data) {
                         }
                         var resultInfo = getRecipeResult(data.chefs[i], equip, data.recipes[j],
                             data.recipes[j].limit, data.recipes[j].limit, data.materials,
-                            null, 0, null, false, buildRecipeMenu(data.recipes[j]), null);
+                            null, 0, null, false, buildRecipeMenu(data.recipes[j]), null, null);
                         var resultData = {};
                         resultData["rankVal"] = resultInfo.rankVal;
                         resultData["rankDisp"] = resultInfo.rankDisp;
@@ -4669,7 +4669,7 @@ function setCalConfigData(rule, data) {
         var quantity = getRecipeQuantity(rule.menus[i].recipe.data, rule.materials, rule);
 
         var resultData = getRecipeResult(null, null, rule.menus[i].recipe.data, quantity, quantity, rule.materials,
-            rule, rule.decorationEffect, null, false, buildRecipeMenu(rule.menus[i].recipe.data), null);
+            rule, rule.decorationEffect, null, false, buildRecipeMenu(rule.menus[i].recipe.data), null, null);
         resultData["available"] = quantity;
         resultData["availableScore"] = Math.ceil(+(resultData.totalScore / resultData.max * quantity).toFixed(2));;
 
@@ -4987,6 +4987,33 @@ function loadRule(data, rule) {
         $("#cal-activity").hide();
     }
 
+    var ruleDesc = "";
+    if (rule.Satiety) {
+        for (var i = 0; i < rule.IntentList.length; i++) {
+            ruleDesc += "<div class='item'>第" + (i + 1) + "轮:";
+            for (var j in rule.IntentList[i]) {
+                for (var k in data.intents) {
+                    if (rule.IntentList[i][j] == data.intents[k].intentId) {
+                        ruleDesc += "<span id='intent-" + i + j + "' class='label label-default'>" + data.intents[k].desc + "</span>";
+                        break;
+                    }
+                }
+            }
+            ruleDesc += "</div>";
+        }
+
+        if (rule.SatisfyRewardType == 1) {
+            ruleDesc += "<div class='item'><span id='intent-satiety' class='label label-default'>饱腹感达到" + rule.Satiety + "时总售价+"
+                + rule.SatisfyExtraValue + "%</span></div>";
+        }
+        $(".condiment-box").hide();
+        $(".recipe-box .recipe-condiment").hide();
+    } else {
+        $(".condiment-box").show();
+        $(".recipe-box .recipe-condiment").show();
+    }
+    $("#rule-desc").html(ruleDesc);
+
     var allRecipes = JSON.parse(JSON.stringify(data.recipes));
     var allChefs = JSON.parse(JSON.stringify(data.chefs));
     var allEquips = JSON.parse(JSON.stringify(data.equips));
@@ -5133,7 +5160,7 @@ function loadRule(data, rule) {
         var quantity = getRecipeQuantity(rule.recipes[j], rule.materials, rule);
 
         var resultData = getRecipeResult(null, null, rule.recipes[j], quantity, quantity, rule.materials,
-            rule, rule.decorationEffect, null, false, buildRecipeMenu(rule.recipes[j]), null);
+            rule, rule.decorationEffect, null, false, buildRecipeMenu(rule.recipes[j]), null, null);
         resultData["available"] = quantity;
         resultData["availableScore"] = resultData.totalScore / resultData.max * quantity;
 
@@ -5277,6 +5304,10 @@ function calCustomResults(data) {
         }
 
         if (customData[i].chef.chefId) {
+            if (currentRule.Satiety) {
+                partialUltimateData = getSelfPartialUltimateData(customData[i].chef, currentRule, data);
+            }
+
             setDataForChef(customData[i].chef, customData[i].equip, true, currentRule.calGlobalUltimateData, partialUltimateData, partialUltimateData, currentRule.calSelfUltimateData, currentRule.calActivityUltimateData, true, currentRule);
 
             for (var m in partialUltimateData) {
@@ -5286,6 +5317,8 @@ function calCustomResults(data) {
             }
         }
     }
+
+    var intentAdds = getIntentAdds(customData, data, true);
 
     var price = 0;
     var bonus = 0;
@@ -5308,14 +5341,17 @@ function calCustomResults(data) {
     }
 
     for (var i in customData) {
+        if (currentRule.Satiety) {
+            partialUltimateData = getSelfPartialUltimateData(customData[i].chef, currentRule, data);
+        }
+
         for (var j in customData[i].recipes) {
             if (customData[i].recipes[j].data) {
-
                 var useCondiment = $(".selected-item:eq(" + i + ") .recipe-box:eq(" + j + ") .recipe-condiment input").prop("checked");
                 var resultData = getRecipeResult(customData[i].chef, customData[i].equip, customData[i].recipes[j].data,
                     customData[i].recipes[j].quantity, customData[i].recipes[j].max, currentRule.materials,
                     currentRule, currentRule.decorationEffect, useCondiment ? customData[i].condiment : null,
-                    true, customData[i].recipes, partialUltimateData);
+                    true, customData[i].recipes, partialUltimateData, intentAdds[i * 3 + Number(j)]);
 
                 customData[i].recipes[j] = resultData;
                 time += resultData.totalTime;
@@ -5416,7 +5452,12 @@ function calCustomResults(data) {
                 else if (currentRule.calActivityUltimateData.length > 0) {
                     content += "<span>奇珍" + recipeData.data.activityAdditionDisp + "</span>";
                 }
-                content += "<span>基础" + recipeData.basicAdditionDisp + "</span>";
+                content += "<span>基础";
+                content += recipeData.basicPercentDisp ? recipeData.basicPercentDisp : recipeData.basicAbsDisp;
+                content += "</span>";
+                if (recipeData.basicPercentDisp && recipeData.basicAbsDisp) {
+                    content += "<span>" + recipeData.basicAbsDisp + "</span>"
+                }
                 content += "<span>在场" + recipeData.partialAdditionDisp + "</span>";
                 content += "</div>";
 
@@ -5445,7 +5486,24 @@ function calCustomResults(data) {
         $(".selected-item:eq(" + i + ") .condiment-box .content").html(condimentContent);
     }
 
-    var summary = "原售价：" + price;
+    var summary = "";
+    if (currentRule.Satiety) {
+        $("#intent-satiety").addClass("label-default").removeClass("label-info");
+        var satiety = calSatiety(customData, currentRule);
+
+        summary += "饱腹感：" + satiety.total + "/" + currentRule.Satiety;
+
+        if (satiety.done) {
+            if (currentRule.SatisfyRewardType == 1 && satiety.total == currentRule.Satiety) {
+                $("#intent-satiety").addClass("label-info").removeClass("label-default");
+            }
+            summary += " 饱腹感加成：" + satiety.add + "%";
+            score = calSatietyAdd(score, satiety.add);
+        }
+    } else {
+        summary += "原售价：" + price;
+    }
+
     if (currentRule.hasRuleAddition && !currentRule.hasOwnProperty("scoreMultiply")) {
         summary += " 规则分：" + bonus;
     }
@@ -5494,6 +5552,157 @@ function calCustomResults(data) {
     $("#pane-cal-custom .selected-sum").html(summary);
 }
 
+function getIntentAdds(customData, data, update) {
+    var intentAdds = [];
+    if (currentRule.Satiety) {
+        for (var i = 0; i < 9; i++) {
+            intentAdds.push([]);
+        }
+
+        for (var i = 0; i < currentRule.IntentList.length; i++) {
+            for (var j = 0; j < currentRule.IntentList[i].length; j++) {
+                for (var k in data.intents) {
+                    if (currentRule.IntentList[i][j] == data.intents[k].intentId) {
+
+                        if (update) {
+                            $("#intent-" + i + j).addClass("label-default").removeClass("label-info");
+                        }
+
+                        var valid = false;
+                        var validIndex = 0;
+                        var intent = data.intents[k];
+                        if (intent.conditionType == "Group") {
+                            valid = checkIntent(intent, customData[i].recipes, null);
+                        } else {
+                            for (var m in customData[i].recipes) {
+                                if (customData[i].recipes[m].data) {
+                                    valid = checkIntent(intent, customData[i].recipes, m);
+                                    if (valid) {
+                                        validIndex = Number(m);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (valid) {
+                            if (update) {
+                                $("#intent-" + i + j).addClass("label-info").removeClass("label-default");
+                            }
+
+                            if (intent.effectType == "CreateBuff") {
+                                for (var m in data.buffs) {
+                                    var buff = data.buffs[m];
+                                    if (buff.buffId == intent.effectValue) {
+                                        for (var n = 1; n <= buff.lastRounds; n++) {
+                                            for (var o = 0; o < 3; o++) {
+                                                if (checkIntent(buff, customData[n + i].recipes, o)) {
+                                                    intentAdds[(n + i) * 3 + o].push(buff);
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    }
+                                }
+                            } else if (intent.effectType == "CreateIntent" && validIndex < 2) {
+                                for (var m in data.intents) {
+                                    if (data.intents[m].intentId == intent.effectValue) {
+                                        if (checkIntent(data.intents[m], customData[i].recipes, validIndex + 1)) {
+                                            intentAdds[i * 3 + validIndex + 1].push(data.intents[m]);
+                                        }
+                                        break;
+                                    }
+                                }
+                            } else {
+                                if (checkIntent(intent, customData[i].recipes, validIndex)) {
+                                    intentAdds[i * 3 + validIndex].push(intent);
+                                }
+                            }
+                        }
+
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    return intentAdds;
+}
+
+function checkIntent(intent, recipes, index) {
+    if (intent.conditionType == "Group") {
+        var count = 0;
+        for (var m in recipes) {
+            var recipe = recipes[m].data;
+            if (recipe) {
+                if (recipe[intent.conditionValue.toLowerCase()] > 0) {
+                    count++;
+                }
+            }
+        }
+        if (count == 3) {
+            return true;
+        }
+    } else {
+        var recipe = recipes[index].data;
+        if (recipe) {
+            if (intent.conditionType == "CondimentSkill" && recipe.condiment == intent.conditionValue
+                || intent.conditionType == "CookSkill" && recipe[intent.conditionValue.toLowerCase()] > 0
+                || intent.conditionType == "Rarity" && recipe.rarity == intent.conditionValue
+                || intent.conditionType == "Order" && index + 1 == intent.conditionValue
+                || !intent.conditionType) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function getSatietyPercent(satiety, rule) {
+    if (rule.SatisfyRewardType == 1 && satiety == rule.Satiety) {
+        return rule.SatisfyExtraValue;
+    } else {
+        return -rule.SatisfyDeductValue * Math.abs(satiety - rule.Satiety);
+    }
+}
+
+function calSatiety(customData, rule) {
+    var result = {};
+    result["total"] = 0;
+    result["add"] = 0;
+    result["done"] = false;
+    if (rule.Satiety) {
+        var recipeNum = 0;
+        for (var i in customData) {
+            for (var j in customData[i].recipes) {
+                if (customData[i].recipes[j].data) {
+                    result.total += customData[i].recipes[j].satiety;
+                    recipeNum++;
+                }
+            }
+        }
+
+        if (rule.GuestType == "Normal" && recipeNum == 3
+            || rule.GuestType == "Boss" && recipeNum == 9) {
+            result.done = true;
+            result.add = getSatietyPercent(result.total, rule);
+        }
+    }
+    return result;
+}
+
+function calSatietyAdd(score, satietyAdd) {
+    return Math.ceil(+(score * (1 + satietyAdd * 0.01)).toFixed(2));
+}
+
+function getSelfPartialUltimateData(chef, rule, data) {
+    var partialChefIds = [];
+    if (chef.chefId && partialChefIds.indexOf(chef.chefId) < 0 && rule.calPartialChefIds.indexOf(chef.chefId) >= 0) {
+        partialChefIds.push(chef.chefId);
+    }
+    return getPartialUltimateData(data.chefs, data.partialSkill, true, partialChefIds);
+}
+
 function getCustomChefsOptions(index, data) {
     var chkGot = $('#chk-cal-got').prop("checked");
     var useEquip = $("#chk-cal-use-equip").prop("checked");
@@ -5509,15 +5718,20 @@ function getCustomChefsOptions(index, data) {
     var newData = JSON.parse(JSON.stringify(customData));
 
     var partialChefIds2 = [];
-    for (var i in newData) {
-        if (i == index) {
-            continue;
-        }
-        if (newData[i].chef.chefId && partialChefIds2.indexOf(newData[i].chef.chefId) < 0
-            && currentRule.calPartialChefIds.indexOf(newData[i].chef.chefId) >= 0) {
-            partialChefIds2.push(newData[i].chef.chefId);
+    if (!currentRule.Satiety) {
+        for (var i in newData) {
+            if (i == index) {
+                continue;
+            }
+            if (newData[i].chef.chefId && partialChefIds2.indexOf(newData[i].chef.chefId) < 0
+                && currentRule.calPartialChefIds.indexOf(newData[i].chef.chefId) >= 0) {
+                partialChefIds2.push(newData[i].chef.chefId);
+            }
         }
     }
+
+    var intentAdds = getIntentAdds(newData, data, false);
+    var satiety = calSatiety(newData, currentRule);
 
     var options = [];
 
@@ -5576,17 +5790,26 @@ function getCustomChefsOptions(index, data) {
 
             var score = 0;
             for (var n in newData) {
+                if (currentRule.Satiety) {
+                    partialUltimateData = getSelfPartialUltimateData(newData[n].chef, currentRule, data);
+                }
+
                 for (var m in newData[n].recipes) {
                     if (newData[n].recipes[m].data) {
                         var resultData = getRecipeResult(newData[n].chef, newData[n].equip, newData[n].recipes[m].data,
                             newData[n].recipes[m].quantity, newData[n].recipes[m].max, currentRule.materials,
                             currentRule, currentRule.decorationEffect,
                             newData[n].recipes[m].useCondiment ? newData[n].condiment : null,
-                            true, newData[n].recipes, partialUltimateData);
+                            true, newData[n].recipes, partialUltimateData, intentAdds[n * 3 + Number(m)]);
                         score += resultData.totalScore;
                     }
                 }
             }
+
+            if (currentRule.Satiety) {
+                score = calSatietyAdd(score, satiety.add);
+            }
+
             option["content"] += "<span class='score'>" + score + "</span>";
             option["order"] = score;
         } else {
@@ -5636,10 +5859,15 @@ function getCustomEquipsOptions(index, equips, data) {
     for (var i in newData) {
         if (newData[i].chef.chefId && partialChefIds.indexOf(newData[i].chef.chefId) < 0
             && currentRule.calPartialChefIds.indexOf(newData[i].chef.chefId) >= 0) {
-            partialChefIds.push(newData[i].chef.chefId);
+            if (!currentRule.Satiety || index == i) {
+                partialChefIds.push(newData[i].chef.chefId);
+            }
         }
     }
     var partialUltimateData = getPartialUltimateData(data.chefs, data.partialSkill, true, partialChefIds);
+
+    var intentAdds = getIntentAdds(newData, data, false);
+    var satiety = calSatiety(newData, currentRule);
 
     var options = [];
 
@@ -5685,17 +5913,26 @@ function getCustomEquipsOptions(index, equips, data) {
 
             var score = 0;
             for (var n in newData) {
+                if (currentRule.Satiety) {
+                    partialUltimateData = getSelfPartialUltimateData(newData[n].chef, currentRule, data);
+                }
+
                 for (var m in newData[n].recipes) {
                     if (newData[n].recipes[m].data) {
                         var resultData = getRecipeResult(newData[n].chef, newData[n].equip, newData[n].recipes[m].data,
                             newData[n].recipes[m].quantity, newData[n].recipes[m].max, currentRule.materials,
                             currentRule, currentRule.decorationEffect,
                             newData[n].recipes[m].useCondiment ? newData[n].condiment : null,
-                            true, newData[n].recipes, partialUltimateData);
+                            true, newData[n].recipes, partialUltimateData, intentAdds[n * 3 + Number(m)]);
                         score += resultData.totalScore;
                     }
                 }
             }
+
+            if (currentRule.Satiety) {
+                score = calSatietyAdd(score, satiety.add);
+            }
+
             option["content"] += "<span class='score'>" + score + "</span>";
             option["order"] = score;
         }
@@ -5736,7 +5973,9 @@ function getCustomCondimentsOptions(index, condiments, data) {
     for (var i in newData) {
         if (newData[i].chef.chefId && partialChefIds.indexOf(newData[i].chef.chefId) < 0
             && currentRule.calPartialChefIds.indexOf(newData[i].chef.chefId) >= 0) {
-            partialChefIds.push(newData[i].chef.chefId);
+            if (!currentRule.Satiety || index == i) {
+                partialChefIds.push(newData[i].chef.chefId);
+            }
         }
     }
     var partialUltimateData = getPartialUltimateData(data.chefs, data.partialSkill, true, partialChefIds);
@@ -5748,6 +5987,9 @@ function getCustomCondimentsOptions(index, condiments, data) {
             }
         }
     }
+
+    var intentAdds = getIntentAdds(newData, data, false);
+    var satiety = calSatiety(newData, currentRule);
 
     var options = [];
 
@@ -5766,16 +6008,24 @@ function getCustomCondimentsOptions(index, condiments, data) {
 
             var score = 0;
             for (var n in newData) {
+                if (currentRule.Satiety) {
+                    partialUltimateData = getSelfPartialUltimateData(newData[n].chef, currentRule, data);
+                }
+
                 for (var m in newData[n].recipes) {
                     if (newData[n].recipes[m].data) {
                         var resultData = getRecipeResult(newData[n].chef, newData[n].equip, newData[n].recipes[m].data,
                             newData[n].recipes[m].quantity, newData[n].recipes[m].max, currentRule.materials,
                             currentRule, currentRule.decorationEffect,
                             newData[n].recipes[m].useCondiment ? newData[n].condiment : null,
-                            true, newData[n].recipes, partialUltimateData);
+                            true, newData[n].recipes, partialUltimateData, intentAdds[n * 3 + Number(m)]);
                         score += resultData.totalScore;
                     }
                 }
+            }
+
+            if (currentRule.Satiety) {
+                score = calSatietyAdd(score, satiety.add);
             }
 
             option["content"] += "<span class='score'>" + score + "</span>";
@@ -5817,10 +6067,13 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
     for (var i in newData) {
         if (newData[i].chef.chefId && partialChefIds.indexOf(newData[i].chef.chefId) < 0
             && currentRule.calPartialChefIds.indexOf(newData[i].chef.chefId) >= 0) {
-            partialChefIds.push(newData[i].chef.chefId);
+            if (!currentRule.Satiety || chefIndex == i) {
+                partialChefIds.push(newData[i].chef.chefId);
+            }
         }
     }
     var partialUltimateData = getPartialUltimateData(data.chefs, data.partialSkill, true, partialChefIds);
+
     var options = [];
     var menus = $('#cal-recipes-table').DataTable().rows({ search: 'applied' }).data().toArray();
     for (var j in menus) {
@@ -5844,18 +6097,24 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
             }
         }
 
+        var intentAdds = getIntentAdds(newData, data, false);
+
         var score = 0;
         var maxScore = recipe.totalScore;
         var efficiency = recipe.efficiency;
         var sDiff = "";
         for (var n in newData) {
+            if (currentRule.Satiety) {
+                partialUltimateData = getSelfPartialUltimateData(newData[n].chef, currentRule, data);
+            }
+
             for (var m in newData[n].recipes) {
                 if (newData[n].recipes[m].data) {
                     var resultData = getRecipeResult(newData[n].chef, newData[n].equip, newData[n].recipes[m].data,
                         newData[n].recipes[m].quantity, newData[n].recipes[m].max, currentRule.materials,
                         currentRule, currentRule.decorationEffect,
                         newData[n].recipes[m].useCondiment ? newData[n].condiment : null,
-                        true, newData[n].recipes, partialUltimateData);
+                        true, newData[n].recipes, partialUltimateData, intentAdds[n * 3 + Number(m)]);
                     score += resultData.totalScore;
 
                     if (n == chefIndex && m == recipeIndex) {
@@ -5863,7 +6122,8 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
                             newData[n].recipes[m].max, newData[n].recipes[m].max, currentRule.materials,
                             currentRule, currentRule.decorationEffect,
                             newData[n].recipes[m].useCondiment ? newData[n].condiment : null,
-                            true, newData[n].recipes, partialUltimateData);
+                            true, newData[n].recipes, partialUltimateData, intentAdds[n * 3 + Number(m)]);
+                        newData[n].recipes[m] = resultData;
                         maxScore = resultData.totalScore;
                         efficiency = resultData.efficiency;
                         if (resultData.rankVal == 0) {
@@ -5873,6 +6133,11 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
                     }
                 }
             }
+        }
+
+        var satiety = calSatiety(newData, currentRule);
+        if (currentRule.Satiety) {
+            score = calSatietyAdd(score, satiety.add);
         }
 
         for (var m in customData) {
@@ -7418,6 +7683,8 @@ function generateData(json, json2, person) {
         json.chefs = json.chefs.concat(json2.chefs);
         json.skills = json.skills.concat(json2.skills);
         json.maps = json.maps.concat(json2.maps);
+        json.buffs = json.buffs.concat(json2.buffs);
+        json.intents = json.intents.concat(json2.intents);
         json.rules = json.rules.concat(json2.rules);
         json.activities = json.activities.concat(json2.activities);
 
@@ -7450,6 +7717,10 @@ function generateData(json, json2, person) {
     retData["partialSkill"] = partialSkill;
 
     retData["rules"] = json.rules;
+
+    retData["intents"] = json.intents;
+
+    retData["buffs"] = json.buffs;
 
     retData["decorationEffect"] = 0;
     if (person && person.decorationEffect) {

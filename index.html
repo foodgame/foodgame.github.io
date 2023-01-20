@@ -8,9 +8,9 @@
     <link rel="shortcut icon" href="favicon.ico?v=1" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="css/style.min.css?v=7" />
     <script type="text/javascript" src="js/script.min.js?v=20"></script>
-    <script type="text/javascript" src="js/common.min.js?v=45"></script>
-    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=59" />
-    <script type="text/javascript" src="js/food.min.js?v=185"></script>
+    <script type="text/javascript" src="js/common.min.js?v=46"></script>
+    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=60" />
+    <script type="text/javascript" src="js/food.min.js?v=186"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=110" />
     <script>
         $(function () {
@@ -19,7 +19,7 @@
                 success: function (json) {
                     init(json);
                 },
-                url: 'data/data.min.json?v=82'
+                url: 'data/data.min.json?v=83'
             });
         });
     </script>
@@ -788,7 +788,7 @@
                                     <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="菜单显示内容">
                                         <select id="chk-cal-recipe-show" class="selectpicker" multiple data-width="fit" data-dropdown-align-right='auto'
                                             data-none-selected-text="菜单内容" data-selected-text-format="static">
-                                            <option value='rarity'>星</option>
+                                            <option value='rarity' selected>星</option>
                                             <option value='skill' selected>技法</option>
                                             <option value='condiment' selected>调料</option>
                                             <option value='material' selected>材料</option>
@@ -1577,6 +1577,7 @@
                 </div>
                 <div id="pane-cal-rules" class='pane-cal-rules pane-cal-sub hidden'>
                     <div id="pane-cal-custom">
+                        <div id="rule-desc"></div>
                         <div class="selected-sum"></div>
                         <div class="selected-item-wrapper">
                             <div class="selected-item">

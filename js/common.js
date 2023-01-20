@@ -299,6 +299,16 @@ function getPercentDisp(percent) {
     }
 }
 
+function getAbsDisp(abs) {
+    if (abs > 0) {
+        return "+" + abs.toString();
+    } else if (abs < 0) {
+        return abs.toString();
+    } else {
+        return "";
+    }
+}
+
 function getRecipeQuantity(recipe, materials, rule) {
     var quantity = 1;
     if (!rule.hasOwnProperty("DisableMultiCookbook") || rule.DisableMultiCookbook == false) {
@@ -333,7 +343,7 @@ function getRecipeQuantity(recipe, materials, rule) {
     return quantity;
 }
 
-function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, rule, decoration, condiment, forCal, recipes, partialUltimateData) {
+function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, rule, decoration, condiment, forCal, recipes, partialUltimateData, intents) {
 
     var resultData = {};
 
@@ -344,8 +354,11 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
     var bonusAddition = 0;
     var condimentSkillAddition = 0;
 
-    var basicAddition = 0;
+    var basicAddition = new Addition();
     var partialAddition = 0;
+    var intentBasicAddition = new Addition();
+    var intentPriceAddition = 0;
+    var mIntentAddition = 0;
 
     if (chef && chef.chefId) {
         var rankData = getRankInfo(recipe, chef);
@@ -366,16 +379,16 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
             updateConditionMatch(chef.specialSkillEffect, chef, recipe, quantity, recipes);
 
             chefSkillAddition = getRecipeSkillAddition(chef.specialSkillEffect, recipe, rule, true);
-            basicAddition = getRecipeBasicAddition(chef.specialSkillEffect);
+            basicAddition.percent = getRecipeBasicAddition(chef.specialSkillEffect);
 
             updateConditionMatch(chef.selfUltimateEffect, chef, recipe, quantity, recipes);
             chefSkillAddition += getRecipeSkillAddition(chef.selfUltimateEffect, recipe, rule, true);
-            basicAddition += getRecipeBasicAddition(chef.selfUltimateEffect);
+            basicAddition.percent += getRecipeBasicAddition(chef.selfUltimateEffect);
 
             if (partialUltimateData) {
                 for (var m in partialUltimateData) {
                     partialAddition = getRecipeSkillAddition(partialUltimateData[m].effect, recipe, rule, true);
-                    basicAddition += getRecipeBasicAddition(partialUltimateData[m].effect);
+                    basicAddition.percent += getRecipeBasicAddition(partialUltimateData[m].effect);
                 }
             }
         }
@@ -386,7 +399,7 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
                 var equipEffect = updateEquipmentEffect(equip.effect, chef.selfUltimateEffect);
                 updateConditionMatch(equipEffect, chef, recipe, quantity, recipes);
                 equipSkillAddition = getRecipeSkillAddition(equipEffect, recipe, rule, true);
-                basicAddition += getRecipeBasicAddition(equipEffect);
+                basicAddition.percent += getRecipeBasicAddition(equipEffect);
             }
         }
         resultData["equipSkillAdditionDisp"] = getPercentDisp(equipSkillAddition);
@@ -394,8 +407,39 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
         bonusAddition = bonusAddition + Number(chef.addition);
     }
 
+    resultData["satiety"] = recipe.rarity;
+    if (intents) {
+        var satietyAddition = new Addition();
+        for (var i in intents) {
+            var type = intents[i].effectType;
+            var value = intents[i].effectValue;
+            if (type == "BasicPriceChange") {
+                intentBasicAddition.abs += value;
+            } else if (type == "BasicPriceChangePercent") {
+                intentBasicAddition.percent += value;
+            } else if (type == "SatietyChange") {
+                satietyAddition.abs += value;
+            } else if (type == "SatietyChangePercent") {
+                satietyAddition.percent += value;
+            } else if (type == "SetSatietyValue") {
+                resultData.satiety = value;
+            } else if (type == "PriceChangePercent") {
+                intentPriceAddition += value;
+            } else if (type == "IntentAdd") {
+                mIntentAddition += value;
+            }
+        }
+
+        basicAddition.abs += intentBasicAddition.abs * (1 + (mIntentAddition * 0.01));
+        basicAddition.percent += intentBasicAddition.percent * (1 + (mIntentAddition * 0.01));
+
+        bonusAddition += intentPriceAddition / 100 * (1 + (mIntentAddition * 0.01));
+        resultData.satiety = Math.ceil(+((resultData.satiety + satietyAddition.abs) * (1 + satietyAddition.percent / 100)).toFixed(2));
+    }
+
     resultData["partialAdditionDisp"] = getPercentDisp(partialAddition);
-    resultData["basicAdditionDisp"] = getPercentDisp(basicAddition);
+    resultData["basicPercentDisp"] = getPercentDisp(basicAddition.percent);
+    resultData["basicAbsDisp"] = getAbsDisp(basicAddition.abs);
 
     if (!rule || !rule.hasOwnProperty("DisableCondimentEffect") || rule.DisableCondimentEffect == false) {
         if (condiment) {
@@ -420,7 +464,10 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
     }
 
     var priceAddition = (rankAddition + chefSkillAddition + equipSkillAddition + condimentSkillAddition + decorationAddition + recipe.ultimateAddition + partialAddition) / 100;
-    var basicPrice = Math.floor(recipe.price * (1 + basicAddition / 100));
+    var basicPrice = (recipe.price + basicAddition.abs) * (1 + basicAddition.percent / 100);
+    if (!intents) {
+        basicPrice = Math.floor(basicPrice);
+    }
 
     resultData["data"] = recipe;
     resultData["quantity"] = quantity;

@@ -250,6 +250,21 @@ table.dataTable tbody>tr>.selected {
     background-color: inherit;
 }
 
+#rule-desc {
+    text-align: center;
+}
+
+#rule-desc .item {
+    margin-bottom: 3px;
+}
+
+#rule-desc .label {
+    font-size: 12px;
+    margin-left: 5px;
+    margin-bottom: 2px;
+    display: inline-block;
+}
+
 .selected-sum {
     color: #337ab7;
     font-weight: bold;
@@ -344,6 +359,7 @@ table.dataTable tbody>tr>.selected {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 10px;
+    align-items: center;
 }
 
 .selected-item {

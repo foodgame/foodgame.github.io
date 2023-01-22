@@ -6123,7 +6123,6 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
                             currentRule, currentRule.decorationEffect,
                             newData[n].recipes[m].useCondiment ? newData[n].condiment : null,
                             true, newData[n].recipes, partialUltimateData, intentAdds[n * 3 + Number(m)]);
-                        newData[n].recipes[m] = resultData;
                         maxScore = resultData.totalScore;
                         efficiency = resultData.efficiency;
                         if (resultData.rankVal == 0) {
@@ -6131,6 +6130,8 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
                             sDiff = skillDiff.disp;
                         }
                     }
+
+                    newData[n].recipes[m] = resultData;
                 }
             }
         }

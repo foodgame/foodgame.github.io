@@ -157,7 +157,7 @@ function getRecipeSkillAddition(effects, recipe, rule, checkCondition) {
                 hasSkill = true;
             }
         } else if (type == "Gold_Gain") {
-            if (!rule || rule.Id == 0) {
+            if (!rule || rule.Id == 0 || rule.Satiety) {
                 hasSkill = true;
             }
         } else if (type == "CookbookPrice") {

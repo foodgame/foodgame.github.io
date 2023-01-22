@@ -432,6 +432,9 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
         basicAddition.percent += intentBasicAddition.percent * (1 + (mIntentAddition * 0.01));
 
         bonusAddition += intentPriceAddition / 100 * (1 + (mIntentAddition * 0.01));
+
+        satietyAddition.abs = satietyAddition.abs * (1 + (mIntentAddition * 0.01));
+        satietyAddition.percent = satietyAddition.percent * (1 + (mIntentAddition * 0.01));
         resultData.satiety = Math.ceil(+((resultData.satiety + satietyAddition.abs) * (1 + satietyAddition.percent / 100)).toFixed(2));
     }
 

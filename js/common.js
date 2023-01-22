@@ -300,12 +300,10 @@ function getPercentDisp(percent) {
 }
 
 function getAbsDisp(abs) {
-    if (abs > 0) {
-        return "+" + abs.toString();
-    } else if (abs < 0) {
-        return abs.toString();
-    } else {
+    if (abs == 0) {
         return "";
+    } else {
+        return abs.toString();
     }
 }
 

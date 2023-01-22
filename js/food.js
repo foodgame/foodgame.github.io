@@ -5649,7 +5649,7 @@ function checkIntent(intent, recipes, index) {
             if (intent.conditionType == "CondimentSkill" && recipe.condiment == intent.conditionValue
                 || intent.conditionType == "CookSkill" && recipe[intent.conditionValue.toLowerCase()] > 0
                 || intent.conditionType == "Rarity" && recipe.rarity == intent.conditionValue
-                || intent.conditionType == "Order" && index + 1 == intent.conditionValue
+                || intent.conditionType == "Order" && Number(index) + 1 == intent.conditionValue
                 || !intent.conditionType) {
                 return true;
             }

@@ -3567,9 +3567,109 @@ function initImportExport(data) {
                 }
             };
             reader.readAsText(file, "UTF-8");
-            $(this).val("");
+            $('#file-import').val("");
         }, 0);
     });
+
+    $('#btn-import-bcjh').click(function () {
+        $("#import-msg-2-bcjh").html("导入中...").removeClass("hidden");
+        setTimeout(function () {
+            var success = importDataBcjh($("#input-export-import-bcjh").val());
+            if (success) {
+                $("#import-msg-2-bcjh").html("导入成功 !");
+            } else {
+                $("#import-msg-2-bcjh").html("导入失败 !");
+            }
+        }, 0);
+    });
+
+    $('#file-import-bcjh').change(function () {
+        $("#import-msg-bcjh").html("导入中...").removeClass("hidden");
+        setTimeout(function () {
+            var file = document.getElementById("file-import-bcjh").files[0];
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                var success = importDataBcjh(event.target.result);
+                if (success) {
+                    $("#import-msg-bcjh").html("导入成功 !");
+                } else {
+                    $("#import-msg-bcjh").html("导入失败 !");
+                }
+            };
+            reader.readAsText(file, "UTF-8");
+            $('#file-import-bcjh').val("");
+        }, 0);
+    });
+}
+
+function importDataBcjh(input) {
+    var bcjh;
+    try {
+        bcjh = JSON.parse(input);
+    } catch (e) {
+        return false;
+    }
+
+    var ultimate = bcjh.userUltimate;
+    var repGot = bcjh.repGot;
+    var chefGot = bcjh.chefGot;
+    if (!ultimate || !repGot || !chefGot) {
+        return false;
+    }
+
+    $("#input-cal-decoration").val(ultimate.decoBuff);
+    $("#input-cal-ultimate-stirfry").val(ultimate.Stirfry);
+    $("#input-cal-ultimate-boil").val(ultimate.Boil);
+    $("#input-cal-ultimate-knife").val(ultimate.Knife);
+    $("#input-cal-ultimate-fry").val(ultimate.Fry);
+    $("#input-cal-ultimate-bake").val(ultimate.Bake);
+    $("#input-cal-ultimate-steam").val(ultimate.Steam);
+    $("#input-cal-ultimate-male-skill").val((Number(ultimate.Male) + Number(ultimate.All)) || "");
+    $("#input-cal-ultimate-female-skill").val((Number(ultimate.Female) + Number(ultimate.All)) || "");
+    $("#input-cal-ultimate-1-limit").val(ultimate.MaxLimit_1);
+    $("#input-cal-ultimate-2-limit").val(ultimate.MaxLimit_2);
+    $("#input-cal-ultimate-3-limit").val(ultimate.MaxLimit_3);
+    $("#input-cal-ultimate-4-limit").val(ultimate.MaxLimit_4);
+    $("#input-cal-ultimate-5-limit").val(ultimate.MaxLimit_5);
+    $("#input-cal-ultimate-1-price").val(ultimate.PriceBuff_1);
+    $("#input-cal-ultimate-2-price").val(ultimate.PriceBuff_2);
+    $("#input-cal-ultimate-3-price").val(ultimate.PriceBuff_3);
+    $("#input-cal-ultimate-4-price").val(ultimate.PriceBuff_4);
+    $("#input-cal-ultimate-5-price").val(ultimate.PriceBuff_5);
+
+    var partialIds = [];
+    for (var i in ultimate.Partial.id) {
+        partialIds.push(ultimate.Partial.id[i].split(',')[0]);
+    }
+    $('#chk-cal-partial-ultimate').selectpicker('val', partialIds);
+
+    var selfIds = [];
+    for (var i in ultimate.Self.id) {
+        selfIds.push(ultimate.Self.id[i].split(',')[0]);
+    }
+    $('#chk-cal-self-ultimate').selectpicker('val', selfIds);
+
+    for (var i in currentRule.recipes) {
+        for (var j in repGot) {
+            if (j == currentRule.recipes[i].recipeId) {
+                currentRule.recipes[i].got = repGot[j];
+                break;
+            }
+        }
+    }
+
+    for (var i in currentRule.chefs) {
+        for (var j in chefGot) {
+            if (j == currentRule.chefs[i].chefId) {
+                currentRule.chefs[i].got = chefGot[j];
+                break;
+            }
+        }
+    }
+
+    $('#cal-recipes-table').DataTable().draw();
+
+    return true;
 }
 
 function importData(data, input) {
@@ -4170,9 +4270,9 @@ function initCalRules(data) {
 
     $("#btn-cal-clear-ultimate").click(function () {
         $("#cal-ultimate input").val("");
-        $('#chk-cal-partial-ultimate').selectpicker('deselectAll');
-        $('#chk-cal-self-ultimate').selectpicker('deselectAll');
-        $('#chk-cal-ex').selectpicker('deselectAll');
+        $('#chk-cal-partial-ultimate').selectpicker('deselectAll').selectpicker('refresh');;
+        $('#chk-cal-self-ultimate').selectpicker('deselectAll').selectpicker('refresh');;
+        $('#chk-cal-ex').selectpicker('deselectAll').selectpicker('refresh');;
         setCalConfigData(currentRule, data);
         calCustomResults(data);
         $("#pane-cal-recipes").attr("data-cal", "false");
@@ -4340,7 +4440,8 @@ function loadUltimate(data, usePerson) {
         } else if (globalUltimate[i].type == "UseAll" && globalUltimate[i].rarity == 5) {
             $("#input-cal-ultimate-5-price").val(globalUltimate[i].value);
             continue;
-        } else if (globalUltimate[i].type == "Material_Gain") {
+        } else if (globalUltimate[i].type == "Material_Gain"
+            || globalUltimate[i].type == "Material_Vegetable") {
             continue
         } else {
             console.log(globalUltimate[i].type);

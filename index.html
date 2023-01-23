@@ -9,8 +9,8 @@
     <link rel="stylesheet" type="text/css" href="css/style.min.css?v=7" />
     <script type="text/javascript" src="js/script.min.js?v=20"></script>
     <script type="text/javascript" src="js/common.min.js?v=48"></script>
-    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=62" />
-    <script type="text/javascript" src="js/food.min.js?v=190"></script>
+    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=63" />
+    <script type="text/javascript" src="js/food.min.js?v=191"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=110" />
     <script>
         $(function () {
@@ -1394,26 +1394,28 @@
                                 <div class="input-group-addon">%</div>
                             </div>
                             <div class="select-wrapper">
-                                <select id="chk-cal-partial-ultimate" multiple data-live-search="false"
-                                    data-width="180px" data-dropdown-align-right='auto'
-                                    data-none-selected-text="上场类技能已修炼 0" data-selected-text-format="count>0"
-                                    data-count-selected-text="上场类技能已修炼 {0}" data-actions-box="true"
+                                <select id="chk-cal-partial-ultimate" multiple data-live-search="true"
+                                    data-live-search-placeholder="查找" data-width="180px"
+                                    data-dropdown-align-right='auto' data-none-selected-text="上场类技能已修炼 0"
+                                    data-selected-text-format="count>0" data-count-selected-text="上场类技能已修炼 {0}"
+                                    data-none-results-text="没有找到" data-actions-box="true"
                                     data-select-all-text="全选" data-deselect-all-text="清空"></select>
                             </div>
                             <div class="select-wrapper">
-                                <select id="chk-cal-self-ultimate" multiple data-live-search="false" data-width="180px"
+                                <select id="chk-cal-self-ultimate" multiple data-live-search="true"
+                                    data-live-search-placeholder="查找" data-width="180px"
                                     data-dropdown-align-right='auto' data-none-selected-text="个人类技能已修炼 0"
                                     data-selected-text-format="count>0" data-count-selected-text="个人类技能已修炼 {0}"
-                                    data-actions-box="true" data-select-all-text="全选"
-                                    data-deselect-all-text="清空"></select>
+                                    data-none-results-text="没有找到" data-actions-box="true"
+                                    data-select-all-text="全选" data-deselect-all-text="清空"></select>
                             </div>
                             <div class="select-wrapper">
                                 <select id="chk-cal-ex" multiple data-live-search="true"
                                     data-live-search-placeholder="查找" data-width="150px"
                                     data-dropdown-align-right='auto' data-none-selected-text="菜谱已熟练 0"
                                     data-selected-text-format="count>0" data-count-selected-text="菜谱已熟练 {0}"
-                                    data-actions-box="true" data-select-all-text="全选"
-                                    data-deselect-all-text="清空"></select>
+                                    data-none-results-text="没有找到" data-actions-box="true"
+                                    data-select-all-text="全选" data-deselect-all-text="清空"></select>
                             </div>
                             <button id="btn-cal-load-ultimate" class="btn btn-default" type="button"
                                 data-toggle="tooltip" title="读取厨师图鉴中的个人已修炼数据">
@@ -1573,8 +1575,32 @@
                                 清空加成
                             </button>
                         </div>
-                    </div>
-                </div>
+                        <div>
+                            <hr>
+                            <h4>
+                                <span class="label label-info">白菜菊花数据导入</span>
+                            </h4>
+                            <h5 class="text-danger">只用于计算器, 不会保存, 也不会覆盖本图鉴的个人数据. 每次加载一个新规则后需要重新导入.</h5>
+                            <h5 class="text-primary">手动复制版</h5>
+                            <div class="form-group">
+                                <textarea id="input-export-import-bcjh" class="form-control"></textarea>
+                            </div>
+                            <button id="btn-import-bcjh" class="btn btn-default" type="button" data-toggle="tooltip"
+                                title="将备份的白菜菊花数据复制到上方文本框内, 然后点击该按钮导入白菜菊花数据">
+                                导入白菜菊花数据
+                            </button>
+                            <div id="import-msg-2-bcjh" class="import-msg inline-div hidden"></div>
+                            <h5 class="text-primary">文件版 (有的浏览器不支持)</h5>
+                            <div class="select-file inline-div" data-toggle="tooltip" title="选择本地的白菜菊花数据文件并导入">
+                                <input id="file-import-bcjh" type="file">
+                                <button id="btn-import-upload" class="btn btn-default" type="button">
+                                    导入白菜菊花数据文件
+                                </button>
+                            </div>
+                            <div id="import-msg-bcjh" class="import-msg inline-div hidden"></div>
+                        </div>
+                        </div>
+                        </div>
                 <div id="pane-cal-rules" class='pane-cal-rules pane-cal-sub hidden'>
                     <div id="pane-cal-custom">
                         <div id="rule-desc"></div>

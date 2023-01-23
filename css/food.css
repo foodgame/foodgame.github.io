@@ -602,6 +602,11 @@ table.dataTable tbody>tr>.selected {
     min-height: 50vh;
 }
 
+#input-export-import-bcjh {
+    width: 100% !important;
+    min-height: 20vh;
+}
+
 #input-cal-decoration {
     width: 65px;
 }

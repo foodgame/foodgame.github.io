@@ -9,8 +9,8 @@
     <link rel="stylesheet" type="text/css" href="css/style.min.css?v=7" />
     <script type="text/javascript" src="js/script.min.js?v=20"></script>
     <script type="text/javascript" src="js/common.min.js?v=48"></script>
-    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=63" />
-    <script type="text/javascript" src="js/food.min.js?v=191"></script>
+    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=64" />
+    <script type="text/javascript" src="js/food.min.js?v=192"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=110" />
     <script>
         $(function () {
@@ -1581,15 +1581,24 @@
                                 <span class="label label-info">白菜菊花数据导入</span>
                             </h4>
                             <h5 class="text-danger">只用于计算器, 不会保存, 也不会覆盖本图鉴的个人数据. 每次加载一个新规则后需要重新导入.</h5>
+                            <h5 class="text-primary">云端版</h5>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="input-import-bcjh-cloud" placeholder="数据ID">
+                            </div>
+                            <button id="btn-import-bcjh-cloud" class="btn btn-default" type="button" data-toggle="tooltip"
+                                title="输入白菜菊花云端数据ID, 然后点击该按钮导入白菜菊花数据">
+                                导入白菜菊花数据
+                            </button>
+                            <div id="import-msg-bcjh-cloud" class="import-msg inline-div hidden"></div>
                             <h5 class="text-primary">手动复制版</h5>
                             <div class="form-group">
-                                <textarea id="input-export-import-bcjh" class="form-control"></textarea>
+                                <textarea id="input-import-bcjh-text" class="form-control"></textarea>
                             </div>
-                            <button id="btn-import-bcjh" class="btn btn-default" type="button" data-toggle="tooltip"
+                            <button id="btn-import-bcjh-text" class="btn btn-default" type="button" data-toggle="tooltip"
                                 title="将备份的白菜菊花数据复制到上方文本框内, 然后点击该按钮导入白菜菊花数据">
                                 导入白菜菊花数据
                             </button>
-                            <div id="import-msg-2-bcjh" class="import-msg inline-div hidden"></div>
+                            <div id="import-msg-bcjh-text" class="import-msg inline-div hidden"></div>
                             <h5 class="text-primary">文件版 (有的浏览器不支持)</h5>
                             <div class="select-file inline-div" data-toggle="tooltip" title="选择本地的白菜菊花数据文件并导入">
                                 <input id="file-import-bcjh" type="file">
@@ -1597,7 +1606,7 @@
                                     导入白菜菊花数据文件
                                 </button>
                             </div>
-                            <div id="import-msg-bcjh" class="import-msg inline-div hidden"></div>
+                            <div id="import-msg-bcjh-file" class="import-msg inline-div hidden"></div>
                         </div>
                         </div>
                         </div>

@@ -3571,29 +3571,60 @@ function initImportExport(data) {
         }, 0);
     });
 
-    $('#btn-import-bcjh').click(function () {
-        $("#import-msg-2-bcjh").html("导入中...").removeClass("hidden");
+    $('#btn-import-bcjh-cloud').click(function () {
+        $("#import-msg-bcjh-cloud").html("导入中...").removeClass("hidden");
+
+        if (!$("#input-import-bcjh-cloud").val()) {
+            $("#import-msg-bcjh-cloud").html("输入数据ID !");
+            return;
+        }
+
         setTimeout(function () {
-            var success = importDataBcjh($("#input-export-import-bcjh").val());
+            $.ajax({
+                cache: false,
+                success: function (bjson) {
+                    if (bjson.result) {
+                        var success = importDataBcjh(bjson.data);
+                        if (success) {
+                            $("#import-msg-bcjh-cloud").html("导入成功 !");
+                        } else {
+                            $("#import-msg-bcjh-cloud").html("导入失败 !");
+                        }
+                    } else {
+                        $("#import-msg-bcjh-cloud").html(bjson.msg);
+                    }
+                },
+                error: function () {
+                    $("#import-msg-bcjh-cloud").html("获取失败 !");
+                },
+                url: 'https://bcjh.xyz/api/download_data?id=' + $("#input-import-bcjh-cloud").val()
+            });
+        }, 0);
+    });
+
+    $('#btn-import-bcjh-text').click(function () {
+        $("#import-msg-bcjh-text").html("导入中...").removeClass("hidden");
+        setTimeout(function () {
+            var success = importDataBcjh($("#input-import-bcjh-text").val());
             if (success) {
-                $("#import-msg-2-bcjh").html("导入成功 !");
+                $("#import-msg-bcjh-text").html("导入成功 !");
             } else {
-                $("#import-msg-2-bcjh").html("导入失败 !");
+                $("#import-msg-bcjh-text").html("导入失败 !");
             }
         }, 0);
     });
 
     $('#file-import-bcjh').change(function () {
-        $("#import-msg-bcjh").html("导入中...").removeClass("hidden");
+        $("#import-msg-bcjh-file").html("导入中...").removeClass("hidden");
         setTimeout(function () {
             var file = document.getElementById("file-import-bcjh").files[0];
             var reader = new FileReader();
             reader.onload = function (event) {
                 var success = importDataBcjh(event.target.result);
                 if (success) {
-                    $("#import-msg-bcjh").html("导入成功 !");
+                    $("#import-msg-bcjh-file").html("导入成功 !");
                 } else {
-                    $("#import-msg-bcjh").html("导入失败 !");
+                    $("#import-msg-bcjh-file").html("导入失败 !");
                 }
             };
             reader.readAsText(file, "UTF-8");

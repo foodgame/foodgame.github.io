@@ -602,7 +602,11 @@ table.dataTable tbody>tr>.selected {
     min-height: 50vh;
 }
 
-#input-export-import-bcjh {
+#input-import-bcjh-cloud {
+    width: 200px;
+}
+
+#input-import-bcjh-text {
     width: 100% !important;
     min-height: 20vh;
 }

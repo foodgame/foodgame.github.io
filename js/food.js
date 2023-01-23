@@ -5006,11 +5006,9 @@ function loadRule(data, rule) {
             ruleDesc += "<div class='item'><span id='intent-satiety' class='label label-default'>饱腹感达到" + rule.Satiety + "时总售价+"
                 + rule.SatisfyExtraValue + "%</span></div>";
         }
-        $(".condiment-box").hide();
-        $(".recipe-box .recipe-condiment").hide();
+        $("#pane-cal-custom").addClass("banquet");
     } else {
-        $(".condiment-box").show();
-        $(".recipe-box .recipe-condiment").show();
+        $("#pane-cal-custom").removeClass("banquet");
     }
     $("#rule-desc").html(ruleDesc);
 

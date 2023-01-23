@@ -561,6 +561,14 @@ table.dataTable tbody>tr>.selected {
     color: #337ab7;
 }
 
+#pane-cal-custom.banquet .condiment-box {
+    display: none;
+}
+
+#pane-cal-custom.banquet .recipe-box .recipe-condiment {
+    display: none;
+}
+
 .selected-item .select-picker {
     position: absolute;
     left: 0;
@@ -1141,6 +1149,18 @@ table.dataTable tr.selected th.select-checkbox:after {
 
     .recipe-box.no-details {
         height: 140px;
+    }
+
+    #pane-cal-custom.banquet .recipe-box {
+        height: 240px;
+    }
+
+    #pane-cal-custom.banquet .recipe-box.no-details {
+        height: 110px;
+    }
+
+    #pane-cal-custom.banquet .recipe-box .recipe-box-1 {
+        height: 110px;
     }
 
     .recipe-box .recipe-box-1,

@@ -1192,4 +1192,8 @@ table.dataTable tr.selected th.select-checkbox:after {
         top: 35px;
         z-index: 2;
     }
+
+    body.m-no-scroll {
+        overflow-y: hidden;
+    }
 }

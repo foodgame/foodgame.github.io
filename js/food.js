@@ -6991,10 +6991,12 @@ function initCalCustomTable(data) {
 
     $(".selected-item-wrapper .select-picker select").on('show.bs.select', function (e) {
         $(this).closest(".selected-box").addClass("editing");
+        $("body").addClass("m-no-scroll");
     });
 
     $(".selected-item-wrapper .select-picker select").on('hide.bs.select', function (e) {
         $(this).closest(".selected-box").removeClass("editing");
+        $("body").removeClass("m-no-scroll");
     });
 
     $(".chef-box").click(function () {

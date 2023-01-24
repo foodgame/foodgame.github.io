@@ -5460,14 +5460,10 @@ function calCustomResults(data) {
             }
 
             setDataForChef(customData[i].chef, customData[i].equip, true, currentRule.calGlobalUltimateData, partialUltimateData, partialUltimateData, currentRule.calSelfUltimateData, currentRule.calActivityUltimateData, true, currentRule);
-
-            for (var m in partialUltimateData) {
-                if (customData[i].chef.chefId == partialUltimateData[m].chefId) {
-                    updateConditionMatch(partialUltimateData[m].effect, customData[i].chef, null, null, customData[i].recipes);
-                }
-            }
         }
     }
+
+    updatePartialUltimateDataCondition(customData, partialUltimateData);
 
     var intentAdds = getIntentAdds(customData, data, true);
 
@@ -5494,6 +5490,7 @@ function calCustomResults(data) {
     for (var i in customData) {
         if (currentRule.Satiety) {
             partialUltimateData = getSelfPartialUltimateData(customData[i].chef, currentRule, data);
+            updateSelfPartialUltimateDataCondition(customData[i].chef, customData[i].recipes, partialUltimateData);
         }
 
         for (var j in customData[i].recipes) {
@@ -5854,6 +5851,14 @@ function getSelfPartialUltimateData(chef, rule, data) {
     return getPartialUltimateData(data.chefs, data.partialSkill, true, partialChefIds);
 }
 
+function updateSelfPartialUltimateDataCondition(chef, recipes, partialUltimateData) {
+    for (var m in partialUltimateData) {
+        if (chef.chefId == partialUltimateData[m].chefId) {
+            updateConditionMatch(partialUltimateData[m].effect, chef, null, null, recipes);
+        }
+    }
+}
+
 function getCustomChefsOptions(index, data) {
     var chkGot = $('#chk-cal-got').prop("checked");
     var useEquip = $("#chk-cal-use-equip").prop("checked");
@@ -5932,18 +5937,13 @@ function getCustomChefsOptions(index, data) {
 
             newData[index].chef = chef;
 
-            for (var n in newData) {
-                for (var m in partialUltimateData) {
-                    if (newData[n].chef.chefId == partialUltimateData[m].chefId) {
-                        updateConditionMatch(partialUltimateData[m].effect, newData[n].chef, null, null, newData[n].recipes);
-                    }
-                }
-            }
+            updatePartialUltimateDataCondition(newData, partialUltimateData);
 
             var score = 0;
             for (var n in newData) {
                 if (currentRule.Satiety) {
                     partialUltimateData = getSelfPartialUltimateData(newData[n].chef, currentRule, data);
+                    updateSelfPartialUltimateDataCondition(newData[n].chef, newData[n].recipes, partialUltimateData);
                 }
 
                 for (var m in newData[n].recipes) {
@@ -6096,18 +6096,13 @@ function getCustomEquipsOptions(index, equips, data) {
 
             newData[index].chef = chef;
 
-            for (var n in newData) {
-                for (var m in partialUltimateData) {
-                    if (newData[n].chef.chefId == partialUltimateData[m].chefId) {
-                        updateConditionMatch(partialUltimateData[m].effect, newData[n].chef, null, null, newData[n].recipes);
-                    }
-                }
-            }
+            updatePartialUltimateDataCondition(newData, partialUltimateData);
 
             var score = 0;
             for (var n in newData) {
                 if (currentRule.Satiety) {
                     partialUltimateData = getSelfPartialUltimateData(newData[n].chef, currentRule, data);
+                    updateSelfPartialUltimateDataCondition(newData[n].chef, newData[n].recipes, partialUltimateData);
                 }
 
                 for (var m in newData[n].recipes) {
@@ -6182,13 +6177,7 @@ function getCustomCondimentsOptions(index, condiments, data) {
     }
     var partialUltimateData = getPartialUltimateData(data.chefs, data.partialSkill, true, partialChefIds);
 
-    for (var n in newData) {
-        for (var m in partialUltimateData) {
-            if (newData[n].chef.chefId == partialUltimateData[m].chefId) {
-                updateConditionMatch(partialUltimateData[m].effect, newData[n].chef, null, null, newData[n].recipes);
-            }
-        }
-    }
+    updatePartialUltimateDataCondition(newData, partialUltimateData);
 
     var intentAdds = getIntentAdds(newData, data, false);
     var satiety = calSatiety(newData, currentRule);
@@ -6212,6 +6201,7 @@ function getCustomCondimentsOptions(index, condiments, data) {
             for (var n in newData) {
                 if (currentRule.Satiety) {
                     partialUltimateData = getSelfPartialUltimateData(newData[n].chef, currentRule, data);
+                    updateSelfPartialUltimateDataCondition(newData[n].chef, newData[n].recipes, partialUltimateData);
                 }
 
                 for (var m in newData[n].recipes) {
@@ -6291,13 +6281,7 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
         newData[chefIndex].recipes[recipeIndex]["useCondiment"] = useCondiment;
         newData[chefIndex].recipes[recipeIndex]["quantity"] = recipe.available;
 
-        for (var n in newData) {
-            for (var m in partialUltimateData) {
-                if (newData[n].chef.chefId == partialUltimateData[m].chefId) {
-                    updateConditionMatch(partialUltimateData[m].effect, newData[n].chef, null, null, newData[n].recipes);
-                }
-            }
-        }
+        updatePartialUltimateDataCondition(newData, partialUltimateData);
 
         var intentAdds = getIntentAdds(newData, data, false);
 
@@ -6308,6 +6292,7 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
         for (var n in newData) {
             if (currentRule.Satiety) {
                 partialUltimateData = getSelfPartialUltimateData(newData[n].chef, currentRule, data);
+                updateSelfPartialUltimateDataCondition(newData[n].chef, newData[n].recipes, partialUltimateData);
             }
 
             for (var m in newData[n].recipes) {

@@ -824,7 +824,7 @@ function getPartialUltimateData(chefs, skills, useUltimate, ids) {
                             var tempEffect = [];
                             for (var m in skills[k].effect) {
                                 if (skills[k].effect[m].condition == "Partial") {
-                                    tempEffect.push(skills[k].effect[m]);
+                                    tempEffect.push(JSON.parse(JSON.stringify(skills[k].effect[m])));
                                 }
                             }
                             if (tempEffect.length) {
@@ -842,6 +842,16 @@ function getPartialUltimateData(chefs, skills, useUltimate, ids) {
         }
     }
     return result;
+}
+
+function updatePartialUltimateDataCondition(customData, partialUltimateData) {
+    for (var n in customData) {
+        for (var m in partialUltimateData) {
+            if (customData[n].chef.chefId == partialUltimateData[m].chefId) {
+                updateConditionMatch(partialUltimateData[m].effect, customData[n].chef, null, null, customData[n].recipes);
+            }
+        }
+    }
 }
 
 function getSelfUltimateData(chefs, skills, useUltimate, ids) {

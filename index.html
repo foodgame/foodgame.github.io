@@ -9,8 +9,8 @@
     <link rel="stylesheet" type="text/css" href="css/style.min.css?v=7" />
     <script type="text/javascript" src="js/script.min.js?v=20"></script>
     <script type="text/javascript" src="js/common.min.js?v=48"></script>
-    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=64" />
-    <script type="text/javascript" src="js/food.min.js?v=192"></script>
+    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=65" />
+    <script type="text/javascript" src="js/food.min.js?v=193"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=110" />
     <script>
         $(function () {
@@ -19,7 +19,7 @@
                 success: function (json) {
                     init(json);
                 },
-                url: 'data/data.min.json?v=84'
+                url: 'data/data.min.json?v=85'
             });
         });
     </script>
@@ -785,13 +785,35 @@
                                     <button id="btn-cal-clear-custom" class="btn btn-default" type="button">
                                         清空自选
                                     </button>
-                                    <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="菜单显示内容">
-                                        <select id="chk-cal-recipe-show" class="selectpicker" multiple data-width="fit" data-dropdown-align-right='auto'
-                                            data-none-selected-text="菜单内容" data-selected-text-format="static">
+                                    <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="厨师菜单显示内容">
+                                        <select id="chk-cal-chef-show" class="selectpicker" multiple data-width="fit"
+                                            data-dropdown-align-right='auto' data-none-selected-text="厨师菜单"
+                                            data-selected-text-format="static">
+                                            <option value='rarity'>星</option>
+                                            <option value='specialSkill' selected>技能</option>
+                                            <option value='ultimate' selected>修炼技能</option>
+                                            <option value='origin'>来源</option>
+                                        </select>
+                                    </div>
+                                    <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="厨具菜单显示内容">
+                                        <select id="chk-cal-equip-show" class="selectpicker" multiple data-width="fit"
+                                            data-dropdown-align-right='auto' data-none-selected-text="厨具菜单"
+                                            data-selected-text-format="static">
+                                            <option value='rarity' selected>星</option>
+                                            <option value='skill' selected>技法</option>
+                                            <option value='origin'>来源</option>
+                                        </select>
+                                    </div>
+                                    <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="菜谱菜单显示内容">
+                                        <select id="chk-cal-recipe-show" class="selectpicker" multiple data-width="fit"
+                                            data-dropdown-align-right='auto' data-none-selected-text="菜谱菜单"
+                                            data-selected-text-format="static">
+                                            <option value='rank' selected>品阶</option>
                                             <option value='rarity' selected>星</option>
                                             <option value='skill' selected>技法</option>
                                             <option value='condiment' selected>调料</option>
-                                            <option value='material' selected>材料</option>
+                                            <option value='material'>材料</option>
+                                            <option value='origin'>来源</option>
                                         </select>
                                     </div>
                                     <label class="btn btn-default" data-toggle="tooltip" title="显示菜谱详细信息">
@@ -811,8 +833,8 @@
                                     </label>
                                     <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="选择星级,过滤菜谱">
                                         <select id="chk-cal-recipe-rarity" multiple class="selectpicker monitor-none"
-                                            data-width="120px" data-dropdown-align-right='auto' data-none-selected-text="菜谱星级"
-                                            data-selected-text-format="count>3" data-count-selected-text="{0} 星级"
+                                            data-width="100px" data-dropdown-align-right='auto' data-none-selected-text="菜谱星级"
+                                            data-selected-text-format="count>2" data-count-selected-text="{0} 星级"
                                             data-actions-box="true" data-actions-box-only-clear="true"
                                             data-deselect-all-text="清空">
                                             <option value="1">1星</option>
@@ -826,8 +848,8 @@
                                         <div class="inline-wrapper select-wrapper input-group-first" data-toggle="tooltip"
                                             title="选择技法,过滤菜谱">
                                             <select id="chk-cal-recipe-skill" multiple class="selectpicker monitor-none"
-                                                data-width="120px" data-dropdown-align-right='auto'
-                                                data-none-selected-text="选择技法" data-selected-text-format="count>4"
+                                                data-width="100px" data-dropdown-align-right='auto'
+                                                data-none-selected-text="菜谱技法" data-selected-text-format="count>3"
                                                 data-count-selected-text="{0} 技法" data-actions-box="true"
                                                 data-actions-box-only-clear="true" data-deselect-all-text="清空">
                                                 <option value="stirfry">炒</option>
@@ -848,7 +870,7 @@
                                     </div>
                                     <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="选择调料,过滤菜谱">
                                         <select id="chk-cal-recipe-condiment" multiple class="selectpicker monitor-none"
-                                            data-width="100px" data-dropdown-align-right='auto' data-none-selected-text="选择调料"
+                                            data-width="100px" data-dropdown-align-right='auto' data-none-selected-text="菜谱调料"
                                             data-selected-text-format="count>3" data-count-selected-text="{0} 调料"
                                             data-actions-box="true" data-actions-box-only-clear="true"
                                             data-deselect-all-text="清空">
@@ -1581,7 +1603,7 @@
                             <h4>
                                 <span class="label label-info">白菜菊花数据导入</span>
                             </h4>
-                            <h5 class="text-danger">只用于计算器, 不会保存, 也不会覆盖本图鉴的个人数据. 每次加载一个新规则后需要重新导入.</h5>
+                            <h5 class="text-danger">只用于计算器, 不会保存, 也不会覆盖本图鉴的个人数据. 每次加载规则后需要重新导入.</h5>
                             <h5 class="text-primary">云端版</h5>
                             <div class="form-group">
                                 <input type="number" class="form-control" id="input-import-bcjh-cloud" placeholder="数据ID">

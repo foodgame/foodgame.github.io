@@ -815,6 +815,16 @@ table.history-table tr td.history-dt {
     color: #55aaff;
 }
 
+.dropdown-menu>.active>a.dropdown-item .text .name,
+.dropdown-menu>.active>a.dropdown-item .text .subtext,
+.dropdown-menu>.active>a.dropdown-item .text .score,
+.dropdown-menu>.active>a.dropdown-item .text .total,
+.dropdown-menu>.active>a.dropdown-item .text .skilltext,
+.dropdown-menu>.active>a.dropdown-item .text .available,
+.dropdown-menu>.active>a.dropdown-item .text .skill {
+    color: #fff;
+}
+
 .dropdown-item .text .total {
     font-style: italic;
 }

@@ -4012,6 +4012,9 @@ function generateMenuExportData() {
     exportData["equip"] = $("#chk-equip-show").val();
     exportData["decoration"] = $("#chk-decoration-show").val();
     exportData["condiment"] = $("#chk-condiment-show").val();
+    exportData["calChef"] = $("#chk-cal-chef-show").val();
+    exportData["calEquip"] = $("#chk-cal-equip-show").val();
+    exportData["calRecipe"] = $("#chk-cal-recipe-show").val();
     return exportData;
 }
 
@@ -4034,6 +4037,12 @@ function updateMenu(person) {
         $("#chk-equip-show").selectpicker('val', person.menu.equip);
         $("#chk-decoration-show").selectpicker('val', person.menu.decoration);
         $("#chk-condiment-show").selectpicker('val', person.menu.condiment);
+
+        if (person.menu.calChef) {
+            $("#chk-cal-chef-show").selectpicker('val', person.menu.calChef);
+            $("#chk-cal-equip-show").selectpicker('val', person.menu.calEquip);
+            $("#chk-cal-recipe-show").selectpicker('val', person.menu.calRecipe);
+        }
     }
 }
 
@@ -4374,6 +4383,18 @@ function initCalRules(data) {
         $('#chk-cal-recipe-condiment').selectpicker("deselectAll");
         checkMonitorStyle();
         $('#cal-recipes-table').DataTable().draw();
+    });
+
+    $('#chk-cal-chef-show').on('changed.bs.select', function () {
+        updateMenuLocalData();
+    });
+
+    $('#chk-cal-equip-show').on('changed.bs.select', function () {
+        updateMenuLocalData();
+    });
+
+    $('#chk-cal-recipe-show').on('changed.bs.select', function () {
+        updateMenuLocalData();
     });
 }
 
@@ -5836,6 +5857,7 @@ function getSelfPartialUltimateData(chef, rule, data) {
 function getCustomChefsOptions(index, data) {
     var chkGot = $('#chk-cal-got').prop("checked");
     var useEquip = $("#chk-cal-use-equip").prop("checked");
+    var show = $("#chk-cal-chef-show").val();
 
     var hasRecipe = false;
     for (var j in customData[index].recipes) {
@@ -5946,6 +5968,19 @@ function getCustomChefsOptions(index, data) {
             option["order"] = chefs[i].rarity;
         }
 
+        if (show.indexOf("rarity") >= 0) {
+            option["content"] += "<span class='subtext'>" + chefs[i].rarityDisp + "</span>";
+        }
+        if (show.indexOf("specialSkill") >= 0) {
+            option["content"] += "<span class='skilltext'>" + chefs[i].specialSkillDisp.replace(/<br>/g, " ") + "</span>";
+        }
+        if (show.indexOf("ultimate") >= 0) {
+            option["content"] += "<span class='skilltext'>" + chefs[i].ultimateCustomDisp + "</span>";
+        }
+        if (show.indexOf("origin") >= 0) {
+            option["content"] += "<span class='subtext'>" + chefs[i].origin.replace(/<br>/g, " ") + "</span>";
+        }
+
         for (var m in customData) {
             if (customData[m].chef.chefId == chefs[i].chefId) {
                 option["disabled"] = true;
@@ -5973,7 +6008,35 @@ function getCustomChefsOptions(index, data) {
     return options;
 }
 
+function getChefUltimateCustomDisp(skillId, skills) {
+    var valid = false;
+    if (skillId) {
+        for (var k in skills) {
+            if (skillId == skills[k].skillId) {
+                for (var m in skills[k].effect) {
+                    if (skills[k].effect[m].condition == "Partial") {
+                        valid = true;
+                        break;
+                    } else if (skills[k].effect[m].condition == "Self") {
+                        if (skills[k].effect[m].type != "Material_Gain") {
+                            valid = true;
+                            break;
+                        }
+                    }
+                }
+                break;
+            }
+        }
+        if (valid) {
+            var skillInfo = getSkillInfo(skills, skillId);
+            return skillInfo.skillDisp.replace(/<br>/g, " ")
+        }
+    }
+    return "";
+}
+
 function getCustomEquipsOptions(index, equips, data) {
+    var show = $("#chk-cal-equip-show").val();
 
     var hasRecipe = false;
     for (var j in customData[index].recipes) {
@@ -6066,7 +6129,16 @@ function getCustomEquipsOptions(index, equips, data) {
             option["content"] += "<span class='score'>" + score + "</span>";
             option["order"] = score;
         }
-        option["content"] += "<span class='subtext'>" + skillDisp + "</span>";
+
+        if (show.indexOf("rarity") >= 0) {
+            option["content"] += "<span class='subtext'>" + equips[i].rarityDisp + "</span>";
+        }
+        if (show.indexOf("skill") >= 0) {
+            option["content"] += "<span class='subtext'>" + skillDisp + "</span>";
+        }
+        if (show.indexOf("origin") >= 0) {
+            option["content"] += "<span class='subtext'>" + equips[i].origin.replace(/<br>/g, " ") + "</span>";
+        }
 
         if (customData[index].equip.equipId == equips[i].equipId) {
             option["selected"] = true;
@@ -6287,6 +6359,10 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
             option["class"] += "warning-skill";
         }
 
+        if (show.indexOf("rank") >= 0) {
+            option["content"] += "<span class='subtext'>" + (newData[chefIndex].recipes[recipeIndex].rankDisp || "") + "</span>";
+        }
+
         if (currentRule.hasOwnProperty("MaterialsNum")) {
             var avaScore = maxScore / recipe.max * recipe.available;
             if (recipe.available < recipe.max) {
@@ -6321,6 +6397,9 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
         }
         if (show.indexOf("material") >= 0) {
             option["content"] += "<span class='subtext'>" + recipe.data.materialsDisp.replace(/\*/g, "") + "</span>";
+        }
+        if (show.indexOf("origin") >= 0) {
+            option["content"] += "<span class='subtext'>" + recipe.data.origin.replace(/<br>/g, " ") + "</span>";
         }
 
         if (customData[chefIndex].recipes[recipeIndex].data
@@ -8048,6 +8127,8 @@ function generateData(json, json2, person) {
         chefData["ultimateSkillDisp"] = ultimateSkillInfo.skillDisp;
         chefData["ultimateSkillEffect"] = ultimateSkillInfo.skillEffect;
 
+        chefData["ultimateCustomDisp"] = getChefUltimateCustomDisp(json.chefs[i].ultimateSkill, json.skills);
+
         chefData["got"] = "";
         chefData["ultimate"] = "";
         chefData["equip"] = null;
@@ -8681,7 +8762,9 @@ function setSelfUltimateOptions(chefs, skills) {
                 if (chefs[i].ultimateSkill == skills[k].skillId) {
                     for (var m in skills[k].effect) {
                         if (skills[k].effect[m].condition == "Self") {
-                            if (skills[k].effect[m].type != "Material_Gain" && skills[k].effect[m].type != "GuestDropCount") {
+                            if (skills[k].effect[m].type != "Material_Gain"
+                                && skills[k].effect[m].type != "GuestDropCount"
+                                && skills[k].effect[m].type != "GuestApearRate") {
                                 var skillInfo = getSkillInfo(skills, skills[k].skillId);
                                 var option = "<option value='" + chefs[i].chefId + "' data-subtext='" + skillInfo.skillDisp.replace(/<br>/g, " ") + "'>" + chefs[i].name + "</option>";
                                 $('#chk-cal-self-ultimate').append(option);
@@ -8689,6 +8772,7 @@ function setSelfUltimateOptions(chefs, skills) {
                             }
                         }
                     }
+                    break;
                 }
             }
         }

@@ -6360,7 +6360,10 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
         }
 
         if (show.indexOf("rank") >= 0) {
-            option["content"] += "<span class='subtext'>" + (newData[chefIndex].recipes[recipeIndex].rankDisp || "") + "</span>";
+            var rankDisp = newData[chefIndex].recipes[recipeIndex].rankDisp;
+            if (rankDisp && rankDisp != "-") {
+                option["content"] += "<span class='subtext'>" + rankDisp + "</span>";
+            }
         }
 
         if (currentRule.hasOwnProperty("MaterialsNum")) {

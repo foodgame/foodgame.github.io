@@ -354,9 +354,6 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
 
     var basicAddition = new Addition();
     var partialAddition = 0;
-    var intentBasicAddition = new Addition();
-    var intentPriceAddition = 0;
-    var mIntentAddition = 0;
 
     if (chef && chef.chefId) {
         var rankData = getRankInfo(recipe, chef);
@@ -407,34 +404,57 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
 
     resultData["satiety"] = recipe.rarity;
     if (intents) {
-        var satietyAddition = new Addition();
+        var mIntentAddition = 0;
         for (var i in intents) {
             var type = intents[i].effectType;
             var value = intents[i].effectValue;
-            if (type == "BasicPriceChange") {
-                intentBasicAddition.abs += value;
-            } else if (type == "BasicPriceChangePercent") {
-                intentBasicAddition.percent += value;
-            } else if (type == "SatietyChange") {
-                satietyAddition.abs += value;
-            } else if (type == "SatietyChangePercent") {
-                satietyAddition.percent += value;
-            } else if (type == "SetSatietyValue") {
-                resultData.satiety = value;
-            } else if (type == "PriceChangePercent") {
-                intentPriceAddition += value;
-            } else if (type == "IntentAdd") {
+            if (type == "IntentAdd") {
                 mIntentAddition += value;
             }
         }
 
-        basicAddition.abs += intentBasicAddition.abs * (1 + (mIntentAddition * 0.01));
-        basicAddition.percent += intentBasicAddition.percent * (1 + (mIntentAddition * 0.01));
+        var intentBasicAddition = new Addition();
+        var intentPriceAddition = 0;
+        var satietyAddition = new Addition();
 
-        bonusAddition += intentPriceAddition / 100 * (1 + (mIntentAddition * 0.01));
+        for (var i in intents) {
+            var isBuff = intents[i].buffId;
+            var type = intents[i].effectType;
+            var value = intents[i].effectValue;
+            if (type == "BasicPriceChange") {
+                if (!isBuff) {
+                    value = value * (1 + (mIntentAddition * 0.01));
+                }
+                intentBasicAddition.abs += value;
+            } else if (type == "BasicPriceChangePercent") {
+                if (!isBuff) {
+                    value = value * (1 + (mIntentAddition * 0.01));
+                }
+                intentBasicAddition.percent += value;
+            } else if (type == "SatietyChange") {
+                if (!isBuff) {
+                    value = value * (1 + (mIntentAddition * 0.01));
+                }
+                satietyAddition.abs += value;
+            } else if (type == "SatietyChangePercent") {
+                if (!isBuff) {
+                    value = value * (1 + (mIntentAddition * 0.01));
+                }
+                satietyAddition.percent += value;
+            } else if (type == "SetSatietyValue") {
+                resultData.satiety = value;
+            } else if (type == "PriceChangePercent") {
+                if (!isBuff) {
+                    value = value * (1 + (mIntentAddition * 0.01));
+                }
+                intentPriceAddition += value;
+            }
+        }
 
-        satietyAddition.abs = satietyAddition.abs * (1 + (mIntentAddition * 0.01));
-        satietyAddition.percent = satietyAddition.percent * (1 + (mIntentAddition * 0.01));
+        basicAddition.abs += intentBasicAddition.abs;
+        basicAddition.percent += intentBasicAddition.percent;
+
+        bonusAddition += intentPriceAddition / 100;
         resultData.satiety = Math.ceil(+((resultData.satiety + satietyAddition.abs) * (1 + satietyAddition.percent / 100)).toFixed(2));
     }
 

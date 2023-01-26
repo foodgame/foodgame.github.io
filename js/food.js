@@ -5423,9 +5423,9 @@ function setCustomRecipe(chefIndex, recipeIndex, recipeId) {
 function updateCustomRecipeCondiment(chefIndex, recipeIndex, useCondiment) {
     var chkCondiment = $(".selected-item:eq(" + chefIndex + ") .recipe-box:eq(" + recipeIndex + ") .recipe-condiment input");
     if (useCondiment) {
-        chkCondiment.bootstrapToggle('on');
+        chkCondiment.prop("checked", true);
     } else {
-        chkCondiment.bootstrapToggle('off');
+        chkCondiment.prop("checked", false);
     }
 }
 
@@ -5570,6 +5570,14 @@ function calCustomResults(data) {
             if (customData[i].recipes[j].data) {
                 var recipeData = customData[i].recipes[j];
                 recipeBox.find(".recipe-name").html(recipeData.data.name);
+
+                var exRecipeIds = $('#chk-cal-ex').val();
+                var chkEx = recipeBox.find(".recipe-ex input");
+                if (exRecipeIds.indexOf(customData[i].recipes[j].data.recipeId.toString()) >= 0) {
+                    chkEx.prop("checked", true);
+                } else {
+                    chkEx.prop("checked", false);
+                }
 
                 var result = "<div>" + recipeData.score + "*" + recipeData.quantity + "=<span class='score'>" + recipeData.totalScore + "</span></div>";
                 result += (recipeData.skillDiff ? "<div class='red'>" + recipeData.skillDiff + "</div>" : "");
@@ -7287,9 +7295,23 @@ function initCalCustomTable(data) {
         }
     });
 
-    $('.recipe-box .recipe-condiment input').bootstrapToggle();
+    $('.recipe-box .recipe-ex input').click(function () {
+        var chefIndex = $(this).closest(".selected-item").index(".selected-item");
+        var recipeIndex = $(this).closest(".selected-item").find(".recipe-box").index($(this).closest(".recipe-box"));
+        var recipeId = customData[chefIndex].recipes[recipeIndex].data.recipeId.toString();
+        var exRecipeIds = $('#chk-cal-ex').val();
 
-    $('.recipe-box .recipe-condiment input').change(function () {
+        var index = exRecipeIds.indexOf(recipeId);
+        if (index < 0) {
+            exRecipeIds.push(recipeId);
+        } else {
+            exRecipeIds.splice(index, 1);
+        }
+
+        $('#chk-cal-ex').selectpicker('val', exRecipeIds);
+    });
+
+    $('.recipe-box .recipe-condiment input').click(function () {
         calCustomResults(data);
     });
 

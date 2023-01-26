@@ -436,18 +436,21 @@ table.dataTable tbody>tr>.selected {
     width: 100%;
 }
 
-.recipe-box .recipe-name,
-.recipe-box .recipe-condiment {
+.recipe-box .recipe-name {
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-}
-
-.recipe-box .recipe-name {
     font-weight: bold;
     color: #337ab7;
     height: 30px;
+}
+
+.recipe-box .recipe-qec {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap
 }
 
 .recipe-box .recipe-result {
@@ -506,6 +509,10 @@ table.dataTable tbody>tr>.selected {
 }
 
 .recipe-box .recipe-quantity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     height: 30px;
     cursor: pointer;
 }
@@ -517,7 +524,7 @@ table.dataTable tbody>tr>.selected {
     box-shadow: none;
     padding: 0;
     border: none;
-    text-align: right;
+    text-align: center;
     line-height: 25px;
     height: 25px;
     font-weight: bold;
@@ -527,7 +534,6 @@ table.dataTable tbody>tr>.selected {
 .recipe-box .recipe-quantity .available,
 .recipe-box .recipe-quantity .max {
     font-size: 12px;
-    vertical-align: middle;
 }
 
 .recipe-box .recipe-quantity .available {
@@ -535,30 +541,39 @@ table.dataTable tbody>tr>.selected {
     font-weight: bold;
 }
 
-.recipe-box .recipe-condiment .toggle-handle {
+label.chk-label {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-bottom: 0;
+}
+
+label.chk-label input[type="checkbox"] {
     display: none;
 }
 
-.recipe-box .recipe-condiment {
+label.chk-label input[type="checkbox"]+span {
+    color: #bbb;
+    font-size: 12px;
+    border: 1px dashed #888;
+    padding: 0 2px;
+    position: relative;
+    background: linear-gradient(to right top, transparent 47.75%, #333 49.5%, #333 50.5%, transparent 52.25%);
+}
+
+label.chk-label input[type="checkbox"]:checked+span {
+    color: #888;
+    border-color: #fff;
+    background: none;
+}
+
+.recipe-box .recipe-ex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 30px;
-}
-
-.recipe-box .recipe-condiment .btn {
-    height: 30px !important;
-}
-
-.recipe-box .recipe-condiment .btn-default {
-    background-color: transparent;
-    box-shadow: none;
-    padding: 0;
-    border: none;
-    line-height: 30px !important;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-.recipe-box .recipe-condiment .btn-default.toggle-on {
-    color: #337ab7;
 }
 
 #pane-cal-custom.banquet .condiment-box {
@@ -1162,23 +1177,39 @@ table.dataTable tr.selected th.select-checkbox:after {
 
     .recipe-box {
         width: auto;
-        height: 270px;
+        height: 240px;
         flex-direction: column;
     }
 
     .recipe-box.no-details {
-        height: 140px;
-    }
-
-    #pane-cal-custom.banquet .recipe-box {
-        height: 240px;
-    }
-
-    #pane-cal-custom.banquet .recipe-box.no-details {
         height: 110px;
     }
 
-    #pane-cal-custom.banquet .recipe-box .recipe-box-1 {
+    .recipe-box .recipe-qec {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .recipe-box .recipe-quantity {
+        width: auto;
+        order: 2;
+    }
+
+    .recipe-box .recipe-ex {
+        order: 1;
+    }
+
+    .recipe-box .recipe-condiment {
+        order: 3;
+    }
+
+    label.chk-label input[type="checkbox"]+span span {
+        display: none;
+    }
+
+    .recipe-box .recipe-box-1 {
         height: 110px;
     }
 

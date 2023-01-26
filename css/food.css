@@ -1197,6 +1197,10 @@ table.dataTable tr.selected th.select-checkbox:after {
         order: 2;
     }
 
+    .recipe-box .recipe-quantity .available {
+        display: none;
+    }
+
     .recipe-box .recipe-ex {
         order: 1;
     }

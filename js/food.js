@@ -5404,14 +5404,24 @@ function setCustomCondiment(index, condimentId, data) {
 
 function setCustomRecipe(chefIndex, recipeIndex, recipeId) {
     customData[chefIndex].recipes[recipeIndex] = {};
+
+    var materialsData = JSON.parse(JSON.stringify(currentRule.materials));
+    for (var m in customData) {
+        for (var n in customData[m].recipes) {
+            if (customData[m].recipes[n].data) {
+                updateMaterialsData(materialsData, customData[m].recipes[n], customData[m].recipes[n].quantity);
+            }
+        }
+    }
+
     if (recipeId) {
         for (var i in currentRule.menus) {
             if (currentRule.menus[i].recipe.data.recipeId == recipeId) {
-                var available = currentRule.menus[i].recipe.available;
+                var quantity = getRecipeQuantity(currentRule.menus[i].recipe.data, materialsData, currentRule);
 
                 var recipe = {};
                 recipe["data"] = currentRule.menus[i].recipe.data;
-                recipe["quantity"] = available;
+                recipe["quantity"] = quantity;
                 customData[chefIndex].recipes[recipeIndex] = recipe;
 
                 break;
@@ -5539,6 +5549,8 @@ function calCustomResults(data) {
                 recipeBox.find(".max").html(customData[i].recipes[j].max);
                 if (currentRule.hasOwnProperty("MaterialsNum")) {
                     recipeBox.find(".available").html(available > 0 ? "(" + available + ")" : "");
+                } else {
+                    recipeBox.find(".available").html("");
                 }
             }
         }
@@ -6262,6 +6274,16 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
     var show = $("#chk-cal-recipe-show").val();
 
     var newData = JSON.parse(JSON.stringify(customData));
+    newData[chefIndex].recipes[recipeIndex] = {};
+
+    var materialsData = JSON.parse(JSON.stringify(currentRule.materials));
+    for (var m in newData) {
+        for (var n in newData[m].recipes) {
+            if (newData[m].recipes[n].data) {
+                updateMaterialsData(materialsData, newData[m].recipes[n], newData[m].recipes[n].quantity);
+            }
+        }
+    }
 
     var partialChefIds = [];
     for (var i in newData) {
@@ -6285,9 +6307,11 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
         option["value"] = recipe.data.recipeId;
         option["content"] = "<span class='name'>" + recipe.data.name + "</span>";
 
+        var quantity = getRecipeQuantity(recipe.data, materialsData, currentRule);
+
         newData[chefIndex].recipes[recipeIndex] = recipe;
         newData[chefIndex].recipes[recipeIndex]["useCondiment"] = useCondiment;
-        newData[chefIndex].recipes[recipeIndex]["quantity"] = recipe.available;
+        newData[chefIndex].recipes[recipeIndex]["quantity"] = quantity;
 
         updatePartialUltimateDataCondition(newData, partialUltimateData);
 
@@ -6339,6 +6363,9 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
         for (var m in customData) {
             for (var n in customData[m].recipes) {
                 if (customData[m].recipes[n].data && customData[m].recipes[n].data.recipeId == recipe.data.recipeId) {
+                    if (m == chefIndex && n == recipeIndex) {
+                        continue;
+                    }
                     option["disabled"] = true;
                     score = 0;
                     break;
@@ -6360,12 +6387,12 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
         }
 
         if (currentRule.hasOwnProperty("MaterialsNum")) {
-            var avaScore = maxScore / recipe.max * recipe.available;
-            if (recipe.available < recipe.max) {
-                option["content"] += "<span class='available'>" + recipe.available + "/" + recipe.max
+            var avaScore = maxScore / recipe.max * quantity;
+            if (quantity < recipe.max) {
+                option["content"] += "<span class='available'>" + quantity + "/" + recipe.max
                     + " " + avaScore + "/" + maxScore + "</span><span class='total'>" + score + "</span>";
             } else {
-                option["content"] += "<span class='subtext'>" + recipe.available + "/" + recipe.max
+                option["content"] += "<span class='subtext'>" + quantity + "/" + recipe.max
                     + " " + avaScore + "</span><span class='total'>" + score + "</span>";
             }
             option["order"] = score;

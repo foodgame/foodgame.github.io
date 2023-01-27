@@ -4332,6 +4332,9 @@ function initCalRules(data) {
 
     $("#chk-cal-got").click(function () {
         $('#cal-recipes-table').DataTable().draw();
+        if (private) {
+            $('#cal-chefs-table').DataTable().draw();
+        }
     });
 
     $('#chk-cal-recipe-rarity').on('changed.bs.select', function () {
@@ -6770,6 +6773,19 @@ function initCalChefsTable(data) {
         }
     });
 
+    $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
+        if (settings.nTable != document.getElementById('cal-chefs-table')) {
+            return true;
+        }
+
+        var check = $('#chk-cal-got').prop("checked");
+        if (!check || check && rowData.got) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
     var options = getEquipsOptions(data.equips, data.skills);
     calChefsTable.MakeCellsEditable({
         "columns": [16],  // equip
@@ -6812,7 +6828,7 @@ function initCalChefsTable(data) {
     $('.chk-cal-chefs-rarity input[type="checkbox"]').click(function () {
         var rarity = $(this).attr("data-rarity");
         if ($(this).prop("checked")) {
-            calChefsTable.rows('.rarity-' + rarity).select();
+            calChefsTable.rows('.rarity-' + rarity, { search: 'applied' }).select();
         } else {
             calChefsTable.rows('.rarity-' + rarity).deselect();
         }
@@ -6835,7 +6851,7 @@ function initCalChefsTable(data) {
 
     $('#btn-cal-chefs-select-all').click(function () {
         $('.chk-cal-chefs-rarity input[type="checkbox"]').prop("checked", true);
-        calChefsTable.rows().select();
+        calChefsTable.rows({ search: 'applied' }).select();
     });
 
     $('#btn-cal-chefs-deselect-all').click(function () {
@@ -7894,7 +7910,7 @@ function initCalRecipesTable() {
     });
 
     $('#btn-cal-recipes-deselect-all').click(function () {
-        table.rows({ search: 'applied' }).deselect();
+        table.rows().deselect();
     });
 
     $('#chk-cal-recipes-show').on('changed.bs.select', function () {

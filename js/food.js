@@ -6363,17 +6363,33 @@ function getCustomRecipesOptions(chefIndex, recipeIndex, data) {
             score = calSatietyAdd(score, satiety.add);
         }
 
+        var occupiedName = "";
+        var occupiedCount = 0;
+
         for (var m in customData) {
             for (var n in customData[m].recipes) {
-                if (customData[m].recipes[n].data && customData[m].recipes[n].data.recipeId == recipe.data.recipeId) {
-                    if (m == chefIndex && n == recipeIndex) {
-                        continue;
+                if (customData[m].recipes[n].data) {
+                    if (customData[m].recipes[n].data.recipeId == recipe.data.recipeId) {
+                        if (m == chefIndex && n == recipeIndex) {
+                            continue;
+                        }
+                        option["disabled"] = true;
+                        score = 0;
+                    } else if (customData[m].recipes[n].data.recipeId == recipe.data.comboVal
+                        || customData[m].recipes[n].data.comboVal == recipe.data.recipeId) {
+                        if (m == chefIndex && n == recipeIndex) {
+                            continue;
+                        }
+                        option["disabled"] = true;
+                        occupiedName = customData[m].recipes[n].data.name;
+                        occupiedCount++;
                     }
-                    option["disabled"] = true;
-                    score = 0;
-                    break;
                 }
             }
+        }
+
+        if (occupiedCount) {
+            option["content"] += "<span class='combo'>" + occupiedName + (occupiedCount > 1 ? "等" : "") + "占用</span>";
         }
 
         option["class"] = "";
@@ -8311,13 +8327,15 @@ function generateData(json, json2, person) {
         recipeData["allMaterialsEff"] = materialsEff ? Math.floor(materialsEff) : "";
         recipeData["condimentEff"] = condimentEff ? Math.floor(condimentEff) : "";
 
-        var combo = "";
+        var comboVal = "";
+        var comboDisp = "-"
         for (var m in json.combos) {
             for (var n in json.combos[m].recipes) {
                 if (json.combos[m].recipes[n] == json.recipes[i].recipeId) {
                     for (var o in json.recipes) {
                         if (json.recipes[o].recipeId == json.combos[m].recipeId) {
-                            combo = json.recipes[o].name;
+                            comboVal = json.recipes[o].recipeId;
+                            comboDisp = json.recipes[o].name;
                             break;
                         }
                     }
@@ -8325,8 +8343,8 @@ function generateData(json, json2, person) {
                 }
             }
         }
-        recipeData["comboVal"] = combo;
-        recipeData["comboDisp"] = combo ? combo : "-";
+        recipeData["comboVal"] = comboVal;
+        recipeData["comboDisp"] = comboDisp;
 
         var rankGuestInfo = getRankGuestInfo(json.recipes[i], recipeData.rank);
         recipeData["rankGuestsVal"] = rankGuestInfo.rankGuestsVal;

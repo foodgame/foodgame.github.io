@@ -5941,9 +5941,15 @@ function getCustomChefsOptions(index, data) {
                 newData[index].equip = chefs[i].equip;
             }
 
-            setDataForChef(newData[index].chef, newData[index].equip, true, currentRule.calGlobalUltimateData,
-                partialUltimateData, partialUltimateData, currentRule.calSelfUltimateData,
-                currentRule.calActivityUltimateData, true, currentRule);
+            for (var n in newData) {
+                if (newData[n].chef.chefId) {
+                    if (!currentRule.Satiety || n == index) {
+                        setDataForChef(newData[n].chef, newData[n].equip, true, currentRule.calGlobalUltimateData,
+                            partialUltimateData, partialUltimateData, currentRule.calSelfUltimateData,
+                            currentRule.calActivityUltimateData, true, currentRule);
+                    }
+                }
+            }
 
             var chef = JSON.parse(JSON.stringify(newData[index].chef));
             for (var j in newData[index].recipes) {

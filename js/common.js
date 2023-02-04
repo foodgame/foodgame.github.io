@@ -455,7 +455,7 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
         basicAddition.percent += intentBasicAddition.percent;
 
         bonusAddition += intentPriceAddition / 100;
-        resultData.satiety = Math.ceil(+((resultData.satiety + satietyAddition.abs) * (1 + satietyAddition.percent / 100)).toFixed(2));
+        resultData.satiety = Math.ceil(calAddition(resultData.satiety, satietyAddition));
     }
 
     resultData["partialAdditionDisp"] = getPercentDisp(partialAddition);
@@ -485,7 +485,7 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
     }
 
     var priceAddition = (rankAddition + chefSkillAddition + equipSkillAddition + condimentSkillAddition + decorationAddition + recipe.ultimateAddition + partialAddition) / 100;
-    var basicPrice = (recipe.price + basicAddition.abs) * (1 + basicAddition.percent / 100);
+    var basicPrice = calAddition(recipe.price, basicAddition);
     if (!intents) {
         basicPrice = Math.floor(basicPrice);
     }

@@ -2819,7 +2819,10 @@ function initDecorationTable(data) {
             "orderSequence": ["desc", "asc"]
         },
         {
-            "data": "avgEff",
+            "data": {
+                "_": "tAvgEff",
+                "display": "avgEffDisp"
+            },
             "defaultContent": "-",
             "orderSequence": ["desc", "asc"]
         },
@@ -3037,15 +3040,19 @@ function initDecorationTable(data) {
 
 function updateDecorationSum(data) {
     var selectedData = $('#decoration-table').DataTable().rows({ selected: true }).data().toArray();
-    var eff = 0;
+    var tEff = 0;
+    var rEff = 0;
     var gold = 0;
     var suits = [];
     for (var i in selectedData) {
         if (selectedData[i].suit && suits.indexOf(selectedData[i].suit) < 0) {
             suits.push(selectedData[i].suit);
         }
-        if (selectedData[i].avgEff) {
-            eff += selectedData[i].avgEff;
+        if (selectedData[i].tAvgEff) {
+            tEff += selectedData[i].tAvgEff;
+        }
+        if (selectedData[i].rAvgEff) {
+            rEff += selectedData[i].rAvgEff;
         }
         gold += selectedData[i].gold;
     }
@@ -3057,7 +3064,7 @@ function updateDecorationSum(data) {
 
     var sum = "";
     if (selectedData.length) {
-        sum = "平均玉璧/天:" + (+eff.toFixed(1)) + " 收入加成: " + getPercentDisp(+((gold + suitGold) * 100).toFixed(2));
+        sum = "平均玉璧/天: " + getDecorationAvgEffDisp(tEff, rEff) + " 收入加成: " + getPercentDisp(+((gold + suitGold) * 100).toFixed(2));
     }
     $("#decoration-sum").html(sum);
 }
@@ -8077,7 +8084,14 @@ function generateData(json, json2, person) {
         if (decoration.tipTime) {
             decoration["minEff"] = +(decoration.tipMin * 3600 * 24 / decoration.tipTime).toFixed(1);
             decoration["maxEff"] = +(decoration.tipMax * 3600 * 24 / decoration.tipTime).toFixed(1);
-            decoration["avgEff"] = +((decoration.tipMin + decoration.tipMax) / 2 * 3600 * 24 / decoration.tipTime).toFixed(1);
+            decoration["tAvgEff"] = +((decoration.tipMin + decoration.tipMax) / 2 * 3600 * 24 / decoration.tipTime).toFixed(1);
+
+            if (decoration.tipTime / 3600 % 24 >= 20) {
+                var day = Math.ceil(decoration.tipTime / 3600 / 24);
+                decoration["rAvgEff"] = +((decoration.tipMin + decoration.tipMax) / 2 / day).toFixed(1);
+            }
+
+            decoration["avgEffDisp"] = getDecorationAvgEffDisp(decoration.tAvgEff, decoration.rAvgEff);
         }
 
         decoration["goldDisp"] = getPercentDisp(+(decoration.gold * 100).toFixed(2)) || "-";
@@ -9066,6 +9080,14 @@ function getSkillDisp(recipe) {
     }
     if (recipe.steam) {
         disp += "<span>蒸" + recipe.steam + "</span>";
+    }
+    return disp;
+}
+
+function getDecorationAvgEffDisp(theory, reality) {
+    var disp = "(理论)" + +(theory).toFixed(1);
+    if (reality) {
+        disp += " (实际)" + +(reality).toFixed(1);
     }
     return disp;
 }

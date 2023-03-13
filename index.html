@@ -10,7 +10,7 @@
     <script type="text/javascript" src="js/script.min.js?v=20"></script>
     <script type="text/javascript" src="js/common.min.js?v=51"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=68" />
-    <script type="text/javascript" src="js/food.min.js?v=199"></script>
+    <script type="text/javascript" src="js/food.min.js?v=200"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=113" />
     <script>
         $(function () {
@@ -1907,7 +1907,9 @@
                     <h4>
                         <span class="label label-info">装修图签</span>
                     </h4>
-                    <p>假设玉壁值是均匀分布, 计算的平均玉壁/天(24小时)</p>
+                    <p>假设玉壁值是均匀分布, 计算的平均玉壁/天(24小时). 考虑不能按时收玉, 固分成两种算法:</p>
+                    <p>理论值：准时收玉, 比如23小时的桌子就一直23小时收</p>
+                    <p>实际值：n天20~23小时的桌子一直是n+1天收一次</p>
                     <br>
                     <h4>
                         <span class="label label-info">任务图鉴</span>

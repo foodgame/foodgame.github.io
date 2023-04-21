@@ -382,7 +382,7 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
 
             if (partialUltimateData) {
                 for (var m in partialUltimateData) {
-                    partialAddition = getRecipeSkillAddition(partialUltimateData[m].effect, recipe, rule, true);
+                    partialAddition += getRecipeSkillAddition(partialUltimateData[m].effect, recipe, rule, true);
                     basicAddition.percent += getRecipeBasicAddition(partialUltimateData[m].effect);
                 }
             }

@@ -58,213 +58,137 @@ function getRankInfo(recipe, chef) {
     return rankInfo;
 }
 
-function getRecipeSkillAddition(effects, recipe, rule, checkCondition) {
-    var addition = 0;
-    var count = 1;
-    for (var k in effects) {
-        if (checkCondition && effects[k].conditionType) {
-            if (effects[k].conditionMatch) {
-                count = effects[k].conditionMatch;
-            } else {
-                continue;
+function getRecipeAddition(effects, chef, recipes, recipe, quantity, rule) {
+    var price = 0;
+    var basic = 0;
+
+    for (var i in effects) {
+        var effect = effects[i];
+        var condition = checkSkillCondition(effect, chef, recipes, recipe, quantity);
+        if (condition.pass) {
+            if (isRecipePriceAddition(effect, recipe, rule)) {
+                price += effect.value * condition.count;
+            }
+
+            if (isRecipeBasicAddition(effect)) {
+                basic += effect.value * condition.count;
             }
         }
+    }
 
-        var type = effects[k].type;
-        var hasSkill = false;
-        if (type == "UseAll") {
-            if (recipe.rarity == effects[k].rarity) {
-                hasSkill = true;
-            }
-        } else if (type == "UseFish") {
-            for (var m in recipe.materials) {
-                if (recipe.materials[m].origin == "池塘") {
-                    hasSkill = true;
-                    break;
-                }
-            }
-        } else if (type == "UseCreation") {
-            for (var m in recipe.materials) {
-                if (recipe.materials[m].origin == "作坊") {
-                    hasSkill = true;
-                    break;
-                }
-            }
-        } else if (type == "UseMeat") {
-            for (var m in recipe.materials) {
-                if (recipe.materials[m].origin == "牧场"
-                    || recipe.materials[m].origin == "鸡舍"
-                    || recipe.materials[m].origin == "猪圈") {
-                    hasSkill = true;
-                    break;
-                }
-            }
-        } else if (type == "UseVegetable") {
-            for (var m in recipe.materials) {
-                if (recipe.materials[m].origin == "菜棚"
-                    || recipe.materials[m].origin == "菜地"
-                    || recipe.materials[m].origin == "森林") {
-                    hasSkill = true;
-                    break;
-                }
-            }
-        } else if (type == "UseStirfry") {
-            if (recipe.stirfry > 0) {
-                hasSkill = true;
-            }
-        } else if (type == "UseBoil") {
-            if (recipe.boil > 0) {
-                hasSkill = true;
-            }
-        } else if (type == "UseFry") {
-            if (recipe.fry > 0) {
-                hasSkill = true;
-            }
-        } else if (type == "UseKnife") {
-            if (recipe.knife > 0) {
-                hasSkill = true;
-            }
-        } else if (type == "UseBake") {
-            if (recipe.bake > 0) {
-                hasSkill = true;
-            }
-        } else if (type == "UseSteam") {
-            if (recipe.steam > 0) {
-                hasSkill = true;
-            }
-        } else if (type == "UseSweet") {
-            if (recipe.condiment == "Sweet") {
-                hasSkill = true;
-            }
-        } else if (type == "UseSour") {
-            if (recipe.condiment == "Sour") {
-                hasSkill = true;
-            }
-        } else if (type == "UseSpicy") {
-            if (recipe.condiment == "Spicy") {
-                hasSkill = true;
-            }
-        } else if (type == "UseSalty") {
-            if (recipe.condiment == "Salty") {
-                hasSkill = true;
-            }
-        } else if (type == "UseBitter") {
-            if (recipe.condiment == "Bitter") {
-                hasSkill = true;
-            }
-        } else if (type == "UseTasty") {
-            if (recipe.condiment == "Tasty") {
-                hasSkill = true;
-            }
-        } else if (type == "Gold_Gain") {
-            if (!rule || rule.Id == 0 || rule.Satiety) {
-                hasSkill = true;
-            }
-        } else if (type == "CookbookPrice") {
+    var result = {};
+    result["price"] = price;
+    result["basic"] = basic;
+    return result;
+}
+
+function isRecipePriceAddition(effect, recipe, rule) {
+    var type = effect.type;
+    var hasSkill = false;
+    if (type == "UseAll") {
+        if (recipe.rarity == effect.rarity) {
             hasSkill = true;
         }
-
-        if (hasSkill) {
-            addition += effects[k].value * count;
+    } else if (type == "UseFish") {
+        for (var m in recipe.materials) {
+            if (recipe.materials[m].origin == "池塘") {
+                hasSkill = true;
+                break;
+            }
         }
+    } else if (type == "UseCreation") {
+        for (var m in recipe.materials) {
+            if (recipe.materials[m].origin == "作坊") {
+                hasSkill = true;
+                break;
+            }
+        }
+    } else if (type == "UseMeat") {
+        for (var m in recipe.materials) {
+            if (recipe.materials[m].origin == "牧场"
+                || recipe.materials[m].origin == "鸡舍"
+                || recipe.materials[m].origin == "猪圈") {
+                hasSkill = true;
+                break;
+            }
+        }
+    } else if (type == "UseVegetable") {
+        for (var m in recipe.materials) {
+            if (recipe.materials[m].origin == "菜棚"
+                || recipe.materials[m].origin == "菜地"
+                || recipe.materials[m].origin == "森林") {
+                hasSkill = true;
+                break;
+            }
+        }
+    } else if (type == "UseStirfry") {
+        if (recipe.stirfry > 0) {
+            hasSkill = true;
+        }
+    } else if (type == "UseBoil") {
+        if (recipe.boil > 0) {
+            hasSkill = true;
+        }
+    } else if (type == "UseFry") {
+        if (recipe.fry > 0) {
+            hasSkill = true;
+        }
+    } else if (type == "UseKnife") {
+        if (recipe.knife > 0) {
+            hasSkill = true;
+        }
+    } else if (type == "UseBake") {
+        if (recipe.bake > 0) {
+            hasSkill = true;
+        }
+    } else if (type == "UseSteam") {
+        if (recipe.steam > 0) {
+            hasSkill = true;
+        }
+    } else if (type == "UseSweet") {
+        if (recipe.condiment == "Sweet") {
+            hasSkill = true;
+        }
+    } else if (type == "UseSour") {
+        if (recipe.condiment == "Sour") {
+            hasSkill = true;
+        }
+    } else if (type == "UseSpicy") {
+        if (recipe.condiment == "Spicy") {
+            hasSkill = true;
+        }
+    } else if (type == "UseSalty") {
+        if (recipe.condiment == "Salty") {
+            hasSkill = true;
+        }
+    } else if (type == "UseBitter") {
+        if (recipe.condiment == "Bitter") {
+            hasSkill = true;
+        }
+    } else if (type == "UseTasty") {
+        if (recipe.condiment == "Tasty") {
+            hasSkill = true;
+        }
+    } else if (type == "Gold_Gain") {
+        if (!rule || rule.Id == 0 || rule.Satiety) {
+            hasSkill = true;
+        }
+    } else if (type == "CookbookPrice") {
+        hasSkill = true;
     }
-    return +addition.toFixed(2);
+
+    if (hasSkill) {
+        return true;
+    }
+
+    return false;
 }
 
-function getRecipeBasicAddition(effects) {
-    var addition = 0;
-    var count = 1;
-    for (var k in effects) {
-        if (effects[k].type == "BasicPrice") {
-            if (effects[k].conditionType) {
-                if (effects[k].conditionMatch) {
-                    count = effects[k].conditionMatch;
-                } else {
-                    continue;
-                }
-            }
-            addition += effects[k].value * count;
-        }
+function isRecipeBasicAddition(effect) {
+    if (effect.type == "BasicPrice") {
+        return true;
     }
-    return +addition.toFixed(2);
-}
-
-function updateConditionMatch(effects, chef, recipe, num, recipes) {
-    for (var k in effects) {
-        var effect = effects[k];
-        if (!effect.conditionType) {
-            continue;
-        }
-        effect["conditionMatch"] = 0;
-        if (effect.conditionType == "PerRank") {
-            for (var i in recipes) {
-                var recipe = recipes[i].data;
-                if (recipe) {
-                    var rankData = getRankInfo(recipe, chef);
-                    if (rankData.rankVal >= effect.conditionValue) {
-                        effect.conditionMatch += 1;
-                    }
-                }
-            }
-        } else if (effect.conditionType == "ExcessCookbookNum") {
-            if (num >= effect.conditionValue) {
-                effect.conditionMatch = 1;
-            }
-        } else if (effect.conditionType == "SameSkill") {
-            var sameCount = 0;
-            var count1 = 0;
-            var count2 = 0;
-            var count3 = 0;
-            var count4 = 0;
-            var count5 = 0;
-            var count6 = 0;
-            for (var i in recipes) {
-                var recipe = recipes[i].data;
-                if (!recipe) {
-                    return;
-                }
-
-                if (recipe.stirfry > 0) {
-                    count1++;
-                    if (count1 == 3) {
-                        sameCount++;
-                    }
-                }
-                if (recipe.boil > 0) {
-                    count2++;
-                    if (count2 == 3) {
-                        sameCount++;
-                    }
-                }
-                if (recipe.knife > 0) {
-                    count3++;
-                    if (count3 == 3) {
-                        sameCount++;
-                    }
-                }
-                if (recipe.fry > 0) {
-                    count4++;
-                    if (count4 == 3) {
-                        sameCount++;
-                    }
-                }
-                if (recipe.bake > 0) {
-                    count5++;
-                    if (count5 == 3) {
-                        sameCount++;
-                    }
-                }
-                if (recipe.steam > 0) {
-                    count6++;
-                    if (count6 == 3) {
-                        sameCount++;
-                    }
-                }
-            }
-
-            effect.conditionMatch = sameCount;
-        }
-    }
+    return false;
 }
 
 function getMaterialsAddition(recipe, materials) {
@@ -341,7 +265,7 @@ function getRecipeQuantity(recipe, materials, rule) {
     return quantity;
 }
 
-function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, rule, decoration, condiment, forCal, recipes, partialUltimateData, intents) {
+function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, rule, decoration, condiment, forCal, recipes, partialRecipeAdds, intents) {
 
     var resultData = {};
 
@@ -371,19 +295,24 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
         resultData["rankAdditionDisp"] = getPercentDisp(rankAddition);
 
         if (!rule || !rule.hasOwnProperty("DisableChefSkillEffect") || rule.DisableChefSkillEffect == false) {
-            updateConditionMatch(chef.specialSkillEffect, chef, recipe, quantity, recipes);
+            var specialSkillAdds = getRecipeAddition(chef.specialSkillEffect, chef, recipes, recipe, quantity, rule);
+            chefSkillAddition += specialSkillAdds.price;
+            basicAddition.percent += specialSkillAdds.basic;
 
-            chefSkillAddition = getRecipeSkillAddition(chef.specialSkillEffect, recipe, rule, true);
-            basicAddition.percent = getRecipeBasicAddition(chef.specialSkillEffect);
+            var selfUltimateAdds = getRecipeAddition(chef.selfUltimateEffect, chef, recipes, recipe, quantity, rule);
+            chefSkillAddition += selfUltimateAdds.price;
+            basicAddition.percent += selfUltimateAdds.basic;
 
-            updateConditionMatch(chef.selfUltimateEffect, chef, recipe, quantity, recipes);
-            chefSkillAddition += getRecipeSkillAddition(chef.selfUltimateEffect, recipe, rule, true);
-            basicAddition.percent += getRecipeBasicAddition(chef.selfUltimateEffect);
+            if (partialRecipeAdds) {
+                for (var i in partialRecipeAdds) {
+                    var effect = partialRecipeAdds[i].effect;
+                    if (isRecipePriceAddition(effect, recipe, rule)) {
+                        partialAddition += effect.value * partialRecipeAdds[i].count;
+                    }
 
-            if (partialUltimateData) {
-                for (var m in partialUltimateData) {
-                    partialAddition += getRecipeSkillAddition(partialUltimateData[m].effect, recipe, rule, true);
-                    basicAddition.percent += getRecipeBasicAddition(partialUltimateData[m].effect);
+                    if (isRecipeBasicAddition(effect)) {
+                        basicAddition.percent += effect.value * partialRecipeAdds[i].count;
+                    }
                 }
             }
         }
@@ -392,9 +321,9 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
         if (!rule || !rule.hasOwnProperty("DisableEquipSkillEffect") || rule.DisableEquipSkillEffect == false) {
             if (equip && equip.effect) {
                 var equipEffect = updateEquipmentEffect(equip.effect, chef.selfUltimateEffect);
-                updateConditionMatch(equipEffect, chef, recipe, quantity, recipes);
-                equipSkillAddition = getRecipeSkillAddition(equipEffect, recipe, rule, true);
-                basicAddition.percent += getRecipeBasicAddition(equipEffect);
+                var equipSkillAdds = getRecipeAddition(equipEffect, chef, recipes, recipe, quantity, rule);
+                equipSkillAddition = equipSkillAdds.price;
+                basicAddition.percent += equipSkillAdds.basic;
             }
         }
         resultData["equipSkillAdditionDisp"] = getPercentDisp(equipSkillAddition);
@@ -465,7 +394,8 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
     if (!rule || !rule.hasOwnProperty("DisableCondimentEffect") || rule.DisableCondimentEffect == false) {
         if (condiment) {
             resultData["useCondiment"] = true;
-            condimentSkillAddition = getRecipeSkillAddition(condiment.effect, recipe, rule, false);
+            var condimentSkillAdds = getRecipeAddition(condiment.effect, chef, recipes, recipe, quantity, rule);
+            condimentSkillAddition = condimentSkillAdds.price;
         }
     }
     resultData["condimentSkillAdditionDisp"] = getPercentDisp(condimentSkillAddition);
@@ -608,7 +538,7 @@ function getCondimentInfo(condimentId, condiments) {
     return info;
 }
 
-function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartialUltimateData, otherPartialUltimateData, selfUltimateEffect, activityUltimateEffect, showFinal, rule) {
+function setDataForChef(chef, equip, useEquip, globalUltimateEffect, partialChefAdds, selfUltimateEffect, activityUltimateEffect, showFinal, rule) {
 
     var stirfryAddition = new Addition();
     var boilAddition = new Addition();
@@ -647,23 +577,9 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, selfPartial
             }
         }
 
-        var selfPartialAdded = false;
-        if (selfPartialUltimateData) {
-            for (var i in selfPartialUltimateData) {
-                if (chef.chefId == selfPartialUltimateData[i].chefId) {
-                    effects = effects.concat(selfPartialUltimateData[i].effect);
-                    selfPartialAdded = true;
-                    break;
-                }
-            }
-        }
-
-        if (otherPartialUltimateData) {
-            for (var i in otherPartialUltimateData) {
-                if (chef.chefId == otherPartialUltimateData[i].chefId && selfPartialAdded) {
-                    continue;
-                }
-                effects = effects.concat(otherPartialUltimateData[i].effect);
+        if (partialChefAdds) {
+            for (var i in partialChefAdds) {
+                effects = effects.concat(partialChefAdds[i]);
             }
         }
     }
@@ -833,27 +749,56 @@ function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-function getPartialUltimateData(chefs, skills, useUltimate, ids) {
-    var result = [];
-    if (useUltimate) {
-        for (var i in ids) {
-            for (var j in chefs) {
-                if (ids[i] == chefs[j].chefId) {
-                    for (var k in skills) {
-                        if (chefs[j].ultimateSkill == skills[k].skillId) {
-                            var tempEffect = [];
-                            for (var m in skills[k].effect) {
-                                if (skills[k].effect[m].condition == "Partial") {
-                                    tempEffect.push(JSON.parse(JSON.stringify(skills[k].effect[m])));
+function isChefAddType(type) {
+    if (type == "Stirfry"
+        || type == "Boil"
+        || type == "Knife"
+        || type == "Fry"
+        || type == "Bake"
+        || type == "Steam") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getPartialRecipeAdds(customData, skills, rule) {
+    var partialAdds = [];
+    for (var o = 0; o < 3; o++) {
+        partialAdds.push([]);
+    }
+
+    for (var i in customData) {
+        var chef = customData[i].chef;
+        if (chef.chefId && rule.calPartialChefIds.indexOf(chef.chefId) >= 0) {
+            for (var k in skills) {
+                var skill = skills[k];
+                if (chef.ultimateSkill == skill.skillId) {
+                    var recipes = customData[i].recipes;
+                    for (var m in skill.effect) {
+                        var effect = skill.effect[m];
+                        if (effect.condition == "Partial") {
+                            var condition = checkSkillCondition(effect, chef, recipes, null, null);
+                            if (condition.pass) {
+                                var add = {};
+                                add["effect"] = effect;
+                                add["count"] = condition.count;
+                                var startIndex = 0;
+                                if (rule.Satiety) {
+                                    startIndex = Number(i);
+                                }
+                                for (var o = startIndex; o < 3; o++) {
+                                    partialAdds[o].push(add);
                                 }
                             }
-                            if (tempEffect.length) {
-                                var partialData = {};
-                                partialData["chefId"] = chefs[j].chefId;
-                                partialData["effect"] = tempEffect;
-                                result.push(partialData);
+                        } else if (effect.condition == "Next" && Number(i) < 2) {
+                            var condition = checkSkillCondition(effect, chef, recipes, null, null);
+                            if (condition.pass) {
+                                var add = {};
+                                add["effect"] = effect;
+                                add["count"] = condition.count;
+                                partialAdds[Number(i) + 1].push(add);
                             }
-                            break;
                         }
                     }
                     break;
@@ -861,17 +806,107 @@ function getPartialUltimateData(chefs, skills, useUltimate, ids) {
             }
         }
     }
-    return result;
+
+    return partialAdds;
 }
 
-function updatePartialUltimateDataCondition(customData, partialUltimateData) {
-    for (var n in customData) {
-        for (var m in partialUltimateData) {
-            if (customData[n].chef.chefId == partialUltimateData[m].chefId) {
-                updateConditionMatch(partialUltimateData[m].effect, customData[n].chef, null, null, customData[n].recipes);
+function checkSkillCondition(effect, chef, recipes, recipe, quantity) {
+    var result = {};
+    result["pass"] = true;
+    result["count"] = 1;
+
+    if (!effect.conditionType) {
+        return result;
+    }
+
+    if (effect.conditionType == "PerRank") {
+        var count = 0;
+        for (var i in recipes) {
+            var oneRecipe = recipes[i];
+            if (oneRecipe.data) {
+                var rankData = getRankInfo(oneRecipe.data, chef);
+                if (rankData.rankVal >= effect.conditionValue) {
+                    count++;
+                }
             }
         }
+        if (count > 0) {
+            result.count = count;
+            return result;
+        }
+    } else if (effect.conditionType == "ExcessCookbookNum") {
+        if (recipe) {
+            if (quantity >= effect.conditionValue) {
+                return result;
+            }
+        }
+    } else if (effect.conditionType == "CookbookRarity") {
+        if (recipe) {
+            if (recipe.rarity == effect.conditionValue) {
+                return result;
+            }
+        }
+    } else if (effect.conditionType == "SameSkill") {
+        var sameCount = 0;
+        var count1 = 0;
+        var count2 = 0;
+        var count3 = 0;
+        var count4 = 0;
+        var count5 = 0;
+        var count6 = 0;
+        for (var i in recipes) {
+            var oneRecipe = recipes[i].data;
+            if (!oneRecipe) {
+                continue;
+            }
+
+            if (oneRecipe.stirfry > 0) {
+                count1++;
+                if (count1 == 3) {
+                    sameCount++;
+                }
+            }
+            if (oneRecipe.boil > 0) {
+                count2++;
+                if (count2 == 3) {
+                    sameCount++;
+                }
+            }
+            if (oneRecipe.knife > 0) {
+                count3++;
+                if (count3 == 3) {
+                    sameCount++;
+                }
+            }
+            if (oneRecipe.fry > 0) {
+                count4++;
+                if (count4 == 3) {
+                    sameCount++;
+                }
+            }
+            if (oneRecipe.bake > 0) {
+                count5++;
+                if (count5 == 3) {
+                    sameCount++;
+                }
+            }
+            if (oneRecipe.steam > 0) {
+                count6++;
+                if (count6 == 3) {
+                    sameCount++;
+                }
+            }
+        }
+        if (sameCount > 0) {
+            result.count = sameCount;
+            return result;
+        }
+    } else {
+        console.log("unknown conditionType");
     }
+
+    result.pass = false;
+    return result;
 }
 
 function getSelfUltimateData(chefs, skills, useUltimate, ids) {
@@ -903,6 +938,74 @@ function getSelfUltimateData(chefs, skills, useUltimate, ids) {
         }
     }
     return result;
+}
+
+function getPartialChefAddsByIds(chefs, skills, useUltimate, ids) {
+    var partialChefAdds = [];
+    if (useUltimate) {
+        for (var i in ids) {
+            for (var j in chefs) {
+                var chef = chefs[j];
+                if (ids[i] == chef.chefId) {
+                    for (var k in skills) {
+                        var skill = skills[k];
+                        if (chef.ultimateSkill == skill.skillId) {
+                            for (var m in skill.effect) {
+                                var effect = skill.effect[m];
+                                if (effect.condition == "Partial") {
+                                    if (isChefAddType(effect.type)) {
+                                        partialChefAdds.push(effect);
+                                    }
+                                }
+                            }
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+    }
+    return partialChefAdds;
+}
+
+function getPartialChefAdds(customData, skills, rule) {
+    var partialAdds = [];
+    for (var o = 0; o < 3; o++) {
+        partialAdds.push([]);
+    }
+
+    for (var i in customData) {
+        var chef = customData[i].chef;
+        if (chef.chefId && rule.calPartialChefIds.indexOf(chef.chefId) >= 0) {
+            for (var k in skills) {
+                var skill = skills[k];
+                if (chef.ultimateSkill == skill.skillId) {
+                    for (var m in skill.effect) {
+                        var effect = JSON.parse(JSON.stringify(skill.effect[m]));
+                        if (effect.condition == "Partial") {
+                            if (isChefAddType(effect.type)) {
+                                var startIndex = 0;
+                                if (rule.Satiety) {
+                                    startIndex = Number(i);
+                                }
+                                for (var o = startIndex; o < 3; o++) {
+                                    partialAdds[o].push(effect);
+                                }
+                            }
+                        } else if (effect.condition == "Next" && Number(i) < 2) {
+                            if (isChefAddType(effect.type)) {
+                                partialAdds[Number(i) + 1].push(effect);
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    return partialAdds;
 }
 
 function updateMaterialsData(materialsData, recipe, quantity) {

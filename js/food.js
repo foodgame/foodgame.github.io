@@ -1551,7 +1551,16 @@ function updateRecipesChefsData(data) {
 
                         var chef = JSON.parse(JSON.stringify(data.chefs[j]));
 
-                        var newPartialChefIds = partialChefIds.indexOf(chef.chefId.toString()) < 0 ? partialChefIds.concat(chef.chefId) : partialChefIds;
+                        var newPartialChefIds = partialChefIds;
+                        for (var p in data.ultimateData.partial) {
+                            if (data.ultimateData.partial[p].chefId == chef.chefId) {
+                                if (partialChefIds.indexOf(chef.chefId.toString()) < 0) {
+                                    newPartialChefIds = partialChefIds.concat(chef.chefId);
+                                }
+                                break;
+                            }
+                        }
+
                         var partialChefAdds = getPartialChefAddsByIds(data.chefs, data.partialSkill, useUltimate, newPartialChefIds);
                         setDataForChef(chef, equip, useEquip, data.ultimateData.global, partialChefAdds, data.ultimateData.self, null, true, null);
 
@@ -1801,7 +1810,16 @@ function updateChefsRecipesData(data) {
 
                         var chef = JSON.parse(JSON.stringify(data.chefs[i]));
 
-                        var newPartialChefIds = partialChefIds.indexOf(chef.chefId.toString()) < 0 ? partialChefIds.concat(chef.chefId) : partialChefIds;
+                        var newPartialChefIds = partialChefIds;
+                        for (var p in data.ultimateData.partial) {
+                            if (data.ultimateData.partial[p].chefId == chef.chefId) {
+                                if (partialChefIds.indexOf(chef.chefId.toString()) < 0) {
+                                    newPartialChefIds = partialChefIds.concat(chef.chefId);
+                                }
+                                break;
+                            }
+                        }
+
                         var partialChefAdds = getPartialChefAddsByIds(data.chefs, data.partialSkill, useUltimate, newPartialChefIds);
                         setDataForChef(chef, equip, useEquip, data.ultimateData.global, partialChefAdds, data.ultimateData.self, null, true, null);
 

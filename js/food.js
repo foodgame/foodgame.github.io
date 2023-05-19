@@ -3846,7 +3846,7 @@ function importData(data, input) {
             options += "<option value='" + person.rules[i].Id + "'>" + person.rules[i].Title + "</option>";
         }
     }
-    $("#select-cal-rule").append(options).selectpicker('refresh');
+    $("#select-cal-rule").append(options).selectpicker('destroy').selectpicker();
 
     if (person.calChefs) {
         $('#cal-chefs-table').DataTable().rows().deselect();
@@ -5927,8 +5927,6 @@ function getCustomChefsOptions(index, data) {
 
     var newData = JSON.parse(JSON.stringify(customData));
 
-    var satiety = calSatiety(newData, currentRule);
-
     var options = [];
 
     var chefs = JSON.parse(JSON.stringify(currentRule.chefs));
@@ -5991,11 +5989,14 @@ function getCustomChefsOptions(index, data) {
                             currentRule, currentRule.decorationEffect,
                             newData[n].recipes[m].useCondiment ? newData[n].condiment : null,
                             true, newData[n].recipes, partialRecipeAdds[n], intentAdds[n * 3 + Number(m)]);
+
+                        newData[n].recipes[m] = resultData;
                         score += resultData.totalScore;
                     }
                 }
             }
 
+            var satiety = calSatiety(newData, currentRule);
             if (currentRule.Satiety) {
                 score = calSatietyAdd(score, satiety.add);
             }
@@ -6091,8 +6092,6 @@ function getCustomEquipsOptions(index, equips, data) {
 
     var partialChefAdds = getPartialChefAdds(newData, data.partialSkill, currentRule);
 
-    var satiety = calSatiety(newData, currentRule);
-
     var options = [];
 
     for (var i in equips) {
@@ -6140,11 +6139,14 @@ function getCustomEquipsOptions(index, equips, data) {
                             currentRule, currentRule.decorationEffect,
                             newData[n].recipes[m].useCondiment ? newData[n].condiment : null,
                             true, newData[n].recipes, partialRecipeAdds[n], intentAdds[n * 3 + Number(m)]);
+
+                        newData[n].recipes[m] = resultData;
                         score += resultData.totalScore;
                     }
                 }
             }
 
+            var satiety = calSatiety(newData, currentRule);
             if (currentRule.Satiety) {
                 score = calSatietyAdd(score, satiety.add);
             }
@@ -6224,6 +6226,8 @@ function getCustomCondimentsOptions(index, condiments, data) {
                             currentRule, currentRule.decorationEffect,
                             newData[n].recipes[m].useCondiment ? newData[n].condiment : null,
                             true, newData[n].recipes, partialRecipeAdds[n], intentAdds[n * 3 + Number(m)]);
+
+                        newData[n].recipes[m] = resultData;
                         score += resultData.totalScore;
                     }
                 }

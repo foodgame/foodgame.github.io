@@ -19,7 +19,7 @@
                 success: function (json) {
                     init(json);
                 },
-                url: 'data/data.min.json?v=110'
+                url: 'data/data.min.json?v=111'
             });
         });
     </script>
@@ -833,10 +833,10 @@
                                     </label>
                                     <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="选择星级,过滤菜谱">
                                         <select id="chk-cal-recipe-rarity" multiple class="selectpicker monitor-none"
-                                            data-width="100px" data-dropdown-align-right='auto' data-none-selected-text="菜谱星级"
-                                            data-selected-text-format="count>2" data-count-selected-text="{0} 星级"
-                                            data-actions-box="true" data-actions-box-only-clear="true"
-                                            data-deselect-all-text="清空">
+                                            data-width="100px" data-dropdown-align-right='auto'
+                                            data-none-selected-text="菜谱星级" data-selected-text-format="count>2"
+                                            data-count-selected-text="{0} 星级" data-actions-box="true"
+                                            data-actions-box-only-clear="true" data-deselect-all-text="清空">
                                             <option value="1">1星</option>
                                             <option value="2">2星</option>
                                             <option value="3">3星</option>
@@ -845,8 +845,8 @@
                                         </select>
                                     </div>
                                     <div class="input-group">
-                                        <div class="inline-wrapper select-wrapper input-group-first" data-toggle="tooltip"
-                                            title="选择技法,过滤菜谱">
+                                        <div class="inline-wrapper select-wrapper input-group-first"
+                                            data-toggle="tooltip" title="选择技法,过滤菜谱">
                                             <select id="chk-cal-recipe-skill" multiple class="selectpicker monitor-none"
                                                 data-width="100px" data-dropdown-align-right='auto'
                                                 data-none-selected-text="菜谱技法" data-selected-text-format="count>3"
@@ -862,7 +862,8 @@
                                         </div>
                                         <span class="input-group-btn input-group-last">
                                             <label class="btn btn-default">
-                                                <input type="checkbox" id="chk-cal-recipe-multiple-skill" class="monitor-none">
+                                                <input type="checkbox" id="chk-cal-recipe-multiple-skill"
+                                                    class="monitor-none">
                                                 <i class="fa fa-check glyphicon glyphicon-ok"></i>
                                                 同时
                                             </label>
@@ -870,10 +871,10 @@
                                     </div>
                                     <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="选择调料,过滤菜谱">
                                         <select id="chk-cal-recipe-condiment" multiple class="selectpicker monitor-none"
-                                            data-width="100px" data-dropdown-align-right='auto' data-none-selected-text="菜谱调料"
-                                            data-selected-text-format="count>3" data-count-selected-text="{0} 调料"
-                                            data-actions-box="true" data-actions-box-only-clear="true"
-                                            data-deselect-all-text="清空">
+                                            data-width="100px" data-dropdown-align-right='auto'
+                                            data-none-selected-text="菜谱调料" data-selected-text-format="count>3"
+                                            data-count-selected-text="{0} 调料" data-actions-box="true"
+                                            data-actions-box-only-clear="true" data-deselect-all-text="清空">
                                             <option value="Sweet">甜</option>
                                             <option value="Sour">酸</option>
                                             <option value="Spicy">辣</option>
@@ -1425,24 +1426,24 @@
                                         data-live-search-placeholder="查找" data-width="150px"
                                         data-dropdown-align-right='auto' data-none-selected-text="上场类已修炼 0"
                                         data-selected-text-format="count>0" data-count-selected-text="上场类已修炼 {0}"
-                                        data-none-results-text="没有找到" data-actions-box="true"
-                                        data-select-all-text="全选" data-deselect-all-text="清空"></select>
+                                        data-none-results-text="没有找到" data-actions-box="true" data-select-all-text="全选"
+                                        data-deselect-all-text="清空"></select>
                                 </div>
                                 <div class="select-wrapper">
                                     <select id="chk-cal-self-ultimate" multiple data-live-search="true"
                                         data-live-search-placeholder="查找" data-width="150px"
                                         data-dropdown-align-right='auto' data-none-selected-text="个人类已修炼 0"
                                         data-selected-text-format="count>0" data-count-selected-text="个人类已修炼 {0}"
-                                        data-none-results-text="没有找到" data-actions-box="true"
-                                        data-select-all-text="全选" data-deselect-all-text="清空"></select>
+                                        data-none-results-text="没有找到" data-actions-box="true" data-select-all-text="全选"
+                                        data-deselect-all-text="清空"></select>
                                 </div>
                                 <div class="select-wrapper">
                                     <select id="chk-cal-ex" multiple data-live-search="true"
                                         data-live-search-placeholder="查找" data-width="150px"
                                         data-dropdown-align-right='auto' data-none-selected-text="菜谱已熟练 0"
                                         data-selected-text-format="count>0" data-count-selected-text="菜谱已熟练 {0}"
-                                        data-none-results-text="没有找到" data-actions-box="true"
-                                        data-select-all-text="全选" data-deselect-all-text="清空"></select>
+                                        data-none-results-text="没有找到" data-actions-box="true" data-select-all-text="全选"
+                                        data-deselect-all-text="清空"></select>
                                 </div>
                             </div>
                             <button id="btn-cal-load-ultimate" class="btn btn-default" type="button"
@@ -1611,10 +1612,11 @@
                             <h5 class="text-danger">只用于计算器, 不会保存, 也不会覆盖本图鉴的个人数据. 每次加载规则后需要重新导入.</h5>
                             <h5 class="text-primary">云端版</h5>
                             <div class="form-group">
-                                <input type="number" class="form-control" id="input-import-bcjh-cloud" placeholder="数据ID">
+                                <input type="number" class="form-control" id="input-import-bcjh-cloud"
+                                    placeholder="数据ID">
                             </div>
-                            <button id="btn-import-bcjh-cloud" class="btn btn-default" type="button" data-toggle="tooltip"
-                                title="输入白菜菊花云端数据ID, 然后点击该按钮导入白菜菊花数据">
+                            <button id="btn-import-bcjh-cloud" class="btn btn-default" type="button"
+                                data-toggle="tooltip" title="输入白菜菊花云端数据ID, 然后点击该按钮导入白菜菊花数据">
                                 导入白菜菊花数据
                             </button>
                             <div id="import-msg-bcjh-cloud" class="import-msg inline-div hidden"></div>
@@ -1622,8 +1624,8 @@
                             <div class="form-group">
                                 <textarea id="input-import-bcjh-text" class="form-control"></textarea>
                             </div>
-                            <button id="btn-import-bcjh-text" class="btn btn-default" type="button" data-toggle="tooltip"
-                                title="将备份的白菜菊花数据复制到上方文本框内, 然后点击该按钮导入白菜菊花数据">
+                            <button id="btn-import-bcjh-text" class="btn btn-default" type="button"
+                                data-toggle="tooltip" title="将备份的白菜菊花数据复制到上方文本框内, 然后点击该按钮导入白菜菊花数据">
                                 导入白菜菊花数据
                             </button>
                             <div id="import-msg-bcjh-text" class="import-msg inline-div hidden"></div>
@@ -1636,8 +1638,8 @@
                             </div>
                             <div id="import-msg-bcjh-file" class="import-msg inline-div hidden"></div>
                         </div>
-                        </div>
-                        </div>
+                    </div>
+                </div>
                 <div id="pane-cal-rules" class='pane-cal-rules pane-cal-sub hidden'>
                     <div id="pane-cal-custom">
                         <div class="selected-sum"></div>

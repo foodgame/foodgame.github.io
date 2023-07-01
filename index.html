@@ -9,8 +9,8 @@
     <link rel="stylesheet" type="text/css" href="css/style.min.css?v=7" />
     <script type="text/javascript" src="js/script.min.js?v=20"></script>
     <script type="text/javascript" src="js/common.min.js?v=53"></script>
-    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=68" />
-    <script type="text/javascript" src="js/food.min.js?v=203"></script>
+    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=69" />
+    <script type="text/javascript" src="js/food.min.js?v=204"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=118" />
     <script>
         $(function () {
@@ -19,7 +19,7 @@
                 success: function (json) {
                     init(json);
                 },
-                url: 'data/data.min.json?v=111'
+                url: 'data/data.min.json?v=112'
             });
         });
     </script>
@@ -887,7 +887,6 @@
                                         清空过滤
                                     </button>
                                 </div>
-                                <div id="rule-desc"></div>
                             </div>
                             <div class="pane-cal-recipes pane-cal-sub hidden">
                                 <div class="header-wrapper">
@@ -1642,68 +1641,18 @@
                 </div>
                 <div id="pane-cal-rules" class='pane-cal-rules pane-cal-sub hidden'>
                     <div id="pane-cal-custom">
-                        <div class="selected-sum"></div>
-                        <div class="selected-item-wrapper">
-                            <div class="selected-item">
-                                <div class="chef-box selected-box">
-                                    <div class="content"></div>
-                                    <div class="select-picker">
-                                        <select class='selectpicker select-picker-chef' data-width="auto"
-                                            data-live-search="true" data-live-search-style="commaSplitContains"
-                                            data-live-search-placeholder="查找" data-dropdown-align-right='auto'
-                                            data-none-results-text="没有找到" data-actions-box="true"
-                                            data-deselect-all-text="清空" data-done-button="true"
-                                            data-done-button-text="关闭"></select>
-                                    </div>
-                                </div>
-                                <div class="equip-box selected-box">
-                                    <div class="content"></div>
-                                    <div class="select-picker">
-                                        <select class='selectpicker select-picker-equip' data-width="auto"
-                                            data-live-search="true" data-live-search-style="commaSplitContains"
-                                            data-live-search-placeholder="查找" data-dropdown-align-right='auto'
-                                            data-none-results-text="没有找到" data-actions-box="true"
-                                            data-deselect-all-text="清空" data-done-button="true"
-                                            data-done-button-text="关闭"></select>
-                                    </div>
-                                </div>
-                                <div class="condiment-box selected-box">
-                                    <div class="content"></div>
-                                    <div class="select-picker">
-                                        <select class='selectpicker select-picker-condiment' data-width="auto"
-                                            data-live-search="true" data-live-search-style="commaSplitContains"
-                                            data-live-search-placeholder="查找" data-dropdown-align-right='auto'
-                                            data-none-results-text="没有找到" data-actions-box="true"
-                                            data-deselect-all-text="清空" data-done-button="true"
-                                            data-done-button-text="关闭"></select>
-                                    </div>
-                                </div>
-                                <div class="recipe-box selected-box">
-                                    <div class="recipe-placeholder"></div>
-                                    <div class="recipe-box-1">
-                                        <div class="recipe-name"></div>
-                                        <div class="recipe-qec">
-                                            <div class="recipe-quantity">
-                                                <input type="number" min="0" class="form-control arrow"> /
-                                                <span class="max"></span>
-                                                <span class="available"></span>
-                                            </div>
-                                            <div class="recipe-ex">
-                                                <label class="chk-label">
-                                                    <input type="checkbox">
-                                                    <span><span>专</span>精</span>
-                                                </label>
-                                            </div>
-                                            <div class="recipe-condiment">
-                                                <label class="chk-label">
-                                                    <input type="checkbox" checked>
-                                                    <span><span>加</span>料</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="recipe-result"></div>
+                        <div class="cal-custom-item">
+                            <div class="rule-desc"></div>
+                            <div class="selected-sum-wrapper">
+                                <span class='btn-resize glyphicon glyphicon-resize-small'></span>
+                                <div class="selected-sum"></div>
+                            </div>
+                            <div class="selected-item-wrapper">
+                                <div class="selected-item">
+                                    <div class="chef-box selected-box">
+                                        <div class="content"></div>
                                         <div class="select-picker">
-                                            <select class='selectpicker select-picker-recipe' data-width="auto"
+                                            <select class='selectpicker select-picker-chef' data-width="auto"
                                                 data-live-search="true" data-live-search-style="commaSplitContains"
                                                 data-live-search-placeholder="查找" data-dropdown-align-right='auto'
                                                 data-none-results-text="没有找到" data-actions-box="true"
@@ -1711,7 +1660,63 @@
                                                 data-done-button-text="关闭"></select>
                                         </div>
                                     </div>
-                                    <div class="recipe-box-2"></div>
+                                    <div class="equip-box selected-box">
+                                        <div class="content"></div>
+                                        <div class="select-picker">
+                                            <select class='selectpicker select-picker-equip' data-width="auto"
+                                                data-live-search="true" data-live-search-style="commaSplitContains"
+                                                data-live-search-placeholder="查找" data-dropdown-align-right='auto'
+                                                data-none-results-text="没有找到" data-actions-box="true"
+                                                data-deselect-all-text="清空" data-done-button="true"
+                                                data-done-button-text="关闭"></select>
+                                        </div>
+                                    </div>
+                                    <div class="condiment-box selected-box">
+                                        <div class="content"></div>
+                                        <div class="select-picker">
+                                            <select class='selectpicker select-picker-condiment' data-width="auto"
+                                                data-live-search="true" data-live-search-style="commaSplitContains"
+                                                data-live-search-placeholder="查找" data-dropdown-align-right='auto'
+                                                data-none-results-text="没有找到" data-actions-box="true"
+                                                data-deselect-all-text="清空" data-done-button="true"
+                                                data-done-button-text="关闭"></select>
+                                        </div>
+                                    </div>
+                                    <div class="recipe-box selected-box">
+                                        <div class="recipe-placeholder"></div>
+                                        <div class="recipe-box-1">
+                                            <div class="recipe-name"></div>
+                                            <div class="recipe-qec">
+                                                <div class="recipe-quantity">
+                                                    <input type="number" min="0" class="form-control arrow"> /
+                                                    <span class="max"></span>
+                                                    <span class="available"></span>
+                                                </div>
+                                                <div class="recipe-ex">
+                                                    <label class="chk-label">
+                                                        <input type="checkbox">
+                                                        <span><span>专</span>精</span>
+                                                    </label>
+                                                </div>
+                                                <div class="recipe-condiment">
+                                                    <label class="chk-label">
+                                                        <input type="checkbox" checked>
+                                                        <span><span>加</span>料</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="recipe-result"></div>
+                                            <div class="select-picker">
+                                                <select class='selectpicker select-picker-recipe' data-width="auto"
+                                                    data-live-search="true" data-live-search-style="commaSplitContains"
+                                                    data-live-search-placeholder="查找" data-dropdown-align-right='auto'
+                                                    data-none-results-text="没有找到" data-actions-box="true"
+                                                    data-deselect-all-text="清空" data-done-button="true"
+                                                    data-done-button-text="关闭"></select>
+                                            </div>
+                                        </div>
+                                        <div class="recipe-box-2"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1895,60 +1900,60 @@
             <div class="tab-pane pane-info">
                 <h4>
                     <span class="label label-primary">说明</span>
-                    </h3>
-                    <p class="text-primary">国内镜像 - https://foodgame.gitee.io (已弃用)
-                    </p>
-                    <p class="text-primary">国外镜像 -
-                        <a href='https://foodgame.github.io'>https://foodgame.github.io</a> (国内访问会有速度慢和偶尔访问不了的情况)
-                    </p>
-                    <p class="text-primary">注意, 个人数据在两个网站不同步, 换网站时可在原网站导出个人数据, 再在新网站导入数据.</p>
-                    <br>
-                    <p>点击列名可以排序. 搜索框可同时搜索多个, 中间用空格分隔.</p>
-                    <p>搜索框可同时搜索多个, 中间用空格分隔.</p>
-                    <br>
-                    <h4>
-                        <span class="label label-info">装修图签</span>
-                    </h4>
-                    <p>假设玉壁值是均匀分布, 计算的平均玉壁/天(24小时). 考虑不能按时收玉, 固分成两种算法:</p>
-                    <p>理论值：准时收玉, 比如23小时的桌子就一直23小时收</p>
-                    <p>实际值：n天20~23小时的桌子一直是n+1天收一次</p>
-                    <br>
-                    <h4>
-                        <span class="label label-info">任务图鉴</span>
-                    </h4>
-                    <p>旧支线任务编号解释 - 举例支线123.1, 代表主线任务123会解锁</p>
-                    <br>
-                    <h4>
-                        <span class="label label-info">计算器</span>
-                    </h4>
-                    <p>正常营业 - 用于算一次性经营金币或时间的任务</p>
-                    <p>黑色字体的总时间都不包含厨师厨具的加成, 最终时间看上方的蓝色字体总时间</p>
-                    <p>修改菜谱厨师图鉴中的已有/厨具数据后, 需要重新加载计算器</p>
-                    <p>修改菜谱厨师图鉴中的已熟练/已修炼数据后, 需要点击读取已修炼并重新计算</p>
-                    <br>
-                    <p>厨神和限时的计算器可以去官方群和贴吧群里找</p>
-                    <br>
-                    <h4>
-                        <span class="label label-info">个人数据</span>
-                    </h4>
-                    <p>个人数据保存在浏览器端, 正常情况下下次打开网站时数据不会丢失.</p>
-                    <p>如需要更换设备或防止浏览器缓存被清空等情况, 可使用个人数据备份功能.</p>
-                    <hr>
-                    <h4>
-                        <span class="label label-primary">联系</span>
-                        </h3>
-                        <p>贴吧1群 名字 L</p>
-                        <hr>
-                        <h4>
-                            <span class="label label-primary">更新</span>
-                            </h3>
-                            <div id="data-history"></div>
-                            <div id="pagination-history"></div>
-                            <hr>
-                            <h4>
-                                <span class="label label-primary">致谢</span>
-                                </h3>
-                                <p>感谢Boketto提供的菜谱数据. 感谢闲时和小熊提供的升阶贵客符文数据. 感谢梨大只提供的数据.</p>
+                </h4>
+                <p class="text-primary">国内镜像 - https://foodgame.gitee.io (已弃用)
+                </p>
+                <p class="text-primary">国外镜像 -
+                    <a href='https://foodgame.github.io'>https://foodgame.github.io</a> (国内访问会有速度慢和偶尔访问不了的情况)
+                </p>
+                <p class="text-primary">注意, 个人数据在两个网站不同步, 换网站时可在原网站导出个人数据, 再在新网站导入数据.</p>
+                <br>
+                <p>点击列名可以排序. 搜索框可同时搜索多个, 中间用空格分隔.</p>
+                <p>搜索框可同时搜索多个, 中间用空格分隔.</p>
+                <br>
+                <h4>
+                    <span class="label label-info">装修图签</span>
+                </h4>
+                <p>假设玉壁值是均匀分布, 计算的平均玉壁/天(24小时). 考虑不能按时收玉, 固分成两种算法:</p>
+                <p>理论值：准时收玉, 比如23小时的桌子就一直23小时收</p>
+                <p>实际值：n天20~23小时的桌子一直是n+1天收一次</p>
+                <br>
+                <h4>
+                    <span class="label label-info">任务图鉴</span>
+                </h4>
+                <p>旧支线任务编号解释 - 举例支线123.1, 代表主线任务123会解锁</p>
+                <br>
+                <h4>
+                    <span class="label label-info">计算器</span>
+                </h4>
+                <p>正常营业 - 用于算一次性经营金币或时间的任务</p>
+                <p>黑色字体的总时间都不包含厨师厨具的加成, 最终时间看上方的蓝色字体总时间</p>
+                <p>修改菜谱厨师图鉴中的已有/厨具数据后, 需要重新加载计算器</p>
+                <p>修改菜谱厨师图鉴中的已熟练/已修炼数据后, 需要点击读取已修炼并重新计算</p>
+                <br>
+                <p>厨神和限时的计算器可以去官方群和贴吧群里找</p>
+                <br>
+                <h4>
+                    <span class="label label-info">个人数据</span>
+                </h4>
+                <p>个人数据保存在浏览器端, 正常情况下下次打开网站时数据不会丢失.</p>
+                <p>如需要更换设备或防止浏览器缓存被清空等情况, 可使用个人数据备份功能.</p>
+                <hr>
+                <h4>
+                    <span class="label label-primary">联系</span>
+                </h4>
+                <p>贴吧1群 名字 L</p>
+                <hr>
+                <h4>
+                    <span class="label label-primary">更新</span>
+                </h4>
+                <div id="data-history"></div>
+                <div id="pagination-history"></div>
+                <hr>
+                <h4>
+                    <span class="label label-primary">致谢</span>
+                </h4>
+                <p>感谢Boketto提供的菜谱数据. 感谢闲时和小熊提供的升阶贵客符文数据. 感谢梨大只提供的数据.</p>
             </div>
         </div>
     </div>

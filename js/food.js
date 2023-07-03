@@ -20,11 +20,7 @@ function init(json) {
 
     initFunction();
 
-    var person;
-    try {
-        var localData = localStorage.getItem('data');
-        person = JSON.parse(localData);
-    } catch (e) { }
+    var person = getLocalData();
 
     if (private) {
         $.ajax({
@@ -3875,6 +3871,51 @@ function importData(data, input) {
         }).select();
     }
 
+    var old = getLocalData();
+    if (!old.cal) {
+        old["cal"] = [];
+    }
+
+    for (var i in person.cal) {
+        var opt = "";
+        var exist1 = false;
+        for (var j in old.cal) {
+            if (person.cal[i].id == old.cal[j].id) {
+                for (var m in person.cal[i].data) {
+                    var exist2 = false;
+                    for (var n in old.cal[j].data) {
+                        if (person.cal[i].data[m].score == old.cal[j].data[n].score) {
+                            old.cal[j].data[n].menu = person.cal[i].data[m].menu;
+                            exist2 = true;
+                            break;
+                        }
+                    }
+                    if (!exist2) {
+                        old.cal[j].data.push(person.cal[i].data[m]);
+                        if (person.cal[i].id == calCustomRule.id) {
+                            opt += "<option value='" + person.cal[i].data[m].score + "'>" + person.cal[i].data[m].score + "</option>";
+                        }
+                    }
+                }
+                exist1 = true;
+                break;
+            }
+        }
+        if (!exist1) {
+            old.cal.push(person.cal[i]);
+            if (person.cal[i].id == calCustomRule.id) {
+                for (var m in person.cal[i].data) {
+                    opt += "<option value='" + person.cal[i].data[m].score + "'>" + person.cal[i].data[m].score + "</option>";
+                }
+            }
+        }
+        if (opt) {
+            $("#select-cal-custom").append(opt).selectpicker('destroy').selectpicker();
+        }
+    }
+
+    updateCalLocalData(old.cal);
+
     updateMenu(person);
     updateSetting(person);
 
@@ -3902,94 +3943,28 @@ function importData(data, input) {
     return true;
 }
 
+function updateCalLocalData(cal) {
+    updateLocalData("cal", cal);
+}
+
 function updateRecipesLocalData() {
-    var person;
-    try {
-        var localData = localStorage.getItem('data');
-        person = JSON.parse(localData);
-    } catch (e) { }
-
-    if (!person) {
-        person = {};
-    }
-
-    person["recipes"] = generateRecipesExportData();
-
-    try {
-        localStorage.setItem('data', JSON.stringify(person));
-    } catch (e) { }
+    updateLocalData("recipes", generateRecipesExportData());
 }
 
 function updateChefsLocalData() {
-    var person;
-    try {
-        var localData = localStorage.getItem('data');
-        person = JSON.parse(localData);
-    } catch (e) { }
-
-    if (!person) {
-        person = {};
-    }
-
-    person["chefs"] = generateChefsExportData();
-
-    try {
-        localStorage.setItem('data', JSON.stringify(person));
-    } catch (e) { }
+    updateLocalData("chefs", generateChefsExportData());
 }
 
 function updateMenuLocalData() {
-    var person;
-    try {
-        var localData = localStorage.getItem('data');
-        person = JSON.parse(localData);
-    } catch (e) { }
-
-    if (!person) {
-        person = {};
-    }
-
-    person["menu"] = generateMenuExportData();
-
-    try {
-        localStorage.setItem('data', JSON.stringify(person));
-    } catch (e) { }
+    updateLocalData("menu", generateMenuExportData());
 }
 
 function updateSettingLocalData() {
-    var person;
-    try {
-        var localData = localStorage.getItem('data');
-        person = JSON.parse(localData);
-    } catch (e) { }
-
-    if (!person) {
-        person = {};
-    }
-
-    person["setting"] = generateSettingExportData();
-
-    try {
-        localStorage.setItem('data', JSON.stringify(person));
-    } catch (e) { }
+    updateLocalData("setting", generateSettingExportData());
 }
 
 function updateDecorationLocalData() {
-    var person;
-    try {
-        var localData = localStorage.getItem('data');
-        person = JSON.parse(localData);
-    } catch (e) { }
-
-    if (!person) {
-        person = {};
-    }
-
-    person["decorationEffect"] = Number($("#input-cal-decoration").val());
-
-    try {
-        localStorage.setItem('data', JSON.stringify(person));
-    } catch (e) { }
+    updateLocalData("decorationEffect", Number($("#input-cal-decoration").val()));
 }
 
 function updateActivityLocalData() {
@@ -3997,15 +3972,7 @@ function updateActivityLocalData() {
 }
 
 function updateLocalData(key, value) {
-    var person;
-    try {
-        var localData = localStorage.getItem('data');
-        person = JSON.parse(localData);
-    } catch (e) { }
-
-    if (!person) {
-        person = {};
-    }
+    var person = getLocalData();
 
     person[key] = value;
 
@@ -4014,7 +3981,21 @@ function updateLocalData(key, value) {
     } catch (e) { }
 }
 
+function getLocalData() {
+    var person;
+    try {
+        var localData = localStorage.getItem('data');
+        person = JSON.parse(localData);
+    } catch (e) { }
+
+    if (!person) {
+        person = {};
+    }
+    return person;
+}
+
 function generateExportData() {
+    var old = getLocalData();
     var person = {};
     person["recipes"] = generateRecipesExportData();
     person["chefs"] = generateChefsExportData();
@@ -4022,6 +4003,7 @@ function generateExportData() {
     person["setting"] = generateSettingExportData();
     person["decorationEffect"] = Number($("#input-cal-decoration").val());
     person["activity"] = generateActivityExportData();
+    person["cal"] = old.cal;
     return JSON.stringify(person);
 }
 
@@ -4240,6 +4222,8 @@ function updateActivity(person) {
 function initCalTables(data) {
 
     calCustomRule = {};
+    calCustomRule["id"] = 0;
+    calCustomRule["score"] = 0;
     calCustomRule["rules"] = [];
 
     setSelfUltimateOptions(data.chefs, data.skills);
@@ -4421,6 +4405,148 @@ function initCalRules(data) {
         $('#cal-recipes-table').DataTable().draw();
     });
 
+    $('#btn-cal-custom-load').click(function () {
+        var score = $("#select-cal-custom").val();
+        if (!score) {
+            return;
+        }
+        var person = getLocalData();
+        for (var i in person.cal) {
+            if (person.cal[i].id == calCustomRule.id) {
+                for (var j in person.cal[i].data) {
+                    if (person.cal[i].data[j].score == score) {
+                        var menu = person.cal[i].data[j].menu;
+                        for (var groupIndex in menu) {
+                            for (var chefIndex in menu[groupIndex]) {
+                                var item = menu[groupIndex][chefIndex];
+                                setCustomChef(groupIndex, chefIndex, item.chef);
+                                setCustomEquip(groupIndex, chefIndex, item.equip);
+                                setCustomCondiment(groupIndex, chefIndex, item.condiment, data);
+                                for (var recipeIndex in item.recipes) {
+                                    var recipe = item.recipes[recipeIndex];
+                                    setCustomRecipe(groupIndex, chefIndex, recipeIndex, recipe.id);
+                                    setCustomRecipeQuantity(groupIndex, chefIndex, recipeIndex, recipe.qty);
+                                    updateCustomRecipeCondiment(groupIndex, chefIndex, recipeIndex, recipe.cdt);
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        calCustomResults(data);
+
+        if (calCustomRule.rules[0].hasOwnProperty("MaterialsNum")) {
+            $("#pane-cal-recipes").attr("data-cal", "false");
+        }
+    });
+
+    $('#btn-cal-custom-delete').click(function () {
+        var score = $("#select-cal-custom").val();
+        if (!score) {
+            return;
+        }
+        bootbox.confirm({
+            size: "small",
+            message: "<div class='text-center'>确定删除?</div>",
+            locale: "zh_CN",
+            callback: function (result) {
+                if (result) {
+                    var person = getLocalData();
+                    for (var i in person.cal) {
+                        if (person.cal[i].id == calCustomRule.id) {
+                            for (var j in person.cal[i].data) {
+                                if (person.cal[i].data[j].score == score) {
+                                    person.cal[i].data.splice(j, 1);
+                                    $("#select-cal-custom option[value='" + score + "']").remove();
+                                    $("#select-cal-custom").selectpicker('destroy').selectpicker();
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                    updateCalLocalData(person.cal);
+                }
+            }
+        });
+    });
+
+    $("#btn-cal-custom-save").click(function () {
+        if (!calCustomRule.score) {
+            return;
+        }
+
+        var person = getLocalData();
+        if (!person.cal) {
+            person["cal"] = [];
+        }
+
+        var item = {};
+        item["score"] = calCustomRule.score;
+        item["menu"] = [];
+        for (var r in calCustomRule.rules) {
+            var item1 = [];
+            var customData = calCustomRule.rules[r].custom;
+            for (var i in customData) {
+                var item2 = {};
+                item2["chef"] = customData[i].chef.chefId;
+                item2["equip"] = customData[i].equip.equipId;
+                item2["condiment"] = customData[i].condiment.condimentId;
+                item2["recipes"] = [];
+                for (var j in customData[i].recipes) {
+                    var item3 = {};
+                    if (customData[i].recipes[j].data) {
+                        item3["id"] = customData[i].recipes[j].data.recipeId;
+                        item3["qty"] = customData[i].recipes[j].quantity;
+                        item3["cdt"] = customData[i].recipes[j].useCondiment;
+                    }
+                    item2.recipes.push(item3);
+                }
+                item1.push(item2);
+            }
+            item.menu.push(item1);
+        }
+
+        var add = false;
+        var exist1 = false;
+        for (var i in person.cal) {
+            if (person.cal[i].id == calCustomRule.id) {
+                var exist2 = false;
+                for (var j in person.cal[i].data) {
+                    if (person.cal[i].data[j].score == item.score) {
+                        person.cal[i].data[j].menu = item.menu;
+                        exist2 = true;
+                        break;
+                    }
+                }
+                if (!exist2) {
+                    person.cal[i].data.push(item);
+                    add = true;
+                }
+                exist1 = true;
+                break;
+            }
+        }
+        if (!exist1) {
+            var calItem = {};
+            calItem["id"] = calCustomRule.id;
+            calItem["data"] = [];
+            calItem.data.push(item);
+            person.cal.push(calItem);
+            add = true;
+        }
+
+        if (add) {
+            var opt = "<option value='" + item.score + "'>" + item.score + "</option>";
+            $("#select-cal-custom").append(opt).selectpicker('destroy').selectpicker('val', item.score);
+        }
+
+        updateCalLocalData(person.cal);
+    });
+
     $('#chk-cal-chef-show').on('changed.bs.select', function () {
         updateMenuLocalData();
     });
@@ -4439,6 +4565,7 @@ function loadCalRule(data) {
     calCustomRule.rules = [];
     for (var i in data.rules) {
         if (data.rules[i].Id == ruleId) {
+            calCustomRule.id = ruleId;
             if (data.rules[i].Group) {
                 for (var m in data.rules[i].Group) {
                     calCustomRule.rules.push(data.rules[i].Group[m]);
@@ -4463,11 +4590,25 @@ function loadCalRule(data) {
         }
     }
 
+    $(".cal-custom-item .selected-item .recipe-box .recipe-condiment input").prop("checked", true);
+
     if (calCustomRule.rules.length > 1) {
         $(".pane-cal-recipes").hide();
     } else {
         $(".pane-cal-recipes").show();
     }
+
+    var person = getLocalData();
+    var options = "";
+    for (var i in person.cal) {
+        if (person.cal[i].id == calCustomRule.id) {
+            for (var m in person.cal[i].data) {
+                options += "<option value='" + person.cal[i].data[m].score + "'>" + person.cal[i].data[m].score + "</option>";
+            }
+            break;
+        }
+    }
+    $("#select-cal-custom").html(options).selectpicker('destroy').selectpicker();
 
     $("#btn-cal-rule-load").prop("disabled", true);
     $('.loading').removeClass("hidden");
@@ -4487,11 +4628,7 @@ function loadCalRule(data) {
 }
 
 function loadUltimate(data, usePerson) {
-    var person;
-    try {
-        var localData = localStorage.getItem('data');
-        person = JSON.parse(localData);
-    } catch (e) { }
+    var person = getLocalData();
 
     var ultimateData = getUltimateData(data.chefs, person, data.skills, true, usePerson);
     var globalUltimate = ultimateData.global;
@@ -5511,8 +5648,15 @@ function setCustomRecipe(groupIndex, chefIndex, recipeIndex, recipeId) {
     }
 }
 
-function updateCustomRecipeCondiment(chefIndex, recipeIndex, useCondiment) {
-    var chkCondiment = $(".cal-custom-item:eq(0) .selected-item:eq(" + chefIndex + ") .recipe-box:eq(" + recipeIndex + ") .recipe-condiment input");
+function setCustomRecipeQuantity(groupIndex, chefIndex, recipeIndex, quantity) {
+    var currentRule = calCustomRule.rules[groupIndex];
+    var customData = currentRule.custom;
+
+    customData[chefIndex].recipes[recipeIndex].quantity = quantity || 0;
+}
+
+function updateCustomRecipeCondiment(groupIndex, chefIndex, recipeIndex, useCondiment) {
+    var chkCondiment = $(".cal-custom-item:eq(" + groupIndex + ") .selected-item:eq(" + chefIndex + ") .recipe-box:eq(" + recipeIndex + ") .recipe-condiment input");
     if (useCondiment) {
         chkCondiment.prop("checked", true);
     } else {
@@ -5748,8 +5892,8 @@ function calCustomResults(data) {
 
         if (calCustomRule.rules.length > 1) {
             summary += " 合计：<span class='total-score'></span>";
-            totalScore += score;
         }
+        totalScore += score;
 
         if (currentRule.showTime) {
             var timeAddition = 0;
@@ -5800,6 +5944,7 @@ function calCustomResults(data) {
     if (calCustomRule.rules.length > 1) {
         $(".total-score").html(totalScore);
     }
+    calCustomRule.score = totalScore;
 }
 
 function getIntentAdds(groupIndex, customData, data, update) {
@@ -7431,12 +7576,10 @@ function initCalCustomTable(data) {
         var recipeIndex = $(this).closest(".selected-item").find(".recipe-box").index($(this).closest(".recipe-box"));
         var quantity = $(this).val();
 
-        var currentRule = calCustomRule.rules[groupIndex];
-        var customData = currentRule.custom;
-
-        customData[chefIndex].recipes[recipeIndex].quantity = quantity;
+        setCustomRecipeQuantity(groupIndex, chefIndex, recipeIndex, quantity);
         calCustomResults(data);
 
+        var currentRule = calCustomRule.rules[groupIndex];
         if (currentRule.hasOwnProperty("MaterialsNum")) {
             $("#pane-cal-recipes").attr("data-cal", "false");
         }
@@ -7668,7 +7811,8 @@ function showCalOptimalResult(optimalMenu, data) {
         var result = JSON.parse(JSON.stringify(optimalMenu[index].menu));
         initCustomData();
 
-        var currentRule = calCustomRule.rules[0];
+        var groupIndex = 0;
+        var currentRule = calCustomRule.rules[groupIndex];
         var customData = currentRule.custom;
 
         for (var i in result) {
@@ -7677,7 +7821,7 @@ function showCalOptimalResult(optimalMenu, data) {
             customData[i].condiment = result[i].condiment;
             for (var j in result[i].recipes) {
                 customData[i].recipes[j] = result[i].recipes[j];
-                updateCustomRecipeCondiment(i, j, customData[i].recipes[j].useCondiment);
+                updateCustomRecipeCondiment(groupIndex, i, j, customData[i].recipes[j].useCondiment);
             }
         }
 
@@ -8444,11 +8588,7 @@ function updateRecipeChefTable(data) {
 
 function getUpdateData(data) {
 
-    var person;
-    try {
-        var localData = localStorage.getItem('data');
-        person = JSON.parse(localData);
-    } catch (e) { }
+    var person = getLocalData();
 
     var showFinal = $("#chk-setting-show-final").prop("checked");
 

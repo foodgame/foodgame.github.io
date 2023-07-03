@@ -10,7 +10,7 @@
     <script type="text/javascript" src="js/script.min.js?v=20"></script>
     <script type="text/javascript" src="js/common.min.js?v=53"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=69" />
-    <script type="text/javascript" src="js/food.min.js?v=204"></script>
+    <script type="text/javascript" src="js/food.min.js?v=205"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=118" />
     <script>
         $(function () {
@@ -779,6 +779,23 @@
                                     <input type="radio" name="rad-cal-pane-options"
                                         data-pane="#pane-cal-optimal-results">计算
                                 </label>
+                            </div>
+                            <div class="input-group pane-cal-rules pane-cal-sub hidden">
+                                <div class="select-wrapper input-group-first">
+                                    <select id="select-cal-custom" class="selectpicker" data-width="100px"
+                                        data-dropdown-align-right='auto' data-none-selected-text="选择方案">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <span class="input-group-btn input-group-mid">
+                                    <a id="btn-cal-custom-load" class="btn btn-default">读取</a>
+                                </span>
+                                <span class="input-group-btn input-group-mid">
+                                    <a id="btn-cal-custom-delete" class="btn btn-default">删除</a>
+                                </span>
+                                <span class="input-group-btn">
+                                    <a id="btn-cal-custom-save" class="btn btn-default">保存</a>
+                                </span>
                             </div>
                             <div class="pane-cal-rules pane-cal-sub hidden">
                                 <div class="header-wrapper">

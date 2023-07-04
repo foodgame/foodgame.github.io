@@ -6585,9 +6585,6 @@ function getCustomRecipesOptions(groupIndex, chefIndex, recipeIndex, data) {
             score = calSatietyAdd(score, satiety.add);
         }
 
-        var occupiedName = "";
-        var occupiedCount = 0;
-
         for (var r in calCustomRule.rules) {
             var custom = calCustomRule.rules[r].custom;
             for (var m in custom) {
@@ -6599,22 +6596,10 @@ function getCustomRecipesOptions(groupIndex, chefIndex, recipeIndex, data) {
                             }
                             option["disabled"] = true;
                             score = 0;
-                        } else if (custom[m].recipes[n].data.recipeId == recipe.data.comboVal
-                            || custom[m].recipes[n].data.comboVal == recipe.data.recipeId) {
-                            if (r == groupIndex && m == chefIndex && n == recipeIndex) {
-                                continue;
-                            }
-                            option["disabled"] = true;
-                            occupiedName = custom[m].recipes[n].data.name;
-                            occupiedCount++;
                         }
                     }
                 }
             }
-        }
-
-        if (occupiedCount) {
-            option["content"] += "<span class='combo'>" + occupiedName + (occupiedCount > 1 ? "等" : "") + "占用</span>";
         }
 
         option["class"] = "";

@@ -819,7 +819,14 @@ function checkSkillCondition(effect, chef, recipes, recipe, quantity) {
         return result;
     }
 
-    if (effect.conditionType == "PerRank") {
+    if (effect.conditionType == "Rank") {
+        if (recipe) {
+            var rankData = getRankInfo(recipe, chef);
+            if (rankData.rankVal >= effect.conditionValue) {
+                return result;
+            }
+        }
+    } else if (effect.conditionType == "PerRank") {
         var count = 0;
         for (var i in recipes) {
             var oneRecipe = recipes[i];
@@ -842,7 +849,7 @@ function checkSkillCondition(effect, chef, recipes, recipe, quantity) {
         }
     } else if (effect.conditionType == "CookbookRarity") {
         if (recipe) {
-            if (recipe.rarity == effect.conditionValue) {
+            if (effect.conditionValueList.indexOf(recipe.rarity) >= 0) {
                 return result;
             }
         }
@@ -902,7 +909,7 @@ function checkSkillCondition(effect, chef, recipes, recipe, quantity) {
             return result;
         }
     } else {
-        console.log("unknown conditionType");
+        console.log("unknown conditionType: " + effect.conditionType);
     }
 
     result.pass = false;

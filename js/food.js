@@ -5868,17 +5868,20 @@ function calCustomResults(data) {
         }
 
         var summary = "";
+        if (calCustomRule.rules.length > 1) {
+            summary += currentRule.Title + " ";
+        }
         if (currentRule.Satiety) {
             $(".cal-custom-item:eq(" + groupIndex + ") .intent-satiety").addClass("label-default").removeClass("label-info");
             var satiety = calSatiety(customData, currentRule);
 
-            summary += "饱腹感：" + satiety.total + "/" + currentRule.Satiety;
+            summary += "饱腹：" + satiety.total + "/" + currentRule.Satiety;
 
             if (satiety.done) {
                 if (currentRule.SatisfyRewardType == 1 && satiety.total == currentRule.Satiety) {
                     $(".cal-custom-item:eq(" + groupIndex + ") .intent-satiety").addClass("label-info").removeClass("label-default");
                 }
-                summary += " 饱腹感加成：" + satiety.add + "%";
+                summary += " 加成：" + satiety.add + "%";
                 score = calSatietyAdd(score, satiety.add);
             }
         } else {

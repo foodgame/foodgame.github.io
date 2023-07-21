@@ -4270,6 +4270,9 @@ function showCalSubPane() {
 function initCalRules(data) {
     var options = "";
     for (var i in data.rules) {
+        if (data.rules[i].Hide) {
+            continue;
+        }
         options += "<option value='" + data.rules[i].Id + "'>" + data.rules[i].Title + "</option>";
     }
     $("#select-cal-rule").append(options).selectpicker().change(function () {
@@ -4568,7 +4571,12 @@ function loadCalRule(data) {
             calCustomRule.id = ruleId;
             if (data.rules[i].Group) {
                 for (var m in data.rules[i].Group) {
-                    calCustomRule.rules.push(data.rules[i].Group[m]);
+                    for (var j in data.rules) {
+                        if (data.rules[j].Id == data.rules[i].Group[m]) {
+                            calCustomRule.rules.push(data.rules[j]);
+                            break;
+                        }
+                    }
                 }
             } else {
                 calCustomRule.rules.push(data.rules[i]);

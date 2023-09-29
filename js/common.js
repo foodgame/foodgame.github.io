@@ -847,6 +847,12 @@ function checkSkillCondition(effect, chef, recipes, recipe, quantity) {
                 return result;
             }
         }
+    } else if (effect.conditionType == "FewerCookbookNum") {
+        if (recipe) {
+            if (quantity <= effect.conditionValue) {
+                return result;
+            }
+        }
     } else if (effect.conditionType == "CookbookRarity") {
         if (recipe) {
             if (effect.conditionValueList.indexOf(recipe.rarity) >= 0) {

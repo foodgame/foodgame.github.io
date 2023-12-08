@@ -16,8 +16,23 @@
         $(function () {
             $.ajax({
                 cache: true,
+                xhr: function () {
+                    var xhr = $.ajaxSettings.xhr();
+                    xhr.addEventListener("progress", function (e) {
+                        if (e.lengthComputable) {
+                            var percent = Math.floor((e.loaded / e.total) * 100);
+                            $(".loading-text .progress-bar").css("width", percent + "%");
+                        }
+                    }, false);
+                    return xhr;
+                },
                 success: function (json) {
+                    $(".loading-text .progress").hide();
                     init(json);
+                },
+                error: function () {
+                    $(".loading-text .progress").hide();
+                    $(".loading-text h1").html("加载失败，请刷新重试");
                 },
                 url: 'data/data.min.json?v=131'
             });
@@ -28,6 +43,9 @@
 <body>
     <div class="loading loading-text">
         <h1>加载中...</h1>
+        <div class="progress">
+            <div class="progress-bar"></div>
+        </div>
     </div>
 
     <div class="loading loading-bg"></div>

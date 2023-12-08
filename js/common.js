@@ -231,10 +231,18 @@ function getAbsDisp(abs) {
     }
 }
 
-function getRecipeQuantity(recipe, materials, rule) {
+function getRecipeQuantity(recipe, materials, rule, chef) {
     var quantity = 1;
     if (!rule.hasOwnProperty("DisableMultiCookbook") || rule.DisableMultiCookbook == false) {
         quantity = recipe.limitVal;
+
+        if (chef) {
+            for (var i in chef.maxLimitEffect) {
+                if (chef.maxLimitEffect[i].rarity == recipe.rarity) {
+                    quantity += chef.maxLimitEffect[i].value;
+                }
+            }
+        }
     }
 
     for (var m in recipe.materials) {
@@ -316,6 +324,16 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
                 }
             }
         }
+
+        for (var i in chef.disk.ambers) {
+            var amber = chef.disk.ambers[i].data;
+            if (amber) {
+                var amberAdds = getRecipeAddition(amber.allEffect[chef.disk.level - 1], chef, recipes, recipe, quantity, rule);
+                chefSkillAddition += amberAdds.price;
+                basicAddition.percent += amberAdds.basic;
+            }
+        }
+
         resultData["chefSkillAdditionDisp"] = getPercentDisp(chefSkillAddition);
 
         if (!rule || !rule.hasOwnProperty("DisableEquipSkillEffect") || rule.DisableEquipSkillEffect == false) {
@@ -538,7 +556,7 @@ function getCondimentInfo(condimentId, condiments) {
     return info;
 }
 
-function setDataForChef(chef, equip, useEquip, globalUltimateEffect, partialChefAdds, selfUltimateEffect, activityUltimateEffect, showFinal, rule) {
+function setDataForChef(chef, equip, useEquip, globalUltimateEffect, partialChefAdds, selfUltimateEffect, activityUltimateEffect, showFinal, rule, useAmber) {
 
     var stirfryAddition = new Addition();
     var boilAddition = new Addition();
@@ -558,6 +576,8 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, partialChef
     var saltyAddition = new Addition();
     var bitterAddition = new Addition();
     var tastyAddition = new Addition();
+
+    var maxLimitEffect = [];
 
     var effects = [];
 
@@ -593,6 +613,15 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, partialChef
 
     if (activityUltimateEffect) {
         effects = effects.concat(activityUltimateEffect);
+    }
+
+    if (useAmber) {
+        for (var i in chef.disk.ambers) {
+            var amber = chef.disk.ambers[i].data;
+            if (amber) {
+                effects = effects.concat(amber.allEffect[chef.disk.level - 1]);
+            }
+        }
     }
 
     for (var i in effects) {
@@ -635,6 +664,8 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, partialChef
             setAddition(bitterAddition, effects[i]);
         } else if (type == "Tasty") {
             setAddition(tastyAddition, effects[i]);
+        } else if (type == "MaxEquipLimit" && effects[i].condition == "Self") {
+            maxLimitEffect = maxLimitEffect.concat(effects[i]);
         }
     }
 
@@ -676,44 +707,7 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, partialChef
     chef["bitterDisp"] = getAtrributeDisp(chef.bitterVal, chef.bitter, showFinal);
     chef["tastyDisp"] = getAtrributeDisp(chef.tastyVal, chef.tasty, showFinal);
 
-    chef["disp"] = "<span class='name'>" + chef.name + "</span><br><small>";
-    var count = 0;
-    if (chef.stirfryDisp) {
-        chef.disp += "炒" + chef.stirfryDisp + " ";
-        count++;
-    }
-    if (chef.boilDisp) {
-        chef.disp += "煮" + chef.boilDisp + " ";
-        count++;
-        if (count % 2 == 0) {
-            chef.disp += "<br>";
-        }
-    }
-    if (chef.knifeDisp) {
-        chef.disp += "切" + chef.knifeDisp + " ";
-        count++;
-        if (count % 2 == 0) {
-            chef.disp += "<br>";
-        }
-    }
-    if (chef.fryDisp) {
-        chef.disp += "炸" + chef.fryDisp + " ";
-        count++;
-        if (count % 2 == 0) {
-            chef.disp += "<br>";
-        }
-    }
-    if (chef.bakeDisp) {
-        chef.disp += "烤" + chef.bakeDisp + " ";
-        count++;
-        if (count % 2 == 0) {
-            chef.disp += "<br>";
-        }
-    }
-    if (chef.steamDisp) {
-        chef.disp += "蒸" + chef.steamDisp + " ";
-    }
-    chef.disp += "</small>"
+    chef["maxLimitEffect"] = maxLimitEffect;
 }
 
 function getAtrributeDisp(final, origin, showFinal) {

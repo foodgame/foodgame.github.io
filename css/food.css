@@ -351,6 +351,7 @@ table.dataTable tbody>tr>.selected {
 }
 
 .table-select-picker .bs-donebutton,
+.dd-select-picker .bs-donebutton,
 .selected-item-wrapper .select-picker .bs-donebutton {
     display: none;
 }
@@ -377,8 +378,13 @@ table.dataTable tbody>tr>.selected {
 .selected-item {
     display: flex;
     flex-direction: row;
+    word-break: break-word;
     font-size: 13px;
     margin: 4px 0;
+}
+
+.selected-item.lock {
+    pointer-events: none;
 }
 
 .selected-box {
@@ -405,25 +411,32 @@ table.dataTable tbody>tr>.selected {
     margin-left: 2px;
 }
 
-.chef-box,
-.equip-box,
-.condiment-box {
-    width: 115px;
-    height: 140px;
+.edit-box {
+    position: relative;
 }
 
-.recipe-box {
-    width: 250px;
-    height: 140px;
+.chef-box {
+    min-width: 115px;
+    min-height: 140px;
+}
+
+.equip-box {
+    width: 135px;
+}
+
+.condiment-box {
+    width: 115px;
 }
 
 .chef-box .content .name,
 .equip-box .content .name,
-.condiment-box .content .name {
+.condiment-box .content .name,
+.recipe-box .content .name {
     font-weight: bold;
     color: #337ab7;
 }
 
+.chef-box .chef-placeholder,
 .recipe-box .recipe-placeholder {
     display: flex;
     justify-content: center;
@@ -435,27 +448,126 @@ table.dataTable tbody>tr>.selected {
     height: 100%;
     cursor: pointer;
     z-index: 1;
-    background-color: inherit;
+    background-color: #fff;
     border-radius: 4px;
 }
 
-.recipe-box .recipe-box-1 {
+.chef-box .chef-box-1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 100%;
+}
+
+.chef-box .chef-box-1 .skill {
+    padding-left: 5px;
+}
+
+.chef-box .chef-box-1 .content span {
+    font-size: 85%;
     width: 50%;
-    height: 140px;
+    display: inline-block;
+    text-align: left;
 }
 
-.recipe-box.no-details .recipe-box-1 {
-    width: 100%;
+.chef-box .chef-box-2 {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    cursor: default;
+    width: 150px;
+    height: 100%;
 }
 
-.recipe-box .recipe-name {
+.chef-box .disk-level-box {
+    padding: 6px 0;
+    cursor: pointer;
+}
+
+.chef-box .disk-box {
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    font-weight: bold;
+    min-height: 40px;
+}
+
+.chef-box.no-amber-skill .disk-box {
+    min-height: 35px;
+}
+
+.chef-box .amber-in,
+.equip-box .equip-in,
+.condiment-box .condiment-in {
+    display: flex;
+    justify-content: center;
+}
+
+.chef-box-2 .icon-amber,
+.equip-box .icon-equip,
+.condiment-box .icon-condiment {
+    zoom: 0.5;
+    margin: 0 5px 0 0;
+}
+
+.condiment-box .rarity {
+    font-size: 85%;
+}
+
+.recipe-box-1 .icon-recipe {
+    zoom: 0.8;
+}
+
+.recipe-box-1 .icon-box {
+    min-height: 32px;
+}
+
+.selected-item .icon-box {
+    display: flex;
+    align-items: center;
+}
+
+.chef-box .chef-box-1.no-icon .icon-box,
+.chef-box .chef-box-1.no-skill .content .skill,
+.chef-box .chef-box-2.no-box,
+.chef-box .chef-box-2.no-icon .icon-box,
+.chef-box .chef-box-2.no-skill .content small,
+.equip-box.no-icon .icon-box,
+.equip-box.no-skill .content small,
+.condiment-box.no-condiment,
+.condiment-box.no-icon .icon-box,
+.condiment-box.no-skill .content small,
+.recipe-box .recipe-box-1.no-icon .icon-box,
+.recipe-box .recipe-box-1.no-time .time,
+.recipe-box .recipe-box-2.no-rarity .rarity,
+.recipe-box .recipe-box-2.no-skill .skill,
+.recipe-box .recipe-box-2.no-material .material,
+.recipe-box .recipe-box-2.no-add .add {
+    display: none;
+}
+
+.chef-box .content .name.disk-1 {
+    color: #d9534f;
+}
+
+.chef-box .content .name.disk-2 {
+    color: #449d44;
+}
+
+.chef-box .content .name.disk-3 {
     color: #337ab7;
-    height: 30px;
+}
+
+.recipe-box .recipe-box-1 {
+    display: flex;
+    flex-direction: column;
+    width: 125px;
+    height: 100%;
+}
+
+.recipe-box .recipe-box-1 .name {
+    padding-top: 5px;
 }
 
 .recipe-box .recipe-qec {
@@ -465,17 +577,31 @@ table.dataTable tbody>tr>.selected {
     flex-wrap: wrap
 }
 
+.recipe-box .recipe-ric {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.recipe-box .recipe-ric .rank {
+    padding-right: 5px;
+}
+
+.recipe-box .recipe-ric .condiment {
+    padding-left: 5px;
+}
+
 .recipe-box .recipe-result {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 50px;
     font-size: 11px;
 }
 
 .recipe-box .recipe-result .score {
-    font-size: 12px;
+    font-size: 110%;
+    white-space: nowrap;
 }
 
 .recipe-box .red {
@@ -484,27 +610,24 @@ table.dataTable tbody>tr>.selected {
 }
 
 .recipe-box .recipe-box-2 {
-    width: 50%;
-    height: 140px;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 140px;
     font-size: 12px;
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-.recipe-box.no-details .recipe-box-2 {
-    display: none;
-}
-
-.recipe-box .recipe-box-2 .skill {
+.recipe-box .recipe-box-2 .rarity {
     text-align: center;
-    white-space: nowrap;
+    font-size: 85%;
 }
 
-.recipe-box .recipe-box-2 .skill span {
-    padding-right: 10px;
-}
-
-.recipe-box .recipe-box-2 .material span {
-    white-space: nowrap;
+.recipe-box .recipe-box-2 .skill span,
+.recipe-box .recipe-box-2 .material span,
+.recipe-box .recipe-box-2 .add span {
     width: 50%;
     display: inline-block;
 }
@@ -514,10 +637,9 @@ table.dataTable tbody>tr>.selected {
     text-align: center;
 }
 
-.recipe-box .recipe-box-2 .add span {
-    white-space: nowrap;
-    width: 50%;
-    display: inline-block;
+.recipe-box .recipe-box-2:not(.no-rarity.no-skill) .material,
+.recipe-box .recipe-box-2:not(.no-rarity.no-skill.no-material) .add {
+    border-top: 1px dashed #ddd;
 }
 
 .recipe-box .recipe-quantity {
@@ -526,7 +648,6 @@ table.dataTable tbody>tr>.selected {
     align-items: center;
     width: 100%;
     height: 30px;
-    cursor: pointer;
 }
 
 .recipe-box .recipe-quantity .form-control {
@@ -545,7 +666,8 @@ table.dataTable tbody>tr>.selected {
 
 .recipe-box .recipe-quantity .available,
 .recipe-box .recipe-quantity .max {
-    font-size: 12px;
+    font-size: 90%;
+    white-space: nowrap;
 }
 
 .recipe-box .recipe-quantity .available {
@@ -581,7 +703,8 @@ label.chk-label input[type="checkbox"]:checked+span {
     background: none;
 }
 
-.recipe-box .recipe-ex {
+.recipe-box .recipe-ex,
+.recipe-box .recipe-condiment {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -611,7 +734,9 @@ label.chk-label input[type="checkbox"]:checked+span {
     display: none;
 }
 
-.editing {
+.editing,
+.editing .chef-placeholder,
+.editing .recipe-placeholder {
     background-color: #5bc0de !important;
 }
 
@@ -622,6 +747,10 @@ label.chk-label input[type="checkbox"]:checked+span {
 
 .table-select-picker .bootstrap-select>.dropdown-toggle {
     display: none;
+}
+
+#input-import-run {
+    min-height: 50vh;
 }
 
 #input-export-import {
@@ -671,6 +800,31 @@ label.chk-label input[type="checkbox"]:checked+span {
     margin-right: 40px;
 }
 
+#disk-modal .modal-dialog {
+    max-width: 350px;
+    margin: auto;
+}
+
+#disk-modal .amber-box {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+#disk-modal .amber-box .content {
+    display: flex;
+    align-items: center;
+}
+
+#disk-modal .amber-box .content .icon {
+    zoom: 0.6;
+    padding: 0 5px;
+}
+
+#disk-modal .amber-box .bootstrap-select .dropdown-menu {
+    top: 0;
+}
+
 #menu-modal .main-nav {
     margin-right: 10px;
 }
@@ -688,6 +842,7 @@ label.chk-label input[type="checkbox"]:checked+span {
 .modal-header .modal-title {
     color: #337ab7;
     font-size: 16px;
+    padding-left: 20px;
 }
 
 #menu-modal .close {
@@ -711,6 +866,10 @@ td.td-recipe-icon {
 }
 
 td.td-equip-icon {
+    width: 35px;
+}
+
+td.td-amber-icon {
     width: 35px;
 }
 
@@ -820,6 +979,11 @@ table.history-table tr td.history-dt {
 .quest-warning {
     color: #fff;
     background-color: #5bc0de;
+}
+
+.dropdown-header {
+    color: #337ab7;
+    font-weight: bold;
 }
 
 .dropdown-item .text .name {
@@ -1026,6 +1190,13 @@ div.dataTables_wrapper .table-top div.dataTables_info {
     height: 40px;
 }
 
+#popupmsg {
+    position: fixed;
+    z-index: 90001;
+    display: none;
+    max-width: 600px;
+}
+
 /* fixedHeader */
 .dataTables_scrollHeadInner {
     height: auto !important;
@@ -1094,6 +1265,10 @@ table.dataTable tr.selected th.select-checkbox:after {
         font-size: 12px;
     }
 
+    .dropdown-menu {
+        font-size: 12px;
+    }
+
     .bootstrap-select .dropdown-menu li a span.text,
     .bootstrap-select.show-tick .dropdown-menu li a span.text {
         max-width: 200px;
@@ -1104,6 +1279,7 @@ table.dataTable tr.selected th.select-checkbox:after {
     }
 
     .table-select-picker .bs-donebutton,
+    .dd-select-picker .bs-donebutton,
     .selected-item-wrapper .select-picker .bs-donebutton {
         display: block;
     }
@@ -1149,21 +1325,28 @@ table.dataTable tr.selected th.select-checkbox:after {
     }
 }
 
-@media (max-width: 1169px) {
+@media (max-width: 1310px) {
     .selected-sum {
-        font-size: 13px;
+        font-size: 12px;
     }
 
     .selected-item-wrapper {
         flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
         max-width: 600px;
     }
 
     .selected-item {
         flex-direction: column;
+        font-size: 12px;
         margin: 0;
         width: 33%;
-        min-width: 110px;
+    }
+
+    .selected-item .content small {
+        font-size: 8px;
+        display: inline-block;
     }
 
     .selected-box {
@@ -1177,25 +1360,39 @@ table.dataTable tr.selected th.select-checkbox:after {
     }
 
     .chef-box {
-        height: 80px;
+        flex-direction: column;
+        justify-content: flex-start;
+        min-width: auto;
     }
 
-    .equip-box {
-        height: 80px;
+    .chef-box .chef-box-1,
+    .chef-box .chef-box-2 {
+        width: 100%;
     }
 
-    .condiment-box {
-        height: 60px;
+    .chef-box .chef-box-1 {
+        align-items: flex-start;
+    }
+
+    .chef-box .disk-box {
+        min-height: 25px;
+    }
+
+    .chef-box-1 .skill {
+        font-size: 85%;
+        max-width: 70px;
+        margin: auto;
+    }
+
+    .chef-box-1 .name,
+    .equip-box .name,
+    .condiment-box .name {
+        padding-top: 2px;
     }
 
     .recipe-box {
-        width: auto;
-        height: 240px;
         flex-direction: column;
-    }
-
-    .recipe-box.no-details {
-        height: 110px;
+        justify-content: flex-start;
     }
 
     .recipe-box .recipe-qec {
@@ -1226,38 +1423,51 @@ table.dataTable tr.selected th.select-checkbox:after {
         display: none;
     }
 
-    .recipe-box .recipe-box-1 {
-        height: 110px;
-    }
-
     .recipe-box .recipe-box-1,
     .recipe-box .recipe-box-2 {
         width: 100%;
     }
 
+    .recipe-box .recipe-box-1 .name {
+        padding-top: 2px;
+    }
+
+    .recipe-box .recipe-ric {
+        font-size: 85%;
+    }
+
+    .recipe-box .recipe-result {
+        font-size: 80%;
+    }
+
     .recipe-box .recipe-box-2 {
-        font-size: 11px;
+        font-size: 80%;
     }
 
     .recipe-box .recipe-box-2 .rank {
         margin-left: 0;
     }
 
-    .recipe-box .recipe-box-2 .material {
+    .recipe-box .recipe-box-2 .content {
+        width: 100%;
         max-width: 110px;
         margin: auto;
     }
 
-    .recipe-box .recipe-box-2 .add {
-        max-width: 110px;
-        margin: auto;
+    .recipe-box .recipe-box-2 .add .blank {
+        display: none;
     }
 
-    .selected-item .select-picker {
+    .selected-item .select-picker:not(.position-c) {
         position: fixed;
         left: 10px;
         top: 35px;
         z-index: 2;
+    }
+
+    .selected-item .select-picker:not(.position-c) .dropdown-menu-right {
+        right: auto;
+        left: 0;
     }
 
     body.m-no-scroll {

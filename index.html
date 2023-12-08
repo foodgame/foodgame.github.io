@@ -20,8 +20,11 @@
                     var xhr = $.ajaxSettings.xhr();
                     xhr.addEventListener("progress", function (e) {
                         if (e.lengthComputable) {
+                            $(".loading-text .progress").show();
                             var percent = Math.floor((e.loaded / e.total) * 100);
                             $(".loading-text .progress-bar").css("width", percent + "%");
+                        }else{
+                            $(".loading-text .progress").hide();
                         }
                     }, false);
                     return xhr;
@@ -43,7 +46,7 @@
 <body>
     <div class="loading loading-text">
         <h1>加载中...</h1>
-        <div class="progress">
+        <div class="progress" style="display: none;">
             <div class="progress-bar"></div>
         </div>
     </div>

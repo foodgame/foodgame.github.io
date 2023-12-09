@@ -19,23 +19,23 @@
                 xhr: function () {
                     var xhr = $.ajaxSettings.xhr();
                     xhr.addEventListener("progress", function (e) {
+                        var total = 1354922;
                         if (e.lengthComputable) {
-                            $(".loading-text .progress").show();
-                            var percent = Math.floor((e.loaded / e.total) * 100);
-                            $(".loading-text .progress-bar").css("width", percent + "%");
-                        }else{
-                            $(".loading-text .progress").hide();
+                            total = e.total;
                         }
+                        var percent = Math.min(100, Math.floor((e.loaded / total) * 100));
+                        $("#loading-progress").html(percent + "%");
                     }, false);
                     return xhr;
                 },
                 success: function (json) {
-                    $(".loading-text .progress").hide();
                     init(json);
                 },
                 error: function () {
-                    $(".loading-text .progress").hide();
                     $(".loading-text h1").html("加载失败，请刷新重试");
+                },
+                complete: function () {
+                    $("#loading-progress").remove();
                 },
                 url: 'data/data.min.json?v=131'
             });
@@ -46,9 +46,7 @@
 <body>
     <div class="loading loading-text">
         <h1>加载中...</h1>
-        <div class="progress" style="display: none;">
-            <div class="progress-bar"></div>
-        </div>
+        <h4 id="loading-progress"></h4>
     </div>
 
     <div class="loading loading-bg"></div>
@@ -2152,10 +2150,11 @@
                 <h4>
                     <span class="label label-primary">说明</span>
                 </h4>
-                <p class="text-primary">国内镜像 - https://foodgame.gitee.io (已弃用)
-                </p>
                 <p class="text-primary">国外镜像 -
                     <a href='https://foodgame.github.io'>https://foodgame.github.io</a> (国内访问会有速度慢和偶尔访问不了的情况)
+                </p>
+                <p class="text-primary">备份镜像 -
+                    <a href='https://foodgame.top'>https://foodgame.top</a>
                 </p>
                 <p class="text-primary">注意, 个人数据在两个网站不同步, 换网站时可在原网站导出个人数据, 再在新网站导入数据.</p>
                 <br>

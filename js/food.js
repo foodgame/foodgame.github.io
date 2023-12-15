@@ -2008,6 +2008,47 @@ function initChefTable(data) {
             return true;
         }
 
+        var checks = $("#chk-chef-disk").val();
+        if (checks.length == 0) {
+            return true;
+        }
+
+        var multiple = $('#chk-chef-multiple-disk').prop("checked");
+
+        var ambers = rowData.disk.ambers;
+
+        for (var i in checks) {
+            var values = checks[i].split('_');
+            var type = Number(values[0]);
+            var num = Number(values[1]);
+            var count = 0;
+            for (var j in ambers) {
+                if (ambers[j].type == type) {
+                    count++
+                }
+            }
+            if (count >= num) {
+                if (!multiple) {
+                    return true;
+                }
+            } else {
+                if (multiple) {
+                    return false;
+                }
+            }
+        }
+        if (multiple) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
+    $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
+        if (settings.nTable != document.getElementById('chef-table')) {
+            return true;
+        }
+
         var check = $('#chk-chef-no-origin').prop("checked");
         if (check || !check && rowData.origin) {
             return true;
@@ -2103,6 +2144,14 @@ function initChefTable(data) {
         $('#chef-table').DataTable().draw();
     });
 
+    $('#chk-chef-disk').on('changed.bs.select', function () {
+        $('#chef-table').DataTable().draw();
+    });
+
+    $('#chk-chef-multiple-disk').click(function () {
+        $('#chef-table').DataTable().draw();
+    });
+
     $('#chk-chef-ultimate-no').click(function () {
         $('#chef-table').DataTable().draw();
     });
@@ -2145,6 +2194,8 @@ function initChefTable(data) {
         $("#chk-chef-gender").selectpicker("deselectAll");
         $('#chk-chef-category').selectpicker("deselectAll");
         $('#chk-chef-condiment').selectpicker("deselectAll");
+        $("#chk-chef-disk").selectpicker("deselectAll");
+        $("#chk-chef-multiple-disk").prop("checked", false);
         $("#chk-chef-ultimate-no").prop("checked", false);
         $("#chk-chef-got").prop("checked", false);
         $("#chk-chef-no-origin").prop("checked", true);

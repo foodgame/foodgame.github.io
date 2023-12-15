@@ -10,7 +10,7 @@
     <script type="text/javascript" src="js/script.min.js?v=21"></script>
     <script type="text/javascript" src="js/common.min.js?v=56"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=70" />
-    <script type="text/javascript" src="js/food.min.js?v=209"></script>
+    <script type="text/javascript" src="js/food.min.js?v=210"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=129" />
     <script>
         $(function () {
@@ -517,6 +517,33 @@
                                     <option value="bitter">苦</option>
                                     <option value="tasty">鲜</option>
                                 </select>
+                            </div>
+                            <div class="input-group">
+                                <div class="select-wrapper input-group-first" data-toggle="tooltip" title="选择槽位,过滤厨师">
+                                    <select id="chk-chef-disk" multiple class="selectpicker monitor-none"
+                                        data-width="80px" data-dropdown-align-right='auto' data-none-selected-text="槽位"
+                                        data-selected-text-format="count>1" data-count-selected-text="{0} 槽位"
+                                        data-actions-box="true" data-actions-box-only-clear="true"
+                                        data-deselect-all-text="清空">
+                                        <option value="" class="hidden"></option>
+                                        <option value="1_1">1 红</option>
+                                        <option value="1_2">2 红</option>
+                                        <option value="1_3">3 红</option>
+                                        <option value="2_1">1 绿</option>
+                                        <option value="2_2">2 绿</option>
+                                        <option value="2_3">3 绿</option>
+                                        <option value="3_1">1 蓝</option>
+                                        <option value="3_2">2 蓝</option>
+                                        <option value="3_3">3 蓝</option>
+                                    </select>
+                                </div>
+                                <span class="input-group-btn input-group-last">
+                                    <label class="btn btn-default">
+                                        <input type="checkbox" id="chk-chef-multiple-disk" class="monitor-none">
+                                        <i class="fa fa-check glyphicon glyphicon-ok"></i>
+                                        同时
+                                    </label>
+                                </span>
                             </div>
                             <label class="btn btn-default" data-toggle="tooltip" title="只显示未修炼的厨师">
                                 <input type="checkbox" id="chk-chef-ultimate-no" class="monitor-none">

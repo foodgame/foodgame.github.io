@@ -4603,16 +4603,18 @@ function generateChefsExportData() {
         if (chefs[i].disk.level != 1) {
             chef["dlv"] = chefs[i].disk.level;
         }
+        var hasAmber = false;
         var ambers = [];
         for (var j in chefs[i].disk.ambers) {
             var amber = chefs[i].disk.ambers[j].data;
             if (amber) {
                 ambers.push(amber.amberId);
+                hasAmber = true;
             } else {
                 ambers.push(0);
             }
         }
-        if (ambers.length) {
+        if (hasAmber) {
             chef["ambers"] = ambers;
         }
         exportChefs.push(chef);

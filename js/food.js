@@ -4193,6 +4193,7 @@ function importRunResult(data) {
     var chefKey = "厨师：";
     var chefEndKey = /-|\r\n|\r|\n/g;
     var recipeKey = "菜谱：";
+    var recipeStartKey = "]";
     var recipeEndKey1 = /；|;|\r\n|\r|\n/g;
     var recipeEndKey2 = /\(/g;
 
@@ -4223,6 +4224,10 @@ function importRunResult(data) {
             if (rIndex >= 0) {
                 text = text.substring(rIndex + recipeKey.length);
                 for (var recipeIndex in customData[chefIndex].recipes) {
+                    var startIndex = text.indexOf(recipeStartKey);
+                    if (startIndex >= 0) {
+                        text = text.substring(startIndex + 1);
+                    }
                     var name = text;
                     var endIndex1 = text.search(recipeEndKey1);
                     if (endIndex1 >= 0) {

@@ -4013,9 +4013,55 @@ function initQuestTable(data) {
 }
 
 function initImportExport(data) {
+    $('#btn-import-data').click(function () {
+        if (!$("#input-import-data").val()) {
+            $("#input-import-data").focus();
+            return;
+        }
+
+        $.popupmsg({
+            message: "导入中...",
+            fade: false
+        });
+
+        $.ajax({
+            cache: false,
+            success: function (btext) {
+                var bjson = JSON.parse(btext);
+                if (bjson.ret == "S") {
+                    var success = importData(data, JSON.stringify(bjson.msg));
+                    if (success) {
+                        $("#input-import-data").val("");
+                        $.popupmsg({
+                            message: "导入成功 !"
+                        });
+                    } else {
+                        $.popupmsg({
+                            message: "导入失败 !",
+                            type: "alert-danger"
+                        });
+                    }
+                } else {
+                    $.popupmsg({
+                        message: bjson.msg,
+                        type: "alert-danger"
+                    });
+                }
+            },
+            error: function () {
+                $.popupmsg({
+                    message: "获取失败 !",
+                    type: "alert-danger"
+                });
+            },
+            url: 'https://yx518.com/api/archive.do?token=' + $("#input-import-data").val()
+        });
+    });
+
     $('#btn-export').click(function () {
         $("#input-export-import").val(generateExportData());
     });
+
     $('#btn-import').click(function () {
         $("#import-msg-2").html("导入中...").removeClass("hidden");
         setTimeout(function () {

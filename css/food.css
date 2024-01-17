@@ -753,6 +753,10 @@ label.chk-label input[type="checkbox"]:checked+span {
     min-height: 50vh;
 }
 
+#input-import-data {
+    width: 200px;
+}
+
 #input-export-import {
     width: 100% !important;
     min-height: 50vh;

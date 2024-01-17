@@ -9,8 +9,8 @@
     <link rel="stylesheet" type="text/css" href="css/style.min.css?v=7" />
     <script type="text/javascript" src="js/script.min.js?v=21"></script>
     <script type="text/javascript" src="js/common.min.js?v=56"></script>
-    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=70" />
-    <script type="text/javascript" src="js/food.min.js?v=212"></script>
+    <link rel="stylesheet" type="text/css" href="css/food.min.css?v=71" />
+    <script type="text/javascript" src="js/food.min.js?v=213"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=130" />
     <script>
         $(function () {
@@ -1535,6 +1535,15 @@
                 </div>
             </div>
             <div class="tab-pane pane-export-import">
+                <h5 class="text-primary">官方数据导入</h5>
+                <div class="form-group">
+                    <input class="form-control" id="input-import-data" placeholder="校验码">
+                </div>
+                <button id="btn-import-data" class="btn btn-default" type="button"
+                    data-toggle="tooltip" title="输入官方校验码, 然后点击该按钮导入数据">
+                    导入数据
+                </button>
+                <hr>
                 <h5 class="text-primary">个人数据备份 - 手动复制版</h5>
                 <div class="form-group">
                     <textarea id="input-export-import" class="form-control"></textarea>

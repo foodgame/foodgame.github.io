@@ -10,8 +10,8 @@
     <script type="text/javascript" src="js/script.min.js?v=21"></script>
     <script type="text/javascript" src="js/common.min.js?v=56"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=71" />
-    <script type="text/javascript" src="js/food.min.js?v=213"></script>
-    <link rel="stylesheet" type="text/css" href="css/image.css?v=131" />
+    <script type="text/javascript" src="js/food.min.js?v=214"></script>
+    <link rel="stylesheet" type="text/css" href="css/image.css?v=132" />
     <script>
         $(function () {
             $.ajax({
@@ -19,7 +19,7 @@
                 xhr: function () {
                     var xhr = $.ajaxSettings.xhr();
                     xhr.addEventListener("progress", function (e) {
-                        var total = 1361535;
+                        var total = 1513757;
                         if (e.lengthComputable) {
                             total = e.total;
                         }
@@ -37,7 +37,7 @@
                 complete: function () {
                     $("#loading-progress").remove();
                 },
-                url: 'data/data.min.json?v=134'
+                url: 'data/data.min.json?v=135'
             });
         });
     </script>
@@ -544,6 +544,24 @@
                                         同时
                                     </label>
                                 </span>
+                            </div>
+                            <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="选择遗玉,过滤厨师">
+                                <select id="chk-chef-amber" multiple class="monitor-none" data-width="100px"
+                                    data-live-search="true" data-live-search-placeholder="查找"
+                                    data-dropdown-align-right='auto' data-none-selected-text="选择遗玉"
+                                    data-selected-text-format="count>1" data-count-selected-text="{0} 遗玉"
+                                    data-none-results-text="没有找到" data-actions-box="true"
+                                    data-select-all-text="全选" data-deselect-all-text="清空">
+                                </select>
+                            </div>
+                            <div class="inline-wrapper select-wrapper" data-toggle="tooltip" title="选择厨具,过滤厨师">
+                                <select id="chk-chef-equip" multiple class="monitor-none" data-width="125px"
+                                    data-live-search="true" data-live-search-placeholder="查找"
+                                    data-dropdown-align-right='auto' data-none-selected-text="选择厨具"
+                                    data-selected-text-format="count>1" data-count-selected-text="{0} 厨具"
+                                    data-none-results-text="没有找到" data-actions-box="true"
+                                    data-select-all-text="全选" data-deselect-all-text="清空">
+                                </select>
                             </div>
                             <label class="btn btn-default" data-toggle="tooltip" title="只显示未修炼的厨师">
                                 <input type="checkbox" id="chk-chef-ultimate-no" class="monitor-none">

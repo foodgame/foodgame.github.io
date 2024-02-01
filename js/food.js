@@ -1909,6 +1909,12 @@ function initChefTable(data) {
         $('#chk-chef-show-recipe').append("<option value='" + data.recipes[j].recipeId + "'>" + data.recipes[j].name + "</option>");
     }
 
+    var ambersOptions = getAmbersOptions(data.ambers, null, false);
+    $('#chk-chef-amber').html(getOptionsString(ambersOptions)).selectpicker();
+
+    var equipsOptions = getEquipsOptions(data.equips, false);
+    $('#chk-chef-equip').html(getOptionsString(equipsOptions)).selectpicker();
+
     $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
         if (settings.nTable != document.getElementById('chef-table')) {
             return true;
@@ -2062,6 +2068,46 @@ function initChefTable(data) {
             return true;
         }
 
+        var checks = $("#chk-chef-amber").val();
+        if (checks.length == 0) {
+            return true;
+        }
+
+        var ambers = rowData.disk.ambers;
+
+        for (var i in checks) {
+            for (var j in ambers) {
+                if (ambers[j].data && ambers[j].data.amberId == checks[i]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    });
+
+    $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
+        if (settings.nTable != document.getElementById('chef-table')) {
+            return true;
+        }
+
+        var checks = $("#chk-chef-equip").val();
+        if (checks.length == 0) {
+            return true;
+        }
+
+        for (var i in checks) {
+            if (rowData.equipId == checks[i]) {
+                return true;
+            }
+        }
+        return false;
+    });
+
+    $.fn.dataTableExt.afnFiltering.push(function (settings, data, dataIndex, rowData, counter) {
+        if (settings.nTable != document.getElementById('chef-table')) {
+            return true;
+        }
+
         var check = $('#chk-chef-ultimate-no').prop("checked");
         if (!check || check && !rowData.ultimate) {
             return true;
@@ -2152,6 +2198,14 @@ function initChefTable(data) {
         $('#chef-table').DataTable().draw();
     });
 
+    $('#chk-chef-amber').on('changed.bs.select', function () {
+        $('#chef-table').DataTable().draw();
+    });
+
+    $('#chk-chef-equip').on('changed.bs.select', function () {
+        $('#chef-table').DataTable().draw();
+    });
+
     $('#chk-chef-ultimate-no').click(function () {
         $('#chef-table').DataTable().draw();
     });
@@ -2196,6 +2250,8 @@ function initChefTable(data) {
         $('#chk-chef-condiment').selectpicker("deselectAll");
         $("#chk-chef-disk").selectpicker("deselectAll");
         $("#chk-chef-multiple-disk").prop("checked", false);
+        $('#chk-chef-amber').selectpicker("deselectAll");
+        $('#chk-chef-equip').selectpicker("deselectAll");
         $("#chk-chef-ultimate-no").prop("checked", false);
         $("#chk-chef-got").prop("checked", false);
         $("#chk-chef-no-origin").prop("checked", true);
@@ -2546,7 +2602,7 @@ function reInitChefTable(data) {
     $(".pane-chefs div.search-box").html('<input type="search" value="' + searchValue + '" class="form-control input-sm monitor-none" placeholder="查找 名字 技能 来源">');
 
     var gotOptions = getGotOptions();
-    var equipsOptions = getEquipsOptions(data.equips, data.skills);
+    var equipsOptions = getEquipsOptions(data.equips, true);
 
     chefTable.MakeCellsEditable({
         "columns": [26, 29, 30],  // equipId, ultimate, got
@@ -2630,7 +2686,7 @@ function reInitChefTable(data) {
             var picker = $("#disk-modal select.select-chef-amber:eq(" + i + ")");
             picker.closest(".amber-box").removeClass("hidden").find(".dropdown-toggle").removeClass("btn-primary btn-success btn-danger btn-default").addClass(getAmberBtnClass(amber.type));
 
-            var ambersOptions = getAmbersOptions(data.ambers, amber);
+            var ambersOptions = getAmbersOptions(data.ambers, amber, true);
             picker.html(getOptionsString(ambersOptions)).selectpicker('refresh');
 
             picker.off('changed.bs.select').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
@@ -4934,6 +4990,12 @@ function initCalRules(data, person) {
         if (data.rules[i].Hide || !data.rules[i].Id) {
             continue;
         }
+        var startTime = data.rules[i].StartTime;
+        var endTime = data.rules[i].EndTime;
+        var currTime = (new Date()).getTime() / 1000;
+        if (startTime && currTime < startTime || endTime && currTime > endTime) {
+            continue;
+        }
         var title = data.rules[i].Title;
         var option = "<option value='" + data.rules[i].Id + "'>" + title + "</option>";
         if (title.indexOf("风云宴") >= 0) {
@@ -4944,6 +5006,8 @@ function initCalRules(data, person) {
             $("#select-cal-rule optgroup[label='贤客楼']").append(option);
         } else if (title.indexOf("支线任务") >= 0) {
             $("#select-cal-rule optgroup[label='支线任务']").append(option);
+        } else if (endTime) {
+            $("#select-cal-rule").prepend(option);
         } else {
             $("#select-cal-rule").append(option);
         }
@@ -6513,7 +6577,7 @@ function calCustomResults(data) {
             }
         }
 
-        score = Math.ceil(+(Math.pow(score, scorePow) * scoreMultiply).toFixed(2));
+        score = Math.floor(+(Math.pow(score, scorePow) * scoreMultiply).toFixed(2));
 
         if (score) {
             score += scoreAdd;
@@ -8147,7 +8211,7 @@ function initCalChefsTable(data) {
         }
     });
 
-    var options = getEquipsOptions(data.equips, data.skills);
+    var options = getEquipsOptions(data.equips, true);
     calChefsTable.MakeCellsEditable({
         "columns": [16],  // equip
         "inputTypes": [
@@ -10341,15 +10405,19 @@ function getGotOptions() {
     return list;
 }
 
-function getEquipsOptions(equips, skills) {
+function getEquipsOptions(equips, single) {
     var list = [];
-    var option = {};
-    option["display"] = "无厨具";
-    option["subtext"] = "";
-    option["tokens"] = "";
-    option["value"] = "";
-    option["class"] = "hidden"
-    list.push(option);
+
+    if (single) {
+        var option = {};
+        option["display"] = "无厨具";
+        option["subtext"] = "";
+        option["tokens"] = "";
+        option["value"] = "";
+        option["class"] = "hidden"
+        list.push(option);
+    }
+
     for (var i in equips) {
         var skillDisp = equips[i].skillDisp.replace(/<br>/g, " ");
         var option = {};
@@ -10389,20 +10457,22 @@ function getAmberBtnClass(type) {
     return "btn-default";
 }
 
-function getAmbersOptions(ambers, oAmber) {
+function getAmbersOptions(ambers, oAmber, single) {
     var options = [];
 
-    var option = {};
-    option["display"] = "无遗玉";
-    option["subtext"] = "";
-    option["tokens"] = "";
-    option["value"] = "";
-    option["class"] = "hidden"
-    options.push(option);
+    if (single) {
+        var option = {};
+        option["display"] = "无遗玉";
+        option["subtext"] = "";
+        option["tokens"] = "";
+        option["value"] = "";
+        option["class"] = "hidden"
+        options.push(option);
+    }
 
     for (var i in ambers) {
         var amber = ambers[i];
-        if (amber.type != oAmber.type) {
+        if (oAmber && amber.type != oAmber.type) {
             continue;
         }
 
@@ -10414,7 +10484,7 @@ function getAmbersOptions(ambers, oAmber) {
         option["tokens"] = amber.name + skillDisp;
         option["value"] = amber.amberId;
 
-        if (oAmber.data && oAmber.data.amberId == amber.amberId) {
+        if (oAmber && oAmber.data && oAmber.data.amberId == amber.amberId) {
             option["selected"] = true;
         }
 

@@ -70,7 +70,7 @@ function getRecipeAddition(effects, chef, recipes, recipe, quantity, rule) {
                 price += effect.value * condition.count;
             }
 
-            if (isRecipeBasicAddition(effect)) {
+            if (isRecipeBasicAddition(effect, recipe)) {
                 basic += effect.value * condition.count;
             }
         }
@@ -84,23 +84,20 @@ function getRecipeAddition(effects, chef, recipes, recipe, quantity, rule) {
 
 function isRecipePriceAddition(effect, recipe, rule) {
     var type = effect.type;
-    var hasSkill = false;
     if (type == "UseAll") {
         if (recipe.rarity == effect.rarity) {
-            hasSkill = true;
+            return true;
         }
     } else if (type == "UseFish") {
         for (var m in recipe.materials) {
             if (recipe.materials[m].origin == "池塘") {
-                hasSkill = true;
-                break;
+                return true;
             }
         }
     } else if (type == "UseCreation") {
         for (var m in recipe.materials) {
             if (recipe.materials[m].origin == "作坊") {
-                hasSkill = true;
-                break;
+                return true;
             }
         }
     } else if (type == "UseMeat") {
@@ -108,8 +105,7 @@ function isRecipePriceAddition(effect, recipe, rule) {
             if (recipe.materials[m].origin == "牧场"
                 || recipe.materials[m].origin == "鸡舍"
                 || recipe.materials[m].origin == "猪圈") {
-                hasSkill = true;
-                break;
+                return true;
             }
         }
     } else if (type == "UseVegetable") {
@@ -117,76 +113,124 @@ function isRecipePriceAddition(effect, recipe, rule) {
             if (recipe.materials[m].origin == "菜棚"
                 || recipe.materials[m].origin == "菜地"
                 || recipe.materials[m].origin == "森林") {
-                hasSkill = true;
-                break;
+                return true;
             }
         }
     } else if (type == "UseStirfry") {
         if (recipe.stirfry > 0) {
-            hasSkill = true;
+            return true;
         }
     } else if (type == "UseBoil") {
         if (recipe.boil > 0) {
-            hasSkill = true;
+            return true;
         }
     } else if (type == "UseFry") {
         if (recipe.fry > 0) {
-            hasSkill = true;
+            return true;
         }
     } else if (type == "UseKnife") {
         if (recipe.knife > 0) {
-            hasSkill = true;
+            return true;
         }
     } else if (type == "UseBake") {
         if (recipe.bake > 0) {
-            hasSkill = true;
+            return true;
         }
     } else if (type == "UseSteam") {
         if (recipe.steam > 0) {
-            hasSkill = true;
+            return true;
         }
     } else if (type == "UseSweet") {
         if (recipe.condiment == "Sweet") {
-            hasSkill = true;
+            return true;
         }
     } else if (type == "UseSour") {
         if (recipe.condiment == "Sour") {
-            hasSkill = true;
+            return true;
         }
     } else if (type == "UseSpicy") {
         if (recipe.condiment == "Spicy") {
-            hasSkill = true;
+            return true;
         }
     } else if (type == "UseSalty") {
         if (recipe.condiment == "Salty") {
-            hasSkill = true;
+            return true;
         }
     } else if (type == "UseBitter") {
         if (recipe.condiment == "Bitter") {
-            hasSkill = true;
+            return true;
         }
     } else if (type == "UseTasty") {
         if (recipe.condiment == "Tasty") {
-            hasSkill = true;
+            return true;
         }
     } else if (type == "Gold_Gain") {
         if (!rule || rule.Id == 0 || rule.Satiety) {
-            hasSkill = true;
+            return true;
         }
     } else if (type == "CookbookPrice") {
-        hasSkill = true;
-    }
-
-    if (hasSkill) {
         return true;
     }
 
     return false;
 }
 
-function isRecipeBasicAddition(effect) {
-    if (effect.type == "BasicPrice") {
+function isRecipeBasicAddition(effect, recipe) {
+    var type = effect.type;
+    if (type == "BasicPrice") {
         return true;
+    } else if (type == "BasicPriceUseFish") {
+        for (var m in recipe.materials) {
+            if (recipe.materials[m].origin == "池塘") {
+                return true;
+            }
+        }
+    } else if (type == "BasicPriceUseCreation") {
+        for (var m in recipe.materials) {
+            if (recipe.materials[m].origin == "作坊") {
+                return true;
+            }
+        }
+    } else if (type == "BasicPriceUseMeat") {
+        for (var m in recipe.materials) {
+            if (recipe.materials[m].origin == "牧场"
+                || recipe.materials[m].origin == "鸡舍"
+                || recipe.materials[m].origin == "猪圈") {
+                return true;
+            }
+        }
+    } else if (type == "BasicPriceUseVegetable") {
+        for (var m in recipe.materials) {
+            if (recipe.materials[m].origin == "菜棚"
+                || recipe.materials[m].origin == "菜地"
+                || recipe.materials[m].origin == "森林") {
+                return true;
+            }
+        }
+    } else if (type == "BasicPriceUseStirfry") {
+        if (recipe.stirfry > 0) {
+            return true;
+        }
+    } else if (type == "BasicPriceUseBoil") {
+        if (recipe.boil > 0) {
+            return true;
+        }
+    } else if (type == "BasicPriceUseFry") {
+        if (recipe.fry > 0) {
+            return true;
+        }
+    } else if (type == "BasicPriceUseKnife") {
+        if (recipe.knife > 0) {
+            return true;
+        }
+    } else if (type == "BasicPriceUseBake") {
+        if (recipe.bake > 0) {
+            return true;
+        }
+    } else if (type == "BasicPriceUseSteam") {
+        if (recipe.steam > 0) {
+            return true;
+        }
     }
     return false;
 }
@@ -318,7 +362,7 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
                         partialAddition += effect.value * partialRecipeAdds[i].count;
                     }
 
-                    if (isRecipeBasicAddition(effect)) {
+                    if (isRecipeBasicAddition(effect, recipe)) {
                         basicAddition.percent += effect.value * partialRecipeAdds[i].count;
                     }
                 }

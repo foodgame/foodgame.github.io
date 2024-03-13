@@ -816,17 +816,37 @@ function getPartialRecipeAdds(customData, skills, rule) {
                     for (var m in skill.effect) {
                         var effect = skill.effect[m];
                         if (effect.condition == "Partial") {
-                            var condition = checkSkillCondition(effect, chef, recipes, null, null);
-                            if (condition.pass) {
-                                var add = {};
-                                add["effect"] = effect;
-                                add["count"] = condition.count;
-                                var startIndex = 0;
-                                if (rule.Satiety) {
-                                    startIndex = Number(i);
+                            if (effect.conditionType == "ChefTag") {
+                                for (var j in customData) {
+                                    if (rule.Satiety) {
+                                        if (j < i) {
+                                            continue;
+                                        }
+                                    }
+                                    var chef2 = customData[j].chef;
+                                    if (chef2.chefId) {
+                                        var condition = checkSkillCondition(effect, chef2, recipes, null, null);
+                                        if (condition.pass) {
+                                            var add = {};
+                                            add["effect"] = effect;
+                                            add["count"] = condition.count;
+                                            partialAdds[Number(j)].push(add);
+                                        }
+                                    }
                                 }
-                                for (var o = startIndex; o < 3; o++) {
-                                    partialAdds[o].push(add);
+                            } else {
+                                var condition = checkSkillCondition(effect, chef, recipes, null, null);
+                                if (condition.pass) {
+                                    var add = {};
+                                    add["effect"] = effect;
+                                    add["count"] = condition.count;
+                                    var startIndex = 0;
+                                    if (rule.Satiety) {
+                                        startIndex = Number(i);
+                                    }
+                                    for (var o = startIndex; o < 3; o++) {
+                                        partialAdds[o].push(add);
+                                    }
                                 }
                             }
                         } else if (effect.condition == "Next" && Number(i) < 2) {
@@ -896,6 +916,16 @@ function checkSkillCondition(effect, chef, recipes, recipe, quantity) {
             if (effect.conditionValueList.indexOf(recipe.rarity) >= 0) {
                 return result;
             }
+        }
+    } else if (effect.conditionType == "ChefTag") {
+        var count = 0;
+        for (var i in effect.conditionValueList) {
+            if (chef.tags.indexOf(effect.conditionValueList[i]) >= 0) {
+                count++;
+            }
+        }
+        if (count == effect.conditionValueList.length) {
+            return result;
         }
     } else if (effect.conditionType == "SameSkill") {
         var sameCount = 0;

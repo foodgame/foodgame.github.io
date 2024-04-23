@@ -94,8 +94,6 @@ function initTables(data, person) {
 
     updateMenu(person);
 
-    updateActivity(person);
-
     setPartialUltimateOptions(data.chefs, data.partialSkill);
 
     initRecipeTable(data);
@@ -4531,8 +4529,6 @@ function importData(data, input) {
         $("#input-cal-decoration").val(person.decorationEffect || "");
     }
 
-    updateActivity(person);
-
     try {
         localStorage.setItem('data', generateExportData());
     } catch (e) { }
@@ -4643,7 +4639,30 @@ function updateDecorationLocalData() {
 }
 
 function updateActivityLocalData() {
-    updateLocalData("activity", generateActivityExportData());
+    var person = getLocalData();
+    if (!person.cal) {
+        person["cal"] = [];
+    }
+
+    var activity = generateActivityExportData();
+
+    var exist = false;
+    for (var i in person.cal) {
+        if (person.cal[i].id == calCustomRule.id) {
+            person.cal[i]["activity"] = activity;
+            exist = true;
+            break;
+        }
+    }
+    if (!exist) {
+        var calItem = {};
+        calItem["id"] = calCustomRule.id;
+        calItem["activity"] = activity;
+        calItem["data"] = [];
+        person.cal.push(calItem);
+    }
+
+    updateCalLocalData(person.cal);
 }
 
 function updateLocalData(key, value) {
@@ -4677,7 +4696,6 @@ function generateExportData() {
     person["menu"] = generateMenuExportData(old.menu);
     person["setting"] = generateSettingExportData();
     person["decorationEffect"] = Number($("#input-cal-decoration").val());
-    person["activity"] = generateActivityExportData();
     person["cal"] = old.cal;
     return JSON.stringify(person);
 }
@@ -4899,8 +4917,7 @@ function generateActivityExportData() {
     return exportData;
 }
 
-function updateActivity(person) {
-    var activity = person && person.activity;
+function updateActivity(activity) {
     if (activity) {
         $("#input-cal-activity-stirfry-price").val(activity.stirfryPrice);
         $("#input-cal-activity-bake-price").val(activity.bakePrice);
@@ -5438,6 +5455,9 @@ function loadCalRule(data) {
         if (person.cal[i].id == calCustomRule.id) {
             for (var m in person.cal[i].data) {
                 options += "<option value='" + person.cal[i].data[m].score + "'>" + person.cal[i].data[m].score + "</option>";
+            }
+            if (calCustomRule.rules[0].IsActivity) {
+                updateActivity(person.cal[i].activity);
             }
             break;
         }
@@ -6577,7 +6597,12 @@ function calCustomResults(data) {
             }
         }
 
-        score = Math.floor(+(Math.pow(score, scorePow) * scoreMultiply).toFixed(2));
+        score = +(Math.pow(score, scorePow) * scoreMultiply).toFixed(2);
+        if (currentRule.IsActivity) {
+            score = Math.ceil(score);
+        } else {
+            score = Math.floor(score);
+        }
 
         if (score) {
             score += scoreAdd;
@@ -9690,7 +9715,7 @@ function generateData(json, json2, person) {
             recipeData["icon"] = "<div class='icon-recipe recipe_" + json.recipes[i].recipeId + "'></div>";
         }
 
-        recipeData["tags"] = json.recipes[i].tags || {};
+        recipeData["tags"] = json.recipes[i].tags || [];
         recipeData["tagsDisp"] = "";
         recipeData["exTime"] = 0;
         recipeData["exTimeDisp"] = "";

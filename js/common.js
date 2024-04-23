@@ -927,6 +927,19 @@ function checkSkillCondition(effect, chef, recipes, recipe, quantity) {
         if (count == effect.conditionValueList.length) {
             return result;
         }
+    } else if (effect.conditionType == "CookbookTag") {
+        if (recipe) {
+            var count = 0;
+            for (var i in effect.conditionValueList) {
+                if (recipe.tags.indexOf(effect.conditionValueList[i]) >= 0) {
+                    count++;
+                }
+            }
+            if (count > 0) {
+                result.count = count;
+                return result;
+            }
+        }
     } else if (effect.conditionType == "SameSkill") {
         var sameCount = 0;
         var count1 = 0;

@@ -6175,7 +6175,7 @@ function getActivityConfigData(rule) {
         var goldPrice = Number($("#input-cal-activity-gold-price").val());
         if (goldPrice) {
             var ultimateItem = {};
-            ultimateItem["type"] = "Gold_Gain";
+            ultimateItem["type"] = "CookbookPrice";
             ultimateItem["value"] = goldPrice;
             ultimateItem["condition"] = "Global";
             ultimateItem["cal"] = "Percent";

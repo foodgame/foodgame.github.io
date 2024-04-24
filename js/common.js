@@ -165,7 +165,7 @@ function isRecipePriceAddition(effect, recipe, rule) {
             return true;
         }
     } else if (type == "Gold_Gain") {
-        if (!rule || rule.Id == 0 || rule.Satiety) {
+        if (!rule || rule.Id == 0 || rule.Satiety || rule.IsActivity) {
             return true;
         }
     } else if (type == "CookbookPrice") {

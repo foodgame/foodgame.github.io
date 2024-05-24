@@ -6581,7 +6581,7 @@ function calCustomResults(data) {
                     var resultData = getRecipeResult(customData[i].chef, customData[i].equip, customData[i].recipes[j].data,
                         customData[i].recipes[j].quantity, customData[i].recipes[j].max, currentRule.materials,
                         currentRule, currentRule.decorationEffect, useCondiment ? customData[i].condiment : null,
-                        true, customData[i].recipes, partialRecipeAdds[i], intentAdds[i * 3 + Number(j)]);
+                        true, customData[i].recipes, partialRecipeAdds[i * 3 + Number(j)], intentAdds[i * 3 + Number(j)]);
 
                     customData[i].recipes[j] = resultData;
                     time += resultData.totalTime;
@@ -7201,7 +7201,7 @@ function getCustomChefsOptions(groupIndex, index, data) {
                             newData[n].recipes[m].quantity, newData[n].recipes[m].max, currentRule.materials,
                             currentRule, currentRule.decorationEffect,
                             newData[n].recipes[m].useCondiment ? newData[n].condiment : null,
-                            true, newData[n].recipes, partialRecipeAdds[n], intentAdds[n * 3 + Number(m)]);
+                            true, newData[n].recipes, partialRecipeAdds[n * 3 + Number(m)], intentAdds[n * 3 + Number(m)]);
 
                         newData[n].recipes[m] = resultData;
                         score += resultData.totalScore;
@@ -7350,7 +7350,7 @@ function getCustomDiskLevelsOptions(groupIndex, chefIndex, data) {
                             newData[n].recipes[m].quantity, newData[n].recipes[m].max, currentRule.materials,
                             currentRule, currentRule.decorationEffect,
                             newData[n].recipes[m].useCondiment ? newData[n].condiment : null,
-                            true, newData[n].recipes, partialRecipeAdds[n], intentAdds[n * 3 + Number(m)]);
+                            true, newData[n].recipes, partialRecipeAdds[n * 3 + Number(m)], intentAdds[n * 3 + Number(m)]);
 
                         newData[n].recipes[m] = resultData;
                         score += resultData.totalScore;
@@ -7447,7 +7447,7 @@ function getCustomAmbersOptions(groupIndex, chefIndex, diskIndex, ambers, data) 
                             newData[n].recipes[m].quantity, newData[n].recipes[m].max, currentRule.materials,
                             currentRule, currentRule.decorationEffect,
                             newData[n].recipes[m].useCondiment ? newData[n].condiment : null,
-                            true, newData[n].recipes, partialRecipeAdds[n], intentAdds[n * 3 + Number(m)]);
+                            true, newData[n].recipes, partialRecipeAdds[n * 3 + Number(m)], intentAdds[n * 3 + Number(m)]);
 
                         newData[n].recipes[m] = resultData;
                         score += resultData.totalScore;
@@ -7561,7 +7561,7 @@ function getCustomEquipsOptions(groupIndex, index, equips, data) {
                             newData[n].recipes[m].quantity, newData[n].recipes[m].max, currentRule.materials,
                             currentRule, currentRule.decorationEffect,
                             newData[n].recipes[m].useCondiment ? newData[n].condiment : null,
-                            true, newData[n].recipes, partialRecipeAdds[n], intentAdds[n * 3 + Number(m)]);
+                            true, newData[n].recipes, partialRecipeAdds[n * 3 + Number(m)], intentAdds[n * 3 + Number(m)]);
 
                         newData[n].recipes[m] = resultData;
                         score += resultData.totalScore;
@@ -7651,7 +7651,7 @@ function getCustomCondimentsOptions(groupIndex, index, condiments, data) {
                             newData[n].recipes[m].quantity, newData[n].recipes[m].max, currentRule.materials,
                             currentRule, currentRule.decorationEffect,
                             newData[n].recipes[m].useCondiment ? newData[n].condiment : null,
-                            true, newData[n].recipes, partialRecipeAdds[n], intentAdds[n * 3 + Number(m)]);
+                            true, newData[n].recipes, partialRecipeAdds[n * 3 + Number(m)], intentAdds[n * 3 + Number(m)]);
 
                         newData[n].recipes[m] = resultData;
                         score += resultData.totalScore;
@@ -7791,7 +7791,7 @@ function getCustomRecipesOptions(groupIndex, chefIndex, recipeIndex, data) {
                         newData[n].recipes[m].quantity, newData[n].recipes[m].max, currentRule.materials,
                         currentRule, currentRule.decorationEffect,
                         newData[n].recipes[m].useCondiment ? newData[n].condiment : null,
-                        true, newData[n].recipes, partialRecipeAdds[n], intentAdds[n * 3 + Number(m)]);
+                        true, newData[n].recipes, partialRecipeAdds[n * 3 + Number(m)], intentAdds[n * 3 + Number(m)]);
                     score += resultData.totalScore;
 
                     if (n == chefIndex && m == recipeIndex) {
@@ -7799,7 +7799,7 @@ function getCustomRecipesOptions(groupIndex, chefIndex, recipeIndex, data) {
                             newData[n].recipes[m].max, newData[n].recipes[m].max, currentRule.materials,
                             currentRule, currentRule.decorationEffect,
                             newData[n].recipes[m].useCondiment ? newData[n].condiment : null,
-                            true, newData[n].recipes, partialRecipeAdds[n], intentAdds[n * 3 + Number(m)]);
+                            true, newData[n].recipes, partialRecipeAdds[n * 3 + Number(m)], intentAdds[n * 3 + Number(m)]);
                         maxScore = resultData.totalScore;
                         efficiency = resultData.efficiency;
                         if (resultData.rankVal == 0) {

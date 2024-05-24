@@ -802,7 +802,7 @@ function isChefAddType(type) {
 
 function getPartialRecipeAdds(customData, skills, rule) {
     var partialAdds = [];
-    for (var o = 0; o < 3; o++) {
+    for (var o = 0; o < 9; o++) {
         partialAdds.push([]);
     }
 
@@ -816,25 +816,7 @@ function getPartialRecipeAdds(customData, skills, rule) {
                     for (var m in skill.effect) {
                         var effect = skill.effect[m];
                         if (effect.condition == "Partial") {
-                            if (effect.conditionType == "ChefTag") {
-                                for (var j in customData) {
-                                    if (rule.Satiety) {
-                                        if (j < i) {
-                                            continue;
-                                        }
-                                    }
-                                    var chef2 = customData[j].chef;
-                                    if (chef2.chefId) {
-                                        var condition = checkSkillCondition(effect, chef2, recipes, null, null);
-                                        if (condition.pass) {
-                                            var add = {};
-                                            add["effect"] = effect;
-                                            add["count"] = condition.count;
-                                            partialAdds[Number(j)].push(add);
-                                        }
-                                    }
-                                }
-                            } else {
+                            if (!effect.conditionType || effect.conditionType == "PerRank" || effect.conditionType == "SameSkill") {
                                 var condition = checkSkillCondition(effect, chef, recipes, null, null);
                                 if (condition.pass) {
                                     var add = {};
@@ -842,10 +824,28 @@ function getPartialRecipeAdds(customData, skills, rule) {
                                     add["count"] = condition.count;
                                     var startIndex = 0;
                                     if (rule.Satiety) {
-                                        startIndex = Number(i);
+                                        startIndex = Number(i) * 3;
                                     }
-                                    for (var o = startIndex; o < 3; o++) {
+                                    for (var o = startIndex; o < 9; o++) {
                                         partialAdds[o].push(add);
+                                    }
+                                }
+                            } else {
+                                for (var j in customData) {
+                                    if (rule.Satiety) {
+                                        if (j < i) {
+                                            continue;
+                                        }
+                                    }
+                                    var startIndex = Number(j) * 3;
+                                    for (var g in customData[j].recipes) {
+                                        var condition = checkSkillCondition(effect, customData[j].chef, null, customData[j].recipes[g].data, customData[j].recipes[g].quantity);
+                                        if (condition.pass) {
+                                            var add = {};
+                                            add["effect"] = effect;
+                                            add["count"] = condition.count;
+                                            partialAdds[startIndex + Number(g)].push(add);
+                                        }
                                     }
                                 }
                             }
@@ -855,7 +855,10 @@ function getPartialRecipeAdds(customData, skills, rule) {
                                 var add = {};
                                 add["effect"] = effect;
                                 add["count"] = condition.count;
-                                partialAdds[Number(i) + 1].push(add);
+                                var startIndex = Number(i) * 3 + 3;
+                                for (var o = 0; o < 3; o++) {
+                                    partialAdds[startIndex + o].push(add);
+                                }
                             }
                         }
                     }
@@ -878,7 +881,7 @@ function checkSkillCondition(effect, chef, recipes, recipe, quantity) {
     }
 
     if (effect.conditionType == "Rank") {
-        if (recipe) {
+        if (recipe && chef && chef.chefId) {
             var rankData = getRankInfo(recipe, chef);
             if (rankData.rankVal >= effect.conditionValue) {
                 return result;
@@ -918,14 +921,16 @@ function checkSkillCondition(effect, chef, recipes, recipe, quantity) {
             }
         }
     } else if (effect.conditionType == "ChefTag") {
-        var count = 0;
-        for (var i in effect.conditionValueList) {
-            if (chef.tags.indexOf(effect.conditionValueList[i]) >= 0) {
-                count++;
+        if (chef && chef.chefId) {
+            var count = 0;
+            for (var i in effect.conditionValueList) {
+                if (chef.tags.indexOf(effect.conditionValueList[i]) >= 0) {
+                    count++;
+                }
             }
-        }
-        if (count == effect.conditionValueList.length) {
-            return result;
+            if (count == effect.conditionValueList.length) {
+                return result;
+            }
         }
     } else if (effect.conditionType == "CookbookTag") {
         if (recipe) {

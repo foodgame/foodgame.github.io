@@ -5548,7 +5548,8 @@ function loadUltimate(data, usePerson) {
             || globalUltimate[i].type == "Material_Vegetable"
             || globalUltimate[i].type == "Material_Meat"
             || globalUltimate[i].type == "Material_Fish"
-            || globalUltimate[i].type == "Material_Creation") {
+            || globalUltimate[i].type == "Material_Creation"
+            || globalUltimate[i].type == "ExperienceTimeRate") {
             continue
         } else {
             console.log(globalUltimate[i].type);

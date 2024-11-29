@@ -825,9 +825,17 @@ function isChefAddType(type) {
     }
 }
 
+function getCustomRound(rule) {
+    if (rule.Satiety) {
+        return rule.IntentList.length;
+    } else {
+        return 3;
+    }
+}
+
 function getPartialRecipeAdds(customData, skills, rule) {
     var partialAdds = [];
-    for (var o = 0; o < 9; o++) {
+    for (var o = 0; o < getCustomRound(rule) * 3; o++) {
         partialAdds.push([]);
     }
 
@@ -851,7 +859,7 @@ function getPartialRecipeAdds(customData, skills, rule) {
                                     if (rule.Satiety) {
                                         startIndex = Number(i) * 3;
                                     }
-                                    for (var o = startIndex; o < 9; o++) {
+                                    for (var o = startIndex; o < getCustomRound(rule) * 3; o++) {
                                         partialAdds[o].push(add);
                                     }
                                 }

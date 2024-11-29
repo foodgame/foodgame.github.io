@@ -626,6 +626,8 @@ function initRecipeTable(data) {
             return true;
         } else if (commaSeparatedMatch(rowData.tagsDisp, value)) {
             return true;
+        } else if (commaSeparatedMatch(rowData.guestsDisp, value)) {
+            return true;
         } else {
             return false;
         }
@@ -5015,20 +5017,21 @@ function initCalRules(data, person) {
         }
         var title = data.rules[i].Title;
         var option = "<option value='" + data.rules[i].Id + "'>" + title + "</option>";
-        if (title.indexOf("风云宴") >= 0) {
-            $("#select-cal-rule optgroup[label='风云宴']").append(option);
-        } else if (title.indexOf("常驻关卡") >= 0) {
-            $("#select-cal-rule optgroup[label='常驻关卡']").append(option);
-        } else if (title.indexOf("江湖帖") >= 0) {
-            $("#select-cal-rule optgroup[label='江湖帖']").append(option);
-        } else if (title.indexOf("贤客楼") >= 0) {
-            $("#select-cal-rule optgroup[label='贤客楼']").append(option);
-        } else if (title.indexOf("支线任务") >= 0) {
-            $("#select-cal-rule optgroup[label='支线任务']").append(option);
-        } else if (endTime) {
-            $("#select-cal-rule").prepend(option);
-        } else {
-            $("#select-cal-rule").append(option);
+
+        var added = false;
+        $("#select-cal-rule optgroup").each(function () {
+            if (title.indexOf($(this).attr("label")) >= 0) {
+                $(this).append(option);
+                added = true;
+            }
+        });
+
+        if (!added) {
+            if (endTime) {
+                $("#select-cal-rule").prepend(option);
+            } else {
+                $("#select-cal-rule").append(option);
+            }
         }
     }
 
@@ -5386,12 +5389,6 @@ function loadCalRule(data) {
     $(".cal-custom-item").hide();
     $(".cal-custom-item .selected-item").hide();
 
-    if (calCustomRule.rules.length > 1) {
-        $("#btn-cal-import-run").show();
-    } else {
-        $("#btn-cal-import-run").hide();
-    }
-
     for (var groupIndex = 0; groupIndex < calCustomRule.rules.length; groupIndex++) {
         var rule = calCustomRule.rules[groupIndex];
 
@@ -5434,9 +5431,11 @@ function loadCalRule(data) {
                     + rule.SatisfyExtraValue + "%</span></div>";
             }
             $("#pane-cal-custom").addClass("banquet");
+            $("#btn-cal-import-run").show();
         } else {
             $("#pane-cal-custom").removeClass("banquet");
-            $(".cal-custom-item:eq(" + groupIndex + ") .selected-item").show();
+            $(".cal-custom-item:eq(" + groupIndex + ") .selected-item:nth-child(-n+3)").show();
+            $("#btn-cal-import-run").hide();
         }
         $(".rule-desc:eq(" + groupIndex + ")").html(ruleDesc);
     }
@@ -6404,7 +6403,7 @@ function initCustomData() {
     for (var r in calCustomRule.rules) {
         var rule = calCustomRule.rules[r];
         rule["custom"] = [];
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < getCustomRound(rule); i++) {
             var oneMenu = {};
             oneMenu["chef"] = {};
             oneMenu["equip"] = {};
@@ -6976,7 +6975,7 @@ function getIntentAdds(groupIndex, customData, data, update) {
     var currentRule = calCustomRule.rules[groupIndex];
     var intentAdds = [];
     if (currentRule.Satiety) {
-        for (var i = 0; i < 9; i++) {
+        for (var i = 0; i < currentRule.IntentList.length * 3; i++) {
             intentAdds.push([]);
         }
 
@@ -8707,7 +8706,7 @@ function initCalCustomTable(data) {
     var recipeCopy = $(".selected-item .recipe-box")[0].outerHTML;
     $(".selected-item").append(recipeCopy).append(recipeCopy);
     var itemCopy = $(".selected-item")[0].outerHTML;
-    $(".selected-item-wrapper").append(itemCopy).append(itemCopy);
+    $(".selected-item-wrapper").append(itemCopy).append(itemCopy).append(itemCopy);
     var customCopy = $(".cal-custom-item")[0].outerHTML;
     $("#pane-cal-custom").append(customCopy).append(customCopy);
 

@@ -665,7 +665,10 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, partialChef
 
         if (partialChefAdds) {
             for (var i in partialChefAdds) {
-                effects = effects.concat(partialChefAdds[i]);
+                var condition = checkSkillCondition(partialChefAdds[i], chef, null, null, null);
+                if (condition.pass) {
+                    effects = effects.concat(partialChefAdds[i]);
+                }
             }
         }
     }
@@ -834,8 +837,9 @@ function getCustomRound(rule) {
 }
 
 function getPartialRecipeAdds(customData, skills, rule) {
+    var round = getCustomRound(rule);
     var partialAdds = [];
-    for (var o = 0; o < getCustomRound(rule) * 3; o++) {
+    for (var o = 0; o < round * 3; o++) {
         partialAdds.push([]);
     }
 
@@ -859,7 +863,7 @@ function getPartialRecipeAdds(customData, skills, rule) {
                                     if (rule.Satiety) {
                                         startIndex = Number(i) * 3;
                                     }
-                                    for (var o = startIndex; o < getCustomRound(rule) * 3; o++) {
+                                    for (var o = startIndex; o < round * 3; o++) {
                                         partialAdds[o].push(add);
                                     }
                                 }
@@ -882,7 +886,7 @@ function getPartialRecipeAdds(customData, skills, rule) {
                                     }
                                 }
                             }
-                        } else if (effect.condition == "Next" && Number(i) < 2) {
+                        } else if (effect.condition == "Next" && Number(i) < round - 1) {
                             var condition = checkSkillCondition(effect, chef, recipes, null, null);
                             if (condition.pass) {
                                 var add = {};
@@ -1104,8 +1108,9 @@ function getPartialChefAddsByIds(chefs, skills, useUltimate, ids) {
 }
 
 function getPartialChefAdds(customData, skills, rule) {
+    var round = getCustomRound(rule);
     var partialAdds = [];
-    for (var o = 0; o < 3; o++) {
+    for (var o = 0; o < round; o++) {
         partialAdds.push([]);
     }
 
@@ -1123,11 +1128,11 @@ function getPartialChefAdds(customData, skills, rule) {
                                 if (rule.Satiety) {
                                     startIndex = Number(i);
                                 }
-                                for (var o = startIndex; o < 3; o++) {
+                                for (var o = startIndex; o < round; o++) {
                                     partialAdds[o].push(effect);
                                 }
                             }
-                        } else if (effect.condition == "Next" && Number(i) < 2) {
+                        } else if (effect.condition == "Next" && Number(i) < round - 1) {
                             if (isChefAddType(effect.type)) {
                                 partialAdds[Number(i) + 1].push(effect);
                             }

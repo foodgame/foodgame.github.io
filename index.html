@@ -10,7 +10,7 @@
     <script type="text/javascript" src="js/script.min.js?v=21"></script>
     <script type="text/javascript" src="js/common.min.js?v=65"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=71" />
-    <script type="text/javascript" src="js/food.min.js?v=221"></script>
+    <script type="text/javascript" src="js/food.min.js?v=222"></script>
     <link rel="stylesheet" type="text/css" href="css/image.css?v=153" />
     <script>
         $(function () {
@@ -19,7 +19,7 @@
                 xhr: function () {
                     var xhr = $.ajaxSettings.xhr();
                     xhr.addEventListener("progress", function (e) {
-                        var total = 1555319;
+                        var total = 1557111;
                         if (e.lengthComputable) {
                             total = e.total;
                         }
@@ -37,7 +37,7 @@
                 complete: function () {
                     $("#loading-progress").remove();
                 },
-                url: 'data/data.min.json?v=164'
+                url: 'data/data.min.json?v=165'
             });
         });
     </script>

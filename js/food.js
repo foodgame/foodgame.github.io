@@ -5427,7 +5427,18 @@ function loadCalRule(data) {
             }
 
             if (rule.SatisfyRewardType == 1) {
-                ruleDesc += "<div class='item'><span class='intent-satiety label label-default'>饱腹感达到" + rule.Satiety + "时总售价+"
+                ruleDesc += "<div class='item'>";
+                if (rule.GlobalBuffList) {
+                    for (var j in rule.GlobalBuffList) {
+                        for (var k in data.buffs) {
+                            if (rule.GlobalBuffList[j] == data.buffs[k].buffId) {
+                                ruleDesc += "<span class='label label-info'>" + data.buffs[k].desc + "</span>";
+                                break;
+                            }
+                        }
+                    }
+                }
+                ruleDesc += "<span class='intent-satiety label label-default'>饱腹感达到" + rule.Satiety + "时总售价+"
                     + rule.SatisfyExtraValue + "%</span></div>";
             }
             $("#pane-cal-custom").addClass("banquet");
@@ -6422,6 +6433,9 @@ function initCustomData() {
 function setCustomChef(groupIndex, index, chefId) {
     var currentRule = calCustomRule.rules[groupIndex];
     var customData = currentRule.custom;
+    if (!customData[index]) {
+        return;
+    }
     if (chefId) {
         for (var i in currentRule.chefs) {
             if (currentRule.chefs[i].chefId == chefId) {
@@ -6445,6 +6459,9 @@ function setCustomChef(groupIndex, index, chefId) {
 function setCustomDiskLevel(groupIndex, index, level) {
     var currentRule = calCustomRule.rules[groupIndex];
     var customData = currentRule.custom;
+    if (!customData[index]) {
+        return;
+    }
     if (level) {
         customData[index].chef.disk.level = level;
     } else {
@@ -6455,12 +6472,18 @@ function setCustomDiskLevel(groupIndex, index, level) {
 function setCustomAmber(groupIndex, chefIndex, diskIndex, amberId) {
     var currentRule = calCustomRule.rules[groupIndex];
     var customData = currentRule.custom;
+    if (!customData[chefIndex]) {
+        return;
+    }
     customData[chefIndex].chef.disk.ambers[diskIndex].data = getAmberInfo(amberId, currentRule.ambers);
 }
 
 function setCustomEquip(groupIndex, index, equipId) {
     var currentRule = calCustomRule.rules[groupIndex];
     var customData = currentRule.custom;
+    if (!customData[index]) {
+        return;
+    }
     if (equipId) {
         customData[index].equip = getEquipInfo(equipId, currentRule.equips);
     } else {
@@ -6470,6 +6493,9 @@ function setCustomEquip(groupIndex, index, equipId) {
 
 function setCustomCondiment(groupIndex, index, condimentId, data) {
     var customData = calCustomRule.rules[groupIndex].custom;
+    if (!customData[index]) {
+        return;
+    }
     if (condimentId) {
         customData[index].condiment = getCondimentInfo(condimentId, data.condiments);
     } else {
@@ -6480,7 +6506,9 @@ function setCustomCondiment(groupIndex, index, condimentId, data) {
 function setCustomRecipe(groupIndex, chefIndex, recipeIndex, recipeId) {
     var currentRule = calCustomRule.rules[groupIndex];
     var customData = currentRule.custom;
-
+    if (!customData[chefIndex]) {
+        return;
+    }
     customData[chefIndex].recipes[recipeIndex] = {};
 
     var materialsData = JSON.parse(JSON.stringify(currentRule.materials));
@@ -6511,7 +6539,9 @@ function setCustomRecipe(groupIndex, chefIndex, recipeIndex, recipeId) {
 function setCustomRecipeQuantity(groupIndex, chefIndex, recipeIndex, quantity) {
     var currentRule = calCustomRule.rules[groupIndex];
     var customData = currentRule.custom;
-
+    if (!customData[chefIndex]) {
+        return;
+    }
     customData[chefIndex].recipes[recipeIndex].quantity = quantity || 0;
 }
 
@@ -6977,6 +7007,24 @@ function getIntentAdds(groupIndex, customData, data, update) {
     if (currentRule.Satiety) {
         for (var i = 0; i < currentRule.IntentList.length * 3; i++) {
             intentAdds.push([]);
+        }
+
+        if (currentRule.GlobalBuffList) {
+            for (var j in currentRule.GlobalBuffList) {
+                for (var k in data.buffs) {
+                    if (currentRule.GlobalBuffList[j] == data.buffs[k].buffId) {
+                        for (var m in customData) {
+                            for (var n in customData[m].recipes) {
+                                if (customData[m].recipes[n].data) {
+                                    if (checkIntent(data.buffs[k], customData[m].recipes, n, customData[m].chef)) {
+                                        intentAdds[m * 3 + Number(n)].push(data.buffs[k]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         for (var i = 0; i < currentRule.IntentList.length; i++) {

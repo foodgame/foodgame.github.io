@@ -8017,6 +8017,7 @@ function checkMaterials(customData, materials) {
                                 var mQuantity = calMaterialReduce(chef, recipe.data.materials[m].material, recipe.data.materials[m].quantity);
                                 materialsData[n].quantity -= mQuantity * recipe.quantity;
                             }
+                            break;
                         }
                     }
                 }

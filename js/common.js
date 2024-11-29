@@ -314,16 +314,16 @@ function getRecipeQuantity(recipe, materials, rule, chef) {
         for (var n in materials) {
             if (recipe.materials[m].material == materials[n].materialId) {
                 exist = true;
-                if (materials[n].quantity) {
+                if (materials[n].quantity != "") {
                     var mQuantity = calMaterialReduce(chef, recipe.materials[m].material, recipe.materials[m].quantity);
-                    var tt = Math.floor(materials[n].quantity / mQuantity);
-                    if (tt < quantity) {
-                        quantity = tt;
+                    if (mQuantity != 0) {
+                        var tt = Math.floor(materials[n].quantity / mQuantity);
+                        if (tt < quantity) {
+                            quantity = tt;
+                        }
                     }
-                    break;
-                } else if (materials[n].quantity === 0) {
-                    return 0;
                 }
+                break;
             }
         }
         if (!exist) {

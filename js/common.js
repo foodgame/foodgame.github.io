@@ -275,6 +275,26 @@ function getAbsDisp(abs) {
     }
 }
 
+function calMaterialReduce(chef, materialId, quantity) {
+    if (chef && chef.materialEffects) {
+        var addtion = new Addition();
+        for (var i in chef.materialEffects) {
+            var effect = chef.materialEffects[i];
+            if (effect.conditionType == "MaterialReduce") {
+                if (effect.conditionValueList.indexOf(materialId) >= 0) {
+                    setAddition(addtion, effect);
+                }
+            }
+        }
+        return Math.ceil(calReduce(quantity, addtion));
+    }
+    return quantity;
+}
+
+function calReduce(value, addition) {
+    return +((value - addition.abs) * (1 - addition.percent / 100)).toFixed(2);
+}
+
 function getRecipeQuantity(recipe, materials, rule, chef) {
     var quantity = 1;
     if (!rule.hasOwnProperty("DisableMultiCookbook") || rule.DisableMultiCookbook == false) {
@@ -295,7 +315,8 @@ function getRecipeQuantity(recipe, materials, rule, chef) {
             if (recipe.materials[m].material == materials[n].materialId) {
                 exist = true;
                 if (materials[n].quantity) {
-                    var tt = Math.floor(materials[n].quantity / recipe.materials[m].quantity);
+                    var mQuantity = calMaterialReduce(chef, recipe.materials[m].material, recipe.materials[m].quantity);
+                    var tt = Math.floor(materials[n].quantity / mQuantity);
                     if (tt < quantity) {
                         quantity = tt;
                     }
@@ -622,6 +643,7 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, partialChef
     var tastyAddition = new Addition();
 
     var maxLimitEffect = [];
+    var materialEffects = [];
 
     var effects = [];
 
@@ -710,6 +732,8 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, partialChef
             setAddition(tastyAddition, effects[i]);
         } else if (type == "MaxEquipLimit" && effects[i].condition == "Self") {
             maxLimitEffect = maxLimitEffect.concat(effects[i]);
+        } else if (type == "MaterialReduce" && effects[i].condition == "Self") {
+            materialEffects = materialEffects.concat(effects[i]);
         }
     }
 
@@ -752,6 +776,7 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, partialChef
     chef["tastyDisp"] = getAtrributeDisp(chef.tastyVal, chef.tasty, showFinal);
 
     chef["maxLimitEffect"] = maxLimitEffect;
+    chef["materialEffects"] = materialEffects;
 }
 
 function getAtrributeDisp(final, origin, showFinal) {
@@ -928,7 +953,7 @@ function checkSkillCondition(effect, chef, recipes, recipe, quantity) {
                     count++;
                 }
             }
-            if (count == effect.conditionValueList.length) {
+            if (count > 0) {
                 return result;
             }
         }
@@ -1000,6 +1025,8 @@ function checkSkillCondition(effect, chef, recipes, recipe, quantity) {
             result.count = sameCount;
             return result;
         }
+    } else if (effect.conditionType == "MaterialReduce") {
+
     } else {
         console.log("unknown conditionType: " + effect.conditionType);
     }
@@ -1107,12 +1134,13 @@ function getPartialChefAdds(customData, skills, rule) {
     return partialAdds;
 }
 
-function updateMaterialsData(materialsData, recipe, quantity) {
+function updateMaterialsData(materialsData, recipe, quantity, chef) {
     for (var m in recipe.data.materials) {
         for (var n in materialsData) {
             if (recipe.data.materials[m].material == materialsData[n].materialId) {
                 if (Number.isInteger(parseInt(materialsData[n].quantity))) {
-                    materialsData[n].quantity -= recipe.data.materials[m].quantity * quantity;
+                    var mQuantity = calMaterialReduce(chef, recipe.data.materials[m].material, recipe.data.materials[m].quantity);
+                    materialsData[n].quantity -= mQuantity * quantity;
                 }
             }
         }

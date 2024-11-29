@@ -5017,6 +5017,8 @@ function initCalRules(data, person) {
         var option = "<option value='" + data.rules[i].Id + "'>" + title + "</option>";
         if (title.indexOf("风云宴") >= 0) {
             $("#select-cal-rule optgroup[label='风云宴']").append(option);
+        } else if (title.indexOf("常驻关卡") >= 0) {
+            $("#select-cal-rule optgroup[label='常驻关卡']").append(option);
         } else if (title.indexOf("江湖帖") >= 0) {
             $("#select-cal-rule optgroup[label='江湖帖']").append(option);
         } else if (title.indexOf("贤客楼") >= 0) {
@@ -5383,6 +5385,13 @@ function loadCalRule(data) {
     $(".btn-resize").hide();
     $(".cal-custom-item").hide();
     $(".cal-custom-item .selected-item").hide();
+
+    if (calCustomRule.rules.length > 1) {
+        $("#btn-cal-import-run").show();
+    } else {
+        $("#btn-cal-import-run").hide();
+    }
+
     for (var groupIndex = 0; groupIndex < calCustomRule.rules.length; groupIndex++) {
         var rule = calCustomRule.rules[groupIndex];
 
@@ -5403,18 +5412,6 @@ function loadCalRule(data) {
             $("#cal-activity").show();
         }
 
-        if (rule.GuestType == "Boss") {
-            $("#btn-cal-import-run").show();
-        } else {
-            $("#btn-cal-import-run").hide();
-        }
-
-        if (rule.GuestType == "Normal") {
-            $(".cal-custom-item:eq(" + groupIndex + ") .selected-item:eq(0)").show();
-        } else {
-            $(".cal-custom-item:eq(" + groupIndex + ") .selected-item").show();
-        }
-
         var ruleDesc = "";
         if (rule.Satiety) {
             for (var i = 0; i < rule.IntentList.length; i++) {
@@ -5428,6 +5425,8 @@ function loadCalRule(data) {
                     }
                 }
                 ruleDesc += "</div>";
+
+                $(".cal-custom-item:eq(" + groupIndex + ") .selected-item:eq(" + i + ")").show();
             }
 
             if (rule.SatisfyRewardType == 1) {
@@ -5437,6 +5436,7 @@ function loadCalRule(data) {
             $("#pane-cal-custom").addClass("banquet");
         } else {
             $("#pane-cal-custom").removeClass("banquet");
+            $(".cal-custom-item:eq(" + groupIndex + ") .selected-item").show();
         }
         $(".rule-desc:eq(" + groupIndex + ")").html(ruleDesc);
     }
@@ -6488,7 +6488,7 @@ function setCustomRecipe(groupIndex, chefIndex, recipeIndex, recipeId) {
     for (var m in customData) {
         for (var n in customData[m].recipes) {
             if (customData[m].recipes[n].data) {
-                updateMaterialsData(materialsData, customData[m].recipes[n], customData[m].recipes[n].quantity);
+                updateMaterialsData(materialsData, customData[m].recipes[n], customData[m].recipes[n].quantity, customData[m].chef);
             }
         }
     }
@@ -6688,7 +6688,7 @@ function calCustomResults(data) {
 
                     recipeBox.find(".recipe-result .content").html(getCalRecipeResultDisp(recipeData, currentRule));
 
-                    recipeBox.find(".recipe-box-2 .content").html(getCalRecipeBox2Disp(recipeData, currentRule));
+                    recipeBox.find(".recipe-box-2 .content").html(getCalRecipeBox2Disp(recipeData, currentRule, customData[i].chef));
 
                     recipeBox.find(".recipe-placeholder").addClass("hidden");
 
@@ -6878,13 +6878,33 @@ function getCalRecipeResultDisp(recipeData, currentRule) {
     return result;
 }
 
-function getCalRecipeBox2Disp(recipeData, currentRule) {
+function getCalMaterialsDisp(recipe, materials, chef) {
+    var calMaterialsDisp = "";
+    for (var k in recipe.materials) {
+        for (var m in materials) {
+            if (recipe.materials[k].material == materials[m].materialId) {
+                var mQuantity = calMaterialReduce(chef, recipe.materials[k].material, recipe.materials[k].quantity);
+                calMaterialsDisp += "<span data-id='" + materials[m].materialId + "'>" + materials[m].name + mQuantity + "</span>";
+                break;
+            }
+        }
+    }
+
+    if (recipe.materials.length == 1) {
+        calMaterialsDisp += "<span></span><span></span>";
+    } else if (recipe.materials.length == 2) {
+        calMaterialsDisp += "<span></span>";
+    }
+    return calMaterialsDisp;
+}
+
+function getCalRecipeBox2Disp(recipeData, currentRule, chef) {
     var content = "<div class='rarity'>" + recipeData.data.rarityDisp + "</div>";
     content += "<div class='skill'>";
     content += recipeData.data.skillDisp;
     content += "</div>";
     content += "<div class='material'>";
-    content += recipeData.data.calMaterialsDisp;
+    content += getCalMaterialsDisp(recipeData.data, currentRule.materials, chef);
     content += "</div>";
     content += "<div class='add'>";
     if (recipeData.rankAdditionDisp) {
@@ -7096,8 +7116,7 @@ function calSatiety(customData, rule) {
             }
         }
 
-        if (rule.GuestType == "Normal" && recipeNum == 3
-            || rule.GuestType == "Boss" && recipeNum == 9) {
+        if (rule.IntentList.length * 3 == recipeNum) {
             result.done = true;
             result.add = getSatietyPercent(result.total, rule);
         }
@@ -7721,7 +7740,7 @@ function getCustomRecipesOptions(groupIndex, chefIndex, recipeIndex, data) {
     for (var m in newData) {
         for (var n in newData[m].recipes) {
             if (newData[m].recipes[n].data) {
-                updateMaterialsData(materialsData, newData[m].recipes[n], newData[m].recipes[n].quantity);
+                updateMaterialsData(materialsData, newData[m].recipes[n], newData[m].recipes[n].quantity, newData[m].chef);
             }
         }
     }
@@ -7988,6 +8007,7 @@ function checkMaterials(customData, materials) {
     var materialsData = JSON.parse(JSON.stringify(materials));
 
     for (var i in customData) {
+        var chef = customData[i].chef;
         for (var j in customData[i].recipes) {
             var recipe = customData[i].recipes[j];
             if (recipe.data) {
@@ -7995,7 +8015,8 @@ function checkMaterials(customData, materials) {
                     for (var n in materialsData) {
                         if (recipe.data.materials[m].material == materialsData[n].materialId) {
                             if (Number.isInteger(parseInt(materialsData[n].quantity))) {
-                                materialsData[n].quantity -= recipe.data.materials[m].quantity * recipe.quantity;
+                                var mQuantity = calMaterialReduce(chef, recipe.data.materials[m].material, recipe.data.materials[m].quantity);
+                                materialsData[n].quantity -= mQuantity * recipe.quantity;
                             }
                         }
                     }
@@ -9765,7 +9786,6 @@ function generateData(json, json2, person) {
         var materialsInfo = getMaterialsInfo(json.recipes[i], json.materials);
         recipeData["materialsVal"] = materialsInfo.materialsVal;
         recipeData["materialsDisp"] = materialsInfo.materialsDisp;
-        recipeData["calMaterialsDisp"] = materialsInfo.calMaterialsDisp;
         recipeData["veg"] = materialsInfo.veg;
         recipeData["meat"] = materialsInfo.meat;
         recipeData["creation"] = materialsInfo.creation;
@@ -9978,7 +9998,6 @@ function getMaterialsData(data, map) {
 function getMaterialsInfo(recipe, materials) {
     var materialsInfo = {};
     var materialsDisp = "";
-    var calMaterialsDisp = "";
     var materialsVal = "";
     var materialsCount = 0;
     var veg = false;
@@ -9990,7 +10009,6 @@ function getMaterialsInfo(recipe, materials) {
         for (var m in materials) {
             if (recipe.materials[k].material == materials[m].materialId) {
                 materialsDisp += materials[m].name + "*" + recipe.materials[k].quantity + " ";
-                calMaterialsDisp += "<span data-id='" + materials[m].materialId + "'>" + materials[m].name + recipe.materials[k].quantity + "</span>";
                 materialsVal += materials[m].name + " ";
                 materialsCount += recipe.materials[k].quantity;
                 recipe.materials[k]["origin"] = materials[m].origin;
@@ -10008,14 +10026,7 @@ function getMaterialsInfo(recipe, materials) {
         }
     }
 
-    if (recipe.materials.length == 1) {
-        calMaterialsDisp += "<span></span><span></span>";
-    } else if (recipe.materials.length == 2) {
-        calMaterialsDisp += "<span></span>";
-    }
-
     materialsInfo["materialsDisp"] = materialsDisp;
-    materialsInfo["calMaterialsDisp"] = calMaterialsDisp;
     materialsInfo["materialsVal"] = materialsVal;
     materialsInfo["materialsCount"] = materialsCount;
     materialsInfo["veg"] = veg;

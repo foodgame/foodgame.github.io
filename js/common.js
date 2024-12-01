@@ -231,6 +231,30 @@ function isRecipeBasicAddition(effect, recipe) {
         if (recipe.steam > 0) {
             return true;
         }
+    } else if (type == "BasicPriceUseSweet") {
+        if (recipe.condiment == "Sweet") {
+            return true;
+        }
+    } else if (type == "BasicPriceUseSour") {
+        if (recipe.condiment == "Sour") {
+            return true;
+        }
+    } else if (type == "BasicPriceUseSpicy") {
+        if (recipe.condiment == "Spicy") {
+            return true;
+        }
+    } else if (type == "BasicPriceUseSalty") {
+        if (recipe.condiment == "Salty") {
+            return true;
+        }
+    } else if (type == "BasicPriceUseBitter") {
+        if (recipe.condiment == "Bitter") {
+            return true;
+        }
+    } else if (type == "BasicPriceUseTasty") {
+        if (recipe.condiment == "Tasty") {
+            return true;
+        }
     }
     return false;
 }
@@ -286,7 +310,8 @@ function calMaterialReduce(chef, materialId, quantity) {
                 }
             }
         }
-        return Math.ceil(calReduce(quantity, addtion));
+        quantity = Math.ceil(calReduce(quantity, addtion))
+        return quantity ? quantity : 1;
     }
     return quantity;
 }
@@ -316,11 +341,9 @@ function getRecipeQuantity(recipe, materials, rule, chef) {
                 exist = true;
                 if (Number.isInteger(parseInt(materials[n].quantity))) {
                     var mQuantity = calMaterialReduce(chef, recipe.materials[m].material, recipe.materials[m].quantity);
-                    if (mQuantity != 0) {
-                        var tt = Math.floor(materials[n].quantity / mQuantity);
-                        if (tt < quantity) {
-                            quantity = tt;
-                        }
+                    var tt = Math.floor(materials[n].quantity / mQuantity);
+                    if (tt < quantity) {
+                        quantity = tt;
                     }
                 }
                 break;

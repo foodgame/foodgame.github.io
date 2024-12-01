@@ -19,7 +19,7 @@
                 xhr: function () {
                     var xhr = $.ajaxSettings.xhr();
                     xhr.addEventListener("progress", function (e) {
-                        var total = 1559240;
+                        var total = 1561824;
                         if (e.lengthComputable) {
                             total = e.total;
                         }
@@ -37,7 +37,7 @@
                 complete: function () {
                     $("#loading-progress").remove();
                 },
-                url: 'data/data.min.json?v=166'
+                url: 'data/data.min.json?v=167'
             });
         });
     </script>

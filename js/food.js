@@ -4478,6 +4478,14 @@ function importData(data, input) {
         }).select();
     }
 
+    if (person.buffs) {
+        data.buffs = person.buffs;
+    }
+
+    if (person.intents) {
+        data.intents = person.intents;
+    }
+
     var old = getLocalData();
     if (!old.cal) {
         old["cal"] = [];
@@ -6261,6 +6269,7 @@ function loadRule(data, customRule) {
                     for (var k in rule.RecipesTagsEffect) {
                         if (allRecipes[i].tags[j] == rule.RecipesTagsEffect[k].TagID) {
                             allRecipes[i].addition = +(Number(allRecipes[i].addition) + rule.RecipesTagsEffect[k].Effect).toFixed(2);
+                            break;
                         }
                     }
                 }
@@ -6321,6 +6330,7 @@ function loadRule(data, customRule) {
                     for (var k in rule.ChefsTagsEffect) {
                         if (allChefs[i].tags[j] == rule.ChefsTagsEffect[k].TagID) {
                             allChefs[i].addition = +(Number(allChefs[i].addition) + rule.ChefsTagsEffect[k].Effect).toFixed(2);
+                            break;
                         }
                     }
                 }

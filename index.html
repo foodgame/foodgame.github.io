@@ -11,7 +11,7 @@
     <script type="text/javascript" src="js/common.min.js?v=67"></script>
     <link rel="stylesheet" type="text/css" href="css/food.min.css?v=71" />
     <script type="text/javascript" src="js/food.min.js?v=223"></script>
-    <link rel="stylesheet" type="text/css" href="css/image.css?v=153" />
+    <link rel="stylesheet" type="text/css" href="css/image.css?v=154" />
     <script>
         $(function () {
             $.ajax({
@@ -19,7 +19,7 @@
                 xhr: function () {
                     var xhr = $.ajaxSettings.xhr();
                     xhr.addEventListener("progress", function (e) {
-                        var total = 1566141;
+                        var total = 1567374;
                         if (e.lengthComputable) {
                             total = e.total;
                         }
@@ -37,7 +37,7 @@
                 complete: function () {
                     $("#loading-progress").remove();
                 },
-                url: 'data/data.min.json?v=174'
+                url: 'data/data.min.json?v=175'
             });
         });
     </script>

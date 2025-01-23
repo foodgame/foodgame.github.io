@@ -60,7 +60,7 @@ function getRankInfo(recipe, chef) {
 
 function getRecipeAddition(effects, chef, recipes, recipe, quantity, rule) {
     var price = 0;
-    var basic = 0;
+    var basic = new Addition();
 
     for (var i in effects) {
         var effect = effects[i];
@@ -71,7 +71,7 @@ function getRecipeAddition(effects, chef, recipes, recipe, quantity, rule) {
             }
 
             if (isRecipeBasicAddition(effect, recipe)) {
-                basic += effect.value * condition.count;
+                addEffectAddition(basic, effect, condition.count);
             }
         }
     }
@@ -393,11 +393,11 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
         if (!rule || !rule.hasOwnProperty("DisableChefSkillEffect") || rule.DisableChefSkillEffect == false) {
             var specialSkillAdds = getRecipeAddition(chef.specialSkillEffect, chef, recipes, recipe, quantity, rule);
             chefSkillAddition += specialSkillAdds.price;
-            basicAddition.percent += specialSkillAdds.basic;
+            addAddition(basicAddition, specialSkillAdds.basic);
 
             var selfUltimateAdds = getRecipeAddition(chef.selfUltimateEffect, chef, recipes, recipe, quantity, rule);
             chefSkillAddition += selfUltimateAdds.price;
-            basicAddition.percent += selfUltimateAdds.basic;
+            addAddition(basicAddition, selfUltimateAdds.basic);
 
             if (partialRecipeAdds) {
                 for (var i in partialRecipeAdds) {
@@ -407,7 +407,7 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
                     }
 
                     if (isRecipeBasicAddition(effect, recipe)) {
-                        basicAddition.percent += effect.value * partialRecipeAdds[i].count;
+                        addEffectAddition(basicAddition, effect, partialRecipeAdds[i].count);
                     }
                 }
             }
@@ -418,7 +418,7 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
             if (amber) {
                 var amberAdds = getRecipeAddition(amber.allEffect[chef.disk.level - 1], chef, recipes, recipe, quantity, rule);
                 chefSkillAddition += amberAdds.price;
-                basicAddition.percent += amberAdds.basic;
+                addAddition(basicAddition, amberAdds.basic);
             }
         }
 
@@ -429,7 +429,7 @@ function getRecipeResult(chef, equip, recipe, quantity, maxQuantity, materials, 
                 var equipEffect = updateEquipmentEffect(equip.effect, chef.selfUltimateEffect);
                 var equipSkillAdds = getRecipeAddition(equipEffect, chef, recipes, recipe, quantity, rule);
                 equipSkillAddition = equipSkillAdds.price;
-                basicAddition.percent += equipSkillAdds.basic;
+                addAddition(basicAddition, equipSkillAdds.basic);
             }
         }
         resultData["equipSkillAdditionDisp"] = getPercentDisp(equipSkillAddition);
@@ -588,6 +588,19 @@ function setAddition(addition, effect) {
     } else if (effect.cal == "Percent") {
         addition.percent = +(addition.percent + effect.value).toFixed(2);
     }
+}
+
+function addEffectAddition(addition, effect, count) {
+    if (effect.cal == "Abs") {
+        addition.abs += effect.value * count;
+    } else if (effect.cal == "Percent") {
+        addition.percent += effect.value * count;
+    }
+}
+
+function addAddition(addition, add) {
+    addition.abs += add.abs;
+    addition.percent += add.percent;
 }
 
 function Addition() {

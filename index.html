@@ -19,7 +19,7 @@
                 xhr: function () {
                     var xhr = $.ajaxSettings.xhr();
                     xhr.addEventListener("progress", function (e) {
-                        var total = 1588796;
+                        var total = 1589388;
                         if (e.lengthComputable) {
                             total = e.total;
                         }
@@ -37,7 +37,7 @@
                 complete: function () {
                     $("#loading-progress").remove();
                 },
-                url: 'data/data.min.json?v=176'
+                url: 'data/data.min.json?v=177'
             });
         });
     </script>
@@ -923,7 +923,7 @@
                                     data-dropdown-align-right='auto' data-live-search-placeholder='查找'
                                     data-none-results-text='没有找到' data-none-selected-text='选择规则'>
                                     <option value='0'>正常营业</option>
-                                    <optgroup label="身临柒境"></optgroup>
+                                    <optgroup label="年兽"></optgroup>
                                     <optgroup label="风云宴"></optgroup>
                                     <optgroup label="江湖帖"></optgroup>
                                     <optgroup label="贤客楼"></optgroup>

@@ -311,7 +311,7 @@ function calMaterialReduce(chef, materialId, quantity) {
             }
         }
         quantity = Math.ceil(calReduce(quantity, addtion))
-        return quantity ? quantity : 1;
+        return quantity > 1 ? quantity : 1;
     }
     return quantity;
 }

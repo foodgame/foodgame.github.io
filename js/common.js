@@ -64,7 +64,7 @@ function getRecipeAddition(effects, chef, recipes, recipe, quantity, rule) {
 
     for (var i in effects) {
         var effect = effects[i];
-        var condition = checkSkillCondition(effect, chef, recipes, recipe, quantity);
+        var condition = checkSkillCondition(effect, chef, recipes, recipe, quantity, null);
         if (condition.pass) {
             if (isRecipePriceAddition(effect, recipe, rule)) {
                 price += effect.value * condition.count;
@@ -701,7 +701,7 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, partialChef
 
         if (partialChefAdds) {
             for (var i in partialChefAdds) {
-                var condition = checkSkillCondition(partialChefAdds[i], chef, null, null, null);
+                var condition = checkSkillCondition(partialChefAdds[i], chef, null, null, null, null);
                 if (condition.pass) {
                     effects = effects.concat(partialChefAdds[i]);
                 }
@@ -889,8 +889,9 @@ function getPartialRecipeAdds(customData, skills, rule) {
                     for (var m in skill.effect) {
                         var effect = skill.effect[m];
                         if (effect.condition == "Partial") {
-                            if (!effect.conditionType || effect.conditionType == "PerRank" || effect.conditionType == "SameSkill") {
-                                var condition = checkSkillCondition(effect, chef, recipes, null, null);
+                            if (!effect.conditionType || effect.conditionType == "PerRank" || effect.conditionType == "SameSkill" 
+                                || effect.conditionType == "PerSkill") {
+                                var condition = checkSkillCondition(effect, chef, recipes, null, null, customData);
                                 if (condition.pass) {
                                     var add = {};
                                     add["effect"] = effect;
@@ -912,7 +913,7 @@ function getPartialRecipeAdds(customData, skills, rule) {
                                     }
                                     var startIndex = Number(j) * 3;
                                     for (var g in customData[j].recipes) {
-                                        var condition = checkSkillCondition(effect, customData[j].chef, null, customData[j].recipes[g].data, customData[j].recipes[g].quantity);
+                                        var condition = checkSkillCondition(effect, customData[j].chef, null, customData[j].recipes[g].data, customData[j].recipes[g].quantity, null);
                                         if (condition.pass) {
                                             var add = {};
                                             add["effect"] = effect;
@@ -923,7 +924,7 @@ function getPartialRecipeAdds(customData, skills, rule) {
                                 }
                             }
                         } else if (effect.condition == "Next" && Number(i) < round - 1) {
-                            var condition = checkSkillCondition(effect, chef, recipes, null, null);
+                            var condition = checkSkillCondition(effect, chef, recipes, null, null, null);
                             if (condition.pass) {
                                 var add = {};
                                 add["effect"] = effect;
@@ -944,7 +945,7 @@ function getPartialRecipeAdds(customData, skills, rule) {
     return partialAdds;
 }
 
-function checkSkillCondition(effect, chef, recipes, recipe, quantity) {
+function checkSkillCondition(effect, chef, recipes, recipe, quantity, customData) {
     var result = {};
     result["pass"] = true;
     result["count"] = 1;
@@ -1071,6 +1072,34 @@ function checkSkillCondition(effect, chef, recipes, recipe, quantity) {
         }
         if (sameCount > 0) {
             result.count = sameCount;
+            return result;
+        }
+    } else if (effect.conditionType == "PerSkill") {
+        var count = 0;
+        if (customData) {
+            for (var i in customData) {
+                for (var j in customData[i].recipes) {
+                    var oneRecipe = customData[i].recipes[j].data;
+                    if (oneRecipe) {
+                        if (effect.conditionValue == 1 && oneRecipe.stirfry > 0) {
+                            count++;
+                        } else if (effect.conditionValue == 2 && oneRecipe.fry > 0) {
+                            count++;
+                        } else if (effect.conditionValue == 3 && oneRecipe.bake > 0) {
+                            count++;
+                        } else if (effect.conditionValue == 4 && oneRecipe.steam > 0) {
+                            count++;
+                        } else if (effect.conditionValue == 5 && oneRecipe.boil > 0) {
+                            count++;
+                        } else if (effect.conditionValue == 6 && oneRecipe.knife > 0) {
+                            count++;
+                        }
+                    }
+                }
+            }
+        }
+        if (count > 0) {
+            result.count = count;
             return result;
         }
     } else if (effect.conditionType == "MaterialReduce") {

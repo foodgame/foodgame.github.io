@@ -771,7 +771,7 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, partialChef
             setAddition(tastyAddition, effects[i]);
         } else if (type == "MaxEquipLimit" && (effects[i].condition == "Self" || effects[i].condition == "Partial")) {
             maxLimitEffect = maxLimitEffect.concat(effects[i]);
-        } else if (type == "MaterialReduce" && (effects[i].condition == "Self" || effects[i].condition == "Partial")) {
+        } else if (type == "MaterialReduce" && effects[i].condition == "Self") {
             materialEffects = materialEffects.concat(effects[i]);
         }
     }

@@ -769,9 +769,9 @@ function setDataForChef(chef, equip, useEquip, globalUltimateEffect, partialChef
             setAddition(bitterAddition, effects[i]);
         } else if (type == "Tasty") {
             setAddition(tastyAddition, effects[i]);
-        } else if (type == "MaxEquipLimit" && effects[i].condition == "Self") {
+        } else if (type == "MaxEquipLimit" && (effects[i].condition == "Self" || effects[i].condition == "Partial")) {
             maxLimitEffect = maxLimitEffect.concat(effects[i]);
-        } else if (type == "MaterialReduce" && effects[i].condition == "Self") {
+        } else if (type == "MaterialReduce" && (effects[i].condition == "Self" || effects[i].condition == "Partial")) {
             materialEffects = materialEffects.concat(effects[i]);
         }
     }
@@ -857,7 +857,8 @@ function isChefAddType(type) {
         || type == "Knife"
         || type == "Fry"
         || type == "Bake"
-        || type == "Steam") {
+        || type == "Steam"
+        || type == "MaxEquipLimit") {
         return true;
     } else {
         return false;

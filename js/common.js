@@ -873,7 +873,7 @@ function getCustomRound(rule) {
     }
 }
 
-function getPartialRecipeAdds(customData, skills, rule) {
+function getPartialRecipeAdds(customData, rule) {
     var round = getCustomRound(rule);
     var partialAdds = [];
     for (var o = 0; o < round * 3; o++) {
@@ -883,61 +883,55 @@ function getPartialRecipeAdds(customData, skills, rule) {
     for (var i in customData) {
         var chef = customData[i].chef;
         if (chef.chefId && rule.calPartialChefIds.indexOf(chef.chefId) >= 0) {
-            for (var k in skills) {
-                var skill = skills[k];
-                if (chef.ultimateSkill == skill.skillId) {
-                    var recipes = customData[i].recipes;
-                    for (var m in skill.effect) {
-                        var effect = skill.effect[m];
-                        if (effect.condition == "Partial") {
-                            if (!effect.conditionType || effect.conditionType == "PerRank" || effect.conditionType == "SameSkill" 
-                                || effect.conditionType == "PerSkill") {
-                                var condition = checkSkillCondition(effect, chef, recipes, null, null, customData);
+            var recipes = customData[i].recipes;
+            for (var m in chef.ultimateSkillEffect) {
+                var effect = chef.ultimateSkillEffect[m];
+                if (effect.condition == "Partial") {
+                    if (!effect.conditionType || effect.conditionType == "PerRank" || effect.conditionType == "SameSkill"
+                        || effect.conditionType == "PerSkill") {
+                        var condition = checkSkillCondition(effect, chef, recipes, null, null, customData);
+                        if (condition.pass) {
+                            var add = {};
+                            add["effect"] = effect;
+                            add["count"] = condition.count;
+                            var startIndex = 0;
+                            if (rule.Satiety) {
+                                startIndex = Number(i) * 3;
+                            }
+                            for (var o = startIndex; o < round * 3; o++) {
+                                partialAdds[o].push(add);
+                            }
+                        }
+                    } else {
+                        for (var j in customData) {
+                            if (rule.Satiety) {
+                                if (j < i) {
+                                    continue;
+                                }
+                            }
+                            var startIndex = Number(j) * 3;
+                            for (var g in customData[j].recipes) {
+                                var condition = checkSkillCondition(effect, customData[j].chef, null, customData[j].recipes[g].data, customData[j].recipes[g].quantity, null);
                                 if (condition.pass) {
                                     var add = {};
                                     add["effect"] = effect;
                                     add["count"] = condition.count;
-                                    var startIndex = 0;
-                                    if (rule.Satiety) {
-                                        startIndex = Number(i) * 3;
-                                    }
-                                    for (var o = startIndex; o < round * 3; o++) {
-                                        partialAdds[o].push(add);
-                                    }
-                                }
-                            } else {
-                                for (var j in customData) {
-                                    if (rule.Satiety) {
-                                        if (j < i) {
-                                            continue;
-                                        }
-                                    }
-                                    var startIndex = Number(j) * 3;
-                                    for (var g in customData[j].recipes) {
-                                        var condition = checkSkillCondition(effect, customData[j].chef, null, customData[j].recipes[g].data, customData[j].recipes[g].quantity, null);
-                                        if (condition.pass) {
-                                            var add = {};
-                                            add["effect"] = effect;
-                                            add["count"] = condition.count;
-                                            partialAdds[startIndex + Number(g)].push(add);
-                                        }
-                                    }
-                                }
-                            }
-                        } else if (effect.condition == "Next" && Number(i) < round - 1) {
-                            var condition = checkSkillCondition(effect, chef, recipes, null, null, null);
-                            if (condition.pass) {
-                                var add = {};
-                                add["effect"] = effect;
-                                add["count"] = condition.count;
-                                var startIndex = Number(i) * 3 + 3;
-                                for (var o = 0; o < 3; o++) {
-                                    partialAdds[startIndex + o].push(add);
+                                    partialAdds[startIndex + Number(g)].push(add);
                                 }
                             }
                         }
                     }
-                    break;
+                } else if (effect.condition == "Next" && Number(i) < round - 1) {
+                    var condition = checkSkillCondition(effect, chef, recipes, null, null, null);
+                    if (condition.pass) {
+                        var add = {};
+                        add["effect"] = effect;
+                        add["count"] = condition.count;
+                        var startIndex = Number(i) * 3 + 3;
+                        for (var o = 0; o < 3; o++) {
+                            partialAdds[startIndex + o].push(add);
+                        }
+                    }
                 }
             }
         }
@@ -1113,28 +1107,23 @@ function checkSkillCondition(effect, chef, recipes, recipe, quantity, customData
     return result;
 }
 
-function getSelfUltimateData(chefs, skills, useUltimate, ids) {
+function getSelfUltimateData(chefs, useUltimate, ids) {
     var result = [];
     if (useUltimate) {
         for (var i in ids) {
             for (var j in chefs) {
                 if (ids[i] == chefs[j].chefId) {
-                    for (var k in skills) {
-                        if (chefs[j].ultimateSkill == skills[k].skillId) {
-                            var tempEffect = [];
-                            for (var m in skills[k].effect) {
-                                if (skills[k].effect[m].condition == "Self") {
-                                    tempEffect.push(skills[k].effect[m]);
-                                }
-                            }
-                            if (tempEffect.length) {
-                                var selfData = {};
-                                selfData["chefId"] = chefs[j].chefId;
-                                selfData["effect"] = tempEffect;
-                                result.push(selfData);
-                            }
-                            break;
+                    var tempEffect = [];
+                    for (var m in chefs[j].ultimateSkillEffect) {
+                        if (chefs[j].ultimateSkillEffect[m].condition == "Self") {
+                            tempEffect.push(chefs[j].ultimateSkillEffect[m]);
                         }
+                    }
+                    if (tempEffect.length) {
+                        var selfData = {};
+                        selfData["chefId"] = chefs[j].chefId;
+                        selfData["effect"] = tempEffect;
+                        result.push(selfData);
                     }
                     break;
                 }
@@ -1144,25 +1133,19 @@ function getSelfUltimateData(chefs, skills, useUltimate, ids) {
     return result;
 }
 
-function getPartialChefAddsByIds(chefs, skills, useUltimate, ids) {
+function getPartialChefAddsByIds(chefs, useUltimate, ids) {
     var partialChefAdds = [];
     if (useUltimate) {
         for (var i in ids) {
             for (var j in chefs) {
                 var chef = chefs[j];
                 if (ids[i] == chef.chefId) {
-                    for (var k in skills) {
-                        var skill = skills[k];
-                        if (chef.ultimateSkill == skill.skillId) {
-                            for (var m in skill.effect) {
-                                var effect = skill.effect[m];
-                                if (effect.condition == "Partial") {
-                                    if (isChefAddType(effect.type)) {
-                                        partialChefAdds.push(effect);
-                                    }
-                                }
+                    for (var m in chef.ultimateSkillEffect) {
+                        var effect = chef.ultimateSkillEffect[m];
+                        if (effect.condition == "Partial") {
+                            if (isChefAddType(effect.type)) {
+                                partialChefAdds.push(effect);
                             }
-                            break;
                         }
                     }
                     break;
@@ -1173,7 +1156,7 @@ function getPartialChefAddsByIds(chefs, skills, useUltimate, ids) {
     return partialChefAdds;
 }
 
-function getPartialChefAdds(customData, skills, rule) {
+function getPartialChefAdds(customData, rule) {
     var round = getCustomRound(rule);
     var partialAdds = [];
     for (var o = 0; o < round; o++) {
@@ -1183,28 +1166,22 @@ function getPartialChefAdds(customData, skills, rule) {
     for (var i in customData) {
         var chef = customData[i].chef;
         if (chef.chefId && rule.calPartialChefIds.indexOf(chef.chefId) >= 0) {
-            for (var k in skills) {
-                var skill = skills[k];
-                if (chef.ultimateSkill == skill.skillId) {
-                    for (var m in skill.effect) {
-                        var effect = JSON.parse(JSON.stringify(skill.effect[m]));
-                        if (effect.condition == "Partial") {
-                            if (isChefAddType(effect.type)) {
-                                var startIndex = 0;
-                                if (rule.Satiety) {
-                                    startIndex = Number(i);
-                                }
-                                for (var o = startIndex; o < round; o++) {
-                                    partialAdds[o].push(effect);
-                                }
-                            }
-                        } else if (effect.condition == "Next" && Number(i) < round - 1) {
-                            if (isChefAddType(effect.type)) {
-                                partialAdds[Number(i) + 1].push(effect);
-                            }
+            for (var m in chef.ultimateSkillEffect) {
+                var effect = JSON.parse(JSON.stringify(chef.ultimateSkillEffect[m]));
+                if (effect.condition == "Partial") {
+                    if (isChefAddType(effect.type)) {
+                        var startIndex = 0;
+                        if (rule.Satiety) {
+                            startIndex = Number(i);
+                        }
+                        for (var o = startIndex; o < round; o++) {
+                            partialAdds[o].push(effect);
                         }
                     }
-                    break;
+                } else if (effect.condition == "Next" && Number(i) < round - 1) {
+                    if (isChefAddType(effect.type)) {
+                        partialAdds[Number(i) + 1].push(effect);
+                    }
                 }
             }
         }

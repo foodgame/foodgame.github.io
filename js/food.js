@@ -94,7 +94,7 @@ function initTables(data, person) {
 
     updateMenu(person);
 
-    setPartialUltimateOptions(data.chefs, data.partialSkill);
+    setPartialUltimateOptions(data.chefs);
 
     initRecipeTable(data);
 
@@ -1604,7 +1604,7 @@ function updateRecipesChefsData(data) {
                             }
                         }
 
-                        var partialChefAdds = getPartialChefAddsByIds(data.chefs, data.partialSkill, useUltimate, newPartialChefIds);
+                        var partialChefAdds = getPartialChefAddsByIds(data.chefs, useUltimate, newPartialChefIds);
                         setDataForChef(chef, equip, useEquip, data.ultimateData.global, partialChefAdds, data.ultimateData.self, null, true, null, useUltimate);
 
                         var resultInfo = getRecipeResult(chef, equip, data.recipes[i],
@@ -1863,7 +1863,7 @@ function updateChefsRecipesData(data) {
                             }
                         }
 
-                        var partialChefAdds = getPartialChefAddsByIds(data.chefs, data.partialSkill, useUltimate, newPartialChefIds);
+                        var partialChefAdds = getPartialChefAddsByIds(data.chefs, useUltimate, newPartialChefIds);
                         setDataForChef(chef, equip, useEquip, data.ultimateData.global, partialChefAdds, data.ultimateData.self, null, true, null, useUltimate);
 
                         var resultInfo = getRecipeResult(chef, equip, data.recipes[j],
@@ -4967,7 +4967,7 @@ function initCalTables(data, person) {
     calCustomRule["score"] = 0;
     calCustomRule["rules"] = [];
 
-    setSelfUltimateOptions(data.chefs, data.skills);
+    setSelfUltimateOptions(data.chefs);
     setExOptions(data.recipes);
     initCalRecipesTable();
     initCalCustomTable(data);
@@ -5504,7 +5504,7 @@ function loadCalRule(data) {
 function loadUltimate(data, usePerson) {
     var person = getLocalData();
 
-    var ultimateData = getUltimateData(data.chefs, person, data.skills, true, usePerson);
+    var ultimateData = getUltimateData(data.chefs, person, true, usePerson);
     var globalUltimate = ultimateData.global;
 
     for (var i in globalUltimate) {
@@ -5879,7 +5879,7 @@ function setCalConfigData(data) {
         for (var i in selfChefIds) {
             selfChefIds[i] = Number(selfChefIds[i]);
         }
-        var selfUltimateData = getSelfUltimateData(data.chefs, data.skills, true, selfChefIds);
+        var selfUltimateData = getSelfUltimateData(data.chefs, true, selfChefIds);
 
         var activityUltimateData = getActivityConfigData(rule);
 
@@ -6573,7 +6573,7 @@ function calCustomResults(data) {
         var currentRule = calCustomRule.rules[groupIndex];
         var customData = currentRule.custom;
 
-        var partialChefAdds = getPartialChefAdds(customData, data.partialSkill, currentRule);
+        var partialChefAdds = getPartialChefAdds(customData, currentRule);
 
         for (var i in customData) {
             for (var j in customData[i].recipes) {
@@ -6593,7 +6593,7 @@ function calCustomResults(data) {
             }
         }
 
-        var partialRecipeAdds = getPartialRecipeAdds(customData, data.partialSkill, currentRule);
+        var partialRecipeAdds = getPartialRecipeAdds(customData, currentRule);
 
         var intentAdds = getIntentAdds(groupIndex, customData, data, true);
 
@@ -7229,7 +7229,7 @@ function getCustomChefsOptions(groupIndex, index, data) {
         }
 
         if (hasRecipe) {
-            var partialChefAdds = getPartialChefAdds(newData, data.partialSkill, currentRule);
+            var partialChefAdds = getPartialChefAdds(newData, currentRule);
 
             if (customData[index].chef.chefId == chefs[i].chefId) {
                 newData[index].equip = customData[index].equip;
@@ -7268,7 +7268,7 @@ function getCustomChefsOptions(groupIndex, index, data) {
 
             newData[index].chef = chef;
 
-            var partialRecipeAdds = getPartialRecipeAdds(newData, data.partialSkill, currentRule);
+            var partialRecipeAdds = getPartialRecipeAdds(newData, currentRule);
 
             var intentAdds = getIntentAdds(groupIndex, newData, data, false);
 
@@ -7338,32 +7338,26 @@ function getCustomChefsOptions(groupIndex, index, data) {
     return options;
 }
 
-function getChefUltimateCustomDisp(skillId, skills) {
+function getChefUltimateCustomDisp(effects, disp) {
     var valid = false;
-    if (skillId) {
-        for (var k in skills) {
-            if (skillId == skills[k].skillId) {
-                for (var m in skills[k].effect) {
-                    if (skills[k].effect[m].condition == "Partial") {
-                        valid = true;
-                        break;
-                    } else if (skills[k].effect[m].condition == "Self") {
-                        if (skills[k].effect[m].type != "Material_Gain") {
-                            valid = true;
-                            break;
-                        }
-                    } else if (skills[k].effect[m].condition == "Next") {
-                        valid = true;
-                        break;
-                    }
-                }
+
+    for (var m in effects) {
+        if (effects[m].condition == "Partial") {
+            valid = true;
+            break;
+        } else if (effects[m].condition == "Self") {
+            if (effects[m].type != "Material_Gain") {
+                valid = true;
                 break;
             }
+        } else if (effects[m].condition == "Next") {
+            valid = true;
+            break;
         }
-        if (valid) {
-            var skillInfo = getSkillInfo(skills, skillId);
-            return skillInfo.skillDisp.replace(/<br>/g, " ")
-        }
+    }
+
+    if (valid) {
+        return disp.replace(/<br>/g, " ")
     }
     return "";
 }
@@ -7382,7 +7376,7 @@ function getCustomDiskLevelsOptions(groupIndex, chefIndex, data) {
 
     var newData = JSON.parse(JSON.stringify(customData));
 
-    var partialChefAdds = getPartialChefAdds(newData, data.partialSkill, currentRule);
+    var partialChefAdds = getPartialChefAdds(newData, currentRule);
 
     var maxLevel = newData[chefIndex].chef.disk.maxLevel;
     var level = newData[chefIndex].chef.disk.level;
@@ -7417,7 +7411,7 @@ function getCustomDiskLevelsOptions(groupIndex, chefIndex, data) {
 
             newData[chefIndex].chef = chef;
 
-            var partialRecipeAdds = getPartialRecipeAdds(newData, data.partialSkill, currentRule);
+            var partialRecipeAdds = getPartialRecipeAdds(newData, currentRule);
 
             var intentAdds = getIntentAdds(groupIndex, newData, data, false);
 
@@ -7475,7 +7469,7 @@ function getCustomAmbersOptions(groupIndex, chefIndex, diskIndex, ambers, data) 
 
     var newData = JSON.parse(JSON.stringify(customData));
 
-    var partialChefAdds = getPartialChefAdds(newData, data.partialSkill, currentRule);
+    var partialChefAdds = getPartialChefAdds(newData, currentRule);
 
     var options = [];
 
@@ -7514,7 +7508,7 @@ function getCustomAmbersOptions(groupIndex, chefIndex, diskIndex, ambers, data) 
 
             newData[chefIndex].chef = chef;
 
-            var partialRecipeAdds = getPartialRecipeAdds(newData, data.partialSkill, currentRule);
+            var partialRecipeAdds = getPartialRecipeAdds(newData, currentRule);
 
             var intentAdds = getIntentAdds(groupIndex, newData, data, false);
 
@@ -7592,7 +7586,7 @@ function getCustomEquipsOptions(groupIndex, index, equips, data) {
 
     var newData = JSON.parse(JSON.stringify(customData));
 
-    var partialChefAdds = getPartialChefAdds(newData, data.partialSkill, currentRule);
+    var partialChefAdds = getPartialChefAdds(newData, currentRule);
 
     var options = [];
 
@@ -7628,7 +7622,7 @@ function getCustomEquipsOptions(groupIndex, index, equips, data) {
 
             newData[index].chef = chef;
 
-            var partialRecipeAdds = getPartialRecipeAdds(newData, data.partialSkill, currentRule);
+            var partialRecipeAdds = getPartialRecipeAdds(newData, currentRule);
 
             var intentAdds = getIntentAdds(groupIndex, newData, data, false);
 
@@ -7702,7 +7696,7 @@ function getCustomCondimentsOptions(groupIndex, index, condiments, data) {
 
     var newData = JSON.parse(JSON.stringify(customData));
 
-    var partialRecipeAdds = getPartialRecipeAdds(newData, data.partialSkill, currentRule);
+    var partialRecipeAdds = getPartialRecipeAdds(newData, currentRule);
 
     var intentAdds = getIntentAdds(groupIndex, newData, data, false);
 
@@ -7855,7 +7849,7 @@ function getCustomRecipesOptions(groupIndex, chefIndex, recipeIndex, data) {
         newData[chefIndex].recipes[recipeIndex]["quantity"] = quantity;
         newData[chefIndex].recipes[recipeIndex]["max"] = max;
 
-        var partialRecipeAdds = getPartialRecipeAdds(newData, data.partialSkill, currentRule);
+        var partialRecipeAdds = getPartialRecipeAdds(newData, currentRule);
 
         var intentAdds = getIntentAdds(groupIndex, newData, data, false);
 
@@ -9677,7 +9671,7 @@ function generateData(json, json2, person) {
     var useEquip = $("#chk-chef-apply-equips").prop("checked");
     var useUltimate = $("#chk-chef-apply-ultimate").prop("checked");
     var usePerson = $("#chk-chef-apply-ultimate-person").prop("checked");
-    var ultimateData = getUltimateData(json.chefs, person, json.skills, useUltimate, usePerson);
+    var ultimateData = getUltimateData(json.chefs, person, useUltimate, usePerson);
 
     retData["ultimateData"] = ultimateData;
 
@@ -9730,9 +9724,18 @@ function generateData(json, json2, person) {
 
         var ultimateSkillInfo = getSkillInfo(json.skills, json.chefs[i].ultimateSkill);
         chefData["ultimateSkillDisp"] = ultimateSkillInfo.skillDisp;
-        chefData["ultimateSkillEffect"] = ultimateSkillInfo.skillEffect;
 
-        chefData["ultimateCustomDisp"] = getChefUltimateCustomDisp(json.chefs[i].ultimateSkill, json.skills);
+        if (json.chefs[i].ultimateSkillExtra) {
+            var skillIds = [];
+            skillIds.push(json.chefs[i].ultimateSkill);
+            skillIds = skillIds.concat(json.chefs[i].ultimateSkillExtra);
+            var ultimateSkillInfo2 = getSkillInfo(json.skills, skillIds);
+            chefData["ultimateSkillEffect"] = ultimateSkillInfo2.skillEffect;
+        } else {
+            chefData["ultimateSkillEffect"] = ultimateSkillInfo.skillEffect;
+        }
+
+        chefData["ultimateCustomDisp"] = getChefUltimateCustomDisp(chefData.ultimateSkillEffect, chefData.ultimateSkillDisp);
 
         chefData["got"] = "";
         chefData["ultimate"] = "";
@@ -9962,12 +9965,12 @@ function getUpdateData(data) {
     var useEquip = $("#chk-chef-apply-equips").prop("checked");
     var useUltimate = $("#chk-chef-apply-ultimate").prop("checked");
     var usePerson = $("#chk-chef-apply-ultimate-person").prop("checked");
-    var ultimateData = getUltimateData(data.chefs, person, data.skills, useUltimate, usePerson);
+    var ultimateData = getUltimateData(data.chefs, person, useUltimate, usePerson);
 
     data.ultimateData = ultimateData;
 
     var partialChefIds = $('#chk-chef-partial-ultimate').val();
-    var partialChefAdds = getPartialChefAddsByIds(data.chefs, data.partialSkill, useUltimate, partialChefIds);
+    var partialChefAdds = getPartialChefAddsByIds(data.chefs, useUltimate, partialChefIds);
 
     for (var i in data.chefs) {
         setDataForChef(data.chefs[i], data.chefs[i].equip, useEquip, ultimateData.global, partialChefAdds, ultimateData.self, null, showFinal, null, useUltimate);
@@ -10243,7 +10246,7 @@ function ifUseEx(recipe) {
     return false;
 }
 
-function getUltimateData(chefs, person, skills, useUltimate, usePerson) {
+function getUltimateData(chefs, person, useUltimate, usePerson) {
     var globalEffect = [];
     var partialEffect = [];
     var selfEffect = [];
@@ -10269,46 +10272,42 @@ function getUltimateData(chefs, person, skills, useUltimate, usePerson) {
             }
 
             if (valid) {
-                for (var k in skills) {
-                    if (chefs[i].ultimateSkill == skills[k].skillId) {
-                        var tempEffect = [];
-                        var tempEffect2 = [];
-                        for (var m in skills[k].effect) {
-                            if (skills[k].effect[m].condition == "Partial" || skills[k].effect[m].condition == "Next") {
-                                tempEffect.push(skills[k].effect[m]);
-                            } else if (skills[k].effect[m].condition == "Global") {
-                                var found = false;
-                                for (var n in globalEffect) {
-                                    if (globalEffect[n].type == skills[k].effect[m].type
-                                        && (globalEffect[n].cal == skills[k].effect[m].cal || !globalEffect[n].cal && !skills[k].effect[m].cal)
-                                        && (globalEffect[n].tag == skills[k].effect[m].tag || !globalEffect[n].tag && !skills[k].effect[m].tag)
-                                        && (globalEffect[n].rarity == skills[k].effect[m].rarity || !globalEffect[n].rarity && !skills[k].effect[m].rarity)) {
-                                        globalEffect[n].value = +(globalEffect[n].value + skills[k].effect[m].value).toFixed(2);
-                                        found = true;
-                                        break;
-                                    }
-                                }
-                                if (!found) {
-                                    globalEffect.push(JSON.parse(JSON.stringify(skills[k].effect[m])));
-                                }
-                            } else if (skills[k].effect[m].condition == "Self") {
-                                tempEffect2.push(skills[k].effect[m]);
+                var tempEffect = [];
+                var tempEffect2 = [];
+                for (var m in chefs[i].ultimateSkillEffect) {
+                    var effect = chefs[i].ultimateSkillEffect[m];
+                    if (effect.condition == "Partial" || effect.condition == "Next") {
+                        tempEffect.push(effect);
+                    } else if (effect.condition == "Global") {
+                        var found = false;
+                        for (var n in globalEffect) {
+                            if (globalEffect[n].type == effect.type
+                                && (globalEffect[n].cal == effect.cal || !globalEffect[n].cal && !effect.cal)
+                                && (globalEffect[n].tag == effect.tag || !globalEffect[n].tag && !effect.tag)
+                                && (globalEffect[n].rarity == effect.rarity || !globalEffect[n].rarity && !effect.rarity)) {
+                                globalEffect[n].value = +(globalEffect[n].value + effect.value).toFixed(2);
+                                found = true;
+                                break;
                             }
                         }
-                        if (tempEffect.length) {
-                            var partialData = {};
-                            partialData["chefId"] = chefs[i].chefId;
-                            partialData["effect"] = tempEffect;
-                            partialEffect.push(partialData);
+                        if (!found) {
+                            globalEffect.push(JSON.parse(JSON.stringify(effect)));
                         }
-                        if (tempEffect2.length) {
-                            var selfData = {};
-                            selfData["chefId"] = chefs[i].chefId;
-                            selfData["effect"] = tempEffect2;
-                            selfEffect.push(selfData);
-                        }
-                        break;
+                    } else if (effect.condition == "Self") {
+                        tempEffect2.push(effect);
                     }
+                }
+                if (tempEffect.length) {
+                    var partialData = {};
+                    partialData["chefId"] = chefs[i].chefId;
+                    partialData["effect"] = tempEffect;
+                    partialEffect.push(partialData);
+                }
+                if (tempEffect2.length) {
+                    var selfData = {};
+                    selfData["chefId"] = chefs[i].chefId;
+                    selfData["effect"] = tempEffect2;
+                    selfEffect.push(selfData);
                 }
             }
         }
@@ -10321,42 +10320,36 @@ function getUltimateData(chefs, person, skills, useUltimate, usePerson) {
     return result;
 }
 
-function setPartialUltimateOptions(chefs, skills) {
+function setPartialUltimateOptions(chefs) {
     var partialArray = [];
     for (var i in chefs) {
-        if (chefs[i].ultimateSkill) {
-            for (var k in skills) {
-                if (chefs[i].ultimateSkill == skills[k].skillId) {
-                    for (var m in skills[k].effect) {
-                        if (skills[k].effect[m].condition == "Partial" || skills[k].effect[m].condition == "Next") {
-                            var skillInfo = getSkillInfo(skills, skills[k].skillId);
-                            var partialItem = {};
-                            partialItem["skill"] = skillInfo;
-                            partialItem["chef"] = chefs[i];
-                            partialArray.push(partialItem);
-                            break;
-                        }
-                    }
-                }
+        for (var m in chefs[i].ultimateSkillEffect) {
+            if (chefs[i].ultimateSkillEffect[m].condition == "Partial" || chefs[i].ultimateSkillEffect[m].condition == "Next") {
+                var partialItem = {};
+                partialItem["effect"] = chefs[i].ultimateSkillEffect;
+                partialItem["disp"] = chefs[i].ultimateSkillDisp;
+                partialItem["chef"] = chefs[i];
+                partialArray.push(partialItem);
+                break;
             }
         }
     }
 
     partialArray.sort(function (a, b) {
-        return a.skill.skillDisp.localeCompare(b.skill.skillDisp)
+        return a.disp.localeCompare(b.disp)
     });
 
     for (var i in partialArray) {
-        var option = "<option value='" + partialArray[i].chef.chefId + "' data-subtext='" + partialArray[i].skill.skillDisp.replace(/<br>/g, " ") + "'>" + partialArray[i].chef.name + "</option>";
+        var option = "<option value='" + partialArray[i].chef.chefId + "' data-subtext='" + partialArray[i].disp.replace(/<br>/g, " ") + "'>" + partialArray[i].chef.name + "</option>";
         var toAdd = false;
-        for (var j in partialArray[i].skill.skillEffect) {
-            if (partialArray[i].skill.skillEffect[j].condition == "Partial"
-                && (partialArray[i].skill.skillEffect[j].type == "Bake"
-                    || partialArray[i].skill.skillEffect[j].type == "Steam"
-                    || partialArray[i].skill.skillEffect[j].type == "Boil"
-                    || partialArray[i].skill.skillEffect[j].type == "Fry"
-                    || partialArray[i].skill.skillEffect[j].type == "Knife"
-                    || partialArray[i].skill.skillEffect[j].type == "Stirfry")) {
+        for (var j in partialArray[i].effect) {
+            if (partialArray[i].effect[j].condition == "Partial"
+                && (partialArray[i].effect[j].type == "Bake"
+                    || partialArray[i].effect[j].type == "Steam"
+                    || partialArray[i].effect[j].type == "Boil"
+                    || partialArray[i].effect[j].type == "Fry"
+                    || partialArray[i].effect[j].type == "Knife"
+                    || partialArray[i].effect[j].type == "Stirfry")) {
                 toAdd = true;
                 break;
             }
@@ -10368,23 +10361,16 @@ function setPartialUltimateOptions(chefs, skills) {
     }
 }
 
-function setSelfUltimateOptions(chefs, skills) {
+function setSelfUltimateOptions(chefs) {
     for (var i in chefs) {
-        if (chefs[i].ultimateSkill) {
-            for (var k in skills) {
-                if (chefs[i].ultimateSkill == skills[k].skillId) {
-                    for (var m in skills[k].effect) {
-                        if (skills[k].effect[m].condition == "Self") {
-                            if (skills[k].effect[m].type != "Material_Gain"
-                                && skills[k].effect[m].type != "GuestDropCount"
-                                && skills[k].effect[m].type != "GuestApearRate") {
-                                var skillInfo = getSkillInfo(skills, skills[k].skillId);
-                                var option = "<option value='" + chefs[i].chefId + "' data-subtext='" + skillInfo.skillDisp.replace(/<br>/g, " ") + "'>" + chefs[i].name + "</option>";
-                                $('#chk-cal-self-ultimate').append(option);
-                                break;
-                            }
-                        }
-                    }
+        for (var m in chefs[i].ultimateSkillEffect) {
+            var effect = chefs[i].ultimateSkillEffect[m];
+            if (effect.condition == "Self") {
+                if (effect.type != "Material_Gain"
+                    && effect.type != "GuestDropCount"
+                    && effect.type != "GuestApearRate") {
+                    var option = "<option value='" + chefs[i].chefId + "' data-subtext='" + chefs[i].ultimateSkillDisp.replace(/<br>/g, " ") + "'>" + chefs[i].name + "</option>";
+                    $('#chk-cal-self-ultimate').append(option);
                     break;
                 }
             }
